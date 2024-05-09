@@ -1,6 +1,5 @@
 # Daily stand-up 07.05
 
-
 **Alex:**
 - Working on personas
 
@@ -25,3 +24,5 @@
 - Contemplated and pondered over what might be needed to achieve a usable end product.
 
 We all agreed that it's crucial to clearly define our goals and work together to finalize the site map. This ensures we're on the same page and helps us stay organized for success. 
+
+<-- [Back to documentation guide](../documentation_guide.md)

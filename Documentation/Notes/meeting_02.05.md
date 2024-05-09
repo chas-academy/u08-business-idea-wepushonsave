@@ -14,3 +14,5 @@
 + OPENCV - Computervision - a way to make the game playable in real life from 2 location 
 
 + **O-H Question** - Make sure the user follow the rules for the added deck. And add features to make it easier for users to follow the rules
+
+<-- [Back to documentation guide](../documentation_guide.md)

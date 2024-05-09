@@ -72,3 +72,5 @@
 ![](https://i.imgur.com/Iy2Vv4r.png)
 ![](https://i.imgur.com/8xuShB5.png)
 *Other thoughts*
+
+<-- [Back to documentation guide](../documentation_guide.md)

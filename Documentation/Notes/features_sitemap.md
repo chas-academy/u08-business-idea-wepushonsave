@@ -91,3 +91,5 @@ Filter search based on 'owned'
 Create custom lists
 Send message
 Display entire collection*
+
+<-- [Back to documentation guide](../documentation_guide.md)
