@@ -38,3 +38,11 @@ Team members: Emma, Alex, Louise, Joseph, Dennis, and Clara
 - Emma presented her progress with the **Hi-Fi prototype**, her choices regarding color schemes and design concepts. [Figma_link](https://www.figma.com/team_invite/redeem/WgveQvIZueRc2al9D4HAwF) 
 
 - After these numerous group discussions, we consider that we can now begin to **create our issues** and organize our **Github project**. We will start during the next meeting.
+
+## 10th May
+
+- **Meeting with Sebastian and Olli-Heikki:** We presented team work progress for the first week. We took notes of their feedback, [link here](./Notes/hanledning_10.05.md). 
+
+- **Sprint review and planning**, during this meeting we talked about what we have done individually. Then we defined our next goals. [Notes here](./Notes/sprint_meeting_10.05.md)
+
+- Dennis prepared a list of potential objectives for the upcoming week by brainstorming with the whole team. Team members can now create issues based on these objectives to start working promptly.
