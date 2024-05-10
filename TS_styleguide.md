@@ -1,18 +1,10 @@
 # Style guide Airbnb for TypeScript | ESLint | Prettier
 
-## Frontend | React TypeScript
+## Frontend
 
-**_Sources_**
+### ESLint
 
-- [npmjs.com](https://www.npmjs.com/package/eslint-config-airbnb-typescript)
-- [Airbnb JavaScript styleguide](https://airbnb.io/javascript/react/)
-
-### 1. Install Extentions and Plugins
-
-**Prettier:** _(esbenp.prettier-vscode)_
-**ESLint:** _(dbaeumer.vscode-eslint)_
-
-### 2. Create a React project with TS
+#### 1. Create a React project with TS
 
 _Make sure you have npm installed on your machine_
 
@@ -34,28 +26,32 @@ npm install
 npm run dev
 ```
 
-### 3. Airbnb / ESLint Setup
+#### 2. ESLint Setup
 
-1. Setup regular Airbnb config
+1. Install ESLint
 
 ```pwsh
-npx install-peerdeps --dev eslint-config-airbnb
+npm install eslint eslint-plugin-react eslint-plugin-react-hooks --save-dev
 ```
 
-2. Add `"airbnb", "airbnb/hooks"` to >`package.json > eslint-config-airbnb > hooks.js` under `"extends":`
-
-3. Install dependencies
-   _Not needed in my case as it was in the package.json file_
+2. Setup regular Airbnb config
 
 ```pwsh
-    npm install eslint-config-airbnb-typescript \
-    @typescript-eslint/eslint-plugin@^7.0.0 \
-    @typescript-eslint/parser@^7.0.0 \
-    typescript \
-    prettier \
-    eslint-plugin-prettier \
-    eslint-config-prettier \
-    --save-dev
+npx eslint --init
+```
+
+    > y
+    > To check syntax, find problems
+    > JavaScript modules Import/Export
+    > React
+    > Yes
+    > Browser
+    > Yes
+
+3. Run ESLint on the project
+
+```pwsh
+npx eslint src/*
 ```
 
 ## Backend
