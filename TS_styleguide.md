@@ -64,6 +64,8 @@ _This guide will take you trew how to install and use ESLint with TypeScript. I 
 
 **Source** [ESLint or TypeScript](https://typescript-eslint.io/getting-started)
 
+### ESLint
+
 1. Install eslint
 
 ```pwsh
@@ -100,3 +102,7 @@ _This code will enable recommended configurations for linting_
 ```pwsh
 npx eslint .
 ```
+
+---
+
+### Prettier
