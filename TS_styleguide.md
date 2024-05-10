@@ -54,6 +54,12 @@ npx eslint --init
 npx eslint src/*
 ```
 
+---
+
+### ESLint Config
+
+---
+
 ## Backend
 
 _This guide will take you trew how to install and use ESLint with TypeScript. I will start in a express project using TS. Ensure you also have a TS express project to follow this guide._
@@ -98,3 +104,19 @@ _This code will enable recommended configurations for linting_
 ```pwsh
 npx eslint .
 ```
+
+---
+
+### ESLint Config
+
+---
+
+## Frontend
+
+### Prettier
+
+---
+
+## Backend
+
+### Prettier
