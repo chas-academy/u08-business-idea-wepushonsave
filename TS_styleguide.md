@@ -98,7 +98,3 @@ _This code will enable recommended configurations for linting_
 ```pwsh
 npx eslint .
 ```
-
----
-
-### Prettier
