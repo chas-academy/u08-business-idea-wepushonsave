@@ -57,3 +57,46 @@ npx install-peerdeps --dev eslint-config-airbnb
     eslint-config-prettier \
     --save-dev
 ```
+
+## Backend
+
+_This guide will take you trew how to install and use ESLint with TypeScript. I will start in a express project using TS. Ensure you also have a TS express project to follow this guide._
+
+**Source** [ESLint or TypeScript](https://typescript-eslint.io/getting-started)
+
+1. Install eslint
+
+```pwsh
+npm init @eslint/config@latest`
+```
+
+    > "Check syntax only"
+    > "JavaScript import/export"
+    > "None"
+    > "typescript"
+    > "Browser"
+    > "yes"
+    > "npm"
+
+_You might have to install typescript and other packages, check the source link if you encounter errors at this point_
+
+2. Configurations
+   1. Create a `eslint.config.js` file and add...
+
+```js
+import eslint from "@eslint/js";
+import tseslint from "typescript-eslint";
+
+export default tseslint.config(
+  eslint.configs.recommended,
+  ...tseslint.configs.recommended
+);
+```
+
+_This code will enable recommended configurations for linting_
+
+3. Running ESLint
+
+```pwsh
+npx eslint .
+```
