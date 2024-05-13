@@ -14,3 +14,5 @@ const connectDB = async () => {
 };
 
 export default connectDB();
+
+// Setup mongoose, connect to the database, and log a message to the console if the connection is successful. If the connection fails, log an error message and exit the process with a failure code.
