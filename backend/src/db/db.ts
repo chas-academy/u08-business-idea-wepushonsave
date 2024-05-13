@@ -1,7 +1,7 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import { connect } from "mongoose";
 import mongoose from "mongoose"; // Do i need Import mongoose here??
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 dotenv.config();
 // Load environment variables from a .env file into process.env??
