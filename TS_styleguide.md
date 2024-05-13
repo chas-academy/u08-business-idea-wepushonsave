@@ -1,122 +1,58 @@
-# Style guide Airbnb for TypeScript | ESLint | Prettier
+# Developer styleguide and instructions
 
-## Frontend
+_This document is intended for the developers on how to work within the frame and our styleguide_
 
-### ESLint
+#### Our Stack
 
-#### 1. Create a React project with TS
+_This styleguide is made for typescript in both front and backend_
 
-_Make sure you have npm installed on your machine_
+- ESLint _for linting_
+- Airbnb _as standard_
+- Prettier _for formatting_
 
-1. Create a vite project
+#### Get started
 
-```pwsh
-npm create vite@latest
-```
-
-    Add a name (ProjectName_Frontend)
-    Framework (React)
-    Language (TypeScript)
-
-2. Install and run
+**Install packages and dependencies**
+_This might be all you have to do..._
 
 ```pwsh
-cd ProjectName_Frontend
 npm install
-npm run dev
 ```
 
-#### 2. ESLint Setup
+_Getting started can be your first code on the project or specific branch_
 
-1. Install ESLint
+1. Install Prettier extension
 
-```pwsh
-npm install eslint eslint-plugin-react eslint-plugin-react-hooks --save-dev
-```
+![](https://i.imgur.com/UMkL7s2.png)
 
-2. Setup regular Airbnb config
+2. Configure settings to format on save
 
-```pwsh
-npx eslint --init
-```
+   1. Press F1 and search `open settings`
+      ![](https://i.imgur.com/Suzm1c6.png)
+   2. Click `Preferances: Open User Settings (JSON)`
+   3. Add this to the file
 
-    > y
-    > To check syntax, find problems
-    > JavaScript modules Import/Export
-    > React
-    > Yes
-    > Browser
-    > Yes
+   ```pwsh
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+   ```
 
-3. Run ESLint on the project
+3. Install ESLint extension
+   _Sometimes prettier and eslint cant communicate, then you need to help them out_
+   ![](https://i.imgur.com/t3HhT4J.png)
 
-```pwsh
-npx eslint src/*
-```
-
----
-
-### ESLint Config
-
----
-
-## Backend
-
-_This guide will take you trew how to install and use ESLint with TypeScript. I will start in a express project using TS. Ensure you also have a TS express project to follow this guide._
-
-**Source** [ESLint or TypeScript](https://typescript-eslint.io/getting-started)
-
-### ESLint
-
-1. Install eslint
-
-```pwsh
-npm init @eslint/config@latest`
-```
-
-    > "Check syntax only"
-    > "JavaScript import/export"
-    > "None"
-    > "typescript"
-    > "Browser"
-    > "yes"
-    > "npm"
-
-_You might have to install typescript and other packages, check the source link if you encounter errors at this point_
-
-2. Configurations
-   1. Create a `eslint.config.js` file and add...
-
-```js
-import eslint from "@eslint/js";
-import tseslint from "typescript-eslint";
-
-export default tseslint.config(
-  eslint.configs.recommended,
-  ...tseslint.configs.recommended
-);
-```
-
-_This code will enable recommended configurations for linting_
-
-3. Running ESLint
-
-```pwsh
-npx eslint .
-```
-
----
-
-### ESLint Config
-
----
-
-## Frontend
-
-### Prettier
-
----
-
-## Backend
-
-### Prettier
+4. Getting errors were there should not be errors?
+   1. Go to project root directory and run
+   ```pwsh
+   npm install --save-dev eslint-config-prettier eslint-plugin-prettier
+   ```
+   2. Edit the `.eslintrc` file
+   ```pwsh
+   {
+   "extends": ["airbnb", "prettier"],
+   "plugins": ["prettier"],
+   "rules": {
+    "prettier/prettier": ["error"]
+   }
+   }
+   ```
