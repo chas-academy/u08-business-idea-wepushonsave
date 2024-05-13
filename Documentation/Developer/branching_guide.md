@@ -76,9 +76,7 @@ git fetch
 git pull
 ```
 
-<!--⚠️Imgur upload failed, check dev console-->
-
-![[Pasted image 20240512161725.png]]
+![](https://i.imgur.com/Hs32gZv.png)
 
 4. Rebase
 
