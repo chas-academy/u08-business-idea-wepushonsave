@@ -46,3 +46,11 @@ Team members: Emma, Alex, Louise, Joseph, Dennis, and Clara
 - **Sprint review and planning**, during this meeting we talked about what we have done individually. Then we defined our next goals. [Notes here](./Notes/sprint_meeting_10.05.md)
 
 - Dennis prepared a list of potential objectives for the upcoming week by brainstorming with the whole team. Team members can now create issues based on these objectives to start working promptly.
+
+## 13th May 
+
+- We first started with the daily stand-up, everyone was present and took turns talking about the things done and any questions they might want to ask afterwards. [Notes here](./Notes/daily_stand-up_13.05.md).
+
+- We discussed questions, focusing on Emma's prototype and Clara's feature issues and branches.We selected next tasks for implementation.
+
+- We all agreed to commence coding this week. Goal: to deploy the project for the first time.
