@@ -6,13 +6,8 @@ module.exports = {
   printWidth: 80,
   parser: "flow",
   arrowParens: "avoid",
+  formatOnSave: true,
   overrides: [
-    {
-      files: esNextPaths,
-      options: {
-        trailingComma: "all",
-      },
-    },
     {
       files: typescriptPaths,
       options: {
