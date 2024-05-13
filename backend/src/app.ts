@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import connectDB from "./db/db";
+import src from "@eslint/js";
 
 const app: Express = express();
 
