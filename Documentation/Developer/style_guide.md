@@ -13,7 +13,7 @@ _This styleguide is made for typescript in both front and backend_
 _Quick-tip, run eslint_
 
 ```pwsh
-npm eslint src/*
+npx eslint src/*
 ```
 
 #### Get started
@@ -70,7 +70,7 @@ _Getting started can be your first code on the project or specific branch_
 5. Run `eslint` to manually lint all files
 
 ```pwsh
-npm eslint src/*
+npx eslint src/*
 ```
 
 **Not working?**
@@ -86,5 +86,5 @@ npm install
 4. Try again with
 
 ```pwsh
-npm eslint src/*
+npx eslint src/*
 ```
