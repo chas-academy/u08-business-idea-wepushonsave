@@ -10,6 +10,12 @@ _This styleguide is made for typescript in both front and backend_
 - Airbnb _as standard_
 - Prettier _for formatting_
 
+_Quick-tip, run eslint_
+
+```pwsh
+npm eslint src/*
+```
+
 #### Get started
 
 **Install packages and dependencies**
@@ -42,11 +48,15 @@ _Getting started can be your first code on the project or specific branch_
    ![](https://i.imgur.com/t3HhT4J.png)
 
 4. Getting errors were there should not be errors?
+
    1. Go to project root directory and run
+
    ```pwsh
    npm install --save-dev eslint-config-prettier eslint-plugin-prettier
    ```
+
    2. Edit the `.eslintrc` file
+
    ```pwsh
    {
    "extends": ["airbnb", "prettier"],
@@ -56,3 +66,25 @@ _Getting started can be your first code on the project or specific branch_
    }
    }
    ```
+
+5. Run `eslint` to manually lint all files
+
+```pwsh
+npm eslint src/*
+```
+
+**Not working?**
+
+1. Delete the folder `node_modules` from the directory (Backend or Frontend)
+2. Delete the `package-lock.json` from the same directory
+3. Install all packages
+
+```pwsh
+npm install
+```
+
+4. Try again with
+
+```pwsh
+npm eslint src/*
+```
