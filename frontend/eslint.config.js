@@ -8,4 +8,11 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   pluginReactConfig,
+  {
+    settings: {
+      react: {
+        version: "detect" // or specify the React version you are using, e.g., "16.14.0" or "17.0.0"
+      }
+    }
+  }
 ];
