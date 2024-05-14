@@ -54,3 +54,9 @@ Team members: Emma, Alex, Louise, Joseph, Dennis, and Clara
 - We discussed questions, focusing on Emma's prototype and Clara's feature issues and branches.We selected next tasks for implementation.
 
 - We all agreed to commence coding this week. Goal: to deploy the project for the first time.
+
+## 14th May 
+
+- Our daily 15-minute stand-up occurred today with everyone in attendance except for Emma (who was out sick). Each team member shared their recent tasks and outlined their plans for the day following the meeting. Detailed notes can be found [here](./Notes/daily_stand-up_14.05.md).
+
+- We've established individual goals and committed to supporting each other by addressing any general questions if necesssary.
