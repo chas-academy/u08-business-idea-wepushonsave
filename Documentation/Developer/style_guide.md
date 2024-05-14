@@ -88,3 +88,5 @@ npm install
 ```pwsh
 npx eslint src/*
 ```
+
+[Read more here - Support](https://discord.com/channels/1234413826938765422/1239922385554112623/1239923352249040976)
