@@ -13,7 +13,7 @@ _This styleguide is made for typescript in both front and backend_
 _Quick-tip, run eslint_
 
 ```pwsh
-npx eslint src/*
+npm run lint
 ```
 
 #### Get started
@@ -47,7 +47,7 @@ _Getting started can be your first code on the project or specific branch_
    _Sometimes prettier and eslint cant communicate, then you need to help them out_
    ![](https://i.imgur.com/t3HhT4J.png)
 
-4. Getting errors were there should not be errors?
+4. **LAST RESORT** Getting errors were there should not be errors?
 
    1. Go to project root directory and run
 
@@ -70,7 +70,7 @@ _Getting started can be your first code on the project or specific branch_
 5. Run `eslint` to manually lint all files
 
 ```pwsh
-npx eslint src/*
+npm run lint
 ```
 
 **Not working?**
@@ -86,7 +86,35 @@ npm install
 4. Try again with
 
 ```pwsh
-npx eslint src/*
+npm run lint
+```
+
+# Bypass lint error for _variable: any_
+
+```ts
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+```
+
+_By adding this line at the top of the file, it will automaticly cancel out all error made by an any type. This is not good practice but i found it useful when writing try-catch blocks._
+
+```ts
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+import { connect } from "mongoose";
+
+const connectDB = async () => {
+  try {
+    const mongoURI: string = "mongodb://localhost:27017/MTGVault";
+    await connect(mongoURI);
+    console.log("MongoDB Connected...");
+  } catch (err: any) {
+    console.error(err.message);
+    console.log("Connection failed");
+    // Exit process with failure
+    process.exit(1);
+  }
+};
+
+export default connectDB();
 ```
 
 [Read more here - Support](https://discord.com/channels/1234413826938765422/1239922385554112623/1239923352249040976)
