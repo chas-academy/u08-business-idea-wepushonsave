@@ -28,8 +28,8 @@ router.post("/signup", (req: Request, res: Response) => {
       .then((result: any[]) => {
         // Handle the result
         if (result && result.length > 0) {
-            // User already exists
-            return res.status(400).json({ message: "User already exists!" });
+          // User already exists
+          return res.status(400).json({ message: "User already exists!" });
         } else {
           // Try to create new user
 
@@ -44,13 +44,12 @@ router.post("/signup", (req: Request, res: Response) => {
               });
 
               newUser
-                .save().then((result: any) => {
-                  return res
-                    .status(201)
-                    .json({
-                      message: "User created successfully!",
-                      data: result,
-                    });
+                .save()
+                .then((result: any) => {
+                  return res.status(201).json({
+                    message: "User created successfully!",
+                    data: result,
+                  });
                 })
                 .catch((err: Error) => {
                   console.log(err);
