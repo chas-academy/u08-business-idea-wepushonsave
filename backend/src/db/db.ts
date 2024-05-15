@@ -6,11 +6,6 @@ import dotenv from "dotenv";
 dotenv.config();
 // Load environment variables from a .env file into process.env??
 
-dotenv.config();
-// Load environment variables from a .env file into process.env??
-
-dotenv.config();
-// Load environment variables from a .env file into process.env??
 
 const connectDB = async () => {
   try {
