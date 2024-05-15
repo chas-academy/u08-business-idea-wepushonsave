@@ -9,6 +9,9 @@ dotenv.config();
 dotenv.config();
 // Load environment variables from a .env file into process.env??
 
+require("dotenv").config();
+const mongoose = require("mongoose");
+
 const connectDB = async () => {
   try {
     const mongoURI: string =
