@@ -1,12 +1,12 @@
 import dotenv from "dotenv";
-import app from "./app";
+import userRouter from "./api/User";
 
 dotenv.config();
 const port = process.env.PORT || 3000;
 
 app.get("/test", (req, res) => {
-  res.send("apitest");
-});
+  res.send("apitest")
+})
 
 app.use("/api/user", userRouter);
 
