@@ -1,8 +1,13 @@
-import React from 'react'
-import "./App.css";
+import React, {useState} from 'react';
+import './App.css';
 
 function App() {
-  return <></>;
+  const [test, setTest]: any = useState(null);
+  return (
+    <>
+      <div>String {}</div>
+    </>
+  );
 }
 
 export default App;
