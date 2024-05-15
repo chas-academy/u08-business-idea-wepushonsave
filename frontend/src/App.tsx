@@ -1,8 +1,12 @@
-import React from 'react'
-import "./App.css";
+import Navbar from './components/Navbar/navbar';
+import React, {useState} from 'react';
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <Navbar></Navbar>
+    </>
+  );
 }
 
 export default App;
