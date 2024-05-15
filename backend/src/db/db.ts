@@ -1,8 +1,10 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import { connect } from "mongoose";
+import mongoose from "mongoose"; // Do i need Import mongoose here??
+import dotenv from 'dotenv';
 
-require("dotenv").config();
-const mongoose = require("mongoose");
+dotenv.config();
+// Load environment variables from a .env file into process.env??
 
 const connectDB = async () => {
   try {
@@ -19,5 +21,3 @@ const connectDB = async () => {
 };
 
 export default connectDB();
-
-// Setup mongoose, connect to the database, and log a message to the console if the connection is successful. If the connection fails, log an error message and exit the process with a failure code.

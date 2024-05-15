@@ -4,6 +4,12 @@ import User from "../models/User";
 import { Request, Response } from "express";
 import request from "superagent";
 
+import express from "express";
+import bcrypt from "bcrypt";
+import User from "../models/User";
+import { Request, Response } from "express";
+import request from "superagent";
+
 const router = express.Router();
 
 // **SIGNUP** 
@@ -54,6 +60,14 @@ router.post("/signup", (req: Request, res: Response) => {
               });
 
               newUser
+                .save().then((result: any) => {
+                  return res
+                    .status(201)
+                    .json({
+                      message: "User created successfully!",
+                      data: result,
+                    });
+              newUser
                 .save()
                 .then((result: any) => {
                   return res.status(201).json({
@@ -66,7 +80,25 @@ router.post("/signup", (req: Request, res: Response) => {
                   return res
                     .status(500)
                     .json({ message: "An error occurred while saving user!" });
+                  console.log(err);
+                  return res
+                    .status(500)
+                    .json({ message: "An error occurred while saving user!" });
                 });
+            })
+            .catch((err: Error) => {
+              console.log(err);
+              return res
+                .status(500)
+                .json({ message: "An error occurred while hashing password!" });
+            });
+        }
+      })
+      .catch((err: Error) => {
+        console.log(err);
+        return res.status(500).json({ message: "Internal server error!" });
+      });
+  }
             })
             .catch((err: Error) => {
               console.log(err);
@@ -89,3 +121,4 @@ router.post("/signin", (req: Request, res: Response) => {
 });
 
 export default router;
+
