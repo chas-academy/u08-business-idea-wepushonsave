@@ -8,7 +8,7 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
 // Signup
-router.post('/signup', (req, res) => {
+router.post('/signup', (req: any, res: any) => {
     let {email, password} = req.body;
     email = email.trim();
     password = password.trim();
@@ -21,37 +21,37 @@ router.post('/signup', (req, res) => {
         return res.status(400).json({message: 'Invalid email!'});
     } else {
         // Check if user already exists
-        user.find({ email }).then(result => {
+        User.find({ email }).then((result: any[]) => {
             // Handle the result
             if (result && result.length > 0) {
-                // User already exists
-                return res.status(400).json({message: 'User already exists!'});
+            // User already exists
+            return res.status(400).json({message: 'User already exists!'});
             } else {
-                // Try to crete new user
+            // Try to create new user
 
-                // password handling
-                const saltRounds = 10;
-                bcrypt.hash(password, saltRounds)
-                    .then((hashedPassword: string) => {
-                        const newUser = new User({
-                            email,
-                            password: hashedPassword
-                        });
+            // password handling
+            const saltRounds: number = 10;
+            bcrypt.hash(password, saltRounds)
+                .then((hashedPassword: string) => {
+                const newUser = new User({
+                    email,
+                    password: hashedPassword
+                });
 
-                        newUser.save().then(result => {
-                            return res.status(201).json({message: 'User created successfully!',
-                                data: result,
-                            });
-                        })
-                        .catch((err: Error) => {
-                            console.log(err);
-                            return res.status(500).json({message: 'An error occurred while saving user!'});
-                        });
-                    })
-                    .catch((err: Error) => {
-                        console.log(err);
-                        return res.status(500).json({ message: 'An error occurred while hashing password!' });
+                newUser.save().then((result: any) => {
+                    return res.status(201).json({message: 'User created successfully!',
+                    data: result,
                     });
+                })
+                .catch((err: Error) => {
+                    console.log(err);
+                    return res.status(500).json({message: 'An error occurred while saving user!'});
+                });
+                })
+                .catch((err: Error) => {
+                console.log(err);
+                return res.status(500).json({ message: 'An error occurred while hashing password!' });
+                });
             }
         })
         .catch((err: Error) => {
@@ -63,7 +63,7 @@ router.post('/signup', (req, res) => {
 
 
 // Signin
-router.post('/signin', (req, res) => {
+router.post('/signin', (req: any, res: any) => {
     1
 });
 

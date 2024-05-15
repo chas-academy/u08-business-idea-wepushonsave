@@ -1,9 +1,12 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import { connect } from "mongoose";
 
+require("dotenv").config();
+const mongoose = require("mongoose");
+
 const connectDB = async () => {
   try {
-    const mongoURI: string = "mongodb://localhost:27017/MTGVault";
+    const mongoURI: string = "mongodb+srv://admin:test123@u08cluster.cootwbe.mongodb.net/?retryWrites=true&w=majority&appName=U08Cluster"; //Password encoded %54%%45%5354%31%32%33
     await connect(mongoURI);
     console.log("MongoDB Connected...");
   } catch (err: any) {
