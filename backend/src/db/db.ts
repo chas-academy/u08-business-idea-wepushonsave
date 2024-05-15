@@ -1,6 +1,9 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import { connect } from "mongoose";
 
+require("dotenv").config();
+const mongoose = require("mongoose");
+
 const connectDB = async () => {
   try {
     const mongoURI: string =
