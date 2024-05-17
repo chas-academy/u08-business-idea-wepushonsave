@@ -1,3 +1,0 @@
-const CardLegality = () => {
-  return;
-};

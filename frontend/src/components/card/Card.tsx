@@ -1,4 +1,8 @@
 import {useEffect, useState} from 'react';
+import CardImage from '../CardImage';
+import CardInfo from './CardInfo';
+import CardMarket from './CardMarket';
+import CardLegalities from './CardLegalities';
 
 const delay = async (ms: number) => {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -8,14 +12,12 @@ const Card = () => {
   const [card, setCard]: any = useState();
 
   const getCard = async () => {
+    await delay(1000);
     const cardID = '56ebc372-aabd-4174-a943-c7bf59e5028d';
     const url = `https://api.scryfall.com/cards/${cardID}`;
     const response = await fetch(url);
     const result = await response.json();
     setCard(result);
-    await delay(100);
-    console.log(card);
-    await delay(2000);
     console.log(card);
   };
 
@@ -27,10 +29,12 @@ const Card = () => {
     <>
       <main className="border border-red-600 h-screen ">
         {card && (
-          <div className="border border-black ">
-            <img src={card.image_uris.normal} alt="" />
-            <p>{card.artist}</p>
-          </div>
+          <>
+            <CardImage card={card.image_uris.border_crop}></CardImage>
+            <CardInfo card={card}></CardInfo>
+            <CardMarket card={card.prices}></CardMarket>
+            <CardLegalities card={card.legalities}></CardLegalities>
+          </>
         )}
       </main>
     </>
