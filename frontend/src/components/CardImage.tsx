@@ -1,4 +1,11 @@
-const CardImage = ({card}: any) => {
+import {PropsWithChildren, ReactElement} from 'react';
+import React from 'react';
+
+type CardProps = {
+  card: string;
+};
+
+const CardImage = ({card}: PropsWithChildren<CardProps>): ReactElement => {
   return (
     <>
       <div>
