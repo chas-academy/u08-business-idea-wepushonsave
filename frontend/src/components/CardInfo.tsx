@@ -1,0 +1,3 @@
+const CardInfo = () => {
+  return;
+};
