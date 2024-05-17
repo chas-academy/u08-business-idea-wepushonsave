@@ -256,11 +256,14 @@ _This is it, you have finished the issue and want to merge your progress_
 
 ![](https://i.imgur.com/BGvIMbE.png)
 
-6. Merge pull request
+6. Squash and merge
 
-![](https://i.imgur.com/WxUDyyg.png)
+_Select `Squash and merge`_
+![](https://i.imgur.com/Rwxbdk1.png)
 
-![](https://i.imgur.com/abBrixZ.png)
+![](https://i.imgur.com/U9dM6zx.png)
+_All your commits on this branch are combined in to one commit_
+![](https://i.imgur.com/bBFjYQ3.png)
 
 7. Delete remote branch
 
