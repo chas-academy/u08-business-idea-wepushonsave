@@ -1,4 +1,7 @@
 import {useEffect, useState} from 'react';
+import React from 'react';
+
+// Components
 import CardImage from '../CardImage';
 import CardInfo from './CardInfo';
 import CardMarket from './CardMarket';
