@@ -12,7 +12,10 @@ const delay = async (ms: number) => {
 };
 
 const Card = () => {
+  //FIXME See if there is any other data-type we can use for an unknown value
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   const [card, setCard]: any = useState();
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   const getCard = async () => {
     await delay(1000);

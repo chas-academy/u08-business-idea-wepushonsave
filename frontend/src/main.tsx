@@ -7,6 +7,9 @@ import {
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
+import React from 'react';
+
+// Components
 import CardInfo from './components/card/CardInfo.tsx';
 import CardLegalities from './components/card/CardLegalities.tsx';
 import CardMarket from './components/card/CardMarket.tsx';
