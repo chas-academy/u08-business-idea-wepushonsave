@@ -11,6 +11,15 @@ const delay = async (ms: number) => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
 
+interface CardProps<Data> {
+  data: Data[];
+  responseData: (data: Data) => React.ReactNode;
+}
+
+export function APIResponse<Data>(props: CardProps<Data>) {
+  return null;
+}
+
 const Card = () => {
   //FIXME See if there is any other data-type we can use for an unknown value
   /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -39,7 +48,7 @@ const Card = () => {
             <CardImage card={card.image_uris.border_crop}></CardImage>
             <CardInfo card={card}></CardInfo>
             <CardMarket card={card.prices}></CardMarket>
-            <CardLegalities card={card.legalities}></CardLegalities>
+            <CardLegalities legalities={card.legalities}></CardLegalities>
           </>
         )}
       </main>
