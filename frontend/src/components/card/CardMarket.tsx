@@ -24,4 +24,5 @@ const CardMarket = ({prices}: PropsWithChildren<CardProps>): ReactElement => {
     </>
   );
 };
+
 export default CardMarket;

@@ -1,15 +1,15 @@
-import {PropsWithChildren, ReactElement} from 'react';
 import React from 'react';
+import {useLoaderData} from 'react-router-dom';
+import {objectConverter} from '../utils/objectConverter';
 
-type CardProps = {
-  card: string;
-};
-
-const CardImage = ({card}: PropsWithChildren<CardProps>): ReactElement => {
+const CardImage = () => {
+  const cardData: any = useLoaderData();
+  objectConverter(cardData);
+  console.log(cardData);
   return (
     <>
       <div>
-        <img src={card} alt="" />
+        <p>hej</p>
       </div>
     </>
   );

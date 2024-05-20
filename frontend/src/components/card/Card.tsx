@@ -36,10 +36,10 @@ const Card = () => {
       <main className="border border-red-600 h-screen ">
         {card && (
           <>
-            <CardImage card={card.image_uris.border_crop}></CardImage>
-            <CardInfo card={card}></CardInfo>
+            {/* <CardImage card={card.image_uris.border_crop}></CardImage>
+             <CardInfo card={card}></CardInfo>
             <CardMarket prices={card.prices}></CardMarket>
-            <CardLegalities legalities={card.legalities}></CardLegalities>
+            <CardLegalities legalities={card.legalities}></CardLegalities> */}
           </>
         )}
       </main>
