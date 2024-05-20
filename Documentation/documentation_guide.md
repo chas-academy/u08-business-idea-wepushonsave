@@ -76,3 +76,9 @@ Team members: Emma, Alex, Louise, Joseph, Dennis, and Clara
 - We also worked together on the frontend folder structure to create them now. Then Joseph and Dennis continuing the work for the backend folders. We recognized the importance of establishing a solid foundation before the real coding work this week.
 
 - You can read all the notes [here](./Notes/sprint_meeting_17.05.md).
+
+## 20th May
+
+- Commencing the day with our **daily stand-up meeting**, we took turns discussing what we did and our overall feelings about the progress of the project. Here are our [notes](./Notes/daily_stand-up_20_05.md).
+
+- Discussed decisions, including whether to use CSS files or Tailwind classes for styling. Chose to work only with Tailwind classes.
