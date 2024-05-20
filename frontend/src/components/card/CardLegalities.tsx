@@ -1,18 +1,33 @@
 import React, {PropsWithChildren, ReactElement} from 'react';
 
+/**
+ * Type Definition
+ *
+ * @Legalities = Object
+ *  key: string
+ *  value: string
+ */
 type Legalities = {
   [key: string]: string;
 };
+
+/**
+ * From Card.tsx
+ * @CardProps = card.legalities
+ */
 type CardProps = {
   legalities: Legalities;
 };
-//FIXME See if there is any other data-type we can use for an unknown value
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 const CardLegalities = ({
   legalities,
 }: PropsWithChildren<CardProps>): ReactElement => {
-  /* eslint-enable @typescript-eslint/no-explicit-any */
+  /**
+   * @Object entries
+   * converts object > array
+   */
   const legalityEntries = Object.entries(legalities);
+
   return (
     <>
       <div>
@@ -26,4 +41,5 @@ const CardLegalities = ({
     </>
   );
 };
+
 export default CardLegalities;
