@@ -5,13 +5,13 @@ interface Thread {
    title: string;
    content: string;
    comments: Comment[];
-   collapsed: boolean; // New property to track whether comments are collapsed or expanded
+   collapsed: boolean; //True on init, hides comments
 }
 
 interface Comment {
    id: number;
    text: string;
-   userId: number; // Assuming user ID is used to identify who made the comment
+   userId: number; //Id for user who commented
 }
 
 const mockThreads: Thread[] = [
@@ -23,7 +23,7 @@ const mockThreads: Thread[] = [
          { id: 1, text: 'Comment 1 for Thread 1', userId: 1 },
          { id: 2, text: 'Comment 2 for Thread 1', userId: 2 },
       ],
-      collapsed: true, // Initially collapse comments
+      collapsed: true, // Initially collapse comments (same in every thread)
    },
    {
       id: 2,
@@ -37,7 +37,7 @@ const mockThreads: Thread[] = [
          { id: 5, text: 'Comment 5 for Thread 2', userId: 1 },
          { id: 6, text: 'Comment 6 for Thread 2', userId: 3 },
       ],
-      collapsed: true, // Initially collapse comments
+      collapsed: true,
    },
    {
       id: 3,
@@ -51,7 +51,7 @@ const mockThreads: Thread[] = [
          { id: 5, text: 'Comment 5 for Thread 3', userId: 1 },
          { id: 6, text: 'Comment 6 for Thread 3', userId: 3 },
       ],
-      collapsed: true, // Initially collapse comments
+      collapsed: true,
    },
 ];
 
@@ -67,7 +67,7 @@ const Threads: React.FC = () => {
          title: newThreadTitle,
          content: newThreadContent,
          comments: [],
-         collapsed: false, // Initially collapse comments for new thread
+         collapsed: false, // collapse comments for thread on init
       };
       setThreads([...threads, newThread]);
       setNewThreadTitle('');
@@ -85,7 +85,7 @@ const Threads: React.FC = () => {
                   {
                      id: thread.comments.length + 1,
                      text: commentText,
-                     userId: 1, // Assuming user ID for the current user
+                     userId: 1, // Mockdata Id for user
                   },
                ],
                collapsed: false, // Set collapsed to false to display all comments
@@ -110,7 +110,7 @@ const Threads: React.FC = () => {
       <div className="flex flex-col items-center">
          <h1 className="text-3xl font-bold mb-4">Community Threads</h1>
          <form onSubmit={handleNewThreadSubmit} className="w-full max-w-lg mb-4">
-            {/*create new thread */}
+            {/*create thread */}
          </form>
 
          {threads.map(thread => (
@@ -120,7 +120,7 @@ const Threads: React.FC = () => {
                </h2>
                <p className="text-gray-700">{thread.content}</p>
 
-               {/*show/hide comments toggle*/}
+               {/*"show/hide comments" toggle*/}
                <p
                   className="text-blue-500 cursor-pointer"
                   onClick={() => toggleComments(thread.id)}
@@ -141,7 +141,7 @@ const Threads: React.FC = () => {
                            <p className="text-gray-700">{comment.text}</p>
                         </div>
                      ))}
-                     {/* Display "See more" link if comments length is greater than 2 */}
+                     {/* Display "See more" if comments < 2 */}
                      {thread.comments.length > 2 && (
                         <p className="text-blue-500 cursor-pointer mt-2" onClick={() => toggleComments(thread.id)}>
                            {thread.collapsed ? 'See more' : 'Hide comments'}
