@@ -8,7 +8,6 @@ const CardLegalities = () => {
   /* eslint-enable @typescript-eslint/no-explicit-any */
   const cardLegalities = convertObjectToArray(cardData.legalities);
   console.log(cardLegalities);
-
   return (
     <>
       <h1>Card Legalities</h1>
