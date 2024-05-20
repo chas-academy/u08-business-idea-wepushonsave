@@ -1,15 +1,15 @@
 import React from 'react';
 import {useLoaderData} from 'react-router-dom';
-import {objectConverter} from '../utils/objectConverter';
+import {convertObjectToArray} from '../utils/convertObjectToArray';
 
-const CardImage = () => {
+const CardImage: React.FC = () => {
   const cardData: any = useLoaderData();
-  objectConverter(cardData);
-  console.log(cardData);
+  const cardImage = convertObjectToArray(cardData.image_uris.border_crop);
+
   return (
     <>
       <div>
-        <p>hej</p>
+        <p>CardImage.tsx</p>
       </div>
     </>
   );

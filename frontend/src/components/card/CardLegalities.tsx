@@ -1,43 +1,15 @@
-import React, {PropsWithChildren, ReactElement} from 'react';
+import React from 'react';
+import {useLoaderData} from 'react-router-dom';
+import {convertObjectToArray} from '../../utils/convertObjectToArray';
 
-/**
- * Type Definition
- *
- * @Legalities = Object
- *  key: string
- *  value: string
- */
-type Legalities = {
-  [key: string]: string;
-};
-
-/**
- * From Card.tsx
- * @CardProps = card.legalities
- */
-type CardProps = {
-  legalities: Legalities;
-};
-
-const CardLegalities = ({
-  legalities,
-}: PropsWithChildren<CardProps>): ReactElement => {
-  /**
-   * @Object entries
-   * converts object > array
-   */
-  const legalityEntries = Object.entries(legalities);
+const CardLegalities = () => {
+  const cardData: any = useLoaderData();
+  const cardLegalities = convertObjectToArray(cardData.legalities);
+  console.log(cardLegalities);
 
   return (
     <>
       <h1>Card Legalities</h1>
-      <div>
-        {legalityEntries.map(([format, status], index) => (
-          <div key={index}>
-            <strong>{format}:</strong> {status}
-          </div>
-        ))}
-      </div>
     </>
   );
 };

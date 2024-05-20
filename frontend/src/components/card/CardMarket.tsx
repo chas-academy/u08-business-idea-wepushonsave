@@ -1,26 +1,19 @@
-import React, {PropsWithChildren, ReactElement} from 'react';
+import React from 'react';
+import {useLoaderData} from 'react-router-dom';
+import {convertObjectToArray} from '../../utils/convertObjectToArray';
 
-type Prices = {
-  [key: string]: string;
-};
-
-type CardProps = {
-  prices: Prices;
-};
-
-const CardMarket = ({prices}: PropsWithChildren<CardProps>): ReactElement => {
-  const priceEntries = Object.entries(prices);
+const CardMarket = () => {
+  const cardData: any = useLoaderData();
+  const cardPrints = cardData.prints_search_uri;
+  console.log(cardPrints);
+  const cardPrices = convertObjectToArray(cardData.prices);
+  console.log(cardPrices);
+  const cardMarkets = convertObjectToArray(cardData.purchase_uris);
+  console.log(cardMarkets);
 
   return (
     <>
       <h1>Card Market</h1>
-      <div>
-        {priceEntries.map(([currency, amount], index) => (
-          <div key={index}>
-            <strong>{currency}:</strong> {amount}
-          </div>
-        ))}
-      </div>
     </>
   );
 };

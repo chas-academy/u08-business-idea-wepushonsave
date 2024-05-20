@@ -1,25 +1,12 @@
 import {useLoaderData} from 'react-router-dom';
-
-// types
+import {convertObjectToArray} from '../../utils/convertObjectToArray';
 
 const CardTestLegalities = () => {
   const cardData: any = useLoaderData();
-  const cardEntries = Object.entries(cardData);
-  console.log(cardEntries);
+  const cardLegalities = convertObjectToArray(cardData.legalities);
+  console.log(cardLegalities);
 
-  return (
-    <>
-      <div>
-        {cardEntries.map((data: any, index) => (
-          <>
-            <div className="test-layout">
-              <p key={index}>{data.name}</p>
-            </div>
-          </>
-        ))}
-      </div>
-    </>
-  );
+  return <></>;
 };
 
 export default CardTestLegalities;
