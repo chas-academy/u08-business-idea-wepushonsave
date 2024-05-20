@@ -30,13 +30,13 @@ const CardLegalities = ({
 
   return (
     <>
+      <h1>Card Legalities</h1>
       <div>
         {legalityEntries.map(([format, status], index) => (
           <div key={index}>
             <strong>{format}:</strong> {status}
           </div>
         ))}
-        <p>Card Legalities</p>
       </div>
     </>
   );

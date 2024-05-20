@@ -1,12 +1,26 @@
-import React from 'react';
+import React, {PropsWithChildren, ReactElement} from 'react';
 
-//FIXME See if there is any other data-type we can use for an unknown value
-/* eslint-disable @typescript-eslint/no-explicit-any */
-const CardMarket = ({card}: any) => {
-  /* eslint-enable @typescript-eslint/no-explicit-any */
+type Prices = {
+  [key: string]: string;
+};
+
+type CardProps = {
+  prices: Prices;
+};
+
+const CardMarket = ({prices}: PropsWithChildren<CardProps>): ReactElement => {
+  const priceEntries = Object.entries(prices);
+
   return (
     <>
-      <p>Card Market</p>
+      <h1>Card Market</h1>
+      <div>
+        {priceEntries.map(([currency, amount], index) => (
+          <div key={index}>
+            <strong>{currency}:</strong> {amount}
+          </div>
+        ))}
+      </div>
     </>
   );
 };

@@ -38,7 +38,7 @@ const Card = () => {
           <>
             <CardImage card={card.image_uris.border_crop}></CardImage>
             <CardInfo card={card}></CardInfo>
-            <CardMarket card={card.prices}></CardMarket>
+            <CardMarket prices={card.prices}></CardMarket>
             <CardLegalities legalities={card.legalities}></CardLegalities>
           </>
         )}
