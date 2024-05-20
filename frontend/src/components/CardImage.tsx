@@ -1,15 +1,14 @@
-import {PropsWithChildren, ReactElement} from 'react';
 import React from 'react';
+import {useLoaderData} from 'react-router-dom';
 
-type CardProps = {
-  card: string;
-};
+const CardImage = () => {
+  const cardData: any = useLoaderData();
+  const cardImage = cardData.image_uris.border_crop;
 
-const CardImage = ({card}: PropsWithChildren<CardProps>): ReactElement => {
   return (
     <>
       <div>
-        <img src={card} alt="" />
+        <img src={cardImage} alt="" />
       </div>
     </>
   );
