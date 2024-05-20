@@ -1,47 +1,54 @@
 import {
   createBrowserRouter,
-  Link,
+  Route,
+  createRoutesFromElements,
   RouterProvider,
-  Outlet,
 } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
 import './index.css';
 import React from 'react';
 
-// Components
+// components
 import CardInfo from './components/card/CardInfo.tsx';
 import CardLegalities from './components/card/CardLegalities.tsx';
 import CardMarket from './components/card/CardMarket.tsx';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: (
-      <>
-        <App></App>
-        <Link to={'info'}>Info</Link> |{' '}
-        <Link to={'legalities'}>Legalities</Link> |{' '}
-        <Link to={'market'}>Market</Link>
-        <Outlet></Outlet>
-      </>
-    ),
-    children: [
-      {
-        path: 'info',
-        element: <CardInfo></CardInfo>,
-      },
-      {
-        path: 'legalities',
-        element: <CardLegalities></CardLegalities>,
-      },
-      {
-        path: 'market',
-        element: <CardMarket></CardMarket>,
-      },
-    ],
-  },
-]);
+// layouts
+import RootLayout from './layouts/RootLayout.tsx';
+import CardLayout from './layouts/CardLayout.tsx';
+import CardTestLegalities from './components/card/CardTestLegalities.tsx';
+
+// utils
+import {singleCardLoader} from './utils/singleCardLoader.tsx';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<RootLayout />}>
+      <Route path="card" element={<CardLayout />} loader={singleCardLoader}>
+        <Route
+          path="test"
+          element={<CardTestLegalities />}
+          loader={singleCardLoader}
+        />
+
+        <Route path="info" element={<CardInfo />} loader={singleCardLoader} />
+
+        <Route
+          path="market"
+          element={<CardMarket />}
+          loader={singleCardLoader}
+        />
+
+        <Route
+          path="legalities"
+          element={<CardLegalities />}
+          loader={singleCardLoader}
+        />
+      </Route>
+    </Route>
+  )
+);
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <RouterProvider router={router}></RouterProvider>
 );
