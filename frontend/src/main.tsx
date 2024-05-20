@@ -3,7 +3,6 @@ import {
   Route,
   createRoutesFromElements,
   RouterProvider,
-  Outlet,
 } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -13,7 +12,6 @@ import React from 'react';
 import CardInfo from './components/card/CardInfo.tsx';
 import CardLegalities from './components/card/CardLegalities.tsx';
 import CardMarket from './components/card/CardMarket.tsx';
-import CardImage from './components/CardImage.tsx';
 
 // layouts
 import RootLayout from './layouts/RootLayout.tsx';
@@ -26,9 +24,7 @@ import {singleCardLoader} from './utils/singleCardLoader.tsx';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-      <Route path="card" element={<CardLayout />}>
-        <Route index element={<CardImage />} loader={singleCardLoader} />
-
+      <Route path="card" element={<CardLayout />} loader={singleCardLoader}>
         <Route
           path="test"
           element={<CardTestLegalities />}
