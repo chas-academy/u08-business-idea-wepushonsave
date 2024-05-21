@@ -4,7 +4,7 @@ import connectDB from "./db/db";
 // import cardRouter from "./cards/cards";
 const app: Express = express();
 
-connectDB;
+//connectDB; //Why here? COPIED TO server.ts
 
 app.use(cors());
 app.use(express.json());
