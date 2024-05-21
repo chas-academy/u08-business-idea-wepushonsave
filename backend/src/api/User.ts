@@ -12,7 +12,9 @@ router.post("/signup", (req: Request, res: Response) => {
     email = email.trim();
     password = password.trim();*/
 
-  const { email, password } = req.body;
+
+  const { email, password, username } = req.body;
+
 
   if (!email || !password) {
     return res.status(400).json({ message: "Input email or password!" });
@@ -26,6 +28,7 @@ router.post("/signup", (req: Request, res: Response) => {
     // Check if user already exists
     User.find({ email })
       .then((result: any[]) => {
+        console.log(result); //TEST
         // Handle the result
         if (result && result.length > 0) {
           // User already exists
@@ -39,6 +42,7 @@ router.post("/signup", (req: Request, res: Response) => {
             .hash(password, saltRounds)
             .then((hashedPassword: string) => {
               const newUser = new User({
+                username,
                 email,
                 password: hashedPassword,
               });
@@ -75,7 +79,7 @@ router.post("/signup", (req: Request, res: Response) => {
 
 // Signin
 router.post("/signin", (req: Request, res: Response) => {
-  1;
+  1; //Not ready!!
 });
 
 export default router;
