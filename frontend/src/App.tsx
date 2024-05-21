@@ -1,6 +1,6 @@
 
-
-import Register from /.
+import React from 'react'
+import Register from './components/pages/register/register'
 
 function App() {
   
