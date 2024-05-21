@@ -110,7 +110,25 @@ const Threads: React.FC = () => {
       <div className="flex flex-col items-center">
          <h1 className="text-3xl font-bold mb-4">Community Threads</h1>
          <form onSubmit={handleNewThreadSubmit} className="w-full max-w-lg mb-4">
-            {/*create thread */}
+            <input
+               type="text"
+               placeholder="Thread Title"
+               value={newThreadTitle}
+               onChange={(e) => setNewThreadTitle(e.target.value)}
+               className="w-full bg-gray-200 border border-gray-400 rounded py-2 px-4 mb-2 focus:outline-none focus:bg-white focus:border-blue-500"
+            />
+            <textarea
+               placeholder="Thread Content"
+               value={newThreadContent}
+               onChange={(e) => setNewThreadContent(e.target.value)}
+               className="w-full h-24 bg-gray-200 border border-gray-400 rounded py-2 px-4 mb-2 focus:outline-none focus:bg-white focus:border-blue-500"
+            />
+            <button
+               type="submit"
+               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+               Create Thread
+            </button>
          </form>
 
          {threads.map(thread => (
@@ -165,8 +183,6 @@ const Threads: React.FC = () => {
                      Post Comment
                   </button>
                </form>
-
-
             </div>
          ))}
       </div>
