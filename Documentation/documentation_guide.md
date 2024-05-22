@@ -82,3 +82,13 @@ Team members: Emma, Alex, Louise, Joseph, Dennis, and Clara
 - Commencing the day with our **daily stand-up meeting**, we took turns discussing what we did and our overall feelings about the progress of the project. Here are our [notes](./Notes/daily_stand-up_20_05.md).
 
 - Discussed decisions, including whether to use CSS files or Tailwind classes for styling. Chose to work only with Tailwind classes.
+
+## 21th May
+
+- We had our usual **daily stand-up**, we took turns discussing what we did and our overall feelings about the progress of the project. Here are our [notes](./Notes/daily_stand-up_21_05.md).
+
+- During the day, we are all coding together on a Discord channel, allowing anyone with questions to ask directly. We all appreciate this method of working.
+
+## 22th May
+
+- Today was similar to the previous day. We started with our daily stand-up and then collaborated on the Discord channel, assisting each other and congratulating anyone who completed their tasks. Here are the notes concerning the [stand-up](./Notes/daily_stand-up_22_05.md).
