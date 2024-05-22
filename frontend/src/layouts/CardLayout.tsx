@@ -14,7 +14,6 @@ const CardLayout = () => {
         </div>
 
         <nav>
-          <NavLink to={'test'}>Test</NavLink> | {''}
           <NavLink to={'info'}>Info</NavLink> | {''}
           <NavLink to={'market'}>Market</NavLink> | {''}
           <NavLink to={'legalities'}>Legalities</NavLink>
