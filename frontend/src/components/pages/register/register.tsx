@@ -6,7 +6,16 @@ const [password, setPassword] = useState("");
 const [register, setRegister] = useState(false);*/
 
 const registerUser = () => {
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    //console.log(e.target)
+    const form = (e.currentTarget)
+    const formdata = {
+      email: form.email.value,
+      password: form.password.value
+    }
+ //fetch or axxios call to api point
+    
     alert("User registered successfully!");
   };
 
@@ -25,7 +34,7 @@ const registerUser = () => {
             id="email"
             name="email"
             className="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="Email"
+            placeholder="Email"            
           />
         </div>
 

@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import Validation from "./loginValidation";
 
+
+const loginUser = () => {
 
 const [values, setValues] = useState({
     email: "",
@@ -10,22 +11,14 @@ const [values, setValues] = useState({
 });
 
 const [errors, setErrors] = useState({
-    errors: String,
-    setErrors: String
+   email: "",
+   password: ""
  });
-
-const handleInput = (event: any) => {
-    setValues(prev => ({
-        ...prev,
-        [event.target.name]: event.target.value
-    }))
- };
-
-const loginUser = () => {
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        setValues(Validation(values));
+        setErrors(Validation(values));
+        //if no errors submit
       };
 
     const handleInput = (event: any) => {
