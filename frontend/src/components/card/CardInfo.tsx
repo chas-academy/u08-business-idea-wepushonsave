@@ -1,19 +1,15 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
-import { convertObjectToArray } from '../../utils/convertObjectToArray';
-import { ICardInfo } from './ICardInfo';
-
-
-
-
+import {useLoaderData} from 'react-router-dom';
+import {convertObjectToArray} from '../../utils/convertObjectToArray';
+import {ICardInfo} from './ICardInfo';
 
 const CardInfo = () => {
   //FIXME See if there is any other data-type we can use for an unknown value
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const cardData: any = useLoaderData();
   /* eslint-enable @typescript-eslint/no-explicit-any */
-  
-  const extractCardData = (cardData: any): ICardInfo => {
+
+  const extractCardData = (cardData: ICardInfo) => {
     return {
       name: cardData.name,
       mana_cost: cardData.mana_cost,
@@ -42,20 +38,23 @@ const CardInfo = () => {
       set_type: cardData.set_type,
       edhrec_rank: cardData.edhrec_rank,
       tcgplayer_id: cardData.tcgplayer_id,
-      cardmarket_id: cardData.cardmarket_id
-    }
-  }
+      cardmarket_id: cardData.cardmarket_id,
+    };
+  };
 
-  const cardInfo: ICardInfo = extractCardData(cardData)
-  const info = convertObjectToArray(cardInfo)
-  console.log(info)
+  const cardInfo: ICardInfo = extractCardData(cardData);
+  const info = convertObjectToArray(cardInfo);
+  console.log(info);
 
   return (
     <>
       <div>
         <p>Card Information</p>
         {info.map(({key, value}, index) => (
-       <p key={index}><strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong> {typeof value === 'object' ? value.join(', ') : value}</p>
+          <p key={index}>
+            <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
+            {typeof value === 'object' ? value.join(', ') : value}
+          </p>
         ))}
       </div>
     </>
