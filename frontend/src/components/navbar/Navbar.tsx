@@ -1,8 +1,8 @@
-import logo from './assets/logo-MTG-TOMB.webp';
-import docIcon from './assets/doc-icon.webp';
-import profileIcon from './assets/profile-icon.webp';
-import decksIcon from './assets/decks-icon.webp';
-import communityIcon from './assets/community-icon.webp';
+import logo from '../../assets/logo-MTG-TOMB.webp';
+import docIcon from '../../assets/doc-icon.webp';
+import profileIcon from '../../assets/profile-icon.webp';
+import decksIcon from '../../assets/decks-icon.webp';
+import communityIcon from '../../assets/community-icon.webp';
 
 const Navbar = () => {
   return (
