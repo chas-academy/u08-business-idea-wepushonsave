@@ -12,7 +12,10 @@ const registerUser = () => {
 
   return (
     <>
-      <form className="flex flex-col space-y-4">
+
+      <h1 className="text-3xl font-bold text-center">Register</h1>
+      <form action="" onSubmit={handleSubmit}
+      className="flex flex-col space-y-4">
         <div className="flex flex-col">
           <label htmlFor="email" className="text-sm font-medium mb-2">
             Email address
@@ -22,13 +25,13 @@ const registerUser = () => {
             id="email"
             name="email"
             className="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="Enter email"
+            placeholder="Email"
           />
         </div>
 
         <div className="flex flex-col">
           <label htmlFor="password" className="text-sm font-medium mb-2">
-            Password
+            Choose a password
           </label>
           <input
             type="password"
@@ -42,7 +45,7 @@ const registerUser = () => {
           type="submit"
           className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          Login
+          Submit
         </button>
       </form>
     </>
