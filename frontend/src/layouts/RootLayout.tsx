@@ -10,8 +10,9 @@ const RootLayout = () => {
       <div>
         <App />
       </div>
-      <nav>
-        <NavLink to={'card'}>Card</NavLink>
+      <nav className=" bg-gray-500">
+        <NavLink to={'card'}>Card</NavLink> |{' '}
+        <NavLink to={'cards'}>Cards</NavLink> |{' '}
       </nav>
       <main>
         <Outlet />
