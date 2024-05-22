@@ -1,7 +1,6 @@
 import React from 'react';
 import {NavLink, Outlet} from 'react-router-dom';
 import CardImage from '../components/CardImage';
-import CardsArray from '../components/card/CardsArray';
 
 const CardLayout = () => {
   return (
