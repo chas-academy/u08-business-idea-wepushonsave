@@ -19,24 +19,26 @@ import CardLayout from './layouts/CardLayout.tsx';
 
 // utils
 import {singleCardLoader} from './utils/singleCardLoader.tsx';
+import CardsArray from './components/card/CardsArray.tsx';
+import {cardsArrayLoader} from './utils/cardsArrayLoader.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
+      <Route path="cards" element={<CardsArray />} loader={cardsArrayLoader} />
       <Route path="card" element={<CardLayout />} loader={singleCardLoader}>
         <Route path="info" element={<CardInfo />} loader={singleCardLoader} />
-
         <Route
           path="market"
           element={<CardMarket />}
           loader={singleCardLoader}
         />
-
         <Route
           path="legalities"
           element={<CardLegalities />}
           loader={singleCardLoader}
         />
+        RR
       </Route>
     </Route>
   )
