@@ -13,11 +13,11 @@ const CollapsableContent: React.FC<CollapsableContentProps> = ({ title, items })
       {items.map((item, index) => {     //mapar ut texten i generateCollapsableContent, allt med ett - framför kommer få en annan styling
           if (item.startsWith('-')) {
             return (
-                <h3 key={index} className="font-bold text-lg">{item.substring(1)}</h3>
+                <h3 key={index} className="font-bold text-lg">{item.substring(1)}</h3> //- i början gör den bold
             );
-          } if (item.startsWith('*')) {
+          } if (item.startsWith('*')) { 
             return(
-            <li key={index} className="mt-2 ml-2">{item.substring(1)}</li>
+            <li key={index} className="mt-2 ml-2">{item.substring(1)}</li>//* gör att den blir en nested li
         )
           }
           else {
