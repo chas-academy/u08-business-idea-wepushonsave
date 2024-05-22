@@ -93,7 +93,7 @@ const Threads: React.FC = () => {
             : thread
       );
       setThreads(updatedThreads);
-      // Reset the value of the input field
+      // Reset the input field
       e.currentTarget.comment.value = '';
    };
 
@@ -125,18 +125,18 @@ const Threads: React.FC = () => {
             />
             <button
                type="submit"
-               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+               className="bg-btn-gradient text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
                Create Thread
             </button>
          </form>
 
          {threads.map(thread => (
-            <div key={thread.id} className="w-full max-w-lg mb-4">
-               <h2 className="text-2xl font-bold cursor-pointer" onClick={() => toggleComments(thread.id)}>
+            <div key={thread.id} className="w-full max-w-lg mb-4 bg-blue-200">
+               <h2 className="text-2xl font-bold cursor-pointer bg-blue-300" onClick={() => toggleComments(thread.id)}>
                   {thread.title}
                </h2>
-               <p className="text-gray-700">{thread.content}</p>
+               <p className="min-h-20 text-gray-900 bg-pink-100 p-2">{thread.content}</p>
 
                {/*"show/hide comments" toggle*/}
                <p
@@ -150,7 +150,7 @@ const Threads: React.FC = () => {
                {!thread.collapsed && (
                   <div>
                      {thread.comments.slice(0, 2).map(comment => (
-                        <div key={comment.id} className="border border-gray-300 rounded p-2 mt-2">
+                        <div key={comment.id} className="border border-white rounded p-2 m-2">
                            <p className="text-gray-700">{comment.text}</p>
                         </div>
                      ))}
@@ -178,7 +178,7 @@ const Threads: React.FC = () => {
                   />
                   <button
                      type="submit"
-                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                     className="bg-btn-gradient hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   >
                      Post Comment
                   </button>
