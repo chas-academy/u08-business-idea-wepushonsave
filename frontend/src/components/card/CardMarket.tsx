@@ -16,6 +16,22 @@ const CardMarket = () => {
   return (
     <>
       <h1>Card Market</h1>
+      <div>
+        {cardPrices.map(({key, value}, index) => (
+          <p key={index}>
+            <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
+            {typeof value === 'object' ? '' : value}
+          </p>
+        ))}
+      </div>
+
+      <div>
+        {cardMarkets.map(({key, value}, index) => (
+          <a href={value} target="_blank" rel="noopener noreferrer" key={index}>
+            <p>{key.charAt(0).toUpperCase() + key.slice(1)}:</p>
+          </a>
+        ))}
+      </div>
     </>
   );
 };
