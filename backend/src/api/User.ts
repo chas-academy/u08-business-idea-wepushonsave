@@ -8,13 +8,7 @@ const router = express.Router();
 
 // Signup
 router.post("/signup", (req: Request, res: Response) => {
-  /*let {email, password} = req.body;
-    email = email.trim();
-    password = password.trim();*/
-
-
   const { email, password, username } = req.body;
-
 
   if (!email || !password) {
     return res.status(400).json({ message: "Input email or password!" });
@@ -25,16 +19,13 @@ router.post("/signup", (req: Request, res: Response) => {
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ message: "Invalid email!" });
   } else {
+
     // Check if user already exists
     User.find({ email })
       .then((result: any[]) => {
-        console.log(result); //TEST
-        // Handle the result
         if (result && result.length > 0) {
-          // User already exists
           return res.status(400).json({ message: "User already exists!" });
         } else {
-          // Try to create new user
 
           // password handling
           const saltRounds: number = 10;
@@ -79,7 +70,36 @@ router.post("/signup", (req: Request, res: Response) => {
 
 // Signin
 router.post("/signin", (req: Request, res: Response) => {
-  1; //Not ready!!
-});
+  const { email, password } = req.body; 
 
-export default router;
+    if (email == "" || password == "") {
+      return res.status(400).json({ message: "Input email or password!" });
+    } else {
+      // Check if user exists
+      User.find({ email })
+      .then(data => {
+        if (data.length) {
+          //User exists
+
+          const hashedPassword = data[0].password;
+          bcrypt.compare(password, hashedPassword).then(result => {
+            if (result) {
+              return res.status(200).json({ message: "User signed in successfully!" });
+            } else {
+              return res.status(400).json({ message: "Invalid email or password!" });
+            }
+          })
+          .catch(err => {
+            return res.status(500).json({ message: "An error occurred while comparing passwords!" });
+          });
+        } else {
+          return res.status(400).json({ message: "Invalid credentials entered!" });
+        }
+      })
+      .catch(err => {
+        return res.status(500).json({ message: "An error occurred while finding user!" });
+      });
+    }
+  });
+
+  export default router;

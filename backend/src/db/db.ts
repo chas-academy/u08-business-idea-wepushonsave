@@ -9,13 +9,12 @@ dotenv.config();
 const connectDB = async () => {
   try {
     const mongoURI: string =
-      "mongodb+srv://admin:test1234@u08cluster.cootwbe.mongodb.net/?retryWrites=true&w=majority&appName=U08Cluster"; //Password encoded %54%%45%5354%31%32%33
+      "mongodb+srv://admin:test1234@u08cluster.cootwbe.mongodb.net/?retryWrites=true&w=majority&appName=U08Cluster";
     await connect(mongoURI);
     console.log("MongoDB Connected...");
   } catch (err: any) {
     console.error(err.message);
     console.log("Connection failed");
-    // Exit process with failure
     process.exit(1);
   }
 };
