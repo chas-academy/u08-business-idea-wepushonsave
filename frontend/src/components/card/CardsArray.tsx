@@ -1,5 +1,4 @@
-import {redirect, useLoaderData, useNavigate} from 'react-router-dom';
-import {singleCardLoader} from '../../utils/singleCardLoader';
+import {useLoaderData, useNavigate} from 'react-router-dom';
 
 /**
  * @IAPIResponse
@@ -46,6 +45,10 @@ const CardsArray: React.FC = () => {
                 src={value.image_uris.border_crop}
                 alt={value.name + 'card image'}
               />
+        <div className="grid grid-cols-3">
+          {cards.map((value, index) => (
+            <div key={index}>
+              <img src={value.image_uris.border_crop} alt="" />
             </div>
           ))}
         </div>

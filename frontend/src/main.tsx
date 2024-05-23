@@ -38,6 +38,7 @@ const router = createBrowserRouter(
             return singleCardLoader(params);
           }}
         />
+
         <Route
           path="market"
           element={<CardMarket />}
