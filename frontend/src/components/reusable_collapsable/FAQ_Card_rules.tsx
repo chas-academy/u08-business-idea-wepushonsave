@@ -1,4 +1,3 @@
-import React from 'react';
 import Collapsable from './Collapsable';
 import CollapsableContent from './CollapsableContent';
 
