@@ -8,6 +8,7 @@ const CardLegalities = () => {
   /* eslint-enable @typescript-eslint/no-explicit-any */
   const cardLegalities = convertObjectToArray(cardData.legalities);
   console.log(cardLegalities);
+
   return (
     <>
       <div className="grid grid-cols-2 bg-[#8cbfb5] gap-1">
