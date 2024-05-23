@@ -1,4 +1,4 @@
-import {useLoaderData} from 'react-router-dom';
+import {useLoaderData, useNavigate} from 'react-router-dom';
 
 /**
  * @IAPIResponse
@@ -15,6 +15,7 @@ interface IImageUris {
 // Defines the structure of each card
 interface ICard {
   name: string;
+  id: string;
   image_uris: IImageUris;
 }
 
@@ -25,14 +26,25 @@ interface IAPIResponse {
 
 const CardsArray: React.FC = () => {
   const apiResponse = useLoaderData() as IAPIResponse;
-
   const cards = apiResponse.data;
-  console.log(cards);
+  const navigate = useNavigate();
+
+  const getCardId = async (id: string) => {
+    navigate(`/card/${id}`);
+  };
 
   if (cards !== null) {
     return (
       <>
         <h1 className=" text-cyan-50">CardsArray.tsx</h1>
+        <div className="grid grid-cols-3 gap-1">
+          {cards.map((value, index) => (
+            <div key={index}>
+              <img
+                onClick={() => getCardId(value.id)}
+                src={value.image_uris.border_crop}
+                alt={value.name + 'card image'}
+              />
         <div className="grid grid-cols-3">
           {cards.map((value, index) => (
             <div key={index}>
