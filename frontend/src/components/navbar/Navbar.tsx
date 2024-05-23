@@ -15,7 +15,6 @@ const Navbar = () => {
             src={logo}
             alt="Logo"
             className="w-12 h-12 md:w-16 md:h-16 mb-2 mt-3 md:mt-2 mx-auto inset-0 border-2 border-transparent hover:border-white hover:shadow-lg hover:shadow-plum hover:bg-mint/60 rounded-lg"
-            className="w-12 h-12 md:w-16 md:h-16 mb-2 mt-3 md:mt-2 mx-auto inset-0 border-2 border-transparent hover:border-white hover:shadow-lg hover:shadow-plum hover:bg-mint/60 rounded-lg"
           />
         </a>
 
