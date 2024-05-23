@@ -9,15 +9,22 @@ const CardLayout = () => {
         <div className="cards-array-layout"></div>
         <CardImage />
 
+        <nav className="border border-black flex justify-evenly bg-[#4a54ab]">
+          <NavLink className={'text-xl'} to={'info'}>
+            Info
+          </NavLink>{' '}
+          | {''}
+          <NavLink className={'text-xl'} to={'market'}>
+            Market
+          </NavLink>{' '}
+          | {''}
+          <NavLink className={'text-xl'} to={'legalities'}>
+            Legalities
+          </NavLink>
+        </nav>
         <div className="card-info-layout">
           <Outlet />
         </div>
-
-        <nav>
-          <NavLink to={'info'}>Info</NavLink> | {''}
-          <NavLink to={'market'}>Market</NavLink> | {''}
-          <NavLink to={'legalities'}>Legalities</NavLink>
-        </nav>
       </div>
     </>
   );
