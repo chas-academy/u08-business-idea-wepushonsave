@@ -1,9 +1,3 @@
-import logo from '../../assets/logo-MTG-TOMB.webp';
-import docIcon from '../../assets/doc-icon.webp';
-import profileIcon from '../../assets/profile-icon.webp';
-import decksIcon from '../../assets/decks-icon.webp';
-import communityIcon from '../../assets/community-icon.webp';
-
 const Navbar = () => {
   return (
     <>
@@ -12,7 +6,7 @@ const Navbar = () => {
           href="#"
           className="mtg-tomb-logo w-full md:w-24 block text-center 0">
           <img
-            src={logo}
+            src="./src/assets/logo-MTG-TOMB.webp"
             alt="Logo"
             className="w-12 h-12 md:w-16 md:h-16 mb-2 mt-3 md:mt-2 mx-auto inset-0 border-2 border-transparent hover:border-white hover:shadow-lg hover:shadow-plum hover:bg-mint/60 rounded-lg"
           />
