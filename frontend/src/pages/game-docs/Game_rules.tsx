@@ -1,4 +1,3 @@
-import React from 'react';
 import FAQ_Game_rules from '../../components/reusable_collapsable/FAQ_Game_rules';
 
 
