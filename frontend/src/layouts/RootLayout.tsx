@@ -14,6 +14,7 @@ const RootLayout = () => {
         <NavLink to={'cards'}>Cards</NavLink> |{' '}
         <NavLink to={'gamerules'}>Game Rules</NavLink> |{' '}
         <NavLink to={'cardrules'}>Card Rules</NavLink> |{' '}
+
       </nav>
       <main>
         <Outlet />

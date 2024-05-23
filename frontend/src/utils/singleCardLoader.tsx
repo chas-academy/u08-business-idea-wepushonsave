@@ -10,6 +10,7 @@ export const singleCardLoader = async (params: IId) => {
   const id = Object.values(cardId).toString();
 
   const url = `https://api.scryfall.com/cards/${id}`;
+
   const response = await fetch(url);
   const result = await response.json();
 
