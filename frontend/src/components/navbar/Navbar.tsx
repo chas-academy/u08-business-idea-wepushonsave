@@ -1,3 +1,4 @@
+
 const Navbar = () => {
   return (
     <>
@@ -6,7 +7,7 @@ const Navbar = () => {
           href="#"
           className="mtg-tomb-logo w-full md:w-24 block text-center 0">
           <img
-            src="./src/assets/logo-MTG-TOMB.webp"
+            src={logo}
             alt="Logo"
             className="w-12 h-12 md:w-16 md:h-16 mb-2 mt-3 md:mt-2 mx-auto inset-0 border-2 border-transparent hover:border-white hover:shadow-lg hover:shadow-plum hover:bg-mint/60 rounded-lg"
           />
@@ -19,6 +20,7 @@ const Navbar = () => {
             src="./src/assets/doc-icon.webp"
             alt="Logo"
             className="w-12 h-12 md:w-16 md:h-16 mb-2 mt-3 md:mt-2 mx-auto inset-0 border-2 border-transparent hover:border-white hover:shadow-lg hover:shadow-plum hover:bg-mint/60 rounded-lg"
+
           />
         </a>
 
@@ -30,6 +32,7 @@ const Navbar = () => {
             alt="Logo"
             style={{ width: '4.25rem', height: '4.25rem' }}
             className="mx-auto bg-custom-purple-600 rounded-full border-2 border-periwinkle hover:shadow-md hover:shadow-plum  hover:border-white"
+
           />
         </a>
 
@@ -40,6 +43,7 @@ const Navbar = () => {
             src="./src/assets/decks-icon.webp"
             alt="Logo"
             className="w-12 h-12 md:w-16 md:h-16 mb-2 mt-3 md:mt-2 mx-auto inset-0 border-2 border-transparent hover:border-white hover:shadow-lg hover:shadow-plum hover:bg-mint/60 rounded-lg"
+
           />
         </a>
 
@@ -50,6 +54,7 @@ const Navbar = () => {
             src="./src/assets/community-icon.webp"
             alt="Logo"
             className="w-12 h-12 md:w-16 md:h-16 mb-2 mt-3 md:mt-2 mx-auto inset-0 border-2 border-transparent hover:border-white hover:shadow-lg hover:shadow-plum hover:bg-mint/60 rounded-lg"
+
           />
         </a>
 
@@ -58,6 +63,7 @@ const Navbar = () => {
         <a href="#" className="login-logo-desktop ml-auto 0">
           <button className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
             <span className="absolute inset-0 border-2 border-transparent hover:border-white rounded-lg"></span>
+
             LOGIN
           </button>
         </a>
@@ -74,6 +80,7 @@ const Navbar = () => {
             src="./src/assets/profile-icon.webp"
             alt="Logo"
             className="w-14 h-14 m-3 bg-custom-purple-600 rounded-full border-4 border-periwinkle hover:shadow-lg hover:shadow-plum  hover:border-white"
+
           />
         </a>
       </nav>
