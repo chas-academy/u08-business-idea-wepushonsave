@@ -36,7 +36,6 @@ const CardsArray: React.FC = () => {
   if (cards !== null) {
     return (
       <>
-        <h1 className=" text-cyan-50">CardsArray.tsx</h1>
         <div className="grid grid-cols-3 gap-1">
           {cards.map((value, index) => (
             <div key={index}>
@@ -45,10 +44,6 @@ const CardsArray: React.FC = () => {
                 src={value.image_uris.border_crop}
                 alt={value.name + 'card image'}
               />
-        <div className="grid grid-cols-3">
-          {cards.map((value, index) => (
-            <div key={index}>
-              <img src={value.image_uris.border_crop} alt="" />
             </div>
           ))}
         </div>
