@@ -23,3 +23,5 @@ module.exports = async (request, response, next) => {
       });
     }
   };
+
+  export default module.exports;
