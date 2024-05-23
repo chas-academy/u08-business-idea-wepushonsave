@@ -6,10 +6,9 @@ const CardLayout = () => {
     <>
       <div className="card-layout">
         <p>CardLayout</p>
-        <div className="cards-array-layout"></div>
         <CardImage />
 
-        <nav className="h-16 w-full grid grid-cols-3">
+        <nav className="grid grid-cols-3">
           <NavLink
             className={({isActive}) =>
               isActive

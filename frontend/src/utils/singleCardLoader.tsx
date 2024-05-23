@@ -1,14 +1,15 @@
 import {Params} from 'react-router-dom';
 
 interface IId {
-  id: Params<string>;
+  params: Params<string>;
 }
 
-export const singleCardLoader = async (id: IId | undefined) => {
+export const singleCardLoader = async (params: IId) => {
   await delay(1000);
-  const cardId = id?.id;
-  console.log(cardId);
-  const url = `https://api.scryfall.com/cards/${cardId}`;
+  const cardId = params?.params;
+  const id = Object.values(cardId).toString();
+
+  const url = `https://api.scryfall.com/cards/${id}`;
   const response = await fetch(url);
   const result = await response.json();
 
