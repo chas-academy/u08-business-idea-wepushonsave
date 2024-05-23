@@ -9,16 +9,32 @@ const CardLayout = () => {
         <div className="cards-array-layout"></div>
         <CardImage />
 
-        <nav className="border border-black flex justify-evenly bg-[#4a54ab]">
-          <NavLink className={'text-xl'} to={'info'}>
+        <nav className="h-16 w-full grid grid-cols-3">
+          <NavLink
+            className={({isActive}) =>
+              isActive
+                ? 'card-details-active card-info'
+                : 'card-details-not-active'
+            }
+            to={'info'}>
             Info
           </NavLink>{' '}
-          | {''}
-          <NavLink className={'text-xl'} to={'market'}>
+          <NavLink
+            className={({isActive}) =>
+              isActive
+                ? 'card-details-active card-market'
+                : 'card-details-not-active'
+            }
+            to={'market'}>
             Market
           </NavLink>{' '}
-          | {''}
-          <NavLink className={'text-xl'} to={'legalities'}>
+          <NavLink
+            className={({isActive}) =>
+              isActive
+                ? 'card-details-active card-legalities'
+                : 'card-details-not-active'
+            }
+            to={'legalities'}>
             Legalities
           </NavLink>
         </nav>
