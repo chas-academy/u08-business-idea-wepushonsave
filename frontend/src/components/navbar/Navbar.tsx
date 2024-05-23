@@ -18,9 +18,7 @@ const Navbar = () => {
           />
         </a>
 
-        <a
-          href="#"
-          className="docs-logo w-full md:w-24 block text-center  0">
+        <a href="#" className="docs-logo w-full md:w-24 block text-center  0">
           <img
             src={docIcon}
             alt="Doc Icon"
@@ -34,21 +32,18 @@ const Navbar = () => {
           <img
             src={profileIcon}
             alt="Profile Icon"
-            style={{ width: '4.25rem', height: '4.25rem' }}
+            style={{width: '4.25rem', height: '4.25rem'}}
             className="mx-auto bg-custom-purple-600 rounded-full border-4 border-custom-purple-800"
           />
         </a>
 
-        <a
-          href="#"
-          className="decks-logo w-full md:w-24 block text-center 0">
+        <a href="#" className="decks-logo w-full md:w-24 block text-center 0">
           <img
             src={decksIcon}
             alt="Decks Icon"
             className="w-12 h-12 md:w-16 md:h-16 mb-2 mt-3 md:mt-2 mx-auto inset-0 border-2 border-transparent hover:border-white hover:shadow-lg hover:shadow-plum hover:bg-mint/60 rounded-lg"
           />
         </a>
-
 
         <a
           href="#"
@@ -87,6 +82,5 @@ const Navbar = () => {
     </>
   );
 };
-
 
 export default Navbar;
