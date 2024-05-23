@@ -10,13 +10,16 @@ const CardLegalities = () => {
   console.log(cardLegalities);
   return (
     <>
-      <h1>Card Legalities</h1>
-      {cardLegalities.map(({key, value}, index) => (
-        <p key={index}>
-          <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
-          {typeof value === 'object' ? value.join(', ') : value}
-        </p>
-      ))}
+      <div className="grid grid-cols-2 bg-[#8cbfb5] gap-1">
+        {cardLegalities.map(({key, value}, index) => (
+          <div className="border border-black m-1 ">
+            <p key={index}>
+              <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
+              {typeof value === 'object' ? value.join(', ') : value}
+            </p>
+          </div>
+        ))}
+      </div>
     </>
   );
 };

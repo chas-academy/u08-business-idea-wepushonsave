@@ -48,13 +48,14 @@ const CardInfo = () => {
   return (
     <>
       <div>
-        <p>Card Information</p>
-        {info.map(({key, value}, index) => (
-          <p key={index}>
-            <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
-            {typeof value === 'object' ? value.join(', ') : value}
-          </p>
-        ))}
+        <div className="grid grid-cols-2 bg-[#8cbfb5] gap-1">
+          {info.map(({key, value}, index) => (
+            <div key={index} className="border border-black m-1">
+              <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
+              {typeof value === 'object' ? value.join(', ') : value}
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
