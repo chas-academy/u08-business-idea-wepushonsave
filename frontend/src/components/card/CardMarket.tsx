@@ -15,21 +15,30 @@ const CardMarket = () => {
 
   return (
     <>
-      <h1>Card Market</h1>
-      <div>
+      <div className="grid grid-cols-2 bg-[#8cbfb5] gap-1">
         {cardPrices.map(({key, value}, index) => (
-          <p key={index}>
-            <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
-            {typeof value === 'object' ? '' : value}
-          </p>
+          <div className="border border-black m-1">
+            <p key={index}>
+              <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
+              {value === null ? null : typeof value === 'object' ? '' : value}
+            </p>
+          </div>
         ))}
       </div>
 
-      <div>
+      <div className="grid grid-cols-2 bg-[#8cbfb5] gap-1">
         {cardMarkets.map(({key, value}, index) => (
-          <a href={value} target="_blank" rel="noopener noreferrer" key={index}>
-            <p>{key.charAt(0).toUpperCase() + key.slice(1)}:</p>
-          </a>
+          <div className="border border-black m-1">
+            <a
+              href={value}
+              target="_blank"
+              rel="noopener noreferrer"
+              key={index}>
+              <p className="underline text-center">
+                {key ? key.charAt(0).toUpperCase() + key.slice(1) : null}:
+              </p>
+            </a>
+          </div>
         ))}
       </div>
     </>
