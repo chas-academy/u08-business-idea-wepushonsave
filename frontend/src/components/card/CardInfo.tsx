@@ -8,6 +8,7 @@ const CardInfo = () => {
   const cardData: any = useLoaderData();
   /* eslint-enable @typescript-eslint/no-explicit-any */
 
+  //FIXME This function does what? Fix
   const extractCardData = (cardData: any): ICardInfo => {
     return {
       name: cardData.name,
@@ -48,7 +49,7 @@ const CardInfo = () => {
   return (
     <>
       <div>
-        <div className="grid grid-cols-2 bg-[#8cbfb5] gap-1">
+        <div className="grid grid-cols-2 bg-[#322929] gap-1">
           {info.map(({key, value}, index) => (
             <div key={index} className="border border-black m-1">
               <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
