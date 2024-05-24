@@ -13,7 +13,7 @@ const Collapsable: React.FC<CollapsableProps> = ({titles, content}) => {
       <button
         onClick={() => setCollapsableOpen(!collapsableOpen)} //onclick event som kommer att öppna eller stänga drop downen 
         className="flex justify-between w-full">
-        <span>{titles}</span>
+        <span className='font-semibold'>{titles}</span>
         {collapsableOpen ? <span>-</span> : <span>+</span>} {/*om öppen ska - skrivas ut om stängd + */}
       </button>
       <div
