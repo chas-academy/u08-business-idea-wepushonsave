@@ -1,4 +1,4 @@
-import {NavLink, Outlet} from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import CardImage from '../components/CardImage';
 
 const CardLayout = () => {
@@ -12,7 +12,7 @@ const CardLayout = () => {
         <nav className="grid grid-cols-3">
 
           <NavLink
-            className={({isActive}) =>
+            className={({ isActive }) =>
               isActive
                 ? 'card-details-active card-info'
                 : 'card-details-not-active'
@@ -21,7 +21,7 @@ const CardLayout = () => {
             Info
           </NavLink>{' '}
           <NavLink
-            className={({isActive}) =>
+            className={({ isActive }) =>
               isActive
                 ? 'card-details-active card-market'
                 : 'card-details-not-active'
@@ -30,7 +30,7 @@ const CardLayout = () => {
             Market
           </NavLink>{' '}
           <NavLink
-            className={({isActive}) =>
+            className={({ isActive }) =>
               isActive
                 ? 'card-details-active card-legalities'
                 : 'card-details-not-active'

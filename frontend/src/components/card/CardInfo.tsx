@@ -1,6 +1,6 @@
-import {useLoaderData} from 'react-router-dom';
-import {convertObjectToArray} from '../../utils/convertObjectToArray';
-import {ICardInfo} from './ICardInfo';
+import { useLoaderData } from 'react-router-dom';
+import { convertObjectToArray } from '../../utils/convertObjectToArray';
+import { ICardInfo } from './ICardInfo';
 
 const CardInfo = () => {
   //FIXME See if there is any other data-type we can use for an unknown value
@@ -49,7 +49,7 @@ const CardInfo = () => {
     <>
       <div>
         <div className="grid grid-cols-2 bg-[#8cbfb5] gap-1">
-          {info.map(({key, value}, index) => (
+          {info.map(({ key, value }, index) => (
             <div key={index} className="border border-black m-1">
               <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
               {typeof value === 'object' ? value.join(', ') : value}

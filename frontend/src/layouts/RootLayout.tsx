@@ -1,4 +1,4 @@
-import {NavLink, Outlet} from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import App from '../App';
 import Navbar from '../components/navbar/Navbar';
 
@@ -12,6 +12,7 @@ const RootLayout = () => {
       </div>
       <nav className=" bg-gray-500">
         <NavLink to={'cards'}>Cards</NavLink> |{' '}
+        <NavLink to={'community'}>Community</NavLink>
         <NavLink to={'gamerules'}>Game Rules</NavLink> |{' '}
         <NavLink to={'cardrules'}>Card Rules</NavLink> |{' '}
 
