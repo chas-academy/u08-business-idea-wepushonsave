@@ -22,12 +22,12 @@ const CommentSchema = new Schema<CommentDocument>({
 
 
 const ThreadSchema = new Schema<ThreadDocument>({
+   title: { type: String, required: true },
    content: { type: String, required: true },
-   comments: { type: [CommentSchema], default: [] },
+   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
    collapsed: { type: Boolean, default: true },
 }, { timestamps: true });
 
 
 const Thread = model<ThreadDocument>('Thread', ThreadSchema);
-
 export default Thread;

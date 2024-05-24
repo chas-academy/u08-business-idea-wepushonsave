@@ -1,10 +1,11 @@
-import { Router } from 'express';
+import express, { Request, Response } from 'express';
 import Thread from '../models/threadModel';
+import Comment from '../models/commentModel';
 
-const router = Router();
+const router = express.Router();
 
 // Get all threads
-router.get('/all', async (req, res) => {
+router.get('/', async (req: Request, res: Response) => {
    try {
       const threads = await Thread.find().sort({ createdAt: -1 });
       res.json(threads);
@@ -15,13 +16,13 @@ router.get('/all', async (req, res) => {
    }
 });
 
-// Create a new thread
-router.post('/create', async (req, res) => {
+// Create thread
+router.post('/', async (req: Request, res: Response) => {
    try {
-      const { content } = req.body;
-      const newThread = new Thread({ content, comments: [], collapsed: false });
-      const savedThread = await newThread.save();
-      res.status(201).json(savedThread);
+      const { title, content } = req.body;
+      const newThread = new Thread({ title, content });
+      await newThread.save();
+      res.status(201).json(newThread);
    } catch (error) {
       console.error('Error creating thread:', error);
       res.status(500).json({ message: 'Error creating thread' });
@@ -29,15 +30,18 @@ router.post('/create', async (req, res) => {
    }
 });
 
-// Add a comment to a thread
-router.post('/:threadId/comments', async (req, res) => {
+// Add a comment 
+router.post('/:threadId/comments', async (req: Request, res: Response) => {
    try {
       const { threadId } = req.params;
       const { text, userId } = req.body;
 
+      const newComment = new Comment({ text, userId });
+      await newComment.save();
+
       const thread = await Thread.findById(threadId);
       if (!thread) {
-         return res.status(404).json({ message: 'Thread not found' });
+         return res.status(404).send('Thread not found');
       }
 
       thread.comments.push({ text, userId });
@@ -45,7 +49,7 @@ router.post('/:threadId/comments', async (req, res) => {
 
       const updatedThread = await thread.save();
 
-      res.status(201).json(updatedThread.comments[updatedThread.comments.length - 1]);
+      res.status(201).json(newComment);
    } catch (error) {
       console.error('Error adding comment:', error);
       res.status(500).json({ message: 'Error adding comment' });
