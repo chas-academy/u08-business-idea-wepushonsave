@@ -1,5 +1,5 @@
-import {useLoaderData} from 'react-router-dom';
-import {convertObjectToArray} from '../../utils/convertObjectToArray';
+import { useLoaderData } from 'react-router-dom';
+import { convertObjectToArray } from '../../utils/convertObjectToArray';
 
 const CardMarket = () => {
   //FIXME See if there is any other data-type we can use for an unknown value
@@ -16,7 +16,7 @@ const CardMarket = () => {
   return (
     <>
       <div className="grid grid-cols-2 bg-[#8cbfb5] gap-1">
-        {cardPrices.map(({key, value}, index) => (
+        {cardPrices.map(({ key, value }, index) => (
           <div className="border border-black m-1">
             <p key={index}>
               <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
@@ -27,7 +27,7 @@ const CardMarket = () => {
       </div>
 
       <div className="grid grid-cols-2 bg-[#8cbfb5] gap-1">
-        {cardMarkets.map(({key, value}, index) => (
+        {cardMarkets.map(({ key, value }, index) => (
           <div className="border border-black m-1">
             <a
               href={value}

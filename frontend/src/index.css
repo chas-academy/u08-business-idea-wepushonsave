@@ -2,45 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+/* body {
   background-color: #242424;
-}
+} */
 /**
 * @card 
 * This class is used for single cards
 */
 .card-details-active {
-  @apply
-  bg-[#CCe4df]
-  border-[#5C5663]
-   border
-   w-40 
-   h-14
-   flex justify-center items-center
-   z-10
-   text-xl 
+  @apply bg-[#CCe4df] border-[#5C5663] border w-40 h-14 flex justify-center items-center z-10 text-xl
 }
 
 .card-details-not-active {
-  @apply
-  bg-[#5C5663]
-  border-[#CCe4df]
-   border
-   w-40
-   h-14
-   flex justify-center items-center
-   text-sm
-  }
+  @apply bg-[#5C5663] border-[#CCe4df] border w-40 h-14 flex justify-center items-center text-sm
+}
 
 .card-info {
-  @apply
-  rounded-tr-3xl
+  @apply rounded-tr-3xl
 }
+
 .card-market {
-  @apply
-  rounded-t-3xl
+  @apply rounded-t-3xl
 }
+
 .card-legalities {
-  @apply
-  rounded-tl-3xl
+  @apply rounded-tl-3xl
 }

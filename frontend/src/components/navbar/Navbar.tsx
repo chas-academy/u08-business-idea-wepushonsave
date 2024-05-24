@@ -32,8 +32,8 @@ const Navbar = () => {
           <img
             src={profileIcon}
             alt="Profile Icon"
-            style={{width: '4.25rem', height: '4.25rem'}}
-            className="mx-auto bg-custom-purple-600 rounded-full border-4 border-custom-purple-800"
+            style={{ width: '4.25rem', height: '4.25rem' }}
+            className="mx-auto bg-custom-purple-600 rounded-full border-4 border-plum hover:border-mint hover:shadow-md hover:shadow-plum"
           />
         </a>
 
