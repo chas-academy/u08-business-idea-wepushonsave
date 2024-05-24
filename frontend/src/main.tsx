@@ -11,51 +11,59 @@ import './index.css';
 import CardInfo from './components/card/CardInfo.tsx';
 import CardLegalities from './components/card/CardLegalities.tsx';
 import CardMarket from './components/card/CardMarket.tsx';
-import Threads from './pages/community/Threads.tsx';
+import CardsArray from './components/card/CardsArray.tsx';
 
 // layouts
 import RootLayout from './layouts/RootLayout.tsx';
 import CardLayout from './layouts/CardLayout.tsx';
-import CardTestLegalities from './components/card/CardTestLegalities.tsx';
 
 // utils
 import { singleCardLoader } from './utils/singleCardLoader.tsx';
+import { cardsArrayLoader } from './utils/cardsArrayLoader.tsx';
 import GameRules from './pages/game-docs/Game_rules.tsx';
 import CardRules from './pages/game-docs/Card_rules.tsx';
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-      <Route path="community" element={<Threads />} />
+      <Route path="cards" element={<CardsArray />} loader={cardsArrayLoader} />
+      <Route path="gamerules" element={<GameRules />} />
+      <Route path="cardrules" element={<CardRules />} />
 
-      <Route path="card" element={<CardLayout />} loader={singleCardLoader}>
+      <Route
+        path="card/:id"
+        element={<CardLayout />}
+        loader={({ params }) => {
+          return singleCardLoader({ params });
+
+        }}>
         <Route
-          path="test"
-          element={<CardTestLegalities />}
-          loader={singleCardLoader}
+          path="info"
+          element={<CardInfo />}
+          loader={({ params }) => {
+            return singleCardLoader({ params });
+          }}
         />
-
-        <Route path="info" element={<CardInfo />} loader={singleCardLoader} />
 
         <Route
           path="market"
           element={<CardMarket />}
-          loader={singleCardLoader}
-        />
+          loader={({ params }) => {
+            return singleCardLoader({ params });
 
+          }}
+        />
         <Route
           path="legalities"
           element={<CardLegalities />}
-          loader={singleCardLoader}
+          loader={({ params }) => {
+            return singleCardLoader({ params });
+
+          }}
         />
+        RR
       </Route>
-
-      <Route path="About" element={<></>} /> {/* About - TILL ALEX DOCUMENTATION*/}
-
-      <Route path="gamerules" element={<GameRules />} />
-      <Route path="cardrules" element={<CardRules />} />
-
-
     </Route>
   )
 );
