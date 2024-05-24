@@ -6,7 +6,7 @@ const CardLayout = () => {
   return (
     <>
       <div className="card-layout">
-        <section className="card-layout-image">
+        <section className="card-layout-image w-full h-full grid grid-cols-1 justify-items-center">
           <CardImage />
         </section>
 

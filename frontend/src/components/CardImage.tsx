@@ -9,8 +9,8 @@ const CardImage = () => {
 
   return (
     <>
-      <div>
-        <img src={cardImage} alt="" />
+      <div className="card-image-container flex justify-center items-center size-fit">
+        <img className="size-9/12" src={cardImage} alt="" />
       </div>
     </>
   );
