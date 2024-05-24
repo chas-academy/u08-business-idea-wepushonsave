@@ -8,6 +8,7 @@ const CardInfo = () => {
   const cardData: any = useLoaderData();
   /* eslint-enable @typescript-eslint/no-explicit-any */
 
+  //FIXME This function does what? Fix
   const extractCardData = (cardData: any): ICardInfo => {
     return {
       name: cardData.name,
