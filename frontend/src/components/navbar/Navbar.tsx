@@ -9,7 +9,7 @@ const Navbar = () => {
     <>
       <nav className="fixed bottom-0 inset-x-0 bg-nav-gradient flex items-start text-sm text-blue-900 uppercase font-mono md:fixed md:top-0 md:bottom-auto md:w-full md:h-auto">
         <a
-          href="#"
+          href="/"
           className="mtg-tomb-logo w-full md:w-24 block text-center 0">
           <img
             src={logo}
@@ -46,7 +46,7 @@ const Navbar = () => {
         </a>
 
         <a
-          href="#"
+          href="/community"
           className="community-logo w-full md:w-24 block text-center 0">
           <img
             src={communityIcon}
