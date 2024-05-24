@@ -2,38 +2,35 @@ interface CollapsableContentProps {
   title: string;
   items: string[];
 }
-
-const CollapsableContent: React.FC<CollapsableContentProps> = ({
-  title,
-  items,
-}) => {
+//This component expects two pieces of information: a title, which is like a heading, and items, which are like bullet points or paragraphs.
+const CollapsableContent = ({ title, items }: CollapsableContentProps) => {
   return (
     <div>
       <h3 className="font-bold text-lg">{title}</h3>
-      <ul className="list-disc ml-6 mt-2 ">
-      {items.map((item, index) => {     //mapar ut texten i generateCollapsableContent, allt med ett - framför kommer få en annan styling
+      <ul className="list-disc ml-6 mt-2">
+        {items.map((item, index) => {
           if (item.startsWith('-')) {
             return (
               <h3 key={index} className="font-bold text-lg">
                 {item.substring(1)}
-              </h3> //- i början gör den bold
+              </h3>
             );
-          } if (item.startsWith('*')) { 
-            return(
-            <li key={index} className="mt-2 ml-2">{item.substring(1)}</li>//* gör att den blir en nested li
-        )
-          } if (item.startsWith('_')) { 
-            return(
-            <br />
-        )
           }
-          else {
+          else if (item.startsWith('*')) {
             return (
-              <li key={index} className="mt-2">
-                {item}
+              <li key={index} className="mt-2 ml-2">
+                {item.substring(1)}
               </li>
             );
           }
+          else if (item.startsWith('_')) {
+            return <br key={index} />;
+          }
+          return (
+            <li key={index} className="mt-2">
+              {item}
+            </li>
+          );
         })}
       </ul>
     </div>
