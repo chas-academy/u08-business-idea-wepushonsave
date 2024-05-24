@@ -15,7 +15,7 @@ const CardMarket = () => {
 
   return (
     <>
-      <div className="grid grid-cols-2 bg-[#8cbfb5] gap-1">
+      <div className="grid grid-cols-2 bg-[#322929] gap-1">
         {cardPrices.map(({key, value}, index) => (
           <div className="border border-black m-1">
             <p key={index}>
@@ -26,7 +26,7 @@ const CardMarket = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-2 bg-[#8cbfb5] gap-1">
+      <div className="grid grid-cols-2 bg-[#322929] gap-1">
         {cardMarkets.map(({key, value}, index) => (
           <div className="border border-black m-1">
             <a

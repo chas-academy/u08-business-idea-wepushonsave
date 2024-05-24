@@ -14,7 +14,7 @@ const CardLayout = () => {
           <CardFooter />
         </section>
 
-        <nav className="card-layout-nav grid grid-cols-3">
+        <nav className="card-layout-nav grid grid-cols-3 bg-inactive-card-btn-gradient">
           <NavLink
             className={({isActive}) =>
               isActive

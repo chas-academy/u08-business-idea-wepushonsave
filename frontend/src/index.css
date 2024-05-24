@@ -11,36 +11,42 @@ body {
 */
 .card-details-active {
   @apply
-  bg-[#CCe4df]
-  border-[#5C5663]
-   border
-   w-40 
+  bg-active-card-btn-gradient
+  border-[#cce4dfd3]
    h-14
    flex justify-center items-center
    z-10
    text-xl 
+   -m-1
 }
 
 .card-details-not-active {
   @apply
-  bg-[#5C5663]
-  border-[#CCe4df]
-   border
-   w-40
+  bg-inactive-card-btn-gradient
    h-14
    flex justify-center items-center
-   text-sm
+   text-lg
+   text-opacity-75
+   text-white
   }
 
 .card-info {
   @apply
   rounded-tr-3xl
+  border-t-2
+  border-r-2
+
 }
 .card-market {
   @apply
   rounded-t-3xl
+  border-l-2
+  border-t-2
+  border-r-2
 }
 .card-legalities {
   @apply
   rounded-tl-3xl
+  border-l-2
+  border-t-2
 }
