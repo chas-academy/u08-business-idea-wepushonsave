@@ -8,6 +8,7 @@ const CollapsableContent = ({ title, items }: CollapsableContentProps) => {
     <div>
       <h3 className="font-bold text-lg">{title}</h3>
       <ul className="list-disc ml-6 mt-2">
+        {/*displaying through mapping funcktion and the if statements give styling depending on the statements */}
         {items.map((item, index) => {
           if (item.startsWith('-')) {
             return (
