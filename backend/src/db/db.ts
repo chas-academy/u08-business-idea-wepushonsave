@@ -1,4 +1,3 @@
-/* eslint-disable  @typescript-eslint/no-explicit-any */
 import { connect } from "mongoose";
 
 import dotenv from "dotenv";
@@ -9,7 +8,7 @@ dotenv.config();
 const connectDB = async () => {
   try {
     const mongoURI: string =
-      "mongodb+srv://admin:test1234@u08cluster.cootwbe.mongodb.net/?retryWrites=true&w=majority&appName=U08Cluster";
+      "mongodb+srv://admin:test1234@u08cluster.cootwbe.mongodb.net/?retryWrites=true&w=majority&appName=U08Cluster"; // Password encoded %54%%45%5354%31%32%33
     await connect(mongoURI);
     console.log("MongoDB Connected...");
   } catch (err: any) {
@@ -20,4 +19,4 @@ const connectDB = async () => {
   }
 };
 
-export default connectDB();
+export default connectDB;
