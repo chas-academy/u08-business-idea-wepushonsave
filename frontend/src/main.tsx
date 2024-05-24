@@ -18,11 +18,11 @@ import RootLayout from './layouts/RootLayout.tsx';
 import CardLayout from './layouts/CardLayout.tsx';
 
 // utils
-import { singleCardLoader } from './utils/singleCardLoader.tsx';
-import { cardsArrayLoader } from './utils/cardsArrayLoader.tsx';
+import {singleCardLoader} from './utils/singleCardLoader.tsx';
+import {cardsArrayLoader} from './utils/cardsArrayLoader.tsx';
 import GameRules from './pages/game-docs/Game_rules.tsx';
 import CardRules from './pages/game-docs/Card_rules.tsx';
-
+import Threads from './pages/community/Threads.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,39 +30,36 @@ const router = createBrowserRouter(
       <Route path="cards" element={<CardsArray />} loader={cardsArrayLoader} />
       <Route path="gamerules" element={<GameRules />} />
       <Route path="cardrules" element={<CardRules />} />
+      <Route path="community" element={<Threads />} />
 
       <Route
         path="card/:id"
         element={<CardLayout />}
-        loader={({ params }) => {
-          return singleCardLoader({ params });
-
+        loader={({params}) => {
+          return singleCardLoader({params});
         }}>
         <Route
           path="info"
           element={<CardInfo />}
-          loader={({ params }) => {
-            return singleCardLoader({ params });
+          loader={({params}) => {
+            return singleCardLoader({params});
           }}
         />
-
         <Route
           path="market"
           element={<CardMarket />}
-          loader={({ params }) => {
-            return singleCardLoader({ params });
-
+          loader={({params}) => {
+            return singleCardLoader({params});
           }}
         />
         <Route
           path="legalities"
           element={<CardLegalities />}
-          loader={({ params }) => {
-            return singleCardLoader({ params });
-
+          loader={({params}) => {
+            return singleCardLoader({params});
           }}
         />
-        RR
+        RR R
       </Route>
     </Route>
   )
