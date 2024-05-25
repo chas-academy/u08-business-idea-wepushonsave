@@ -69,13 +69,21 @@ const CardMarket = () => {
     if (print.foil) return 'Foil';
     return null;
   };
+
+  const getCardRarity = (print: IPrintsData) => {
+    if (print.rarity === 'common') return 'text-yellow-300';
+    if (print.rarity === 'uncommon') return 'text-yellow-500';
+    if (print.rarity === 'rare') return 'text-orange-400';
+    if (print.rarity === 'mythic') return 'text-red-500';
+  };
+
   return (
     <>
       <section className="card-market-grid grid grid-cols-1 gap-4 text-white">
         {/* .map(print) = The amount of diffrent card illustarations  */}
         {prints.map(print => {
           return (
-            <div className="card-market-prints-container  bg-[#322929] shadow-2xl shadow-[#322929] rounded-sm grid grid-cols-3 gap-1 m-1">
+            <div className="card-market-prints-container text-re  bg-[#322929] shadow-2xl shadow-[#322929] rounded-sm grid grid-cols-3 gap-1 m-1">
               <div className="print-container m-2 ">
                 <img
                   className="shadow shadow-[#0000008a]"
@@ -83,54 +91,34 @@ const CardMarket = () => {
                   alt=""
                 />
               </div>
+
               <div className="print-details-container col-span-2 justify-items-center content-center relative mr-2">
                 <div className="print-name-quality-container grid grid-cols-3 absolute top-0 m-2 w-full">
                   <h1 className={`text-xl col-span-2 ${getCardQuality(print)}`}>
                     {print.name}
                   </h1>
+
                   <p
                     className={`text-xs absolute right-3 top-2 ${getCardQuality(print)}`}>
                     {getCardQualityType(print)}
                   </p>
                 </div>
-                <p>
+
+                <p className="text-sm">
                   <strong className="m-2">SET:</strong>
                   {print.set_name}
                 </p>
-                <p>
+                <p className="text-sm">
                   <strong className="m-2">PRICE:</strong>
                   {getEURPrice(print.prices)}
+                </p>
+                <p className={`absolute bottom-2 m-2 ${getCardRarity(print)}`}>
+                  {print.rarity.charAt(0).toUpperCase() + print.rarity.slice(1)}
                 </p>
               </div>
             </div>
           );
         })}
-        <div className="grid grid-cols-2 bg-[#322929] gap-1">
-          {cardPrices.map(({key, value}, index) => (
-            <div key={index} className="border border-black m-1">
-              <p>
-                <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
-                {value === null ? null : typeof value === 'object' ? '' : value}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-2 bg-[#322929] gap-1">
-          {cardMarkets.map(({key, value}, index) => (
-            <div className="border border-black m-1">
-              <a
-                href={value}
-                target="_blank"
-                rel="noopener noreferrer"
-                key={index}>
-                <p className="underline text-center">
-                  {key ? key.charAt(0).toUpperCase() + key.slice(1) : null}:
-                </p>
-              </a>
-            </div>
-          ))}
-        </div>
       </section>
     </>
   );
