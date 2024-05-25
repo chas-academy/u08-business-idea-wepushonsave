@@ -27,7 +27,7 @@ const Navbar = () => {
         </a>
 
         <a
-          href="#"
+          href="/profile"
           className="profile-logo w-full block text-center 0 md:hover:bg-transparent md:w-auto  md:items-center  md:hidden">
           <img
             src={profileIcon}
@@ -70,7 +70,7 @@ const Navbar = () => {
           </button>
         </a>
         <a
-          href="#"
+          href="/profile"
           className="profile-logo-desktop hidden md:block md:items-center md:w-24 0">
           <img
             src={profileIcon}
