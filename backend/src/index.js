@@ -1,11 +1,14 @@
 import express from "express";
 import dotenv from "dotenv";
-//import { startApp } from './app';
+import jwt from 'jsonwebtoken';
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
+
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("Express + TypeScript Server");
