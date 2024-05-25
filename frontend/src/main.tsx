@@ -23,6 +23,15 @@ import {cardsArrayLoader} from './utils/cardsArrayLoader.tsx';
 import GameRules from './pages/game-docs/Game_rules.tsx';
 import CardRules from './pages/game-docs/Card_rules.tsx';
 
+//pages
+import ProfilePage from './pages/profile/ProfilePage.tsx';
+import ProfileDashboard from './pages/profile/ProfileDashboard.tsx';
+import MyCollectionCards from './pages/profile/MyCollectionCards.tsx';
+import MyCollectionCommons from './pages/profile/MyCollectionCommons.tsx';
+import MyCollectionRare from './pages/profile/MyCollectionRare.tsx';
+import ListsWishlist from './pages/profile/ListsWishlist.tsx';
+import ListsCommons from './pages/profile/ListsCommons.tsx';
+import ListsRare from './pages/profile/ListsRare.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,7 +45,6 @@ const router = createBrowserRouter(
         element={<CardLayout />}
         loader={({params}) => {
           return singleCardLoader({params});
-
         }}>
         <Route
           path="info"
@@ -45,13 +53,11 @@ const router = createBrowserRouter(
             return singleCardLoader({params});
           }}
         />
-
         <Route
           path="market"
           element={<CardMarket />}
           loader={({params}) => {
             return singleCardLoader({params});
-
           }}
         />
         <Route
@@ -59,11 +65,18 @@ const router = createBrowserRouter(
           element={<CardLegalities />}
           loader={({params}) => {
             return singleCardLoader({params});
-
           }}
         />
         RR
       </Route>
+      <Route path="profile" element={<ProfilePage />} />
+      <Route path="profile-dashboard" element={<ProfileDashboard />} />
+      <Route path="mycollection" element={<MyCollectionCards />} />
+      <Route path="mycollection-commmons" element={<MyCollectionCommons />} />
+      <Route path="mycollection-rare" element={<MyCollectionRare />} />
+      <Route path="lists-wishlist" element={<ListsWishlist />} />
+      <Route path="lists-commons" element={<ListsCommons />} />
+      <Route path="lists-rare" element={<ListsRare />} />
     </Route>
   )
 );
