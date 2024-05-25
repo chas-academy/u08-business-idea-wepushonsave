@@ -1,10 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
-//import connectDB from "./db/db"; ////Why here? COPIED TO server.ts
 
 const app: Express = express();
-
-//connectDB; //Why here? COPIED TO server.ts
 
 app.use(cors());
 app.use(express.json());
