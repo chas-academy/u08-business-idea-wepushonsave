@@ -23,9 +23,6 @@ import {cardsArrayLoader} from './utils/cardsArrayLoader.tsx';
 import GameRules from './pages/game-docs/Game_rules.tsx';
 import CardRules from './pages/game-docs/Card_rules.tsx';
 import Threads from './pages/community/Threads.tsx';
-import GameRules from './pages/game-docs/Game_rules.tsx';
-import CardRules from './pages/game-docs/Card_rules.tsx';
-import Threads from './pages/community/Threads.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
