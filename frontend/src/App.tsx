@@ -1,5 +1,5 @@
 import Navbar from './components/navbar/Navbar';
-import React, {useEffect, useState} from 'react';
+import { useEffect } from 'react';
 
 useEffect(() => {
   fetch("http://localhost:3000")
@@ -11,6 +11,7 @@ function App() {
   return (
     <>
       <Navbar></Navbar>
+      
     </>
   );
 }
