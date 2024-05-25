@@ -1,18 +1,22 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import {NavLink, Outlet} from 'react-router-dom';
 import CardImage from '../components/CardImage';
+import CardFooter from '../components/card/CardFooter';
 
 const CardLayout = () => {
   return (
     <>
       <div className="card-layout">
-        <p>CardLayout</p>
-        <div className="cards-array-layout"></div>
-        <CardImage />
+        <section className="card-layout-image w-full h-full grid grid-cols-1 justify-items-center">
+          <CardImage />
+        </section>
 
-        <nav className="grid grid-cols-3">
+        <section className=" card-layout-footer relative ml-4 mr-4 grid grid-cols-2 justify-items-center">
+          <CardFooter />
+        </section>
 
+        <nav className="card-layout-nav grid grid-cols-3 bg-inactive-card-btn-gradient">
           <NavLink
-            className={({ isActive }) =>
+            className={({isActive}) =>
               isActive
                 ? 'card-details-active card-info'
                 : 'card-details-not-active'
@@ -21,7 +25,7 @@ const CardLayout = () => {
             Info
           </NavLink>{' '}
           <NavLink
-            className={({ isActive }) =>
+            className={({isActive}) =>
               isActive
                 ? 'card-details-active card-market'
                 : 'card-details-not-active'
@@ -30,7 +34,7 @@ const CardLayout = () => {
             Market
           </NavLink>{' '}
           <NavLink
-            className={({ isActive }) =>
+            className={({isActive}) =>
               isActive
                 ? 'card-details-active card-legalities'
                 : 'card-details-not-active'
@@ -39,7 +43,7 @@ const CardLayout = () => {
             Legalities
           </NavLink>
         </nav>
-        <div className="card-info-layout">
+        <div className="card-layout-details">
           <Outlet />
         </div>
       </div>
