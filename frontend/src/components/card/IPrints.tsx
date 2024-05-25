@@ -5,7 +5,7 @@ export interface IPrintsAPIResponse {
 export interface IPrintsData {
   image_uris: IImageUris;
   foil: boolean;
-  fullart: boolean;
+  full_art: boolean;
   name: string;
   prices: IPrices;
   rarity: string;
