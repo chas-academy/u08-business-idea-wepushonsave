@@ -22,7 +22,7 @@ import {singleCardLoader} from './utils/singleCardLoader.tsx';
 import {cardsArrayLoader} from './utils/cardsArrayLoader.tsx';
 import GameRules from './pages/game-docs/Game_rules.tsx';
 import CardRules from './pages/game-docs/Card_rules.tsx';
-
+import Threads from './pages/community/Threads.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,13 +30,13 @@ const router = createBrowserRouter(
       <Route path="cards" element={<CardsArray />} loader={cardsArrayLoader} />
       <Route path="gamerules" element={<GameRules />} />
       <Route path="cardrules" element={<CardRules />} />
+      <Route path="community" element={<Threads />} />
 
       <Route
         path="card/:id"
         element={<CardLayout />}
         loader={({params}) => {
           return singleCardLoader({params});
-
         }}>
         <Route
           path="info"
@@ -45,13 +45,11 @@ const router = createBrowserRouter(
             return singleCardLoader({params});
           }}
         />
-
         <Route
           path="market"
           element={<CardMarket />}
           loader={({params}) => {
             return singleCardLoader({params});
-
           }}
         />
         <Route
@@ -59,10 +57,8 @@ const router = createBrowserRouter(
           element={<CardLegalities />}
           loader={({params}) => {
             return singleCardLoader({params});
-
           }}
         />
-        RR
       </Route>
     </Route>
   )
