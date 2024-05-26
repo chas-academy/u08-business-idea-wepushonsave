@@ -7,6 +7,11 @@ import {
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
+// pages
+import GameRules from './pages/game-docs/Game_rules.tsx';
+import CardRules from './pages/game-docs/Card_rules.tsx';
+import Threads from './pages/community/Threads.tsx';
+
 // components
 import CardInfo from './components/card/CardInfo.tsx';
 import CardLegalities from './components/card/CardLegalities.tsx';
@@ -20,14 +25,20 @@ import CardLayout from './layouts/CardLayout.tsx';
 // utils
 import {singleCardLoader} from './utils/singleCardLoader.tsx';
 import {cardsArrayLoader} from './utils/cardsArrayLoader.tsx';
-import GameRules from './pages/game-docs/Game_rules.tsx';
-import CardRules from './pages/game-docs/Card_rules.tsx';
-import Threads from './pages/community/Threads.tsx';
+
+import {cardSetLoader} from './utils/cardSetLoader.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route path="cards" element={<CardsArray />} loader={cardsArrayLoader} />
+      <Route
+        path="cards/:set"
+        element={<CardsArray />}
+        loader={({params}) => {
+          return cardSetLoader({params});
+        }}
+      />
       <Route path="gamerules" element={<GameRules />} />
       <Route path="cardrules" element={<CardRules />} />
       <Route path="community" element={<Threads />} />

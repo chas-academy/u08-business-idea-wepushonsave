@@ -10,6 +10,7 @@ export interface IPrintsData {
   prices: IPrices;
   rarity: string;
   related?: string;
+  set: string;
   set_name: string;
   set_search_uri: string;
   type_line: string;

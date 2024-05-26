@@ -1,17 +1,19 @@
-import {useLoaderData} from 'react-router-dom';
+import {useLoaderData, useNavigate} from 'react-router-dom';
 import {convertObjectToArray} from '../../utils/convertObjectToArray';
 import {useEffect, useState} from 'react';
 import {IPrices, IPrintsAPIResponse, IPrintsData} from './IPrints';
-
-const delay = async (ms: number) => {
-  return new Promise(resolve => setTimeout(resolve, ms));
-};
+import {delay} from '../../utils/setApiDelay';
 
 const CardMarket = () => {
   //FIXME See if there is any other data-type we can use for an unknown value
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const cardData: any = useLoaderData();
   /* eslint-enable @typescript-eslint/no-explicit-any */
+  const navigate = useNavigate();
+
+  const getSetUri = async (set: string) => {
+    navigate(`/cards/${set}`);
+  };
 
   console.log(cardData);
 
@@ -106,7 +108,7 @@ const CardMarket = () => {
 
                 <p className="text-sm">
                   <strong className="m-2">SET:</strong>
-                  {print.set_name}
+                  <a onClick={() => getSetUri(print.set)}>{print.set_name}</a>
                 </p>
                 <p className="text-sm">
                   <strong className="m-2">PRICE:</strong>
