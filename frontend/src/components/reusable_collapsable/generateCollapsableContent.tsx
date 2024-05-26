@@ -1,3 +1,5 @@
+/* eslint-disable react/react-in-jsx-scope */
+
 import CollapsableContent from './CollapsableContent';
 
 interface CollapsibleSection {

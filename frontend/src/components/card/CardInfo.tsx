@@ -1,3 +1,6 @@
+/* eslint-disable react/react-in-jsx-scope */
+
+
 import {useLoaderData} from 'react-router-dom';
 import {convertObjectToArray} from '../../utils/convertObjectToArray';
 import {ICardInfo} from './ICardInfo';
@@ -9,7 +12,8 @@ const CardInfo = () => {
   /* eslint-enable @typescript-eslint/no-explicit-any */
 
   //FIXME This function does what? Fix
-  const extractCardData = (cardData: any): ICardInfo => {
+  const extractCardData = (cardData: ICardInfo) => {
+
     return {
       name: cardData.name,
       mana_cost: cardData.mana_cost,
@@ -44,7 +48,6 @@ const CardInfo = () => {
 
   const cardInfo: ICardInfo = extractCardData(cardData);
   const info = convertObjectToArray(cardInfo);
-  console.log(info);
 
   return (
     <>

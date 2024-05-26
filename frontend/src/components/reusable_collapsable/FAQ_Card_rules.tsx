@@ -1,3 +1,5 @@
+/* eslint-disable react/react-in-jsx-scope */
+
 import Collapsable from './Collapsable';
 import CollapsableContent from './CollapsableContent';
 

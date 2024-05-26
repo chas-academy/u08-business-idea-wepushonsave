@@ -1,3 +1,6 @@
+/* eslint-disable react/react-in-jsx-scope */
+
+
 const CardValue = () => {
   return (
     <>

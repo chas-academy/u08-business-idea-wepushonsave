@@ -1,3 +1,6 @@
+/* eslint-disable react/react-in-jsx-scope */
+
+
 import {NavLink, Outlet} from 'react-router-dom';
 import CardImage from '../components/CardImage';
 import CardFooter from '../components/card/CardFooter';
