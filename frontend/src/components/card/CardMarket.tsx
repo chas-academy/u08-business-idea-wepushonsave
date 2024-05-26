@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {useLoaderData, useNavigate} from 'react-router-dom';
 import {convertObjectToArray} from '../../utils/convertObjectToArray';
 import {useEffect, useState} from 'react';
@@ -83,9 +84,11 @@ const CardMarket = () => {
     <>
       <section className="card-market-grid grid grid-cols-1 gap-4 text-white">
         {/* .map(print) = The amount of diffrent card illustarations  */}
-        {prints.map(print => {
+        {prints.map((print, index: number) => {
           return (
-            <div className="card-market-prints-container text-re  bg-[#322929] shadow-2xl shadow-[#322929] rounded-sm grid grid-cols-3 gap-1 m-1">
+            <div
+              key={index}
+              className="card-market-prints-container text-re  bg-[#322929] shadow-2xl shadow-[#322929] rounded-sm grid grid-cols-3 gap-1 m-1">
               <div className="print-container m-2 ">
                 <img
                   className="shadow shadow-[#0000008a]"

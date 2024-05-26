@@ -1,3 +1,5 @@
+/* eslint-disable react/react-in-jsx-scope */
+
 import {useLoaderData} from 'react-router-dom';
 import {convertObjectToArray} from '../../utils/convertObjectToArray';
 

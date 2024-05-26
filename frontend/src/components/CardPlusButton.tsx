@@ -1,3 +1,5 @@
+/* eslint-disable react/react-in-jsx-scope */
+
 import plusButton from '../assets/plus.svg';
 
 const CardPlusButton = () => {
