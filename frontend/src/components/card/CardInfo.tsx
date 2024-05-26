@@ -1,5 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 
+
 import {useLoaderData} from 'react-router-dom';
 import {convertObjectToArray} from '../../utils/convertObjectToArray';
 import {ICardInfo} from './ICardInfo';
@@ -12,6 +13,7 @@ const CardInfo = () => {
 
   //FIXME This function does what? Fix
   const extractCardData = (cardData: ICardInfo) => {
+
     return {
       name: cardData.name,
       mana_cost: cardData.mana_cost,

@@ -1,5 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 
+
 import {useLoaderData} from 'react-router-dom';
 import {convertObjectToArray} from '../../utils/convertObjectToArray';
 
@@ -16,6 +17,7 @@ const CardLegalities = () => {
         {cardLegalities.map(({key, value}, index) => (
           <div key={index} className="border border-black m-1 ">
             <p>
+
               <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
               {typeof value === 'object' ? value.join(', ') : value}
             </p>

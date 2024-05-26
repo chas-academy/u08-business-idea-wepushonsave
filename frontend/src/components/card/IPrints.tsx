@@ -14,6 +14,7 @@ export interface IPrintsData {
   set_name: string;
   set_search_uri: string;
   type_line: string;
+
 }
 
 interface IImageUris {
@@ -32,3 +33,4 @@ export interface IPrices {
 /**
  * id? // Så att det går att klicka sig vidare genom den bilden
  */
+
