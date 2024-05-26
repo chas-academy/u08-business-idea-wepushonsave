@@ -1,6 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
 import {useLoaderData, useNavigate} from 'react-router-dom';
-import {convertObjectToArray} from '../../utils/convertObjectToArray';
 import {useEffect, useState} from 'react';
 import {IPrices, IPrintsAPIResponse, IPrintsData} from './IPrints';
 import {delay} from '../../utils/setApiDelay';
@@ -11,18 +10,11 @@ const CardMarket = () => {
   const cardData: any = useLoaderData();
   /* eslint-enable @typescript-eslint/no-explicit-any */
   const navigate = useNavigate();
-
   const getSetUri = async (set: string) => {
     navigate(`/cards/${set}`);
   };
 
-  console.log(cardData);
-
   const [prints, setPrints] = useState<IPrintsData[]>([]);
-
-  const cardPrices = convertObjectToArray(cardData.prices);
-  console.log(cardPrices);
-  const cardMarkets = convertObjectToArray(cardData.purchase_uris);
   const cardPrints = cardData.prints_search_uri.toString();
 
   useEffect(() => {
@@ -32,11 +24,6 @@ const CardMarket = () => {
         const response = await fetch(cardPrints);
         const result: IPrintsAPIResponse = await response.json();
         setPrints(result.data);
-        console.log(convertObjectToArray(prints));
-
-        if (prints != null) {
-          console.log(prints);
-        }
       } catch (error) {
         console.error('Error fetching prints:', error);
       }
