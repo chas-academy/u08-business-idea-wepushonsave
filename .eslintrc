@@ -2,11 +2,11 @@
   "extends": ["airbnb", "prettier"],
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": ["error"],
+    "prettier/prettier": ["error"]
   },
   "settings": {
     "react": {
-      "version": "detect",
-    },
-  },
+      "version": "detect"
+    }
+  }
 }
