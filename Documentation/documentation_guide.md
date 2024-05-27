@@ -92,3 +92,9 @@ Team members: Emma, Alex, Louise, Joseph, Dennis, and Clara
 ## 22th May
 
 - Today was similar to the previous day. We started with our daily stand-up and then collaborated on the Discord channel, assisting each other and congratulating anyone who completed their tasks. Here are the notes concerning the [stand-up](./Notes/daily_stand-up_22_05.md).
+
+**23rd May**
+
+- Our daily stand-up meeting was a bit longer than usual as we prepared for the afternoon meeting. Here are the [stand-up notes](./Notes/daily_stand-up_23_05.md).
+
+- We had our weekly meeting with the CTO and PO to discuss our project progress. The feedback was very positive, and each team member presented their work. Here are the meeting [notes](./Notes/handledning_23.05.md).

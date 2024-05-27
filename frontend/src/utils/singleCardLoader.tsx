@@ -1,11 +1,17 @@
-export const singleCardLoader = async () => {
-  const delay = async (ms: number) => {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  };
+import {Params} from 'react-router-dom';
+import {delay} from './setApiDelay';
 
+interface IId {
+  params: Params<string>;
+}
+
+export const singleCardLoader = async (params: IId) => {
   await delay(1000);
-  const cardID = '56ebc372-aabd-4174-a943-c7bf59e5028d';
-  const url = `https://api.scryfall.com/cards/${cardID}`;
+  const cardId = params?.params;
+  const id = Object.values(cardId).toString();
+
+  const url = `https://api.scryfall.com/cards/${id}`;
+
   const response = await fetch(url);
   const result = await response.json();
 

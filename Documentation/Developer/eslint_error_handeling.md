@@ -45,6 +45,7 @@ const CardImage = ({ card }: PropsWithChildren<CardProps>): ReactElement => {
 **Solution:**
 
 1. _Import React into the component_
+   **NOT POSSIBLE FOR DEPLOYMENT**
 
 ```ts
 import React from "react";

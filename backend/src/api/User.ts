@@ -2,8 +2,8 @@ import express from "express";
 import bcrypt from "bcrypt";
 import User from "../models/User";
 import { Request, Response } from "express";
-import request from "superagent";
-
+import jwt from 'jsonwebtoken';
+import cookieParser from "cookie-parser";
 
 const router = express.Router();
 
@@ -88,8 +88,12 @@ router.post("/signin", (req: Request, res: Response) => {
           //User exists
 
           const hashedPassword = data[0].password;
+          const userEmail = data[0].email; // Access the email property of the user data
           bcrypt.compare(password, hashedPassword).then(result => {
-            if (result) {
+            if (result) { 
+              // Create token
+              const token = jwt.sign({email: userEmail}, 'jwt-secret-key', {expiresIn: '1d'}); // Use the userEmail variable
+              res.cookie('token', token);
               return res.status(200).json({ message: "User signed in successfully!" });
             } else {
               return res.status(400).json({ message: "Invalid email or password!" });

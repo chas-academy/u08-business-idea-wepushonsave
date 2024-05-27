@@ -1,9 +1,8 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
-
-
+import connectDB from "./db/db";
+// import cardRouter from "./cards/cards";
 const app: Express = express();
-
 
 app.use(cors());
 app.use(express.json());
