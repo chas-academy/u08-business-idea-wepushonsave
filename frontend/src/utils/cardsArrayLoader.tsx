@@ -6,10 +6,9 @@ export const cardsArrayLoader = async () => {
   await delay(1000);
 
   const response = await fetch(
-    'https://api.scryfall.com/cards/search?include_extras=true&include_variations=true&order=set&q=e%3Aaer&unique=prints'
+    'https://api.scryfall.com/cards/search?include_extras=true&include_variations=true&order=set&q=e%3Aotj&unique=prints'
   );
   const result = await response.json();
-  console.log(result);
 
   return {
     data: result.data,

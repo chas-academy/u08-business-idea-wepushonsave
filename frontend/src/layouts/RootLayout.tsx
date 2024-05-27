@@ -1,21 +1,41 @@
-import {NavLink, Outlet} from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import App from '../App';
 import Navbar from '../components/navbar/Navbar';
+import SearchForm from '../components/search/SearchForm';
+import welcomeMobile from '../assets/welcome.png';
 
 const RootLayout = () => {
+  const isHomePage = window.location.pathname === '/';
   return (
     <>
       <Navbar />
-      <div>{/* Searchbar */}</div>
-      <div>
-        <App />
-      </div>
-      <nav className=" bg-gray-500">
+      <nav className="bg-gray-500">
         <NavLink to={'cards'}>Cards</NavLink> |{' '}
         <NavLink to={'community'}>Community</NavLink> |{' '}
         <NavLink to={'gamerules'}>Game Rules</NavLink> |{' '}
         <NavLink to={'cardrules'}>Card Rules</NavLink> |{' '}
       </nav>
+      <div>
+        {isHomePage ? (
+          <>
+            <div className="bg-mobile-search bg-cover w-full py-16 md:bg-desktop-search md:bg-fill md:p-5 md:bg-top md:mt-14 md:h-40 ">
+              <SearchForm />
+            </div>
+            <div className="welcome-img flex-grow flex items-center justify-center mt-4 p-2">
+              <img src={welcomeMobile} alt="Welcome" className="max-w-full max-h-[60vh] mx-10" />
+            </div>
+          </>
+        ) : (
+          <SearchForm />
+        )}
+      </div>
+
+
+
+      <div>
+        <App />
+      </div>
+
       <main>
         <Outlet />
       </main>
