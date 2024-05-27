@@ -1,4 +1,6 @@
-import React from 'react';
+/* eslint-disable react/react-in-jsx-scope */
+
+
 import {useLoaderData} from 'react-router-dom';
 import {convertObjectToArray} from '../../utils/convertObjectToArray';
 
@@ -8,11 +10,20 @@ const CardLegalities = () => {
   const cardData: any = useLoaderData();
   /* eslint-enable @typescript-eslint/no-explicit-any */
   const cardLegalities = convertObjectToArray(cardData.legalities);
-  console.log(cardLegalities);
 
   return (
     <>
-      <h1>Card Legalities</h1>
+      <div className="grid grid-cols-2 bg-[#322929] gap-1">
+        {cardLegalities.map(({key, value}, index) => (
+          <div key={index} className="border border-black m-1 ">
+            <p>
+
+              <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
+              {typeof value === 'object' ? value.join(', ') : value}
+            </p>
+          </div>
+        ))}
+      </div>
     </>
   );
 };

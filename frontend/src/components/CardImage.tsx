@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react/react-in-jsx-scope */
+
 import {useLoaderData} from 'react-router-dom';
 
 const CardImage = () => {
@@ -10,8 +11,8 @@ const CardImage = () => {
 
   return (
     <>
-      <div>
-        <img src={cardImage} alt="" />
+      <div className="card-image-container flex justify-center items-center size-fit">
+        <img className="size-9/12 shadow-xl" src={cardImage} alt="" />
       </div>
     </>
   );
