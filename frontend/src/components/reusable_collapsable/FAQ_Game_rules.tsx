@@ -140,6 +140,7 @@ const FAQ_Game_rules = () => {
                   '*Conduct: Good sportsmanship, communication, and respect for opponents are essential.',
                 ]}
               />
+              
             </>
           }
         />
