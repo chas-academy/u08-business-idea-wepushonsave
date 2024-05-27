@@ -8,11 +8,7 @@ useEffect(() => {
 }, []);
 
 function App() {
-  return (
-    <>
-      <Navbar></Navbar>
-    </>
-  );
+  return <></>;
 }
 
 export default App;
