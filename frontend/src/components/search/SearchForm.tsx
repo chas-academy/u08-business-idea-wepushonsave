@@ -3,11 +3,11 @@
 import SearchBtn from './SearchBtn';
 import SearchIcon from './SearchIcon';
 import SearchInput from './SearchInput';
-import {useSearch} from './SearchContext';
-import {useNavigate} from 'react-router-dom';
+import { useSearch } from './SearchContext';
+import { useNavigate } from 'react-router-dom';
 
 const SearchForm: React.FC = () => {
-  const {query, setQuery} = useSearch();
+  const { query, setQuery } = useSearch();
   const navigate = useNavigate();
 
   const handleInputChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +27,7 @@ const SearchForm: React.FC = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div className="search-container text-white grid grid-cols-7 w-full max-h-12 sm:h-16 relative sm:top-14 ">
+        <div className="search-container text-white grid grid-cols-7 w-full max-h-12 sm:h-16 relative sm:top-14 bg-red-200">
           <div className="search-bar-container bg-[#827C81] shadow rounded-xl col-start-2 sm:col-start-3 col-span-4 sm:col-span-2 grid grid-cols-5   ">
             <div className="search-icon-container self-center content-center m-1 sm:size-9">
               <SearchIcon />

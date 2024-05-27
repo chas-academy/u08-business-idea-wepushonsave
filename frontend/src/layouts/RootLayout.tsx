@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 
-import {NavLink, Outlet} from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import App from '../App';
 import Navbar from '../components/navbar/Navbar';
 import SearchForm from '../components/search/SearchForm';
@@ -20,7 +20,8 @@ const RootLayout = () => {
       <div>
         <App />
       </div>
-      <div>
+      <div className="bg-mobile-search bg-cover bg-center p-5 md:bg-desktop-search">
+
         <SearchForm />
       </div>
       <main>

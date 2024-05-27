@@ -22,6 +22,10 @@ export default {
 
         'site-gradient': 'linear-gradient(to bottom, #2C1E28, #A2AAA9)',
         'profile-content': 'linear-gradient(to bottom, #5C5663, #120A19)',
+
+        'mobile-search': "url('/src/assets/mobile-search.png')",
+        'desktop-search': "url('/src/assets/desktop-search.png')",
+
         filter: 'rgba(50, 41, 41, 0.8)',
         'collection-btn':
           'linear-gradient(to bottom, #FF9A61, rgba(86, 87, 108, 0.8))',
