@@ -121,17 +121,7 @@ const ProfilePage = () => {
               <button
                 className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
                 onClick={listsWishlistClick}>
-                MY WISHLIST
-              </button>
-              <button
-                className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
-                onClick={listsRareClick}>
-                RARE
-              </button>
-              <button
-                className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
-                onClick={listsCommonsClick}>
-                COMMONS
+                CREATE A LIST
               </button>
             </div>
           )}

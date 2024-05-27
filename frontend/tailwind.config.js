@@ -30,6 +30,8 @@ export default {
         'profile-background': "url('./assets/profile-background-img.png')",
         'profile-background-desktop':
           "url('./assets/profile-background-imgDesktop.webp')",
+        'list-card-background':
+          'linear-gradient(180deg, rgba(50,41,41,1) 14%, rgba(81,67,94,1) 100%)',
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
