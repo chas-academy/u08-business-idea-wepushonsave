@@ -12,6 +12,7 @@ import CardInfo from './components/card/CardInfo.tsx';
 import CardLegalities from './components/card/CardLegalities.tsx';
 import CardMarket from './components/card/CardMarket.tsx';
 import CardsArray from './components/card/CardsArray.tsx';
+import CardsDisplay from './components/listOrGrid/CardsDisplay.tsx';
 
 // layouts
 import RootLayout from './layouts/RootLayout.tsx';
@@ -39,7 +40,11 @@ const router = createBrowserRouter(
       <Route path="cards" element={<CardsArray />} loader={cardsArrayLoader} />
       <Route path="gamerules" element={<GameRules />} />
       <Route path="cardrules" element={<CardRules />} />
-
+      <Route
+        path="cards-display"
+        element={<CardsDisplay />}
+        loader={cardsArrayLoader}
+      />
       <Route
         path="card/:id"
         element={<CardLayout />}
