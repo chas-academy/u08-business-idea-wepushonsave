@@ -1,4 +1,5 @@
-import { Params } from 'react-router-dom';
+import {Params} from 'react-router-dom';
+import {delay} from './setApiDelay';
 
 interface IId {
   params: Params<string>;
@@ -15,8 +16,4 @@ export const singleCardLoader = async (params: IId) => {
   const result = await response.json();
 
   return result;
-};
-
-const delay = async (ms: number) => {
-  return new Promise(resolve => setTimeout(resolve, ms));
 };

@@ -1,6 +1,9 @@
-import { useLoaderData } from 'react-router-dom';
-import { convertObjectToArray } from '../../utils/convertObjectToArray';
-import { ICardInfo } from './ICardInfo';
+/* eslint-disable react/react-in-jsx-scope */
+
+
+import {useLoaderData} from 'react-router-dom';
+import {convertObjectToArray} from '../../utils/convertObjectToArray';
+import {ICardInfo} from './ICardInfo';
 
 const CardInfo = () => {
   //FIXME See if there is any other data-type we can use for an unknown value
@@ -8,7 +11,9 @@ const CardInfo = () => {
   const cardData: any = useLoaderData();
   /* eslint-enable @typescript-eslint/no-explicit-any */
 
-  const extractCardData = (cardData: any): ICardInfo => {
+  //FIXME This function does what? Fix
+  const extractCardData = (cardData: ICardInfo) => {
+
     return {
       name: cardData.name,
       mana_cost: cardData.mana_cost,
@@ -43,13 +48,12 @@ const CardInfo = () => {
 
   const cardInfo: ICardInfo = extractCardData(cardData);
   const info = convertObjectToArray(cardInfo);
-  console.log(info);
 
   return (
     <>
       <div>
-        <div className="grid grid-cols-2 bg-[#8cbfb5] gap-1">
-          {info.map(({ key, value }, index) => (
+        <div className="grid grid-cols-2 bg-[#322929] gap-1">
+          {info.map(({key, value}, index) => (
             <div key={index} className="border border-black m-1">
               <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
               {typeof value === 'object' ? value.join(', ') : value}
