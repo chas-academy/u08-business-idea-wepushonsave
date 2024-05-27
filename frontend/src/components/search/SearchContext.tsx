@@ -1,10 +1,13 @@
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/prop-types */
+//FIXME Look into how to solve lint-issue  | react/prop-types
 import {createContext, useContext, useState} from 'react';
 
 interface ISearchContext {
   query: string;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
-  results: any[];
-  setResults: React.Dispatch<React.SetStateAction<any[]>>;
+  results: string[];
+  setResults: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const SearchContext = createContext<ISearchContext | undefined>(undefined);
@@ -13,7 +16,7 @@ export const SearchProvider: React.FC<{children: React.ReactNode}> = ({
   children,
 }) => {
   const [query, setQuery] = useState<string>('');
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<string[]>([]);
 
   return (
     <SearchContext.Provider value={{query, setQuery, results, setResults}}>

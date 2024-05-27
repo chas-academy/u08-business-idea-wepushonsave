@@ -20,7 +20,6 @@ const SearchForm: React.FC = () => {
    */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Search query submitted:', query);
     navigate(`/search?query=${query}`);
   };
 

@@ -1,5 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
-
+/* eslint-disable react/prop-types */
+//FIXME Look into how to solve lint-issue  | react/prop-types
 interface SearchInputProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

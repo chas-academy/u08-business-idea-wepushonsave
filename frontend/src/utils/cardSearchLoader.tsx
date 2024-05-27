@@ -11,7 +11,6 @@ export const cardSearchLoader = async ({request}: LoaderFunctionArgs) => {
   await delay(1000);
   const url = new URL(request.url);
   const query = url.searchParams.get('query');
-  console.log('Search query: ', query);
 
   const apiUrl =
     'https://api.scryfall.com/cards/search?order=cmc&unique=art&include_extras=true&include_variations=true&q=';
