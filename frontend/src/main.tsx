@@ -28,12 +28,22 @@ import CardLayout from './layouts/CardLayout.tsx';
 import {singleCardLoader} from './utils/singleCardLoader.tsx';
 import {cardsArrayLoader} from './utils/cardsArrayLoader.tsx';
 import {cardSetLoader} from './utils/cardSetLoader.tsx';
+import SearchResults from './components/search/SearchResults.tsx';
+import {cardSearchLoader} from './utils/cardSearchLoader.tsx';
 
+// context
+import {SearchProvider} from './components/search/SearchContext.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route path="cards" element={<CardsArray />} loader={cardsArrayLoader} />
+      <Route
+        path="search"
+        element={<SearchResults />}
+        loader={cardSearchLoader}
+      />
+
       <Route
         path="cards/:set"
         element={<CardsArray />}
@@ -78,5 +88,7 @@ const router = createBrowserRouter(
 );
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <RouterProvider router={router}></RouterProvider>
+  <SearchProvider>
+    <RouterProvider router={router} />
+  </SearchProvider>
 );
