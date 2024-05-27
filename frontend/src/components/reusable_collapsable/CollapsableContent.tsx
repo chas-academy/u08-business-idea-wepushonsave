@@ -1,4 +1,11 @@
 /* eslint-disable react/react-in-jsx-scope */
+import land from '../../assets/land.svg';
+import creature from '../../assets/creature.svg';
+import enchantment from '../../assets/Enchantment.svg';
+import artifact from '../../assets/artifact.svg';
+import sorcery from '../../assets/sorcery.svg';
+import instant from '../../assets/instant.svg';
+import planeswalker from '../../assets/paneswalker.svg';
 
 interface CollapsableContentProps {
   title: string;
@@ -26,6 +33,27 @@ const CollapsableContent = ({title, items}: CollapsableContentProps) => {
             );
           } else if (item.startsWith('_')) {
             return <br key={index} />;
+          } else if (item.startsWith('imgLand')) {
+            return <img key={index} src={land} alt="Land rules"></img>;
+          } else if (item.startsWith('imgCreature')) {
+            return <img key={index} src={creature} alt="Creature rules"></img>;
+          } else if (item.startsWith('imgEnchantment')) {
+            return (
+              <img key={index} src={enchantment} alt="Enchantment rules"></img>
+            );
+          } else if (item.startsWith('imgArtifact')) {
+            return <img key={index} src={artifact} alt="Artifact rules"></img>;
+          } else if (item.startsWith('imgSorcery')) {
+            return <img key={index} src={sorcery} alt="Sorcery rules"></img>;
+          } else if (item.startsWith('imgInstant')) {
+            return <img key={index} src={instant} alt="Instant rules"></img>;
+          } else if (item.startsWith('imgPlaneswalker')) {
+            return (
+              <img
+                key={index}
+                src={planeswalker}
+                alt="Planeswalker rules"></img>
+            );
           }
           return (
             <li key={index} className="mt-2">
