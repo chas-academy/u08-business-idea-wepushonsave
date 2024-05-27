@@ -13,7 +13,7 @@ interface IImageUris {
   border_crop: string;
 }
 
-interface ICardFaces {
+export interface ICardFaces {
   name: string;
   image_uris: IImageUris;
 }
