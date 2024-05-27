@@ -10,7 +10,7 @@ const Navbar = () => {
     <>
       <nav className="fixed bottom-0 inset-x-0 bg-nav-gradient flex items-start text-sm text-blue-900 uppercase font-mono md:fixed md:top-0 md:bottom-auto md:w-full md:h-auto">
         <a
-          href="#"
+          href="/"
           className="mtg-tomb-logo w-full md:w-24 block text-center 0">
           <img
             src={logo}
@@ -19,7 +19,7 @@ const Navbar = () => {
           />
         </a>
 
-        <a href="#" className="docs-logo w-full md:w-24 block text-center  0">
+        <a href="/documentation" className="docs-logo w-full md:w-24 block text-center  0">
           <img
             src={docIcon}
             alt="Doc Icon"
@@ -28,17 +28,17 @@ const Navbar = () => {
         </a>
 
         <a
-          href="#"
+          href="/profile"
           className="profile-logo w-full block text-center 0 md:hover:bg-transparent md:w-auto  md:items-center  md:hidden">
           <img
             src={profileIcon}
             alt="Profile Icon"
-            style={{width: '4.25rem', height: '4.25rem'}}
+            style={{ width: '4.25rem', height: '4.25rem' }}
             className="mx-auto bg-custom-purple-600 rounded-full border-4 border-plum hover:border-mint hover:shadow-md hover:shadow-plum"
           />
         </a>
 
-        <a href="#" className="decks-logo w-full md:w-24 block text-center 0">
+        <a href="/decks" className="decks-logo w-full md:w-24 block text-center 0">
           <img
             src={decksIcon}
             alt="Decks Icon"
@@ -47,7 +47,7 @@ const Navbar = () => {
         </a>
 
         <a
-          href="#"
+          href="/community"
           className="community-logo w-full md:w-24 block text-center 0">
           <img
             src={communityIcon}
@@ -58,20 +58,20 @@ const Navbar = () => {
 
         {/* Desktop screen */}
 
-        <a href="#" className="login-logo-desktop ml-auto 0">
+        <a href="/register" className="login-logo-desktop ml-auto 0">
           <button className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
             <span className="absolute inset-0 border-2 border-transparent hover:border-white rounded-lg"></span>
             LOGIN
           </button>
         </a>
-        <a href="#" className="register-logo-desktop 0">
+        <a href="/login" className="register-logo-desktop 0">
           <button className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
             <span className="absolute inset-0 border-2 border-transparent hover:border-white rounded-lg"></span>
             REGISTER
           </button>
         </a>
         <a
-          href="#"
+          href="/profile"
           className="profile-logo-desktop hidden md:block md:items-center md:w-24 0">
           <img
             src={profileIcon}
