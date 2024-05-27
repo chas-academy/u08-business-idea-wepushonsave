@@ -3,7 +3,7 @@ import {useState} from 'react';
 
 interface CollapsableProps {
   titles: string;
-  content: string;
+  content: JSX.Element;
 }
 
 const Collapsable = ({titles, content}: CollapsableProps) => {
