@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
-import connectDB from "./db/db";
+
 // import cardRouter from "./cards/cards";
 const app: Express = express();
 

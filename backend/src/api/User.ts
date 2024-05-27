@@ -3,7 +3,8 @@ import bcrypt from "bcrypt";
 import User from "../models/User";
 import { Request, Response } from "express";
 import jwt from 'jsonwebtoken';
-import cookieParser from "cookie-parser";
+import { IUser } from "../interfaces/IUser";
+/*import cookieParser from "cookie-parser";*/
 
 const router = express.Router();
 
@@ -28,7 +29,7 @@ router.post("/signup", (req: Request, res: Response) => {
   } else {
     // Check if user already exists
     User.find({ email })
-      .then((result: any[]) => {
+      .then((result: IUser[]) => {
         console.log(result); //TEST
         // Handle the result
         if (result && result.length > 0) {
@@ -50,7 +51,7 @@ router.post("/signup", (req: Request, res: Response) => {
 
               newUser
                 .save()
-                .then((result: any) => {
+                .then((result: IUser) => {
                   return res.status(201).json({
                     message: "User created successfully!",
                     data: result,
@@ -103,14 +104,14 @@ router.post("/signin", (req: Request, res: Response) => {
               return res.status(400).json({ message: "Invalid email or password!" });
             }
           })
-          .catch(err => {
+          .catch(_err => {
             return res.status(500).json({ message: "An error occurred while comparing passwords!" });
           });
         } else {
           return res.status(400).json({ message: "Invalid credentials entered!" });
         }
       })
-      .catch(err => {
+      .catch(_err => {
         return res.status(500).json({ message: "An error occurred while finding user!" });
       });
     }
