@@ -20,11 +20,11 @@ export default {
         'inactive-card-btn-gradient':
           'linear-gradient(to bottom, #E0EFF2, #5C5663, #322929)',
 
-        'site-gradient': 'linear-gradient(to bottom, #2C1E28, #A2AAA9)',
+        'site-gradient': 'linear-gradient(to bottom,  #462F64, #21162F)',
         'profile-content': 'linear-gradient(to bottom, #5C5663, #120A19)',
 
-        'mobile-search': "url('/src/assets/mobile-search.png')",
-        'desktop-search': "url('/src/assets/desktop-search.png')",
+        'mobile-search': "url('/src/assets/mobile-hero.png')",
+        'desktop-search': "url('/src/assets/desktop-hero.png')",
 
         filter: 'rgba(50, 41, 41, 0.8)',
         'collection-btn':
