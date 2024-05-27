@@ -3,7 +3,7 @@
 import {NavLink, Outlet} from 'react-router-dom';
 import App from '../App';
 import Navbar from '../components/navbar/Navbar';
-import HomeSearch from '../components/search/Search';
+import SearchForm from '../components/search/SearchForm';
 
 const RootLayout = () => {
   return (
@@ -21,7 +21,7 @@ const RootLayout = () => {
         <App />
       </div>
       <div>
-        <HomeSearch />
+        <SearchForm />
       </div>
       <main>
         <Outlet />

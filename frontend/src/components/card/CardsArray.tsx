@@ -21,7 +21,7 @@ interface ICard {
 }
 
 // Defines the structure for the API response
-interface IAPIResponse {
+export interface IAPIResponse {
   data: ICard[];
 }
 
