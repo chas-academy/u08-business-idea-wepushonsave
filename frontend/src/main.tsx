@@ -30,9 +30,6 @@ import ProfileDashboard from './pages/profile/ProfileDashboard.tsx';
 import MyCollectionCards from './pages/profile/MyCollectionCards.tsx';
 import MyCollectionCommons from './pages/profile/MyCollectionCommons.tsx';
 import MyCollectionRare from './pages/profile/MyCollectionRare.tsx';
-import ListsWishlist from './pages/profile/ListsWishlist.tsx';
-import ListsCommons from './pages/profile/ListsCommons.tsx';
-import ListsRare from './pages/profile/ListsRare.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -79,9 +76,6 @@ const router = createBrowserRouter(
       <Route path="mycollection" element={<MyCollectionCards />} />
       <Route path="mycollection-commmons" element={<MyCollectionCommons />} />
       <Route path="mycollection-rare" element={<MyCollectionRare />} />
-      <Route path="lists-wishlist" element={<ListsWishlist />} />
-      <Route path="lists-commons" element={<ListsCommons />} />
-      <Route path="lists-rare" element={<ListsRare />} />
     </Route>
   )
 );

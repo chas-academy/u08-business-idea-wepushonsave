@@ -17,12 +17,11 @@ export default {
       backgroundImage: {
         'nav-gradient': 'linear-gradient(to bottom, #462F64, #757BC0, #DEE8E0)',
         'btn-gradient': 'linear-gradient(to bottom, #462F64, #757BC0, #DEE8E0)',
+        'site-gradient': 'linear-gradient(to bottom,  #462F64, #21162F)',
         'active-card-btn-gradient':
           'linear-gradient(to bottom, #E0EFF2, #9EA2AA, #322929)',
         'inactive-card-btn-gradient':
           'linear-gradient(to bottom, #E0EFF2, #5C5663, #322929)',
-
-        'site-gradient': 'linear-gradient(to bottom, #2C1E28, #A2AAA9)',
         'profile-content': 'linear-gradient(to bottom, #5C5663, #120A19)',
         filter: 'rgba(50, 41, 41, 0.8)',
         'collection-btn':
