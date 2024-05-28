@@ -13,6 +13,7 @@ const CardLegalities = () => {
 
   return (
     <>
+
       <div className="grid grid-cols-2 bg-[#322929] gap-1">
         {cardLegalities.map(({key, value}, index) => (
           <div key={index} className="border border-black m-1 ">

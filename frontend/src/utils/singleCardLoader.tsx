@@ -17,3 +17,7 @@ export const singleCardLoader = async (params: IId) => {
 
   return result;
 };
+
+const delay = async (ms: number) => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+};

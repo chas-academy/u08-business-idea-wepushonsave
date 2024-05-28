@@ -29,3 +29,4 @@ export interface ICardInfo {
     cardmarket_id: number;
   
 }
+
