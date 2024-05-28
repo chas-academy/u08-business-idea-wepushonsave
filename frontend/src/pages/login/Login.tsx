@@ -1,70 +1,111 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { useState } from "react";
-import Validation from "./loginValidation";
+import {useState} from 'react';
+import Validation from './loginValidation';
 
 const loginUser = () => {
-const [values, setValues] = useState({
-    email: "",
-    password: ""
-});
-const [errors, setErrors] = useState({
-   email: "",
-   password: ""
- });
-    const handleSubmit = (event: any) => {
-        event.preventDefault();
-        setErrors(Validation(values));
-        
-      };
-    const handleInput = (event: any) => {
-        setValues(prev => ({
-            ...prev,
-            [event.target.name]: event.target.value
-        }))
-    };
+  const [values, setValues] = useState({
+    email: '',
+    password: '',
+  });
+  const [errors, setErrors] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+
+    const errorCheck = Validation(values);
+    setErrors(errorCheck);
+
+    if (!errorCheck.email && !errorCheck.password) {
+      fetch('http://localhost:3000/api/user/signin', {
+        method: 'POST',
+        mode: 'no-cors', //should i take away the cors exceptions in backend??
+        body: JSON.stringify(values),
+      });
+    } else {
+      console.log('Errors');
+    }
+  };
+  const handleInput = (event: any) => {
+    setValues(prev => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
+  };
 
   return (
     <>
-    <div className="flex justify-center items-center w-auto">
-        <h1 className="text-3xl font-bold text-center">Login</h1>
-      <form action="" onSubmit={handleSubmit}>
-      
-        
-            <label htmlFor="email" className="text-sm font-medium mb-2">
-                Email
-            </label>
+      <div className="">
+        <h1 className="">Login</h1>
+        <div className="">
+          <form action="" onSubmit={handleSubmit}>
             <input
-                type="email"
-                id="email"
-                name="email"
-                className="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                placeholder="Enter email"
-                onChange={handleInput}
+              type="email"
+              id="email"
+              name="email"
+              className=""
+              placeholder="Email"
+              onChange={handleInput}
             />
-            {errors.email && <span className="text-danger"> {errors.email} </span>}
-        
-        
-          <label htmlFor="password" className="text-sm font-medium mb-2">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            className="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="Enter password"
-          />
-          {errors.password && <span className="text-danger"> {errors.password} </span>}
-        
-        <button
-          type="submit"
-          className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
-          Login
-        </button>
-      </form>
+            {errors.email && (
+              <span className="text-danger"> {errors.email} </span>
+            )}
+
+            <input
+              type="password"
+              id="password"
+              name="password"
+              className=""
+              placeholder="Password"
+              onChange={handleInput}
+            />
+            {errors.password && (
+              <span className="text-danger"> {errors.password} </span>
+            )}
+
+            <button
+              type="submit"
+              className="mt-4 px-4 py-2 bg-purple-200 text-white rounded-md">
+              Login
+            </button>
+          </form>
+        </div>
       </div>
     </>
   );
 };
 export default loginUser;
+
+/*
+<div className="relative w-64 h-64 mx-auto">
+  <div className="w-full h-full bg-purple-600 rounded-md"></div> <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
+    <h1 className="text-3xl font-bold text-gray-800">Login</h1> </div>
+
+  <div className="absolute bottom-0 left-0 w-full h-48 flex flex-col items-center">
+    <div className="w-full p-4 bg-purple-600 rounded-md">
+    <form action="" onSubmit={handleSubmit}>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        className="w-full p-2 text-gray-700 placeholder:text-black placeholder-opacity-75 focus:outline-none"
+        placeholder="Email"
+        onChange={handleInput} />
+      <input
+        type="password"
+        id="password"
+        name="password"
+        className="w-full p-2 mt-2 text-gray-700 placeholder:text-black placeholder-opacity-75 focus:outline-none"
+        placeholder="Password"
+        onChange={handleInput} />
+    
+
+    <button type="submit" className="mt-4 px-4 py-2 bg-purple-200 text-white rounded-md">Login</button>
+    </form>
+    </div>
+  </div>
+</div>
+
+*/

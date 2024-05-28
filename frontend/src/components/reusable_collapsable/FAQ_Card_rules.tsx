@@ -12,6 +12,7 @@ const FAQ_Card_rules = () => {
           content={
             <>
               <CollapsableContent title="" items={[]} />
+              <CollapsableContent title="" items={['imgLand']} />
               <Collapsable
                 titles="Swamp"
                 content={
@@ -185,6 +186,7 @@ const FAQ_Card_rules = () => {
               <CollapsableContent
                 title="Creature Types:"
                 items={[
+                  'imgCreature',
                   " In Magic: The Gathering, creature types are classifications that denote a creature's species, role, or affiliation. Each creature card in the game belongs to one or more creature types, which can be found in the card's type line. Creature types help define the card's flavor and mechanical identity and are often used to create synergies and interactions within a deck. Here are some key points about creature types:",
                   '_',
                 ]}
@@ -236,6 +238,7 @@ const FAQ_Card_rules = () => {
               <CollapsableContent
                 title="Enchantments"
                 items={[
+                  'imgEnchantment',
                   'Enchantments: In Magic: The Gathering, enchantments are a type of permanent card that represents lasting magical effects or conditions. Enchantments provide continuous benefits, impose persistent drawbacks, or alter the game state in various ways. Here are some key points about enchantments:',
                 ]}
               />
@@ -296,6 +299,7 @@ const FAQ_Card_rules = () => {
               <CollapsableContent
                 title="Artifacts: Key Concepts and Gameplay"
                 items={[
+                  'imgArtifact',
                   'Artifacts are a type of permanent card in Magic: The Gathering that represents magical items, devices, or constructs.',
                   'Artifacts can provide various benefits, such as producing mana, enhancing creatures, or offering unique abilities that can be activated.',
                   '_',
@@ -377,6 +381,7 @@ const FAQ_Card_rules = () => {
               <CollapsableContent
                 title="Sorceries: Key Concepts and Gameplay"
                 items={[
+                  'imgSorcery',
                   'Sorceries are a type of spell card in Magic: The Gathering that represents one-time magical effects or actions.',
                   'Sorceries typically have powerful effects but can only be cast during your main phase and when the stack is empty.',
                   '_',
@@ -450,6 +455,7 @@ const FAQ_Card_rules = () => {
               <CollapsableContent
                 title="Instants: Key Concepts and Gameplay"
                 items={[
+                  'imgInstant',
                   'Instants are a type of spell card in Magic: The Gathering that represents immediate magical effects or actions.',
                   'Instants can be cast at any time, including during your opponent’s turn or in response to other spells or abilities.',
                   '_',
@@ -508,6 +514,64 @@ const FAQ_Card_rules = () => {
                   'Control: Instants are essential in control decks, providing removal, counterspells, and other reactive tools to control the game state and thwart opponents’ strategies.',
                   'Tempo: In tempo decks, instants can disrupt opponents’ plays and maintain pressure on the battlefield while advancing your own game plan.',
                   'Combo: In combo decks, instants can enable key combos, protect combo pieces, or disrupt opponents’ attempts to interfere with your win conditions.',
+                  '_',
+                ]}
+              />
+            </>
+          }
+        />
+      </div>
+      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700">
+        <Collapsable
+          titles="Planeswalker"
+          content={
+            <>
+              <CollapsableContent
+                title="Planeswalkers"
+                items={[
+                  'imgPlaneswalker',
+                  'Planeswalkers are a unique type of card in Magic: The Gathering that represent powerful beings with abilities that can greatly influence the game. Planeswalkers enter the battlefield with a set number of loyalty counters and can activate one of their abilities each turn, which either add or subtract loyalty counters. Here are some key points about planeswalkers:',
+                ]}
+              />
+              <CollapsableContent
+                title="1. Flavor and Identity"
+                items={[
+                  'Planeswalkers symbolize mighty beings with the ability to traverse different planes of existence and wield extraordinary powers. Each planeswalker card is based on a specific character with a unique set of abilities that reflect their personality and background.',
+                  '_',
+                ]}
+              />
+              <CollapsableContent
+                title="2. Loyalty Counters"
+                items={[
+                  'Planeswalkers enter the battlefield with a certain number of loyalty counters. Each of their abilities has a cost, either adding or removing loyalty counters. When a planeswalker’s loyalty counters reach zero, they are put into their owner’s graveyard.',
+                  '_',
+                ]}
+              />
+              <CollapsableContent
+                title="3. Abilities"
+                items={[
+                  'Each planeswalker has a set of activated abilities, typically three or four. These abilities often include a variety of effects such as drawing cards, creating creature tokens, or destroying other permanents. Some abilities require adding loyalty counters, while others subtract them.',
+                  '_',
+                ]}
+              />
+              <CollapsableContent
+                title="4. Strategic Value"
+                items={[
+                  'Planeswalkers provide strategic advantages due to their versatile abilities. They can shift the momentum of the game, generate ongoing value, and create difficult choices for opponents. Protecting your planeswalkers and managing their loyalty counters is key to maximizing their impact.',
+                  '_',
+                ]}
+              />
+              <CollapsableContent
+                title="5. Interaction with Other Cards"
+                items={[
+                  'Planeswalkers interact with various other cards and mechanics. Some cards are specifically designed to support or protect planeswalkers, while others can directly target them for destruction. Understanding these interactions is crucial for effective gameplay.',
+                  '_',
+                ]}
+              />
+              <CollapsableContent
+                title="6. Superfriends Decks"
+                items={[
+                  'Superfriends decks are built around the synergy of using multiple planeswalkers. These decks leverage the combined abilities of various planeswalkers to overwhelm opponents, creating powerful board states and generating significant card advantage.',
                   '_',
                 ]}
               />
