@@ -1,10 +1,10 @@
 /* eslint-disable react/react-in-jsx-scope */
 
-const SearchBtn = () => {
+const SearchBtn: React.FC = () => {
   return (
-    <>
-      <button className="search-button text-xs shadow-lg">SEARCH</button>
-    </>
+    <button className="search-button text-xs shadow-lg" type="submit">
+      SEARCH
+    </button>
   );
 };
 
