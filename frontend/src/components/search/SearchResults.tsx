@@ -21,7 +21,7 @@ const SearchResults: React.FC = () => {
   if (cards != null) {
     return (
       <>
-        <div className="grid grid-cols-3 gap-1">
+        <div className="grid grid-cols-3 sm:grid-cols-8 gap-4 m-4 relative sm:top-16">
           {cards.map(card => {
             const imageUrl =
               card.card_faces && card.card_faces.length > 0
@@ -32,7 +32,9 @@ const SearchResults: React.FC = () => {
                 ? card.card_faces[0].name
                 : card.name;
             return (
-              <div key={card.id}>
+              <div
+                key={card.id}
+                className="search-result-img-container border border-red-600 flex justify-center">
                 {imageUrl ? (
                   <img
                     onClick={() => getCardId(card.id)}
