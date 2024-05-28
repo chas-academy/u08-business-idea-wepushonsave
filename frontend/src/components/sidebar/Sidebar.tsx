@@ -39,13 +39,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
       transitionDelay: isOpen ? '200ms' : '0',
    };
 
-   const smoothStyle = {
+   /* const smoothStyle = {
       transition: 'max-height 500ms ease-in-out',
-   };
+   }; */
 
    return (
       <div className="fixed inset-0 z-20 flex mb-[68px] md:mb-0 md:mt-[80px]" style={sidebarStyle}>
-         <div className="bg-gray-700 text-white w-64 p-4 relative">
+         <div className="bg-plum/90 text-white/80 w-64 p-4 relative">
             <div className="flex justify-end">
                <button onClick={toggleSidebar} className={`absolute top-2 right-2 p-1 rounded-full ${isOpen ? 'border border-purple-100/20 bg-periwinkle/70' : ''}`} style={buttonStyle}>
                   <img src={docIcon} alt="Doc Icaon" className="w-10 h-10" style={iconStyle} />
@@ -59,8 +59,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
                            About
                         </button>
 
-                        <div className={`smooth ${expandedItem === 'about' ? 'max-h-[1000px]' : 'max-h-0'}`} style={{ transition: 'max-height 500ms ease-in-out', overflow: 'hidden' }}>
-                           <ul className="About bg-white/10 max-h-[calc(100vh-300px)] overflow-y-auto" style={scrollbarStyle}>
+                        <div className={`smooth ${expandedItem === 'about' ? 'max-h-[1000px]' : 'max-h-0'}`} style={{ transition: `max-height ${expandedItem === 'about' ? '800ms' : '0ms'} ease-in-out`, overflow: 'hidden' }}>
+                           <ul className="About bg-white/10 px-2 max-h-[calc(100vh-300px)] overflow-y-auto" style={scrollbarStyle}>
                               <li className="py-1 text-sm"><a href="#A1">About 1</a></li>
                               <li className="py-1 text-sm"><a href="#A2">About 2</a></li>
                               <li className="py-1 text-sm"><a href="#A3">About 3</a></li>
@@ -73,8 +73,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
                            Game Rules
                         </button>
 
-                        <div className={`smooth ${expandedItem === 'gameRules' ? 'max-h-[1000px]' : 'max-h-0'}`} style={{ transition: 'max-height 500ms ease-in-out', overflow: 'hidden' }}>
-                           <ul className="GameRules bg-white/10 max-h-[calc(100vh-300px)] overflow-y-auto" style={scrollbarStyle}>
+                        <div className={`smooth ${expandedItem === 'gameRules' ? 'max-h-[1000px]' : 'max-h-0'}`} style={{ transition: `max-height ${expandedItem === 'gameRules' ? '800ms' : '0ms'} ease-in-out`, overflow: 'hidden' }}>
+                           <ul className="GameRules bg-white/10 px-2 max-h-[calc(100vh-300px)] overflow-y-auto" style={scrollbarStyle}>
                               <li className="py-1 text-sm"><a href="#commander-rules">Commander Rules and Gameplay Guide</a></li>
                               <li className="py-1 text-sm"><a href="#card-types">Card Types</a></li>
                               <li className="py-1 text-sm"><a href="#turn-structure">Turn Structure</a></li>
@@ -109,8 +109,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
                            Card Rules
                         </button>
 
-                        <div className={`smooth ${expandedItem === 'cardRules' ? 'max-h-[1000px]' : 'max-h-0'}`} style={{ transition: 'max-height 500ms ease-in-out', overflow: 'hidden' }}>
-                           <ul className="CardRules bg-white/10 max-h-[calc(100vh-300px)] overflow-y-auto" style={scrollbarStyle}>
+                        <div className={`smooth ${expandedItem === 'cardRules' ? 'max-h-[1000px]' : 'max-h-0'}`} style={{ transition: `max-height ${expandedItem === 'cardRules' ? '800ms' : '0ms'} ease-in-out`, overflow: 'hidden' }}>
+                           <ul className="CardRules bg-white/10 px-2 max-h-[calc(100vh-300px)] overflow-y-auto" style={scrollbarStyle}>
                               <li className="py-1 text-sm"><a href="#land-types">Land Types</a></li>
                               <li className="py-1 text-sm"><a href="#swamp">Swamp</a></li>
                               <li className="py-1 text-sm"><a href="#mountain">Mountain</a></li>
