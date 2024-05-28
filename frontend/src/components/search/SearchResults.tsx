@@ -5,12 +5,13 @@
  * Display the resaults after a given search
  */
 
-import {useLoaderData, useNavigate} from 'react-router-dom';
-import {IAPIResponse, ICard} from '../card/CardsArray';
+import {useLoaderData} from 'react-router-dom';
+import {IAPIResponse} from '../card/CardsArray';
 import {getImageFromCardFaces} from '../../utils/getImageFromCardFaces';
 import {useEffect, useRef, useState} from 'react';
 import {delay} from '../../utils/setApiDelay';
 import CardLayout from '../../layouts/CardLayout';
+import x from '../../assets/x-letter.svg';
 
 const SearchResults: React.FC = () => {
   const apiResponse = useLoaderData() as IAPIResponse;
@@ -18,25 +19,35 @@ const SearchResults: React.FC = () => {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const [activeCard, setActiveCard] = useState<any>();
   console.log('ActiveCard', activeCard);
-  const navigate = useNavigate();
-
-  const getCardId = async (id: string) => {
-    navigate(`/card/${id}`);
-  };
 
   useEffect(() => {
     delay(2000);
     if (!activeCard) return;
     dialogRef.current?.showModal();
+    document.body.style.overflow = 'hidden';
+    dialogRef.current?.addEventListener('close', closeModal);
+
+    return () => {
+      dialogRef.current?.removeEventListener('close', closeModal);
+      document.body.style.overflow = '';
+    };
   }, [activeCard]);
+
+  const closeModal = () => {
+    dialogRef.current?.close();
+    setActiveCard(undefined);
+    document.body.style.overflow = '';
+  };
 
   if (cards != null) {
     return (
       <>
-        <dialog ref={dialogRef} className="bg-transparent backdrop:bg-black/75">
+        <dialog
+          ref={dialogRef}
+          className="bg-transparent backdrop:bg-black/75 overflow-visible">
           {activeCard && (
             <>
-              <div className="card-image-container border border-red-600 flex justify-center items-center ">
+              <div className="card-image-container border border-red-600 z-0 flex justify-center items-center">
                 <img
                   className="size-9/12 shadow-xl"
                   /* onClick={() => getCardId(card.id)} */
@@ -47,11 +58,20 @@ const SearchResults: React.FC = () => {
                   }
                   alt={`${activeCard.name} card image`}
                 />
+                <button
+                  className="search-result-btn z-1 flex items-center justify-center rounded-full bg-neutral-300 w-5 h-5 absolute -top-2 right-7"
+                  onClick={() => closeModal()}>
+                  <img
+                    className=" overflow-visible w-4 h-4 text-neutral-700"
+                    src={x}
+                    alt=""
+                  />
+                  <span className="sr-only">Close</span>
+                </button>
               </div>
-              <button>
-                <span className="sr-only">Close</span>
-              </button>
-              <CardLayout />
+              <div className="">
+                <CardLayout />
+              </div>
             </>
           )}
         </dialog>
