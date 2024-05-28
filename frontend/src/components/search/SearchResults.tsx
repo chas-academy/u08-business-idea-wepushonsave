@@ -6,7 +6,8 @@
  */
 
 import {useLoaderData, useNavigate} from 'react-router-dom';
-import {IAPIResponse, ICardFaces} from '../card/CardsArray';
+import {IAPIResponse} from '../card/CardsArray';
+import {getImageFromCardFaces} from '../../utils/getImageFromCardFaces';
 
 const SearchResults: React.FC = () => {
   const apiResponse = useLoaderData() as IAPIResponse;
@@ -17,15 +18,6 @@ const SearchResults: React.FC = () => {
     navigate(`/card/${id}`);
   };
 
-  const getCardFaceImage = (card_faces: ICardFaces[]): string | undefined => {
-    for (const face of card_faces) {
-      if (face.image_uris && face.image_uris.border_crop) {
-        return face.image_uris.border_crop;
-      }
-    }
-    return undefined;
-  };
-
   if (cards != null) {
     return (
       <>
@@ -33,7 +25,7 @@ const SearchResults: React.FC = () => {
           {cards.map(card => {
             const imageUrl =
               card.card_faces && card.card_faces.length > 0
-                ? getCardFaceImage(card.card_faces)
+                ? getImageFromCardFaces(card.card_faces)
                 : card.image_uris?.border_crop;
             const cardName =
               card.card_faces && card.card_faces.length > 0

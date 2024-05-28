@@ -1,8 +1,11 @@
+import {ICardFaces} from './CardsArray';
+
 export interface IPrintsAPIResponse {
   data: IPrintsData[];
 }
 
 export interface IPrintsData {
+  card_faces: ICardFaces[];
   image_uris: IImageUris;
   foil: boolean;
   full_art: boolean;
@@ -14,7 +17,6 @@ export interface IPrintsData {
   set_name: string;
   set_search_uri: string;
   type_line: string;
-
 }
 
 interface IImageUris {
@@ -33,4 +35,3 @@ export interface IPrices {
 /**
  * id? // Så att det går att klicka sig vidare genom den bilden
  */
-
