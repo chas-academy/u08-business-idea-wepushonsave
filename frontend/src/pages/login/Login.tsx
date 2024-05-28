@@ -2,6 +2,7 @@
 import {useState} from 'react';
 import Validation from './loginValidation';
 
+
 const loginUser = () => {
   const [values, setValues] = useState({
     email: '',
@@ -21,9 +22,17 @@ const loginUser = () => {
     if (!errorCheck.email && !errorCheck.password) {
       fetch('http://localhost:3000/api/user/signin', {
         method: 'POST',
-        mode: 'no-cors', //should i take away the cors exceptions in backend??
-        body: JSON.stringify(values),
-      });
+        mode: 'cors',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(values)
+      }).then(
+        (response) => {
+          console.log(response.headers)
+        }
+      );
     } else {
       console.log('Errors');
     }

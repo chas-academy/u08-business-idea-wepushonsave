@@ -17,10 +17,10 @@ const Validation = (values: any) =>
         {
             errors.password = "Password is required";
         }
-        else if(password_pattern.test(values.password))
+        /*else if(password_pattern.test(values.password))
         {
             errors.password = "Password is invalid";
-        }else {
+        }*/else {
             errors.password = "";
         }
         return errors;
