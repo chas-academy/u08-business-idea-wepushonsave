@@ -1,4 +1,5 @@
 import {Params} from 'react-router-dom';
+import {delay} from './setApiDelay';
 
 interface IId {
   params: Params<string>;

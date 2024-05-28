@@ -1,3 +1,5 @@
+/* eslint-disable react/react-in-jsx-scope */
+
 import {
   createBrowserRouter,
   Route,
@@ -6,6 +8,12 @@ import {
 } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+
+// pages
+import GameRules from './pages/game-docs/Game_rules.tsx';
+import CardRules from './pages/game-docs/Card_rules.tsx';
+import Threads from './pages/community/Threads.tsx';
+
 
 // components
 import CardInfo from './components/card/CardInfo.tsx';
@@ -31,6 +39,9 @@ import MyCollectionCards from './pages/profile/MyCollectionCards.tsx';
 import MyCollectionCommons from './pages/profile/MyCollectionCommons.tsx';
 import MyCollectionRare from './pages/profile/MyCollectionRare.tsx';
 
+// context
+import { SearchProvider } from './components/search/SearchContext.tsx';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
@@ -42,31 +53,48 @@ const router = createBrowserRouter(
         element={<CardsDisplay />}
         loader={cardsArrayLoader}
       />
+      
+      <Route
+        path="search"
+        element={<SearchResults />}
+        loader={cardSearchLoader}
+      />
+
+      <Route
+        path="cards/:set"
+        element={<CardsArray />}
+        loader={({ params }) => {
+          return cardSetLoader({ params });
+        }}
+      />
+      <Route path="community" element={<Threads />} />
+
       <Route
         path="card/:id"
         element={<CardLayout />}
-        loader={({params}) => {
-          return singleCardLoader({params});
+        loader={({ params }) => {
+          return singleCardLoader({ params });
         }}>
+        
         <Route
           path="info"
           element={<CardInfo />}
-          loader={({params}) => {
-            return singleCardLoader({params});
+          loader={({ params }) => {
+            return singleCardLoader({ params });
           }}
         />
         <Route
           path="market"
           element={<CardMarket />}
-          loader={({params}) => {
-            return singleCardLoader({params});
+          loader={({ params }) => {
+            return singleCardLoader({ params });
           }}
         />
         <Route
           path="legalities"
           element={<CardLegalities />}
-          loader={({params}) => {
-            return singleCardLoader({params});
+          loader={({ params }) => {
+            return singleCardLoader({ params });
           }}
         />
         RR
@@ -81,5 +109,7 @@ const router = createBrowserRouter(
 );
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <RouterProvider router={router}></RouterProvider>
+  <SearchProvider>
+    <RouterProvider router={router} />
+  </SearchProvider>
 );

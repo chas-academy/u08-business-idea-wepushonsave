@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+/* body {
   background-color: #242424;
-}
+} */
 /**
 * @card 
 * This class is used for single cards
@@ -36,6 +36,7 @@ body {
   border-t-2
   border-r-2
 }
+
 .card-market {
   @apply
   rounded-t-3xl
@@ -43,6 +44,7 @@ body {
   border-t-2
   border-r-2
 }
+
 .card-legalities {
   @apply
   rounded-tl-3xl
