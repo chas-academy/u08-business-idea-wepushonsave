@@ -111,9 +111,7 @@
 
 **Are there any confusions or questions?**
 
--
-
----
+- ***
 
 ### Joseph
 
@@ -165,3 +163,5 @@
 - Merge with main (Mby)
 
 **Are there any confusions or questions?**
+
+<-- [Back to documentation guide](../documentation_guide.md)
