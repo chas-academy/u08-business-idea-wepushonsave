@@ -7,10 +7,10 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
-   const [expanded, setExpanded] = useState(false);
+   const [expandedItem, setExpandedItem] = useState<string | null>(null);
 
-   const handleExpand = () => {
-      setExpanded(!expanded);
+   const handleExpand = (itemName: string) => {
+      setExpandedItem(prevItem => (prevItem === itemName ? null : itemName));
    };
 
    const scrollbarStyle: React.CSSProperties = {
@@ -37,7 +37,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
       boxShadow: isOpen ? '0 0 10px rgba(200, 200, 300, 0.8)' : 'none',
       transitionDuration: isOpen ? '1000ms' : '200ms',
       transitionDelay: isOpen ? '200ms' : '0',
-
    };
 
    return (
@@ -47,19 +46,28 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
                <button onClick={toggleSidebar} className={`absolute top-2 right-2 p-1 rounded-full ${isOpen ? 'border border-purple-100/20 bg-periwinkle/70' : ''}`} style={buttonStyle}>
                   <img src={docIcon} alt="Doc Icon" className="w-10 h-10" style={iconStyle} />
                </button>
-
             </div>
             <nav className="mt-12">
                <div className="mt-4">
                   <ul >
-                     <li className="py-2"><a href="#">About</a></li>
-                     <li className="py-2"><a href="#">Card Rules</a></li>
-                     <li className="py-2">
-                        <button type="button" onClick={handleExpand}>
+                     <li className="ABOUT py-2">
+                        <button type="button" onClick={() => handleExpand('about')}>
+                           About
+                        </button>
+                        {expandedItem === 'about' && (
+                           <ul className=" bg-blue-300 max-h-[calc(100vh-300px)] overflow-y-auto" style={scrollbarStyle}>
+                              <li className="py-1 text-sm"><a href="#A1">About 1</a></li>
+                              <li className="py-1 text-sm"><a href="#A2">About 2</a></li>
+                              <li className="py-1 text-sm"><a href="#A3">About 3</a></li>
+                           </ul>
+                        )}
+                     </li>
+                     <li className="GAME RULES py-2">
+                        <button type="button" onClick={() => handleExpand('gameRules')}>
                            Game Rules
                         </button>
-                        {expanded && (
-                           <ul className=" bg-green-500 max-h-[calc(100vh-300px)] overflow-y-auto" style={scrollbarStyle}>
+                        {expandedItem === 'gameRules' && (
+                           <ul className=" bg-pink-100 max-h-[calc(100vh-300px)] overflow-y-auto" style={scrollbarStyle}>
                               <li className="py-1 text-sm"><a href="#commander-rules">Commander Rules and Gameplay Guide</a></li>
                               <li className="py-1 text-sm"><a href="#card-types">Card Types</a></li>
                               <li className="py-1 text-sm"><a href="#turn-structure">Turn Structure</a></li>
@@ -90,6 +98,30 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
                         )}
                      </li>
 
+                     <li className="CARD RULES py-2">
+                        <button type="button" onClick={() => handleExpand('cardRules')}>
+                           Card Rules
+                        </button>
+                        {expandedItem === 'cardRules' && (
+                           <ul className=" bg-pink-300 max-h-[calc(100vh-300px)] overflow-y-auto" style={scrollbarStyle}>
+                              <li className="py-1 text-sm"><a href="#land-types">Land Types</a></li>
+                              <li className="py-1 text-sm"><a href="#swamp">Swamp</a></li>
+                              <li className="py-1 text-sm"><a href="#mountain">Mountain</a></li>
+                              <li className="py-1 text-sm"><a href="#plains">Plains</a></li>
+                              <li className="py-1 text-sm"><a href="#forest">Forest</a></li>
+                              <li className="py-1 text-sm"><a href="#island">Island</a></li>
+                              <li className="py-1 text-sm"><a href="#colorless">Colorless</a></li>
+                              <li className="py-1 text-sm"><a href="#cave">Cave</a></li>
+                              <li className="py-1 text-sm"><a href="#desert">Desert</a></li>
+                              <li className="py-1 text-sm"><a href="#gate">Gate</a></li>
+                              <li className="py-1 text-sm"><a href="#lair">Lair</a></li>
+                              <li className="py-1 text-sm"><a href="#locus">Locus</a></li>
+                              <li className="py-1 text-sm"><a href="#sphere">Sphere</a></li>
+                              <li className="py-1 text-sm"><a href="#urzas">Urza's</a></li>
+                              <li className="py-1 text-sm"><a href="#cloud">Cloud</a></li>
+                           </ul>
+                        )}
+                     </li>
                   </ul>
                </div>
 
