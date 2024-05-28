@@ -19,7 +19,8 @@ interface IAPIResponse {
 }
 
 const CardDisplay: React.FC = () => {
-  // When db will be ready, change loader in CardsDisplay's route to use database
+  // When db will be ready, add the dynamic routes in main.tsx, to fetch the data of a specific list in db and use the component here to display it.
+  // Right now we are just using the useLoaderData to test the code
   const apiResponse = useLoaderData() as IAPIResponse;
   const cards = apiResponse.data;
   const navigate = useNavigate();
@@ -35,12 +36,12 @@ const CardDisplay: React.FC = () => {
     navigate(`/card/${id}`);
   };
 
-  // Function to extract the primary type (first word) from the type_line
+  // Function to extract the first word from the type_line
   const extractPrimaryType = (typeLine: string) => {
     return typeLine.split(' ')[0];
   };
 
-  // Function that sorts the cards by primary types in the list view
+  // Function that sorts the cards in the list view
   const sortedCards = [...cards].sort((a, b) => {
     const primaryTypeA = extractPrimaryType(a.type_line);
     const primaryTypeB = extractPrimaryType(b.type_line);
@@ -60,7 +61,7 @@ const CardDisplay: React.FC = () => {
   const typeCounts = getTypeCounts();
 
   return (
-    <div className="bg-list-card-background">
+    <div className="">
       {/*  When db ready, insert name of the list here */}
       <h1 className="mt-5 text-white text-2xl font-inter text-center">
         All cards
@@ -99,7 +100,7 @@ const CardDisplay: React.FC = () => {
                 .map(card => (
                   <div
                     key={card.id}
-                    className="mb-1 ml-5 mr-5 rounded cursor-pointer flex justify-between bg-list-card-background"
+                    className="mb-1 ml-5 mr-5 rounded cursor-pointer flex justify-between bg-site-gradient"
                     onClick={() => getCardId(card.id)}>
                     <span className="pl-2 text-gray-200 text-sm">
                       {card.name}

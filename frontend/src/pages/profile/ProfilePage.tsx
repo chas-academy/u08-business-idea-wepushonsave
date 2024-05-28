@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {NavLink, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import profileIcon from '../../assets/profile-icon.webp';
 
 const ProfilePage = () => {
@@ -18,15 +18,6 @@ const ProfilePage = () => {
   };
   const mycollectionCommonsClick = () => {
     navigate('/mycollection-commmons');
-  };
-  const listsWishlistClick = () => {
-    navigate('/lists-wishlist');
-  };
-  const listsRareClick = () => {
-    navigate('/lists-rare');
-  };
-  const listsCommonsClick = () => {
-    navigate('/lists-commons');
   };
 
   return (
@@ -118,9 +109,9 @@ const ProfilePage = () => {
 
           {activeSection === 'lists' && (
             <div className="flex flex-col items-center">
-              <button
-                className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
-                onClick={listsWishlistClick}>
+              <button className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange">
+                {' '}
+                {/* Add the OnCLick here to the function created by Lollo */}
                 CREATE A LIST
               </button>
             </div>
