@@ -1,3 +1,4 @@
+
 /* eslint-disable react/react-in-jsx-scope */
 import {useLoaderData, useNavigate} from 'react-router-dom';
 
@@ -17,11 +18,13 @@ export interface ICardFaces {
   name: string;
   image_uris: IImageUris;
 }
+
 // Defines the structure of each card
 interface ICard {
   name: string;
   id: string;
   image_uris: IImageUris;
+
   card_faces: ICardFaces[];
 }
 

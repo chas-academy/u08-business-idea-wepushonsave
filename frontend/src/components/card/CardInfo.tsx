@@ -1,5 +1,5 @@
-/* eslint-disable react/react-in-jsx-scope */
 
+/* eslint-disable react/react-in-jsx-scope */
 
 import {useLoaderData} from 'react-router-dom';
 import {convertObjectToArray} from '../../utils/convertObjectToArray';
@@ -10,6 +10,7 @@ const CardInfo = () => {
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const cardData: any = useLoaderData();
   /* eslint-enable @typescript-eslint/no-explicit-any */
+
 
   //FIXME This function does what? Fix
   const extractCardData = (cardData: ICardInfo) => {

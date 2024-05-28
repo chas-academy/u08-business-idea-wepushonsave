@@ -19,10 +19,10 @@ const Collapsable = ({titles, content}: CollapsableProps) => {
         {/*om öppen ska - skrivas ut om stängd + */}
       </button>
       <div
-        className={`grid overflow-hidden transition-all duration-300 ease-in-out ${
-          collapsableOpen
+        className={`grid overflow-hidden transition-all duration-300 ease-in-out ${collapsableOpen
             ? 'grid-rows-[1fr] opacity-100' //vad som händer om den inte är öppen
             : 'grid-rows-[0fr] opacity-0' //vad som händer om den är öppen
+
         }`}>
         {/* här under skapas layout men också ger en content till collapsable som aggerar pappa, inuti contentet lägger man sedan i items som då är dropdownsens information */}
         {collapsableOpen && (

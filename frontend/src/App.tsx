@@ -1,13 +1,14 @@
 /* eslint-disable react/react-in-jsx-scope */
-
-import SearchComponent from "./mtgtombapi/algoritm/comRec.tsx";
-import SearchThemeComponent from "./mtgtombapi/algoritm/themeRec.tsx";
+import Login from './pages/login/Login';
+//import Register from './pages/register/Register';
 
 function App() {
-  return <>
-    <SearchComponent></SearchComponent>
-    <SearchThemeComponent></SearchThemeComponent>
-  </>;
+  return (
+    <>
+      <Login></Login>
+      {/*<Register></Register>*/}
+    </>
+  );
 }
 
 export default App;

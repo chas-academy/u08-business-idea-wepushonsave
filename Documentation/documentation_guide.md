@@ -112,3 +112,7 @@ Team members: Emma, Alex, Louise, Joseph, Dennis, and Clara
 - We held our first daily stand-up of the week. Each team member shared their accomplishments over the weekend and outlined their upcoming tasks.
 
 - Here are the notes taken during this meeting: [notes](./Notes/daily_stand-up_27_05.md).
+
+## 28th May
+
+- We held our daily stand-up of the week. Each team member shared their accomplishments over the weekend and outlined their upcoming tasks. Here are the [notes](./Notes/daily_stand-up_28_05.md).

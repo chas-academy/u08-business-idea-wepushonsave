@@ -38,6 +38,7 @@ const Navbar = () => {
           />
         </a>
 
+
         <a href="/decks" className="decks-logo w-full md:w-24 block text-center 0">
           <img
             src={decksIcon}
@@ -57,13 +58,14 @@ const Navbar = () => {
         </a>
 
         {/* Desktop screen */}
-
+        
         <a href="/register" className="login-logo-desktop ml-auto 0">
           <button className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
             <span className="absolute inset-0 border-2 border-transparent hover:border-white rounded-lg"></span>
             LOGIN
           </button>
         </a>
+
         <a href="/login" className="register-logo-desktop 0">
           <button className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
             <span className="absolute inset-0 border-2 border-transparent hover:border-white rounded-lg"></span>
