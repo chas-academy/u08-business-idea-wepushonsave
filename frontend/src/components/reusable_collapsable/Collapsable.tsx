@@ -1,16 +1,12 @@
-
 /* eslint-disable react/react-in-jsx-scope */
 import {useState} from 'react';
-
 
 interface CollapsableProps {
   titles: string;
   content: JSX.Element;
 }
 
-
 const Collapsable = ({titles, content}: CollapsableProps) => {
-
   const [collapsableOpen, setCollapsableOpen] = useState(false);
 
   return (
@@ -28,7 +24,6 @@ const Collapsable = ({titles, content}: CollapsableProps) => {
             : 'grid-rows-[0fr] opacity-0' //vad som händer om den är öppen
 
         }`}>
-
         {/* här under skapas layout men också ger en content till collapsable som aggerar pappa, inuti contentet lägger man sedan i items som då är dropdownsens information */}
         {collapsableOpen && (
           <div className="mt-2 p-2 bg-zinc-700 rounded">{content}</div>
