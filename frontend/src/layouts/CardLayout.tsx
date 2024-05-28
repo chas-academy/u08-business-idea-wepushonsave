@@ -1,16 +1,26 @@
 /* eslint-disable react/react-in-jsx-scope */
 
-
-import {NavLink, Outlet} from 'react-router-dom';
-import CardImage from '../components/CardImage';
+import {NavLink, Outlet, useLoaderData} from 'react-router-dom';
 import CardFooter from '../components/card/CardFooter';
+import {getImageFromCardFaces} from '../utils/getImageFromCardFaces';
 
 const CardLayout = () => {
+  //FIXME See if there is any other data-type we can use for an unknown value
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const cardData: any = useLoaderData();
+  /* eslint-enable @typescript-eslint/no-explicit-any */
+  const imageUrl =
+    cardData.card_faces && cardData.card_faces.length > 0
+      ? getImageFromCardFaces(cardData.card_faces)
+      : cardData.image_uris?.border_crop;
+
   return (
     <>
       <div className="card-layout">
         <section className="card-layout-image w-full h-full grid grid-cols-1 justify-items-center">
-          <CardImage />
+          <div className="card-image-container flex justify-center items-center size-fit">
+            <img className="size-9/12 shadow-xl" src={imageUrl} alt="" />
+          </div>
         </section>
 
         <section className=" card-layout-footer relative ml-4 mr-4 grid grid-cols-2 justify-items-center">

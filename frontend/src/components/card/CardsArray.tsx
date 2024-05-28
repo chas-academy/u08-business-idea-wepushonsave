@@ -18,7 +18,7 @@ export interface ICardFaces {
   image_uris: IImageUris;
 }
 // Defines the structure of each card
-interface ICard {
+export interface ICard {
   name: string;
   id: string;
   image_uris: IImageUris;
