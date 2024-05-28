@@ -3,6 +3,7 @@ import {useLoaderData, useNavigate} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import {IPrices, IPrintsAPIResponse, IPrintsData} from './IPrints';
 import {delay} from '../../utils/setApiDelay';
+import {getImageFromCardFaces} from '../../utils/getImageFromCardFaces';
 
 const CardMarket = () => {
   //FIXME See if there is any other data-type we can use for an unknown value
@@ -67,11 +68,27 @@ const CardMarket = () => {
     if (print.rarity === 'mythic') return 'text-red-500';
   };
 
+  /*  const imagePath = 
+  cardData.card_faces && cardData.card_faces.length > 0
+      ? getImageFromCardFaces(cardData.card_faces)
+      : cardData.image_uris?.border_crop; */
   return (
     <>
       <section className="card-market-grid grid grid-cols-1 gap-4 text-white">
         {/* .map(print) = The amount of diffrent card illustarations  */}
         {prints.map((print, index: number) => {
+          const imageUrl =
+            print.card_faces && print.card_faces.length > 0
+              ? getImageFromCardFaces(print.card_faces)
+              : print.image_uris?.border_crop;
+
+          const cardName =
+            print.card_faces && print.card_faces.length > 0
+              ? print.card_faces[0].name
+              : print.name;
+
+          console.log(print.card_faces[0].name);
+
           return (
             <div
               key={index}
@@ -79,15 +96,16 @@ const CardMarket = () => {
               <div className="print-container m-2 ">
                 <img
                   className="shadow shadow-[#0000008a]"
-                  src={print.image_uris.border_crop}
-                  alt=""
+                  src={imageUrl}
+                  alt={cardName}
                 />
               </div>
 
               <div className="print-details-container col-span-2 justify-items-center content-center relative mr-2">
-                <div className="print-name-quality-container grid grid-cols-3 absolute top-0 m-2 w-full">
-                  <h1 className={`text-xl col-span-2 ${getCardQuality(print)}`}>
-                    {print.name}
+                <div className="print-name-quality-container border border-red-600 grid grid-cols-3 absolute top-0 m-2 w-full -ml-2">
+                  <h1
+                    className={`text-xl col-span-2 text-nowrap ${getCardQuality(print)}`}>
+                    {cardName}
                   </h1>
 
                   <p
@@ -96,11 +114,11 @@ const CardMarket = () => {
                   </p>
                 </div>
 
-                <p className="text-sm">
+                <p className="text-sm border text-nowrap">
                   <strong className="m-2">SET:</strong>
                   <a onClick={() => getSetUri(print.set)}>{print.set_name}</a>
                 </p>
-                <p className="text-sm">
+                <p className="text-sm text-nowrap">
                   <strong className="m-2">PRICE:</strong>
                   {getEURPrice(print.prices)}
                 </p>
