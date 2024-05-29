@@ -216,9 +216,9 @@ const FAQ_Game_rules = () => {
 
       <div
         className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
-        id="philosophy">
+        id="pAPAphilosophy">
         <Collapsable
-          titles="pAPAphilosophy"
+          titles="philosophy"
           content={
             <CollapsableContent
               title=""
@@ -231,9 +231,9 @@ const FAQ_Game_rules = () => {
       </div>
       <div
         className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
-        id="the-golden-rule">
+        id="pAPAthe-golden-rule">
         <Collapsable
-          titles="pAPAThe Golden Rule"
+          titles="The Golden Rule"
           content={
             <CollapsableContent
               title=""
@@ -246,9 +246,9 @@ const FAQ_Game_rules = () => {
       </div>
       <div
         className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
-        id="house-rules">
+        id="pAPAhouse-rules">
         <Collapsable
-          titles="pAPAHouse Rules"
+          titles="House Rules"
           content={
             <CollapsableContent
               title=""
