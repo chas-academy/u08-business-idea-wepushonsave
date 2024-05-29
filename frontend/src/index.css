@@ -4,50 +4,41 @@
 
 /* body {
   background-color: #242424;
-} */
+}
 /**
 * @card 
 * This class is used for single cards
 */
+
+/* Emmas provisoriska shit show */
+
+.sidebar a:hover {
+  color: rgb(255, 255, 255);
+}
+
+
+/*other*/
 .card-details-active {
-  @apply
-  bg-active-card-btn-gradient
-  border-[#cce4dfd3]
-   h-14
-   flex justify-center items-center
-   z-10
-   text-xl 
-   -m-1
+  @apply bg-active-card-btn-gradient border-[#cce4dfd3] h-14 flex justify-center items-center z-10 text-xl -m-1
 }
 
 .card-details-not-active {
-  @apply
-  bg-inactive-card-btn-gradient
-   h-14
-   flex justify-center items-center
-   text-lg
-   text-opacity-75
-   text-white
-  }
+  @apply bg-inactive-card-btn-gradient h-14 flex justify-center items-center text-lg text-opacity-75 text-white
+}
 
 .card-info {
+
   @apply
   rounded-tr-3xl
   border-t-2
   border-r-2
+
 }
 
 .card-market {
-  @apply
-  rounded-t-3xl
-  border-l-2
-  border-t-2
-  border-r-2
+  @apply rounded-t-3xl border-l-2 border-t-2 border-r-2
 }
 
 .card-legalities {
-  @apply
-  rounded-tl-3xl
-  border-l-2
-  border-t-2
+  @apply rounded-tl-3xl border-l-2 border-t-2
 }
