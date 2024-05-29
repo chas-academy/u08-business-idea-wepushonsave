@@ -2,10 +2,10 @@ import express, { Request, Response } from 'express';
 import Thread from '../models/threadModel';
 import Comment from '../models/commentModel';
 
-const router = express.Router();
+const threadRouter = express.Router();
 
 // Get all threads
-router.get('/', async (req: Request, res: Response) => {
+threadRouter.get('/all', async (req: Request, res: Response) => {
    try {
       const threads = await Thread.find().populate('comments');
       res.json(threads);
@@ -15,7 +15,7 @@ router.get('/', async (req: Request, res: Response) => {
 });
 
 // Create thread
-router.post('/', async (req: Request, res: Response) => {
+threadRouter.post('/create', async (req: Request, res: Response) => {
    try {
       const { title, content } = req.body;
       const newThread = new Thread({ title, content });
@@ -27,7 +27,7 @@ router.post('/', async (req: Request, res: Response) => {
 });
 
 // Add a comment 
-router.post('/:threadId/comments', async (req: Request, res: Response) => {
+threadRouter.post('/:threadId/comments', async (req: Request, res: Response) => {
    try {
       const { threadId } = req.params;
       const { text, userId } = req.body;
@@ -49,4 +49,4 @@ router.post('/:threadId/comments', async (req: Request, res: Response) => {
    }
 });
 
-export default router;
+export default threadRouter;

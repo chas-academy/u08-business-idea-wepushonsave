@@ -1,11 +1,15 @@
 import dotenv from "dotenv";
-import connectDB from "./db/db";
+import express from "express";
+import connectDB from "./db/db"; //was in app.ts moved here and commented out in app.ts
+import cors from "cors";
 import app from "./app";
 
 connectDB;
 
 dotenv.config();
 const port = 3000;
+
+
 
 app
   .listen(port, () => {
