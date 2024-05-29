@@ -82,32 +82,33 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
 
                         <div className={`smooth ${expandedItem === 'gameRules' ? 'max-h-[1000px]' : 'max-h-0'}`} style={{ transition: `max-height ${expandedItem === 'gameRules' ? '800ms' : '300ms'} ease-in-out`, overflow: 'hidden' }}>
                            <ul className="GameRules bg-white/10 rounded-md p-2 max-h-[calc(100vh-300px)] overflow-y-auto" style={scrollbarStyle}>
-                              <li className="py-1 text-sm"><a href="#commander-rules" className="hover:text-white">Commander Rules and Gameplay Guide</a></li>
-                              <li className="py-1 text-sm"><a href="#card-types" className="hover:text-white">Card Types</a></li>
-                              <li className="py-1 text-sm"><a href="#turn-structure" className="hover:text-white">Turn Structure</a></li>
-                              <li className="py-1 text-sm"><a href="#casting-spells" className="hover:text-white">Casting Spells</a></li>
-                              <li className="py-1 text-sm"><a href="#combat" className="hover:text-white">Combat</a></li>
-                              <li className="py-1 text-sm"><a href="#damage-and-life" className="hover:text-white">Damage and Life</a></li>
-                              <li className="py-1 text-sm"><a href="#keywords-and-abilities" className="hover:text-white">Keywords and Abilities</a></li>
-                              <li className="py-1 text-sm"><a href="#win-conditions" className="hover:text-white">Win Conditions</a></li>
-                              <li className="py-1 text-sm"><a href="#interaction-and-stack" className="hover:text-white">Interaction and Stack</a></li>
-                              <li className="py-1 text-sm"><a href="#mulligans-and-sideboarding" className="hover:text-white">Mulligans and Sideboarding</a></li>
-                              <li className="py-1 text-sm"><a href="#philosophy" className="hover:text-white">Philosophy</a></li>
-                              <li className="py-1 text-sm"><a href="#the-golden-rule" className="hover:text-white">The Golden Rule</a></li>
-                              <li className="py-1 text-sm"><a href="#house-rules" className="hover:text-white">House Rules</a></li>
-                              <li className="py-1 text-sm"><a href="#rules-sources" className="hover:text-white">Rules Sources</a></li>
-                              <li className="py-1 text-sm"><a href="#deck-construction" className="hover:text-white">Deck Construction</a></li>
-                              <li className="py-1 text-sm"><a href="#starting-the-game" className="hover:text-white">Starting the Game</a></li>
-                              <li className="py-1 text-sm"><a href="#commander" className="hover:text-white">Commander</a></li>
-                              <li className="py-1 text-sm"><a href="#card-legality" className="hover:text-white">Card Legality</a></li>
-                              <li className="py-1 text-sm"><a href="#banned-list" className="hover:text-white">Banned List</a></li>
-                              <li className="py-1 text-sm"><a href="#color-identity-and-color-indicator" className="hover:text-white">Color Identity and Color Indicator</a></li>
-                              <li className="py-1 text-sm"><a href="#limited-range-of-influence" className="hover:text-white">Limited Range of Influence</a></li>
-                              <li className="py-1 text-sm"><a href="#official-announcements-and-rulings" className="hover:text-white">Official Announcements and Rulings</a></li>
-                              <li className="py-1 text-sm"><a href="#object-of-commander" className="hover:text-white">Object of Commander</a></li>
-                              <li className="py-1 text-sm"><a href="#rule-violations" className="hover:text-white">Rule Violations</a></li>
-                              <li className="py-1 text-sm"><a href="#additional-rules-for-commander-games" className="hover:text-white">Additional Rules for Commander Games</a></li>
-                              <li className="py-1 text-sm"><a href="#faq-frequently-asked-questions" className="hover:text-white">FAQ (Frequently Asked Questions)</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#pAPAcommander-rules" className="hover:text-white">Commander Rules and Gameplay Guide</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#deck-construction-and-setup" className="hover:text-white">deck construction and setup</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#card-types" className="hover:text-white">Card Types</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#turn-structure" className="hover:text-white">Turn Structure</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#casting-spells" className="hover:text-white">Casting Spells</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#combat" className="hover:text-white">Combat</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#damage-and-life" className="hover:text-white">Damage and Life</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#keywords-and-abilities" className="hover:text-white">Keywords and Abilities</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#win-conditions" className="hover:text-white">Win Conditions</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#interaction-and-stack" className="hover:text-white">Interaction and Stack</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#mulligans-and-sideboarding" className="hover:text-white">Mulligans and Sideboarding</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#pAPAphilosophy" className="hover:text-white">Philosophy</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#pAPAthe-golden-rule" className="hover:text-white">The Golden Rule</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#pAPAhouse-rules" className="hover:text-white">House Rules</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#pAPArules-sources" className="hover:text-white">Rules Sources</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#pAPAdeck-construction" className="hover:text-white">Deck Construction</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#pAPAstarting-the-game" className="hover:text-white">Starting the Game</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#pAPAcommander" className="hover:text-white">Commander</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#pAPAcard-legality" className="hover:text-white">Card Legality</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#pAPAbanned-list" className="hover:text-white">Banned List</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#pAPAcolor-identity-and-color-indicator" className="hover:text-white">Color Identity and Color Indicator</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#pAPAlimited-range-of-influence" className="hover:text-white">Limited Range of Influence</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#pAPAofficial-announcements-and-rulings" className="hover:text-white">Official Announcements and Rulings</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#Vobject-of-commander" className="hover:text-white">Object of Commander</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#pAPArule-violations" className="hover:text-white">Rule Violations</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#pAPAadditional-rules-for-commander-games" className="hover:text-white">Additional Rules for Commander Games</a></li>
+                              <li className="py-1 text-sm"><a href="/gamerules/#pAPAfaq-frequently-asked-questions" className="hover:text-white">FAQ (Frequently Asked Questions)</a></li>
                            </ul>
                         </div>
                      </li>
@@ -121,29 +122,70 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
 
                         <div className={`smooth ${expandedItem === 'cardRules' ? 'max-h-[1000px]' : 'max-h-0'}`} style={{ transition: `max-height ${expandedItem === 'cardRules' ? '800ms' : '300ms'} ease-in-out`, overflow: 'hidden' }}>
                            <ul className="CardRules bg-white/10 rounded-md p-2 max-h-[calc(100vh-300px)] overflow-y-auto" style={scrollbarStyle}>
-                              <li className="py-1 text-sm"><a href="#land-types" className="hover:text-white">Land Types</a></li>
-                              <li className="py-1 text-sm"><a href="#creature-types" className="hover:text-white">Creature Types</a></li>
-                              <li className="py-1 text-sm"><a href="#enchantment" className="hover:text-white">Enchantment</a></li>
-                              <li className="py-1 text-sm"><a href="#artifacts" className="hover:text-white">Artifacts</a></li>
-                              <li className="py-1 text-sm"><a href="#sorcery" className="hover:text-white">Sorcery</a></li>
-                              <li className="py-1 text-sm"><a href="#instants" className="hover:text-white">Instants</a></li>
-                              <li className="py-1 text-sm"><a href="#planeswalker" className="hover:text-white">Planeswalker</a></li>
-
-                              {/*  <li className="py-1 text-sm"><a href="#land-types" className="hover:text-white">Land Types</a></li>
-                              <li className="py-1 text-sm"><a href="#swamp" className="hover:text-white">Swamp</a></li>
-                              <li className="py-1 text-sm"><a href="#mountain" className="hover:text-white">Mountain</a></li>
-                              <li className="py-1 text-sm"><a href="#plains" className="hover:text-white">Plains</a></li>
-                              <li className="py-1 text-sm"><a href="#forest" className="hover:text-white">Forest</a></li>
-                              <li className="py-1 text-sm"><a href="#island" className="hover:text-white">Island</a></li>
-                              <li className="py-1 text-sm"><a href="#colorless" className="hover:text-white">Colorless</a></li>
-                              <li className="py-1 text-sm"><a href="#cave" className="hover:text-white">Cave</a></li>
-                              <li className="py-1 text-sm"><a href="#desert" className="hover:text-white">Desert</a></li>
-                              <li className="py-1 text-sm"><a href="#gate" className="hover:text-white">Gate</a></li>
-                              <li className="py-1 text-sm"><a href="#lair" className="hover:text-white">Lair</a></li>
-                              <li className="py-1 text-sm"><a href="#locus" className="hover:text-white">Locus</a></li>
-                              <li className="py-1 text-sm"><a href="#sphere" className="hover:text-white">Sphere</a></li>
-                              <li className="py-1 text-sm"><a href="#urzas" className="hover:text-white">Urza's</a></li>
-                              <li className="py-1 text-sm"><a href="#cloud" className="hover:text-white">Cloud</a></li> */}
+                              <li className="py-1 text-sm"><a href="/cardrules/#pAPAland-types" className="hover:text-white">Land Types</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#swamp" className="hover:text-white">Swamp</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#mountain" className="hover:text-white">Mountain</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#plains" className="hover:text-white">Plains</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#forest" className="hover:text-white">Forest</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#island" className="hover:text-white">Island</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#colorless" className="hover:text-white">Colorless</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#cave" className="hover:text-white">Cave</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#desert" className="hover:text-white">Desert</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#gate" className="hover:text-white">Gate</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#lair" className="hover:text-white">Lair</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#locus" className="hover:text-white">Locus</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#sphere" className="hover:text-white">Sphere</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#urzas" className="hover:text-white">Urza's</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#cloud" className="hover:text-white">Cloud</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#pAPAcreature" className="hover:text-white">Cloud</a></li> 
+                              <li className="py-1 text-sm"><a href="/cardrules/#creature-types" className="hover:text-white">Creature Types</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#characteristics" className="hover:text-white">Characteristics</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#types-and-subtypes" className="hover:text-white">Types and Subtypes</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#summoning-sickness" className="hover:text-white">Summoning Sickness</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#creature-abilities" className="hover:text-white">Creature Abilities</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#combat" className="hover:text-white">Combat</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#creature-token" className="hover:text-white">Creature Tokens</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#pAPAenchantment" className="hover:text-white">Enchantments</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#enchantments" className="hover:text-white">Enchantments</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#flavor-and-identity" className="hover:text-white">Flavor and Identity</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#types-of-enchantments" className="hover:text-white">Types of Enchantments</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#continuous-effects-enchantments" className="hover:text-white">Continuous Effects</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#strategic-value-enchantments" className="hover:text-white">Strategic Value</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#interaction-with-other-cards-enchantments" className="hover:text-white">Interaction with Other Cards</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#enchantress-effects" className="hover:text-white">Enchantress Effects</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#pAPAartifacts" className="hover:text-white">Artifacts: Key Concepts and Gameplay</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#artifacts-key-concepts-and-gameplay" className="hover:text-white">Artifacts: Key Concepts and Gameplay</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#overview-of-artifacts" className="hover:text-white">Overview of Artifacts</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#types-of-artifacts" className="hover:text-white">Types of Artifacts</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#continuous-effects" className="hover:text-white">Continuous Effects</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#strategic-value-artifacts" className="hover:text-white">Strategic Value</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#interaction-with-other-cards-artifacts" className="hover:text-white">Interaction with Other Cards</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#artifact-deck-themes" className="hover:text-white">Artifact Deck Themes</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#artifact-creatures-and-animation" className="hover:text-white">Artifact Creatures and Animation</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#pAPAsorceries" className="hover:text-white">Sorceries: Key Concepts and Gameplay</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#sorceries-key-concepts-and-gameplay" className="hover:text-white">Sorceries: Key Concepts and Gameplay</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#overview-of-sorceries" className="hover:text-white">Overview of Sorceries</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#types-of-sorceries" className="hover:text-white">Types of Sorceries</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#casting-sorceries" className="hover:text-white">Casting Sorceries</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#strategic-value-sorceries" className="hover:text-white">Strategic Value</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#interaction-with-other-cards-sorceries" className="hover:text-white">Interaction with Other Cards</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#deck-themes-sorceries" className="hover:text-white">Deck Themes</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#instants-key-concepts-and-gameplay" className="hover:text-white">Instants: Key Concepts and Gameplay</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#pAPAinstants" className="hover:text-white">Overview of Instants</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#overview-of-instants" className="hover:text-white">Overview of Instants</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#types-of-instants" className="hover:text-white">Types of Instants</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#casting-instants" className="hover:text-white">Casting Instants</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#strategic-value-instants" className="hover:text-white">Strategic Value</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#interaction-with-other-cards-instants" className="hover:text-white">Interaction with Other Cards</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#deck-themes-instants" className="hover:text-white">Deck Themes</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#pAPAplaneswalkers" className="hover:text-white">Overview of Instants</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#planeswalkers-key-concepts-and-gameplay" className="hover:text-white">Planeswalkers: Key Concepts and Gameplay</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#overview-of-planeswalkers" className="hover:text-white">Overview of Planeswalkers</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#types-of-planeswalker-abilities" className="hover:text-white">Types of Planeswalker Abilities</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#activating-planeswalker-abilities" className="hover:text-white">Activating Planeswalker Abilities</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#strategic-value" className="hover:text-white">Strategic Value</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#interaction-with-other-cards" className="hover:text-white">Interaction with Other Cards</a></li>
+                              <li className="py-1 text-sm"><a href="/cardrules/#deck-themes" className="hover:text-white">Deck Themes</a></li>
 
                            </ul>
                         </div>
