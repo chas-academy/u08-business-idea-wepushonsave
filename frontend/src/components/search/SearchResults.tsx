@@ -8,7 +8,7 @@
 import {useLoaderData} from 'react-router-dom';
 import {IAPIResponse} from '../card/CardsArray';
 import {getImageFromCardFaces} from '../../utils/getImageFromCardFaces';
-import {useEffect, useRef, useState} from 'react';
+import {act, useEffect, useRef, useState} from 'react';
 import {delay} from '../../utils/setApiDelay';
 import CardLayout from '../../layouts/CardLayout';
 import x from '../../assets/x-letter.svg';
@@ -18,20 +18,40 @@ const SearchResults: React.FC = () => {
   const cards = apiResponse.data;
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const [activeCard, setActiveCard] = useState<any>();
-  console.log('ActiveCard', activeCard);
 
   useEffect(() => {
     delay(2000);
     if (!activeCard) return;
     dialogRef.current?.showModal();
-    document.body.style.overflow = 'hidden';
+
+    document.body.addEventListener('click', handleOnClick);
     dialogRef.current?.addEventListener('close', closeModal);
+    document.body.style.overflow = 'hidden';
 
     return () => {
+      document.body.removeEventListener('click', handleOnClick);
       dialogRef.current?.removeEventListener('close', closeModal);
       document.body.style.overflow = '';
     };
   }, [activeCard]);
+
+  /**
+   * Close view
+   * @param e click-events outside the card window
+   */
+  const handleOnClick = (e: MouseEvent) => {
+    const dialogDimensions = dialogRef.current?.getBoundingClientRect();
+    if (dialogDimensions != undefined) {
+      if (
+        e.clientX < dialogDimensions.left ||
+        e.clientX > dialogDimensions.right ||
+        e.clientY < dialogDimensions.top ||
+        e.clientY > dialogDimensions.bottom
+      ) {
+        dialogRef.current?.close();
+      }
+    }
+  };
 
   const closeModal = () => {
     dialogRef.current?.close();
@@ -47,7 +67,7 @@ const SearchResults: React.FC = () => {
           className="bg-transparent backdrop:bg-black/75 overflow-visible">
           {activeCard && (
             <>
-              <div className="card-image-container border border-red-600 z-0 flex justify-center items-center">
+              <div className="card-image-container z-0 flex justify-center items-center">
                 <img
                   className="size-9/12 shadow-xl"
                   /* onClick={() => getCardId(card.id)} */
@@ -89,7 +109,7 @@ const SearchResults: React.FC = () => {
             return (
               <div
                 key={card.id}
-                className="search-result-img-container border border-red-600 flex justify-center">
+                className="search-result-img-container flex justify-center">
                 {imageUrl ? (
                   <button onClick={() => setActiveCard(card)}>
                     <img
