@@ -122,6 +122,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
                         <div className={`smooth ${expandedItem === 'cardRules' ? 'max-h-[1000px]' : 'max-h-0'}`} style={{ transition: `max-height ${expandedItem === 'cardRules' ? '800ms' : '300ms'} ease-in-out`, overflow: 'hidden' }}>
                            <ul className="CardRules bg-white/10 rounded-md p-2 max-h-[calc(100vh-300px)] overflow-y-auto" style={scrollbarStyle}>
                               <li className="py-1 text-sm"><a href="#land-types" className="hover:text-white">Land Types</a></li>
+                              <li className="py-1 text-sm"><a href="#creature-types" className="hover:text-white">Creature Types</a></li>
+                              <li className="py-1 text-sm"><a href="#enchantment" className="hover:text-white">Enchantment</a></li>
+                              <li className="py-1 text-sm"><a href="#artifacts" className="hover:text-white">Artifacts</a></li>
+                              <li className="py-1 text-sm"><a href="#sorcery" className="hover:text-white">Sorcery</a></li>
+                              <li className="py-1 text-sm"><a href="#instants" className="hover:text-white">Instants</a></li>
+                              <li className="py-1 text-sm"><a href="#planeswalker" className="hover:text-white">Planeswalker</a></li>
+
+                              {/*  <li className="py-1 text-sm"><a href="#land-types" className="hover:text-white">Land Types</a></li>
                               <li className="py-1 text-sm"><a href="#swamp" className="hover:text-white">Swamp</a></li>
                               <li className="py-1 text-sm"><a href="#mountain" className="hover:text-white">Mountain</a></li>
                               <li className="py-1 text-sm"><a href="#plains" className="hover:text-white">Plains</a></li>
@@ -135,7 +143,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
                               <li className="py-1 text-sm"><a href="#locus" className="hover:text-white">Locus</a></li>
                               <li className="py-1 text-sm"><a href="#sphere" className="hover:text-white">Sphere</a></li>
                               <li className="py-1 text-sm"><a href="#urzas" className="hover:text-white">Urza's</a></li>
-                              <li className="py-1 text-sm"><a href="#cloud" className="hover:text-white">Cloud</a></li>
+                              <li className="py-1 text-sm"><a href="#cloud" className="hover:text-white">Cloud</a></li> */}
 
                            </ul>
                         </div>
