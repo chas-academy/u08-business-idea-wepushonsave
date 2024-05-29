@@ -1,3 +1,5 @@
+/* eslint-disable react/react-in-jsx-scope */
+
 import {useState} from 'react';
 import {useLoaderData, useNavigate} from 'react-router-dom';
 

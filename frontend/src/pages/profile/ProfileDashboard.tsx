@@ -1,3 +1,5 @@
+/* eslint-disable react/react-in-jsx-scope */
+
 import {useState, useEffect} from 'react';
 
 //NO BACKEND YET, SO DON'T KNOW IF THIS CODE WORKS

@@ -1,3 +1,5 @@
+/* eslint-disable react/react-in-jsx-scope */
+
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import profileIcon from '../../assets/profile-icon.webp';

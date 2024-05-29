@@ -15,21 +15,15 @@ import CardRules from './pages/game-docs/Card_rules.tsx';
 import Threads from './pages/community/Threads.tsx';
 
 // components
-import CardInfo from './components/card/CardInfo.tsx';
-import CardLegalities from './components/card/CardLegalities.tsx';
-import CardMarket from './components/card/CardMarket.tsx';
 import CardsArray from './components/card/CardsArray.tsx';
-import CardsDisplay from './components/listOrGrid/CardsDisplay.tsx';
+import SearchResults from './components/search/SearchResults.tsx';
 
 // layouts
 import RootLayout from './layouts/RootLayout.tsx';
-import CardLayout from './layouts/CardLayout.tsx';
 
 // utils
-import {singleCardLoader} from './utils/singleCardLoader.tsx';
 import {cardsArrayLoader} from './utils/cardsArrayLoader.tsx';
 import {cardSetLoader} from './utils/cardSetLoader.tsx';
-import SearchResults from './components/search/SearchResults.tsx';
 import {cardSearchLoader} from './utils/cardSearchLoader.tsx';
 
 //pages
@@ -43,6 +37,7 @@ import LoginUser from './pages/login/Login.tsx';
 
 // context
 import {SearchProvider} from './components/search/SearchContext.tsx';
+import CardDisplay from './components/listOrGrid/CardsDisplay.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -52,7 +47,7 @@ const router = createBrowserRouter(
       <Route path="cardrules" element={<CardRules />} />
       <Route
         path="cards-display"
-        element={<CardsDisplay />}
+        element={<CardDisplay />}
         loader={cardsArrayLoader}
       />
 
