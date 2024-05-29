@@ -153,8 +153,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
             </nav>
          </div>
          <div className="flex-1 p-4" onClick={toggleSidebar}>
-            <h1 className="text-2xl">Main Content</h1>
-            <p>This is the main content area.</p>
+            <h1 className="text-2xl text-white">MOUSE OUT</h1>
+
          </div>
       </div>
    );
