@@ -15,20 +15,15 @@ import CardRules from './pages/game-docs/Card_rules.tsx';
 import Threads from './pages/community/Threads.tsx';
 
 // components
-import CardInfo from './components/card/CardInfo.tsx';
-import CardLegalities from './components/card/CardLegalities.tsx';
-import CardMarket from './components/card/CardMarket.tsx';
 import CardsArray from './components/card/CardsArray.tsx';
+import SearchResults from './components/search/SearchResults.tsx';
 
 // layouts
 import RootLayout from './layouts/RootLayout.tsx';
-import CardLayout from './layouts/CardLayout.tsx';
 
 // utils
-import {singleCardLoader} from './utils/singleCardLoader.tsx';
 import {cardsArrayLoader} from './utils/cardsArrayLoader.tsx';
 import {cardSetLoader} from './utils/cardSetLoader.tsx';
-import SearchResults from './components/search/SearchResults.tsx';
 import {cardSearchLoader} from './utils/cardSearchLoader.tsx';
 
 // context
@@ -55,7 +50,7 @@ const router = createBrowserRouter(
       <Route path="cardrules" element={<CardRules />} />
       <Route path="community" element={<Threads />} />
 
-      <Route
+      {/* <Route
         path="card/:id"
         element={<CardLayout />}
         loader={({params}) => {
@@ -82,7 +77,7 @@ const router = createBrowserRouter(
             return singleCardLoader({params});
           }}
         />
-      </Route>
+      </Route> */}
     </Route>
   )
 );

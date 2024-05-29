@@ -31,7 +31,3 @@ export interface IPrices {
   usd_etched?: string | null;
   usd_foil?: string | null;
 }
-
-/**
- * id? // Så att det går att klicka sig vidare genom den bilden
- */
