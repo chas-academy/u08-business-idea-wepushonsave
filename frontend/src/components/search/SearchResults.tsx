@@ -6,7 +6,7 @@
  */
 
 import {useLoaderData} from 'react-router-dom';
-import {IAPIResponse} from '../card/CardsArray';
+import {IAPIResponse, ICard} from '../card/CardsArray';
 import {getImageFromCardFaces} from '../../utils/getImageFromCardFaces';
 import {useEffect, useRef, useState} from 'react';
 import {delay} from '../../utils/setApiDelay';
@@ -16,7 +16,7 @@ const SearchResults: React.FC = () => {
   const apiResponse = useLoaderData() as IAPIResponse;
   const cards = apiResponse.data;
   const dialogRef = useRef<HTMLDialogElement | null>(null);
-  const [activeCard, setActiveCard] = useState<any | null>(null);
+  const [activeCard, setActiveCard] = useState<ICard | undefined>(undefined);
 
   useEffect(() => {
     delay(2000);

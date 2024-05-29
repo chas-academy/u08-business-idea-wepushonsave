@@ -1,8 +1,6 @@
-
 /* eslint-disable react/react-in-jsx-scope */
 import {useLoaderData, useNavigate} from 'react-router-dom';
-import {ICardInfo} from './ICardInfo';
-import {IPrintsAPIResponse} from './IPrints';
+import {IPrintsAPIResponse, IPrintsData} from './IPrints';
 
 /**
  * @IAPIResponse
@@ -26,7 +24,6 @@ export interface ICard {
   name: string;
   id: string;
   image_uris: IImageUris;
-
   card_faces: ICardFaces[];
   mana_cost: string[];
   cmc: number;
@@ -57,6 +54,7 @@ export interface ICard {
   cardmarket_id: number;
   prints_search_uri: IPrintsAPIResponse;
   legalities: string[];
+  print: IPrintsData;
 }
 
 // Defines the structure for the API response

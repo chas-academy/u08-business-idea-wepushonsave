@@ -1,4 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/prop-types */
+
 import {Dispatch, useEffect, useState} from 'react';
 import {IPrices, IPrintsAPIResponse, IPrintsData} from './IPrints';
 import {delay} from '../../utils/setApiDelay';
@@ -8,7 +10,9 @@ import {useNavigate} from 'react-router-dom';
 
 interface CardMarketProps {
   card: ICard;
-  setActiveCard: Dispatch<any>;
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  setActiveCard: Dispatch<ICard | any>;
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 }
 const CardMarket: React.FC<CardMarketProps> = ({card, setActiveCard}) => {
   const [prints, setPrints] = useState<IPrintsData[]>([]);

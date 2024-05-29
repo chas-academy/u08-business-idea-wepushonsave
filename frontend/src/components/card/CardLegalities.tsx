@@ -1,4 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/prop-types */
 
 import {convertObjectToArray} from '../../utils/convertObjectToArray';
 import {ICard} from './CardsArray';
@@ -11,7 +12,6 @@ const CardLegalities: React.FC<CardLegalitiesProps> = ({card}) => {
 
   return (
     <>
-
       <div className="grid grid-cols-2 bg-[#322929] gap-1">
         {cardLegalities.map(({key, value}, index) => (
           <div key={index} className="border border-black m-1 ">

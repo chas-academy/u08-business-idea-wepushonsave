@@ -1,4 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/prop-types */
 
 import CardFooter from '../components/card/CardFooter';
 import CardInfo from '../components/card/CardInfo';
@@ -11,7 +12,7 @@ import CardImage from '../components/CardImage';
 export interface CardLayoutProps {
   card: ICard;
   onClose: () => void;
-  setActiveCard: Dispatch<any>;
+  setActiveCard: Dispatch<ICard>;
 }
 
 const CardLayout: React.FC<CardLayoutProps> = ({

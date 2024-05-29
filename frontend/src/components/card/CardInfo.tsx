@@ -1,4 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/prop-types */
 
 import {convertObjectToArray} from '../../utils/convertObjectToArray';
 import {ICard} from './CardsArray';
