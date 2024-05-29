@@ -62,10 +62,16 @@ const SearchResults: React.FC = () => {
     <>
       <dialog
         ref={dialogRef}
-        className="border size-9/12 md:h-9/10 md:w-1/3 bg-transparent backdrop:bg-black/75  shadow-xl">
+        className=" size-9/12 md:h-9/10 md:w-1/3 bg-transparent backdrop:bg-black/75 shadow-xl no-scrollbar flex">
         {activeCard && (
-          <dialog open className="m-2 bg-[#17140D] text-white">
-            <CardLayout card={activeCard} onClose={closeModal} />
+          <dialog
+            open
+            className="m-2 bg-[#17140D] text-white sm:size-9/12 self-auto rounded-t-xl">
+            <CardLayout
+              card={activeCard}
+              onClose={closeModal}
+              setActiveCard={setActiveCard}
+            />
           </dialog>
         )}
       </dialog>
@@ -86,7 +92,11 @@ const SearchResults: React.FC = () => {
               className=" search-result-img-container flex justify-center">
               {imageUrl ? (
                 <button onClick={() => setActiveCard(card)}>
-                  <img src={imageUrl} alt={`${cardName} card image`} />
+                  <img
+                    className="rounded-md"
+                    src={imageUrl}
+                    alt={`${cardName} card image`}
+                  />
                 </button>
               ) : (
                 <p>No image available</p>

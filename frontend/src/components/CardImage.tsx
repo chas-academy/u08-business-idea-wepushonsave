@@ -18,7 +18,7 @@ const CardImage: React.FC<CardImageProps> = ({card, onClose}) => {
   return (
     <>
       <div className="card-image-container z-0 flex justify-center items-center ">
-        <img src={imageUrl} alt={card.name} />
+        <img className="rounded-2xl" src={imageUrl} alt={card.name} />
         <button
           className="search-result-btn z-1 flex items-center justify-center rounded-full bg-neutral-300 w-5 h-5 absolute -top-2 -right-2"
           onClick={() => onClose()}>

@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import {useEffect, useState} from 'react';
+import {Dispatch, useEffect, useState} from 'react';
 import {IPrices, IPrintsAPIResponse, IPrintsData} from './IPrints';
 import {delay} from '../../utils/setApiDelay';
 import {getImageFromCardFaces} from '../../utils/getImageFromCardFaces';
@@ -8,8 +8,9 @@ import {useNavigate} from 'react-router-dom';
 
 interface CardMarketProps {
   card: ICard;
+  setActiveCard: Dispatch<any>;
 }
-const CardMarket: React.FC<CardMarketProps> = ({card}) => {
+const CardMarket: React.FC<CardMarketProps> = ({card, setActiveCard}) => {
   const [prints, setPrints] = useState<IPrintsData[]>([]);
   const cardPrints = card.prints_search_uri.toString();
   const navigate = useNavigate();
@@ -87,38 +88,43 @@ const CardMarket: React.FC<CardMarketProps> = ({card}) => {
           return (
             <div
               key={index}
-              className="card-market-prints-container text-re  bg-[#322929] shadow-2xl shadow-[#322929] rounded-sm grid grid-cols-3 gap-1 m-1">
-              <div className="print-container m-2 ">
-                <img
-                  className="shadow shadow-[#0000008a]"
-                  src={imageUrl}
-                  alt={cardName}
-                />
+              className="p-1 card-market-prints-container bg-[#322929] shadow-2xl shadow-[#322929] rounded-sm grid grid-cols-3 gap-1 m-1">
+              <div className=" print-container">
+                <button onClick={() => setActiveCard(print)}>
+                  <img
+                    className="shadow shadow-[#0000008a]"
+                    src={imageUrl}
+                    alt={cardName}
+                  />
+                </button>
               </div>
 
-              <div className="print-details-container col-span-2 justify-items-center content-center relative mr-2">
-                <div className="print-name-quality-container border border-red-600 grid grid-cols-3 absolute top-0 m-2 w-full -ml-2">
-                  <h1
-                    className={`text-xl col-span-2 text-nowrap ${getCardQuality(print)}`}>
+              <div className=" print-details-container col-span-2 grid-rows-3 grid-flow-row justify-items-center content-center relative">
+                <div className="print-name-quality-container grid grid-cols-3 absolute top-0 w-full">
+                  <h1 className={` col-span-3 w-full ${getCardQuality(print)}`}>
                     {cardName}
                   </h1>
-
-                  <p
-                    className={`text-xs absolute right-3 top-2 ${getCardQuality(print)}`}>
-                    {getCardQualityType(print)}
+                </div>
+                <div className="m-1">
+                  <p className="text-xs relative top-1">
+                    <strong className="text-xs mr-1">SET:</strong>
+                    <a
+                      className="hover:text-blue-400"
+                      onClick={() => getSetUri(print.set)}>
+                      {print.set_name}
+                    </a>
+                  </p>
+                  <p className="text-xs relative top-1">
+                    <strong className="text-xs mr-1">PRICE:</strong>
+                    {getEURPrice(print.prices)}
                   </p>
                 </div>
-
-                <p className="text-sm border text-nowrap">
-                  <strong className="m-2">SET:</strong>
-                  <a onClick={() => getSetUri(print.set)}>{print.set_name}</a>
-                </p>
-                <p className="text-sm text-nowrap">
-                  <strong className="m-2">PRICE:</strong>
-                  {getEURPrice(print.prices)}
-                </p>
-                <p className={`absolute bottom-2 m-2 ${getCardRarity(print)}`}>
+                <p className={`absolute bottom-1 m-1 ${getCardRarity(print)}`}>
                   {print.rarity.charAt(0).toUpperCase() + print.rarity.slice(1)}
+                </p>
+                <p
+                  className={`text-xs absolute right-0 bottom-0 m-1 ${getCardQuality(print)}`}>
+                  {getCardQualityType(print)}
                 </p>
               </div>
             </div>

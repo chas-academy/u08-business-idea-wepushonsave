@@ -2,7 +2,7 @@
 
 import CardFooter from '../components/card/CardFooter';
 import CardInfo from '../components/card/CardInfo';
-import {useState} from 'react';
+import {Dispatch, useState} from 'react';
 import CardMarket from '../components/card/CardMarket';
 import CardLegalities from '../components/card/CardLegalities';
 import {ICard} from '../components/card/CardsArray';
@@ -11,9 +11,14 @@ import CardImage from '../components/CardImage';
 export interface CardLayoutProps {
   card: ICard;
   onClose: () => void;
+  setActiveCard: Dispatch<any>;
 }
 
-const CardLayout: React.FC<CardLayoutProps> = ({card, onClose}) => {
+const CardLayout: React.FC<CardLayoutProps> = ({
+  card,
+  onClose,
+  setActiveCard,
+}) => {
   const [activeTab, setActiveTab] = useState<string | null>(null);
 
   const toggleDropdown = (dropdownName: string) => {
@@ -29,7 +34,7 @@ const CardLayout: React.FC<CardLayoutProps> = ({card, onClose}) => {
       case 'info':
         return <CardInfo card={card} />;
       case 'market':
-        return <CardMarket card={card} />;
+        return <CardMarket card={card} setActiveCard={setActiveCard} />;
       case 'legalities':
         return <CardLegalities card={card} />;
       default:
@@ -51,7 +56,7 @@ const CardLayout: React.FC<CardLayoutProps> = ({card, onClose}) => {
             onClick={() => toggleDropdown('info')}
             className={
               activeTab === 'info'
-                ? 'card-details-active'
+                ? 'card-details-active card-info'
                 : 'card-details-not-active'
             }>
             Info
@@ -60,7 +65,7 @@ const CardLayout: React.FC<CardLayoutProps> = ({card, onClose}) => {
             onClick={() => toggleDropdown('market')}
             className={
               activeTab === 'market'
-                ? 'card-details-active'
+                ? 'card-details-active card-market'
                 : 'card-details-not-active'
             }>
             Market
@@ -69,7 +74,7 @@ const CardLayout: React.FC<CardLayoutProps> = ({card, onClose}) => {
             onClick={() => toggleDropdown('legalities')}
             className={
               activeTab === 'legalities'
-                ? 'card-details-active'
+                ? 'card-details-active card-legalities'
                 : 'card-details-not-active'
             }>
             Legalities
