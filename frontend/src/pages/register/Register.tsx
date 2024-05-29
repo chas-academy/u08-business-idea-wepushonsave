@@ -10,18 +10,34 @@ const registerUser = () => {
     e.preventDefault();
     //console.log(e.target)
     const form = (e.currentTarget)
-    const formdata = {
+    const formdata = {    //should it be formdata = new FormData() ???
+      username: form.username.value,
       email: form.email.value,
       password: form.password.value
-    
+                              //username here too??
     }
-  
-    if (!form.email && !form.password) {
+    console.log(formdata)
+  //
+    if (form.username && form.email && form.password) {
       fetch("http://localhost:3000/api/user/signup", {
         method: "POST",
-        mode: "no-cors",
-        body: JSON.stringify(form.username, form.email, form.password),
+        mode: "cors",
+        headers: { // ?This? or pass it directly to the URLSearchParams constructor ??
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formdata),
       })
+      /* 
+      body: formdata })
+      .then(res => res.json())
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error)
+      });
+      */
+
     } else {
       console.log('Errors');
     }
@@ -40,7 +56,7 @@ const registerUser = () => {
   <div className="flex flex-col">
       
       <input
-        type="username"
+        type="text"
         id="username"
         name="username"
         className="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"

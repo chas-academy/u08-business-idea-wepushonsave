@@ -14,6 +14,8 @@ router.post("/signup", (req: Request, res: Response) => {
     password = password.trim();*/
 
   const { email, password, username } = req.body;
+console.log(req.body); //TEST
+console.log(email, password, username); //TEST
 
   if (!email || !password) {
     return res.status(400).json({ message: "Input email or password!" });
@@ -21,6 +23,7 @@ router.post("/signup", (req: Request, res: Response) => {
     return res
       .status(400)
       .json({ message: "Password must be at least 6 characters!" });
+      //if password and cofirmed password the same continue, if not error message
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ message: "Invalid email!" });
   } else {
