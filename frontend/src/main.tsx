@@ -19,6 +19,7 @@ import CardInfo from './components/card/CardInfo.tsx';
 import CardLegalities from './components/card/CardLegalities.tsx';
 import CardMarket from './components/card/CardMarket.tsx';
 import CardsArray from './components/card/CardsArray.tsx';
+import CardsDisplay from './components/listOrGrid/CardsDisplay.tsx';
 
 // layouts
 import RootLayout from './layouts/RootLayout.tsx';
@@ -28,12 +29,37 @@ import CardLayout from './layouts/CardLayout.tsx';
 import {singleCardLoader} from './utils/singleCardLoader.tsx';
 import {cardsArrayLoader} from './utils/cardsArrayLoader.tsx';
 import {cardSetLoader} from './utils/cardSetLoader.tsx';
+import SearchResults from './components/search/SearchResults.tsx';
+import {cardSearchLoader} from './utils/cardSearchLoader.tsx';
 
+//pages
+import ProfilePage from './pages/profile/ProfilePage.tsx';
+import ProfileDashboard from './pages/profile/ProfileDashboard.tsx';
+import MyCollectionCards from './pages/profile/MyCollectionCards.tsx';
+import MyCollectionCommons from './pages/profile/MyCollectionCommons.tsx';
+import MyCollectionRare from './pages/profile/MyCollectionRare.tsx';
+
+// context
+import {SearchProvider} from './components/search/SearchContext.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route path="cards" element={<CardsArray />} loader={cardsArrayLoader} />
+      <Route path="gamerules" element={<GameRules />} />
+      <Route path="cardrules" element={<CardRules />} />
+      <Route
+        path="cards-display"
+        element={<CardsDisplay />}
+        loader={cardsArrayLoader}
+      />
+
+      <Route
+        path="search"
+        element={<SearchResults />}
+        loader={cardSearchLoader}
+      />
+
       <Route
         path="cards/:set"
         element={<CardsArray />}
@@ -41,8 +67,6 @@ const router = createBrowserRouter(
           return cardSetLoader({params});
         }}
       />
-      <Route path="gamerules" element={<GameRules />} />
-      <Route path="cardrules" element={<CardRules />} />
       <Route path="community" element={<Threads />} />
 
       <Route
@@ -72,11 +96,19 @@ const router = createBrowserRouter(
             return singleCardLoader({params});
           }}
         />
+        RR
       </Route>
+      <Route path="profile" element={<ProfilePage />} />
+      <Route path="profile-dashboard" element={<ProfileDashboard />} />
+      <Route path="mycollection" element={<MyCollectionCards />} />
+      <Route path="mycollection-commmons" element={<MyCollectionCommons />} />
+      <Route path="mycollection-rare" element={<MyCollectionRare />} />
     </Route>
   )
 );
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <RouterProvider router={router}></RouterProvider>
+  <SearchProvider>
+    <RouterProvider router={router} />
+  </SearchProvider>
 );

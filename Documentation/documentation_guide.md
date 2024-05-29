@@ -93,8 +93,26 @@ Team members: Emma, Alex, Louise, Joseph, Dennis, and Clara
 
 - Today was similar to the previous day. We started with our daily stand-up and then collaborated on the Discord channel, assisting each other and congratulating anyone who completed their tasks. Here are the notes concerning the [stand-up](./Notes/daily_stand-up_22_05.md).
 
-**23rd May**
+## 23rd May
 
 - Our daily stand-up meeting was a bit longer than usual as we prepared for the afternoon meeting. Here are the [stand-up notes](./Notes/daily_stand-up_23_05.md).
 
 - We had our weekly meeting with the CTO and PO to discuss our project progress. The feedback was very positive, and each team member presented their work. Here are the meeting [notes](./Notes/handledning_23.05.md).
+
+## 24th May
+
+- We started with our sprint review, allowing everyone to report on their completed tasks. All goals set from last week have been achieved.
+
+- We proceeded with sprint planning, discussing our objectives before the next meeting with the CTO and PO. We agreed that the main functionalities should be completed, as the presentation is just four days later. Task assignments were made accordingly.
+
+- For further details, you can read the documentation [here](./Notes/sprint_meeting_24.05.md).
+
+## 27th May
+
+- We held our first daily stand-up of the week. Each team member shared their accomplishments over the weekend and outlined their upcoming tasks.
+
+- Here are the notes taken during this meeting: [notes](./Notes/daily_stand-up_27_05.md).
+
+## 28th May
+
+- We held our daily stand-up of the week. Each team member shared their accomplishments over the weekend and outlined their upcoming tasks. Here are the [notes](./Notes/daily_stand-up_28_05.md).
