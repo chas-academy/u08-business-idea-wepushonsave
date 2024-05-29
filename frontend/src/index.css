@@ -27,7 +27,12 @@
 }
 
 .card-info {
-  @apply rounded-tr-3xl border-t-2 border-r-2
+
+  @apply
+  rounded-tr-3xl
+  border-t-2
+  border-r-2
+
 }
 
 .card-market {

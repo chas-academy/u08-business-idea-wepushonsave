@@ -5,6 +5,7 @@ import profileIcon from '../../assets/profile-icon.webp';
 import decksIcon from '../../assets/decks-icon.webp';
 import communityIcon from '../../assets/community-icon.webp';
 
+
 interface NavbarProps {
   toggleSidebar: () => void;
 }
@@ -69,6 +70,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
         />
       </a>
     </nav>
+
   );
 };
 
