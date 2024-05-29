@@ -6,6 +6,8 @@ import Navbar from '../components/navbar/Navbar';
 import Sidebar from '../components/sidebar/Sidebar';
 import SearchForm from '../components/search/SearchForm';
 import welcomeMobile from '../assets/welcome.png';
+import ArtCard from '../components/art/RandomArtCard';
+
 
 const RootLayout: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -35,6 +37,8 @@ const RootLayout: React.FC = () => {
             <div className="welcome-img flex-grow flex items-center justify-center mt-4 p-2">
               <img src={welcomeMobile} alt="Welcome" className="max-w-full max-h-[60vh] mx-10" />
             </div>
+            <ArtCard></ArtCard>
+
           </>
         ) : (
           <SearchForm />
