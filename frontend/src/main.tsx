@@ -38,6 +38,8 @@ import ProfileDashboard from './pages/profile/ProfileDashboard.tsx';
 import MyCollectionCards from './pages/profile/MyCollectionCards.tsx';
 import MyCollectionCommons from './pages/profile/MyCollectionCommons.tsx';
 import MyCollectionRare from './pages/profile/MyCollectionRare.tsx';
+import RegisterUser from './pages/register/Register.tsx';
+import LoginUser from './pages/login/Login.tsx';
 
 // context
 import {SearchProvider} from './components/search/SearchContext.tsx';
@@ -68,6 +70,8 @@ const router = createBrowserRouter(
         }}
       />
       <Route path="community" element={<Threads />} />
+
+
 
       <Route
         path="card/:id"
@@ -103,6 +107,8 @@ const router = createBrowserRouter(
       <Route path="mycollection" element={<MyCollectionCards />} />
       <Route path="mycollection-commmons" element={<MyCollectionCommons />} />
       <Route path="mycollection-rare" element={<MyCollectionRare />} />
+      <Route path="register" element={<RegisterUser />} />
+      <Route path="login" element={<LoginUser />} />
     </Route>
   )
 );

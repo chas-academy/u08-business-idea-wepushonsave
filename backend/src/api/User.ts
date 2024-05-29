@@ -8,7 +8,7 @@ import { IUser } from "../interfaces/IUser";
 const router = express.Router();
 
 // Signup
-router.post("/signup", (req: Request, res: Response) => {
+router.post("/register", (req: Request, res: Response) => {
   /*let {email, password} = req.body;
     email = email.trim();
     password = password.trim();*/
@@ -80,7 +80,7 @@ console.log(email, password, username); //TEST
 });
 
 // Signin
-router.post("/signin", (req: Request, res: Response) => {
+router.post("/login", (req: Request, res: Response) => {
   const { email, password } = req.body;
   console.log(email, password); //TEST
   console.log(req.body); //TEST

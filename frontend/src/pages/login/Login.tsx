@@ -3,7 +3,7 @@ import {useState} from 'react';
 import Validation from './loginValidation';
 
 
-const loginUser = () => {
+const LoginUser = () => {
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -20,7 +20,7 @@ const loginUser = () => {
     setErrors(errorCheck);
 
     if (!errorCheck.email && !errorCheck.password) {
-      fetch('http://localhost:3000/api/user/signin', {
+      fetch('http://localhost:3000/api/user/login', {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -85,7 +85,7 @@ const loginUser = () => {
     </>
   );
 };
-export default loginUser;
+export default LoginUser;
 
 /*
 <div className="relative w-64 h-64 mx-auto">

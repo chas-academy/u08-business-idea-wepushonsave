@@ -1,105 +1,77 @@
-
 /* eslint-disable react/react-in-jsx-scope */
 
-/*const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [register, setRegister] = useState(false);*/
-
-const registerUser = () => {
+const RegisterUser = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //console.log(e.target)
-    const form = (e.currentTarget)
-    const formdata = {    //should it be formdata = new FormData() ???
+    const form = e.currentTarget;
+    const formdata = {
       username: form.username.value,
       email: form.email.value,
-      password: form.password.value
-                              //username here too??
-    }
-    console.log(formdata)
-  //
+      password: form.password.value,
+    };
+
     if (form.username && form.email && form.password) {
-      fetch("http://localhost:3000/api/user/signup", {
-        method: "POST",
-        mode: "cors",
-        headers: { // ?This? or pass it directly to the URLSearchParams constructor ??
-          "Content-Type": "application/json"
+      fetch('http://localhost:3000/api/user/register', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formdata),
-      })
-      /* 
-      body: formdata })
-      .then(res => res.json())
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
-        console.log(error)
       });
-      */
-
     } else {
       console.log('Errors');
     }
-   
-    
-    alert("User registered successfully!");
+
+    alert('User registered successfully!');
   };
 
   return (
     <>
+      <h1 className="text-3xl font-bold text-center">Register</h1>
+      <form
+        action=""
+        onSubmit={handleSubmit}
+        className="flex justify-center items-center h-screen">
+        <div className="bg-white rounded-lg shadow-md px-8 py-6 flex flex-col space-y-4">
+          <div className="flex flex-col">
+            <input
+              type="text"
+              name="username"
+              className="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Username"
+            />
+          </div>
 
-<h1 className="text-3xl font-bold text-center">Register</h1>
-<form action="" onSubmit={handleSubmit} className="flex justify-center items-center h-screen">
-  <div className="bg-white rounded-lg shadow-md px-8 py-6 flex flex-col space-y-4">
-    
-  <div className="flex flex-col">
-      
-      <input
-        type="text"
-        id="username"
-        name="username"
-        className="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        placeholder="Username"
-      />
-    </div>
+          <div className="flex flex-col">
+            <input
+              type="email"
+              name="email"
+              className="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Email"
+            />
+          </div>
 
-    <div className="flex flex-col">
-      
-      <input
-        type="email"
-        id="email"
-        name="email"
-        className="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        placeholder="Email"
-      />
-    </div>
-
-    <div className="flex flex-col">
-     
-      <input
-        type="password"
-        id="password"
-        name="password"
-        className="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        placeholder="Password"
-      />
-    </div>
-    <button
-      type="submit"
-      className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:offset-2 focus:ring-indigo-500"
-    >
-      Submit
-    </button>
-  </div>
-</form>
-
-      
+          <div className="flex flex-col">
+            <input
+              type="password"
+              name="password"
+              className="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Password"
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:offset-2 focus:ring-indigo-500">
+            Submit
+          </button>
+        </div>
+      </form>
     </>
   );
 };
 
-export default registerUser;
+export default RegisterUser;
 
 /*
 <h1 className="text-3xl font-bold text-center">Register</h1>
