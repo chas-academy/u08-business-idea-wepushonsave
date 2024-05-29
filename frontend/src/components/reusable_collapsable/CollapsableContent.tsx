@@ -10,6 +10,7 @@ import planeswalker from '../../assets/paneswalker.svg';
 interface CollapsableContentProps {
   title: string;
   items: string[];
+  image?: string
 }
 //This component expects two pieces of information: a title, which is like a heading, and items, which are like bullet points or paragraphs.
 const CollapsableContent = ({title, items}: CollapsableContentProps) => {
