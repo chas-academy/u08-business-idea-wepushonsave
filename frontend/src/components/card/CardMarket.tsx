@@ -1,22 +1,21 @@
 /* eslint-disable react/react-in-jsx-scope */
-import {useLoaderData, useNavigate} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import {IPrices, IPrintsAPIResponse, IPrintsData} from './IPrints';
 import {delay} from '../../utils/setApiDelay';
 import {getImageFromCardFaces} from '../../utils/getImageFromCardFaces';
+import {ICard} from './CardsArray';
+import {useNavigate} from 'react-router-dom';
 
-const CardMarket = () => {
-  //FIXME See if there is any other data-type we can use for an unknown value
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  const cardData: any = useLoaderData();
-  /* eslint-enable @typescript-eslint/no-explicit-any */
+interface CardMarketProps {
+  card: ICard;
+}
+const CardMarket: React.FC<CardMarketProps> = ({card}) => {
+  const [prints, setPrints] = useState<IPrintsData[]>([]);
+  const cardPrints = card.prints_search_uri.toString();
   const navigate = useNavigate();
   const getSetUri = async (set: string) => {
     navigate(`/cards/${set}`);
   };
-
-  const [prints, setPrints] = useState<IPrintsData[]>([]);
-  const cardPrints = cardData.prints_search_uri.toString();
 
   useEffect(() => {
     const getPrints = async () => {
@@ -29,8 +28,10 @@ const CardMarket = () => {
         console.error('Error fetching prints:', error);
       }
     };
+    if (!cardPrints) return;
     getPrints();
-  }, []);
+    console.log('CardMarket useEffect');
+  }, [cardPrints]);
 
   const getEURPrice = (prices: IPrices): string | null => {
     const price = prices.eur || prices.eur_foil || null;
@@ -68,10 +69,6 @@ const CardMarket = () => {
     if (print.rarity === 'mythic') return 'text-red-500';
   };
 
-  /*  const imagePath = 
-  cardData.card_faces && cardData.card_faces.length > 0
-      ? getImageFromCardFaces(cardData.card_faces)
-      : cardData.image_uris?.border_crop; */
   return (
     <>
       <section className="card-market-grid grid grid-cols-1 gap-4 text-white">

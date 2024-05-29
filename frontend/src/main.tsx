@@ -55,7 +55,7 @@ const router = createBrowserRouter(
       <Route path="cardrules" element={<CardRules />} />
       <Route path="community" element={<Threads />} />
 
-      <Route
+      {/* <Route
         path="card/:id"
         element={<CardLayout />}
         loader={({params}) => {
@@ -82,7 +82,7 @@ const router = createBrowserRouter(
             return singleCardLoader({params});
           }}
         />
-      </Route>
+      </Route> */}
     </Route>
   )
 );

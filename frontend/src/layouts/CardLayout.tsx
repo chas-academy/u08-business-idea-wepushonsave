@@ -1,64 +1,74 @@
 /* eslint-disable react/react-in-jsx-scope */
 
-import {NavLink, Outlet, useLoaderData} from 'react-router-dom';
 import CardFooter from '../components/card/CardFooter';
-import {getImageFromCardFaces} from '../utils/getImageFromCardFaces';
+import CardInfo from '../components/card/CardInfo';
+import {useState} from 'react';
+import CardMarket from '../components/card/CardMarket';
+import CardLegalities from '../components/card/CardLegalities';
+import {ICard} from '../components/card/CardsArray';
+import CardImage from '../components/CardImage';
 
-const CardLayout = () => {
-  //FIXME See if there is any other data-type we can use for an unknown value
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  const cardData: any = useLoaderData();
-  /* eslint-enable @typescript-eslint/no-explicit-any */
-  const imageUrl =
-    cardData.card_faces && cardData.card_faces.length > 0
-      ? getImageFromCardFaces(cardData.card_faces)
-      : cardData.image_uris?.border_crop;
+export interface CardLayoutProps {
+  card: ICard;
+  onClose: () => void;
+}
+
+const CardLayout: React.FC<CardLayoutProps> = ({card, onClose}) => {
+  const [activeTab, setActiveTab] = useState('');
+  const renderActiveTab = () => {
+    switch (activeTab) {
+      case 'info':
+        return <CardInfo card={card} />;
+      case 'market':
+        return <CardMarket card={card} />;
+      case 'legalities':
+        return <CardLegalities card={card} />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <>
       <div className="card-layout">
-        <section className="card-layout-image w-full h-full grid grid-cols-1 justify-items-center">
-          <div className="card-image-container flex justify-center items-center size-fit">
-            <img className="size-9/12 shadow-xl" src={imageUrl} alt="" />
-          </div>
-        </section>
+        <CardImage card={card} onClose={onClose} />
 
-        <section className=" card-layout-footer relative ml-4 mr-4 grid grid-cols-2 justify-items-center">
+        <section className="card-layout-footer relative ml-4 mr-4 grid grid-cols-2 justify-items-center ">
           <CardFooter />
         </section>
 
         <nav className="card-layout-nav grid grid-cols-3 bg-inactive-card-btn-gradient">
-          <NavLink
-            className={({isActive}) =>
-              isActive
-                ? 'card-details-active card-info'
+          <button
+            onClick={() => setActiveTab('info')}
+            className={
+              activeTab === 'info'
+                ? 'card-details-active'
                 : 'card-details-not-active'
-            }
-            to={'info'}>
+            }>
             Info
-          </NavLink>{' '}
-          <NavLink
-            className={({isActive}) =>
-              isActive
-                ? 'card-details-active card-market'
+          </button>
+          <button
+            onClick={() => setActiveTab('market')}
+            className={
+              activeTab === 'market'
+                ? 'card-details-active'
                 : 'card-details-not-active'
-            }
-            to={'market'}>
+            }>
             Market
-          </NavLink>{' '}
-          <NavLink
-            className={({isActive}) =>
-              isActive
-                ? 'card-details-active card-legalities'
+          </button>
+          <button
+            onClick={() => setActiveTab('legalities')}
+            className={
+              activeTab === 'legalities'
+                ? 'card-details-active'
                 : 'card-details-not-active'
-            }
-            to={'legalities'}>
+            }>
             Legalities
-          </NavLink>
+          </button>
         </nav>
-        <div className="card-layout-details">
-          <Outlet />
-        </div>
+
+        <div className="card-layout-details">{renderActiveTab()}</div>
+        <button onClick={onClose}>Close</button>
       </div>
     </>
   );

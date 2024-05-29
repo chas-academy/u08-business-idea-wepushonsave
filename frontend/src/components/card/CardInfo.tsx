@@ -1,19 +1,15 @@
 /* eslint-disable react/react-in-jsx-scope */
 
-
-import {useLoaderData} from 'react-router-dom';
 import {convertObjectToArray} from '../../utils/convertObjectToArray';
 import {ICardInfo} from './ICardInfo';
+import {ICard} from './CardsArray';
 
-const CardInfo = () => {
-  //FIXME See if there is any other data-type we can use for an unknown value
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  const cardData: any = useLoaderData();
-  /* eslint-enable @typescript-eslint/no-explicit-any */
+interface CardInfoProps {
+  card: ICard;
+}
 
-  //FIXME This function does what? Fix
-  const extractCardData = (cardData: ICardInfo) => {
-
+const CardInfo: React.FC<CardInfoProps> = ({card}) => {
+  /* const extractCardData = (cardData: ICard): ICardInfo => {
     return {
       name: cardData.name,
       mana_cost: cardData.mana_cost,
@@ -44,10 +40,10 @@ const CardInfo = () => {
       tcgplayer_id: cardData.tcgplayer_id,
       cardmarket_id: cardData.cardmarket_id,
     };
-  };
+  }; */
 
-  const cardInfo: ICardInfo = extractCardData(cardData);
-  const info = convertObjectToArray(cardInfo);
+  /* const cardInfo: ICardInfo = extractCardData(card); */
+  const info = convertObjectToArray(card);
 
   return (
     <>
