@@ -8,144 +8,215 @@ import CollapsableContent from './CollapsableContent';
 const FAQ_Game_rules = () => {
   return (
     <>
-      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700">
-        {/* collapsable creates a new dropdown with collapsable as content  titles is the title on the dropdown while content is everything inside collapsable*/}
+      <div
+        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        id="pAPACommander-rules">
         <Collapsable
           titles="Commander Rules and Gameplay Guide"
           content={
             <>
-              <CollapsableContent
-                title="1. Deck Construction and Setup"
-                items={[
-                  `Deck Size: Each player constructs a 100-card singleton deck around a legendary creature chosen as their Commander.`,
-                  `Commander: The Commander is placed in the command zone at the start of the game.`,
-                  `Color Identity: All cards in your deck must match the color identity of your Commander.`,
-                  'Singleton Rule: You can only include one copy of each card (except basic lands) in your deck.',
-                  'Starting Life: Players begin with 40 life points. In Two-Headed Giant format, each team starts with 30 life points.',
-                  'Opening Hand: Players draw opening hands of seven cards after shuffling their decks and determining the starting player.',
-                  '_',
-                ]}
-              />
-
-              <CollapsableContent
-                title="2. Card Types"
-                items={[
-                  'Lands: Play one land per turn during your main phase. Lands produce mana for casting spells and activating abilities.',
-                  'Creatures: Used to attack opponents and defend against attacks. Each creature has power and toughness values.',
-                  'Spells: Include instants and sorceries with various effects. Instants can be cast at almost any time, while sorceries are cast during the main phase unless they have flash.',
-                  'Artifacts and Enchantments: Provide ongoing effects that modify the game state or give benefits to the player.',
-                  '_',
-                ]}
-              />
-
-              <CollapsableContent
-                title="3. Turn Structure"
-                items={[
-                  'Each turn is divided into phases:',
-                  '_',
-                  '-Beginning Phase:',
-                  '*Untap: Untap all tapped permanents, including lands, creatures, artifacts, and enchantments.',
-                  '*Upkeep: Trigger and resolve any upkeep effects.',
-                  '*Draw: Draw one card from your library.',
-                  '_',
-                  '-Main Phase:',
-                  '*Actions: Play lands, cast spells, and activate abilities.',
-                  '_',
-                  '-Combat Phase (if applicable):',
-                  '*Declare Attackers: Choose which creatures will attack.',
-                  '*Declare Blockers: Assign defending creatures if attacked.',
-                  '*Combat Damage: Resolve damage between attacking and blocking creatures.',
-                  '_',
-                  '-Second Main Phase:',
-                  'Actions: Play additional lands and cast spells.',
-                  '_',
-                  '-Ending Phase:',
-                  '*End Step: Trigger and resolve any end-of-turn effects.',
-                  '*Cleanup Step: Discard down to the hand size limit and end temporary effects.',
-                  '_',
-                ]}
-              />
-              <CollapsableContent
-                title="4. Casting Spells"
-                items={[
-                  'Mana Cost: Pay the mana cost using combinations of colored and colorless mana.',
-                  'Mana Production: Primarily from tapping lands, but also from other cards and abilities.',
-                  'Additional Costs: Some spells have extra costs or restrictions, like sacrificing creatures or paying life.',
-                  '_',
-                ]}
-              />
-
-              <CollapsableContent
-                title="5. Combat"
-                items={[
-                  'Attack and Defense: Attack opponents or their planeswalkers with creatures.',
-                  'Damage Resolution: Attacking creatures deal damage equal to their power, while blocking creatures assign damage to attackers. Damage is dealt simultaneously during the combat damage step.',
-                  '_',
-                ]}
-              />
-              <CollapsableContent
-                title="6. Damage and Life"
-                items={[
-                  'Life Total: Damage reduces a player’s life total. Reaching zero life points results in a loss.',
-                  'Commander Damage: If a player takes 21 or more combat damage from a single commander over the game, they lose.',
-                  '_',
-                ]}
-              />
-              <CollapsableContent
-                title="7. Keywords and Abilities"
-                items={[
-                  'Keywords: Examples include flying (can only be blocked by creatures with flying), trample (excess damage goes to the opponent), and lifelink (damage dealt heals the player).',
-                  'Commander Abilities: Commanders often have unique, impactful abilities.',
-                  '_',
-                ]}
-              />
-              <CollapsableContent
-                title="8. Win Conditions"
-                items={[
-                  'Primary Objective: Reduce opponents’ life totals to zero.',
-                  'Alternative Methods: Commander damage, decking out opponents (forcing them to draw from an empty library), or specific card effects.',
-                  'Deck Strategies: Focus on specific strategies or combos to achieve victory.',
-                  '_',
-                ]}
-              />
-              <CollapsableContent
-                title="9. Interaction and Stack"
-                items={[
-                  'Stack Usage: Spells and abilities resolve using a stack. Players can respond to actions with instants, activated abilities, or other effects.',
-                  'Timing: Understanding the stack is crucial for effective interaction, especially in multiplayer settings.',
-                  '_',
-                ]}
-              />
-              <CollapsableContent
-                title="10. Mulligans and Sideboarding"
-                items={[
-                  'Mulligans: Players can redraw their starting hand, following specific rules like the Vancouver mulligan.',
-                  'Sideboarding: In multiplayer Commander games, players may have sideboards for adjusting decks between games, though typically not used in casual play.',
-                  '_',
-                  '-Commander Mechanics',
-                  '*Command Zone: Your Commander starts in the command zone.',
-                  '*Casting Commander: You can cast your Commander from the command zone by paying its mana cost plus an additional 2 mana for each previous cast from the command zone.',
-                  '*Returning to Command Zone: If your Commander would go to any other zone (graveyard, exile, etc.), you can choose to return it to the command zone instead.',
-                  '_',
-                  '-Interaction and Strategy',
-                  '*Player Interaction: Politics and alliances play a significant role in multiplayer Commander games.',
-                  '*Adaptability: Flexibility and adaptability are essential, as games can evolve unpredictably.',
-                  '_',
-                  '-Winning the Game',
-                  '*Victory: The last player with at least 1 life wins.',
-                  '*Alternative Victory Conditions: Based on house rules or specific card effects.',
-                  '_',
-                  '-Sportsmanship and Enjoyment',
-                  '*Emphasis: Commander is a social format focused on fun and interaction.',
-                  '*Conduct: Good sportsmanship, communication, and respect for opponents are essential.',
-                ]}
-              />
-              
+              <CollapsableContent title="" items={[]} image="" />
+              <div id="deck-construction-and-Setup">
+                <Collapsable
+                  titles="Deck Construction and Setup"
+                  content={
+                    <CollapsableContent
+                      title="1. Deck Construction and Setup"
+                      items={[
+                        'Deck Size: Each player constructs a 100-card singleton deck around a legendary creature chosen as their Commander.',
+                        'Commander: The Commander is placed in the command zone at the start of the game.',
+                        'Color Identity: All cards in your deck must match the color identity of your Commander.',
+                        'Singleton Rule: You can only include one copy of each card (except basic lands) in your deck.',
+                        'Starting Life: Players begin with 40 life points. In Two-Headed Giant format, each team starts with 30 life points.',
+                        'Opening Hand: Players draw opening hands of seven cards after shuffling their decks and determining the starting player.',
+                        '_',
+                      ]}
+                    />
+                  }
+                />
+              </div>
+              <div id="card-types">
+                <Collapsable
+                  titles="Card Types"
+                  content={
+                    <CollapsableContent
+                      title="2. Card Types"
+                      items={[
+                        'Lands: Play one land per turn during your main phase. Lands produce mana for casting spells and activating abilities.',
+                        'Creatures: Used to attack opponents and defend against attacks. Each creature has power and toughness values.',
+                        'Spells: Include instants and sorceries with various effects. Instants can be cast at almost any time, while sorceries are cast during the main phase unless they have flash.',
+                        'Artifacts and Enchantments: Provide ongoing effects that modify the game state or give benefits to the player.',
+                        '_',
+                      ]}
+                    />
+                  }
+                />
+              </div>
+              <div id="turn-structure">
+                <Collapsable
+                  titles="Turn Structure"
+                  content={
+                    <CollapsableContent
+                      title="3. Turn Structure"
+                      items={[
+                        'Each turn is divided into phases:',
+                        '_',
+                        '-Beginning Phase:',
+                        '*Untap: Untap all tapped permanents, including lands, creatures, artifacts, and enchantments.',
+                        '*Upkeep: Trigger and resolve any upkeep effects.',
+                        '*Draw: Draw one card from your library.',
+                        '_',
+                        '-Main Phase:',
+                        '*Actions: Play lands, cast spells, and activate abilities.',
+                        '_',
+                        '-Combat Phase (if applicable):',
+                        '*Declare Attackers: Choose which creatures will attack.',
+                        '*Declare Blockers: Assign defending creatures if attacked.',
+                        '*Combat Damage: Resolve damage between attacking and blocking creatures.',
+                        '_',
+                        '-Second Main Phase:',
+                        '*Actions: Play additional lands and cast spells.',
+                        '_',
+                        '-Ending Phase:',
+                        '*End Step: Trigger and resolve any end-of-turn effects.',
+                        '*Cleanup Step: Discard down to the hand size limit and end temporary effects.',
+                        '_',
+                      ]}
+                    />
+                  }
+                />
+              </div>
+              <div id="casting-spells">
+                <Collapsable
+                  titles="Casting Spells"
+                  content={
+                    <CollapsableContent
+                      title="4. Casting Spells"
+                      items={[
+                        'Mana Cost: Pay the mana cost using combinations of colored and colorless mana.',
+                        'Mana Production: Primarily from tapping lands, but also from other cards and abilities.',
+                        'Additional Costs: Some spells have extra costs or restrictions, like sacrificing creatures or paying life.',
+                        '_',
+                      ]}
+                    />
+                  }
+                />
+              </div>
+              <div id="combat">
+                <Collapsable
+                  titles="Combat"
+                  content={
+                    <CollapsableContent
+                      title="5. Combat"
+                      items={[
+                        'Attack and Defense: Attack opponents or their planeswalkers with creatures.',
+                        'Damage Resolution: Attacking creatures deal damage equal to their power, while blocking creatures assign damage to attackers. Damage is dealt simultaneously during the combat damage step.',
+                        '_',
+                      ]}
+                    />
+                  }
+                />
+              </div>
+              <div id="damage-and-life">
+                <Collapsable
+                  titles="Damage and Life"
+                  content={
+                    <CollapsableContent
+                      title="6. Damage and Life"
+                      items={[
+                        'Life Total: Damage reduces a player’s life total. Reaching zero life points results in a loss.',
+                        'Commander Damage: If a player takes 21 or more combat damage from a single commander over the game, they lose.',
+                        '_',
+                      ]}
+                    />
+                  }
+                />
+              </div>
+              <div id="keywords-and-abilities">
+                <Collapsable
+                  titles="Keywords and Abilities"
+                  content={
+                    <CollapsableContent
+                      title="7. Keywords and Abilities"
+                      items={[
+                        'Keywords: Examples include flying (can only be blocked by creatures with flying), trample (excess damage goes to the opponent), and lifelink (damage dealt heals the player).',
+                        'Commander Abilities: Commanders often have unique, impactful abilities.',
+                        '_',
+                      ]}
+                    />
+                  }
+                />
+              </div>
+              <div id="win-conditions">
+                <Collapsable
+                  titles="Win Conditions"
+                  content={
+                    <CollapsableContent
+                      title="8. Win Conditions"
+                      items={[
+                        'Primary Objective: Reduce opponents’ life totals to zero.',
+                        'Alternative Methods: Commander damage, decking out opponents (forcing them to draw from an empty library), or specific card effects.',
+                        'Deck Strategies: Focus on specific strategies or combos to achieve victory.',
+                        '_',
+                      ]}
+                    />
+                  }
+                />
+              </div>
+              <div id="interaction-and-stack">
+                <Collapsable
+                  titles="Interaction and Stack"
+                  content={
+                    <CollapsableContent
+                      title="9. Interaction and Stack"
+                      items={[
+                        'Stack Usage: Spells and abilities resolve using a stack. Players can respond to actions with instants, activated abilities, or other effects.',
+                        'Timing: Understanding the stack is crucial for effective interaction, especially in multiplayer settings.',
+                        '_',
+                      ]}
+                    />
+                  }
+                />
+              </div>
+              <div id="mulligans-and-sideboarding">
+                <Collapsable
+                  titles="Mulligans and Sideboarding"
+                  content={
+                    <CollapsableContent
+                      title="10. Mulligans and Sideboarding"
+                      items={[
+                        'Mulligans: Players can redraw their starting hand, following specific rules like the Vancouver mulligan.',
+                        'Sideboarding: In multiplayer Commander games, players may have sideboards for adjusting decks between games, though typically not used in casual play.',
+                        '_',
+                        '-Commander Mechanics',
+                        '*Command Zone: Your Commander starts in the command zone.',
+                        '*Casting Commander: You can cast your Commander from the command zone by paying its mana cost plus an additional 2 mana for each previous cast from the command zone.',
+                        '*Returning to Command Zone: If your Commander would go to any other zone (graveyard, exile, etc.), you can choose to return it to the command zone instead.',
+                        '_',
+                        '-Interaction and Strategy',
+                        '*Player Interaction: Politics and alliances play a significant role in multiplayer Commander games.',
+                        '*Adaptability: Flexibility and adaptability are essential, as games can evolve unpredictably.',
+                        '_',
+                        '-Winning the Game',
+                        '*Victory: The last player with at least 1 life wins.',
+                        '*Alternative Victory Conditions: Based on house rules or specific card effects.',
+                        '_',
+                        '-Sportsmanship and Enjoyment',
+                        '*Emphasis: Commander is a social format focused on fun and interaction.',
+                        '*Conduct: Good sportsmanship, communication, and respect for opponents are essential.',
+                      ]}
+                    />
+                  }
+                />
+              </div>
             </>
           }
         />
       </div>
-      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700">
+
+      <div
+        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        id="pAPAphilosophy">
         <Collapsable
           titles="philosophy"
           content={
@@ -158,7 +229,9 @@ const FAQ_Game_rules = () => {
           }
         />
       </div>
-      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700">
+      <div
+        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        id="pAPAthe-golden-rule">
         <Collapsable
           titles="The Golden Rule"
           content={
@@ -171,7 +244,9 @@ const FAQ_Game_rules = () => {
           }
         />
       </div>
-      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700">
+      <div
+        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        id="pAPAhouse-rules">
         <Collapsable
           titles="House Rules"
           content={
@@ -185,7 +260,9 @@ const FAQ_Game_rules = () => {
           }
         />
       </div>
-      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700">
+      <div
+        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        id="pAPArules-sources">
         <Collapsable
           titles="Rules Sources"
           content={
@@ -198,7 +275,9 @@ const FAQ_Game_rules = () => {
           }
         />
       </div>
-      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700">
+      <div
+        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        id="pAPAdeck-construction">
         <Collapsable
           titles="Deck Construction"
           content={
@@ -211,7 +290,9 @@ const FAQ_Game_rules = () => {
           }
         />
       </div>
-      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700">
+      <div
+        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        id="pAPAstarting-the-game">
         <Collapsable
           titles="Starting the Game"
           content={
@@ -224,7 +305,9 @@ const FAQ_Game_rules = () => {
           }
         />
       </div>
-      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700">
+      <div
+        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        id="pAPAcommander">
         <Collapsable
           titles="Commander"
           content={
@@ -237,7 +320,9 @@ const FAQ_Game_rules = () => {
           }
         />
       </div>
-      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700">
+      <div
+        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        id="pAPAcard-legality">
         <Collapsable
           titles="Card Legality"
           content={
@@ -250,7 +335,9 @@ const FAQ_Game_rules = () => {
           }
         />
       </div>
-      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700">
+      <div
+        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        id="pAPAcard-legality">
         <Collapsable
           titles="Banned List"
           content={
@@ -264,7 +351,9 @@ const FAQ_Game_rules = () => {
           }
         />
       </div>
-      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700">
+      <div
+        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        id="pAPAcolor-identity-and-color-indicator">
         <Collapsable
           titles="Color Identity and Color Indicator"
           content={
@@ -278,7 +367,9 @@ const FAQ_Game_rules = () => {
           }
         />
       </div>
-      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700">
+      <div
+        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        id="pAPAlimited-range-of-influence">
         <Collapsable
           titles="Limited Range of Influence"
           content={
@@ -291,7 +382,9 @@ const FAQ_Game_rules = () => {
           }
         />
       </div>
-      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700">
+      <div
+        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        id="pAPAofficial-announcements-and-rulings">
         <Collapsable
           titles="Official Announcements and Rulings"
           content={
@@ -304,7 +397,9 @@ const FAQ_Game_rules = () => {
           }
         />
       </div>
-      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700">
+      <div
+        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        id="pAPAobject-of-commander">
         <Collapsable
           titles="Object of Commander"
           content={
@@ -318,7 +413,9 @@ const FAQ_Game_rules = () => {
           }
         />
       </div>
-      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700">
+      <div
+        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        id="pAPArule-violations">
         <Collapsable
           titles="Rule Violations"
           content={
@@ -331,7 +428,9 @@ const FAQ_Game_rules = () => {
           }
         />
       </div>
-      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700">
+      <div
+        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        id="pAPAadditional-rules-for-commander-games">
         <Collapsable
           titles="Additional Rules for Commander Games"
           content={
@@ -344,7 +443,9 @@ const FAQ_Game_rules = () => {
           }
         />
       </div>
-      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700">
+      <div
+        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        id="pAPAfaq-frequently-asked-questions">
         <Collapsable
           titles="FAQ (Frequently Asked Questions)"
           content={
