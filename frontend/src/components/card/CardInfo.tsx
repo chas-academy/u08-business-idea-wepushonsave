@@ -1,7 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 
 import {convertObjectToArray} from '../../utils/convertObjectToArray';
-import {ICardInfo} from './ICardInfo';
 import {ICard} from './CardsArray';
 
 interface CardInfoProps {
@@ -9,7 +8,7 @@ interface CardInfoProps {
 }
 
 const CardInfo: React.FC<CardInfoProps> = ({card}) => {
-  /* const extractCardData = (cardData: ICard): ICardInfo => {
+  const extractCardData = (cardData: ICard) => {
     return {
       name: cardData.name,
       mana_cost: cardData.mana_cost,
@@ -40,10 +39,10 @@ const CardInfo: React.FC<CardInfoProps> = ({card}) => {
       tcgplayer_id: cardData.tcgplayer_id,
       cardmarket_id: cardData.cardmarket_id,
     };
-  }; */
+  };
 
-  /* const cardInfo: ICardInfo = extractCardData(card); */
-  const info = convertObjectToArray(card);
+  const cardInfo = extractCardData(card);
+  const info = convertObjectToArray(cardInfo);
 
   return (
     <>

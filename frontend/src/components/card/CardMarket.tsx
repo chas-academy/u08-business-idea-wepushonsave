@@ -84,8 +84,6 @@ const CardMarket: React.FC<CardMarketProps> = ({card}) => {
               ? print.card_faces[0].name
               : print.name;
 
-          console.log(print.card_faces[0].name);
-
           return (
             <div
               key={index}

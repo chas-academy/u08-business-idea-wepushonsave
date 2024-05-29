@@ -14,7 +14,16 @@ export interface CardLayoutProps {
 }
 
 const CardLayout: React.FC<CardLayoutProps> = ({card, onClose}) => {
-  const [activeTab, setActiveTab] = useState('');
+  const [activeTab, setActiveTab] = useState<string | null>(null);
+
+  const toggleDropdown = (dropdownName: string) => {
+    if (activeTab === dropdownName) {
+      setActiveTab(null);
+    } else {
+      setActiveTab(dropdownName);
+    }
+  };
+
   const renderActiveTab = () => {
     switch (activeTab) {
       case 'info':
@@ -39,7 +48,7 @@ const CardLayout: React.FC<CardLayoutProps> = ({card, onClose}) => {
 
         <nav className="card-layout-nav grid grid-cols-3 bg-inactive-card-btn-gradient">
           <button
-            onClick={() => setActiveTab('info')}
+            onClick={() => toggleDropdown('info')}
             className={
               activeTab === 'info'
                 ? 'card-details-active'
@@ -48,7 +57,7 @@ const CardLayout: React.FC<CardLayoutProps> = ({card, onClose}) => {
             Info
           </button>
           <button
-            onClick={() => setActiveTab('market')}
+            onClick={() => toggleDropdown('market')}
             className={
               activeTab === 'market'
                 ? 'card-details-active'
@@ -57,7 +66,7 @@ const CardLayout: React.FC<CardLayoutProps> = ({card, onClose}) => {
             Market
           </button>
           <button
-            onClick={() => setActiveTab('legalities')}
+            onClick={() => toggleDropdown('legalities')}
             className={
               activeTab === 'legalities'
                 ? 'card-details-active'
@@ -66,9 +75,7 @@ const CardLayout: React.FC<CardLayoutProps> = ({card, onClose}) => {
             Legalities
           </button>
         </nav>
-
-        <div className="card-layout-details">{renderActiveTab()}</div>
-        <button onClick={onClose}>Close</button>
+        {activeTab && <>{renderActiveTab()}</>}
       </div>
     </>
   );
