@@ -179,7 +179,7 @@ const Threads: React.FC = () => {
                            onClick={() => toggleComments(thread.id)}>
                            {thread.collapsed ? 'See more' : 'Hide comments'}
                         </p>
-                     )}
+                     )} */}
                   </div>
                )}
 
