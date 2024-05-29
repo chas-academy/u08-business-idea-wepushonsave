@@ -9,6 +9,15 @@
 * @card 
 * This class is used for single cards
 */
+
+/* Emmas provisoriska shit show */
+
+.sidebar a:hover {
+  color: rgb(255, 255, 255);
+}
+
+
+/*other*/
 .card-details-active {
   @apply bg-active-card-btn-gradient border-[#cce4dfd3] h-14 flex justify-center items-center z-10 text-xl -m-1
 }
