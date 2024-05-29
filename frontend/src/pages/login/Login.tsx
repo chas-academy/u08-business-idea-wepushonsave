@@ -1,4 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable  @typescript-eslint/no-explicit-any */ // Line 42
+
 import {useState} from 'react';
 import Validation from './loginValidation';
 

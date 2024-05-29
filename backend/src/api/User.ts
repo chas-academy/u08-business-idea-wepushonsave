@@ -7,15 +7,11 @@ import { IUser } from "../interfaces/IUser";
 
 const router = express.Router();
 
-// Signup
+// Register
 router.post("/register", (req: Request, res: Response) => {
-  /*let {email, password} = req.body;
-    email = email.trim();
-    password = password.trim();*/
-
   const { email, password, username } = req.body;
-console.log(req.body); //TEST
-console.log(email, password, username); //TEST
+
+  console.log(email, password, username); //TEST
 
   if (!email || !password) {
     return res.status(400).json({ message: "Input email or password!" });
@@ -23,7 +19,6 @@ console.log(email, password, username); //TEST
     return res
       .status(400)
       .json({ message: "Password must be at least 6 characters!" });
-      //if password and cofirmed password the same continue, if not error message
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ message: "Invalid email!" });
   } else {
@@ -33,11 +28,8 @@ console.log(email, password, username); //TEST
         console.log(result); //TEST
         // Handle the result
         if (result && result.length > 0) {
-          // User already exists
           return res.status(400).json({ message: "User already exists!" });
         } else {
-          // Try to create new user
-
           // password handling
           const saltRounds: number = 10;
           bcrypt
@@ -79,11 +71,9 @@ console.log(email, password, username); //TEST
   }
 });
 
-// Signin
+// Login
 router.post("/login", (req: Request, res: Response) => {
   const { email, password } = req.body;
-  console.log(email, password); //TEST
-  console.log(req.body); //TEST
 
   if (email == "" || password == "") {
     return res.status(400).json({ message: "Input email or password!" });
@@ -93,7 +83,6 @@ router.post("/login", (req: Request, res: Response) => {
       .then((data) => {
         if (data.length) {
           //User exists
-
           const hashedPassword = data[0].password;
           const userEmail = data[0].email; // Access the email property of the user data
           bcrypt
@@ -103,7 +92,7 @@ router.post("/login", (req: Request, res: Response) => {
                 // Create token
                 const token = jwt.sign({ email: userEmail }, "jwt-secret-key", {
                   expiresIn: "1d",
-                }); // Use the userEmail variable
+                });
                 res.cookie("token", token);
                 return res
                   .status(200)
@@ -114,7 +103,8 @@ router.post("/login", (req: Request, res: Response) => {
                   .json({ message: "Invalid email or password!" });
               }
             })
-            .catch((_err) => {
+            .catch((err: Error) => {
+              console.log(err);
               return res
                 .status(500)
                 .json({
@@ -127,7 +117,8 @@ router.post("/login", (req: Request, res: Response) => {
             .json({ message: "Invalid credentials entered!" });
         }
       })
-      .catch((_err) => {
+      .catch((err: Error) => {
+        console.log(err);
         return res
           .status(500)
           .json({ message: "An error occurred while finding user!" });

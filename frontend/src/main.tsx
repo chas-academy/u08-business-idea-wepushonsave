@@ -71,8 +71,6 @@ const router = createBrowserRouter(
       />
       <Route path="community" element={<Threads />} />
 
-
-
       <Route
         path="card/:id"
         element={<CardLayout />}
@@ -100,7 +98,7 @@ const router = createBrowserRouter(
             return singleCardLoader({params});
           }}
         />
-        RR
+        
       </Route>
       <Route path="profile" element={<ProfilePage />} />
       <Route path="profile-dashboard" element={<ProfileDashboard />} />
