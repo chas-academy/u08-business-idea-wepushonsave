@@ -1,6 +1,8 @@
 // src/layouts/RootLayout.tsx
-import { NavLink, Outlet } from 'react-router-dom';
-import { useState } from 'react';
+/* eslint-disable react/react-in-jsx-scope */
+
+import {NavLink, Outlet} from 'react-router-dom';
+import {useState} from 'react';
 import App from '../App';
 import Navbar from '../components/navbar/Navbar';
 import Sidebar from '../components/sidebar/Sidebar';
@@ -33,7 +35,11 @@ const RootLayout: React.FC = () => {
               <SearchForm />
             </div>
             <div className="welcome-img flex-grow flex items-center justify-center mt-4 p-2">
-              <img src={welcomeMobile} alt="Welcome" className="max-w-full max-h-[60vh] mx-10" />
+              <img
+                src={welcomeMobile}
+                alt="Welcome"
+                className="max-w-full max-h-[60vh] mx-10"
+              />
             </div>
           </>
         ) : (

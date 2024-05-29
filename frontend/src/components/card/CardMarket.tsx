@@ -1,21 +1,26 @@
 /* eslint-disable react/react-in-jsx-scope */
-import {useLoaderData, useNavigate} from 'react-router-dom';
-import {useEffect, useState} from 'react';
+/* eslint-disable react/prop-types */
+
+import {Dispatch, useEffect, useState} from 'react';
 import {IPrices, IPrintsAPIResponse, IPrintsData} from './IPrints';
 import {delay} from '../../utils/setApiDelay';
+import {getImageFromCardFaces} from '../../utils/getImageFromCardFaces';
+import {ICard} from './CardsArray';
+import {useNavigate} from 'react-router-dom';
 
-const CardMarket = () => {
-  //FIXME See if there is any other data-type we can use for an unknown value
+interface CardMarketProps {
+  card: ICard;
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  const cardData: any = useLoaderData();
+  setActiveCard: Dispatch<ICard | any>;
   /* eslint-enable @typescript-eslint/no-explicit-any */
+}
+const CardMarket: React.FC<CardMarketProps> = ({card, setActiveCard}) => {
+  const [prints, setPrints] = useState<IPrintsData[]>([]);
+  const cardPrints = card.prints_search_uri.toString();
   const navigate = useNavigate();
   const getSetUri = async (set: string) => {
     navigate(`/cards/${set}`);
   };
-
-  const [prints, setPrints] = useState<IPrintsData[]>([]);
-  const cardPrints = cardData.prints_search_uri.toString();
 
   useEffect(() => {
     const getPrints = async () => {
@@ -28,8 +33,10 @@ const CardMarket = () => {
         console.error('Error fetching prints:', error);
       }
     };
+    if (!cardPrints) return;
     getPrints();
-  }, []);
+    console.log('CardMarket useEffect');
+  }, [cardPrints]);
 
   const getEURPrice = (prices: IPrices): string | null => {
     const price = prices.eur || prices.eur_foil || null;
@@ -72,40 +79,56 @@ const CardMarket = () => {
       <section className="card-market-grid grid grid-cols-1 gap-4 text-white">
         {/* .map(print) = The amount of diffrent card illustarations  */}
         {prints.map((print, index: number) => {
+          const imageUrl =
+            print.card_faces && print.card_faces.length > 0
+              ? getImageFromCardFaces(print.card_faces)
+              : print.image_uris?.border_crop;
+
+          const cardName =
+            print.card_faces && print.card_faces.length > 0
+              ? print.card_faces[0].name
+              : print.name;
+
           return (
             <div
               key={index}
-              className="card-market-prints-container text-re  bg-[#322929] shadow-2xl shadow-[#322929] rounded-sm grid grid-cols-3 gap-1 m-1">
-              <div className="print-container m-2 ">
-                <img
-                  className="shadow shadow-[#0000008a]"
-                  src={print.image_uris.border_crop}
-                  alt=""
-                />
+              className="p-1 card-market-prints-container bg-[#322929] shadow-2xl shadow-[#322929] rounded-sm grid grid-cols-3 gap-1 m-1">
+              <div className=" print-container">
+                <button onClick={() => setActiveCard(print)}>
+                  <img
+                    className="shadow shadow-[#0000008a]"
+                    src={imageUrl}
+                    alt={cardName}
+                  />
+                </button>
               </div>
 
-              <div className="print-details-container col-span-2 justify-items-center content-center relative mr-2">
-                <div className="print-name-quality-container grid grid-cols-3 absolute top-0 m-2 w-full">
-                  <h1 className={`text-xl col-span-2 ${getCardQuality(print)}`}>
-                    {print.name}
+              <div className=" print-details-container col-span-2 grid-rows-3 grid-flow-row justify-items-center content-center relative">
+                <div className="print-name-quality-container grid grid-cols-3 absolute top-0 w-full">
+                  <h1 className={` col-span-3 w-full ${getCardQuality(print)}`}>
+                    {cardName}
                   </h1>
-
-                  <p
-                    className={`text-xs absolute right-3 top-2 ${getCardQuality(print)}`}>
-                    {getCardQualityType(print)}
+                </div>
+                <div className="m-1">
+                  <p className="text-xs relative top-1">
+                    <strong className="text-xs mr-1">SET:</strong>
+                    <a
+                      className="hover:text-blue-400"
+                      onClick={() => getSetUri(print.set)}>
+                      {print.set_name}
+                    </a>
+                  </p>
+                  <p className="text-xs relative top-1">
+                    <strong className="text-xs mr-1">PRICE:</strong>
+                    {getEURPrice(print.prices)}
                   </p>
                 </div>
-
-                <p className="text-sm">
-                  <strong className="m-2">SET:</strong>
-                  <a onClick={() => getSetUri(print.set)}>{print.set_name}</a>
-                </p>
-                <p className="text-sm">
-                  <strong className="m-2">PRICE:</strong>
-                  {getEURPrice(print.prices)}
-                </p>
-                <p className={`absolute bottom-2 m-2 ${getCardRarity(print)}`}>
+                <p className={`absolute bottom-1 m-1 ${getCardRarity(print)}`}>
                   {print.rarity.charAt(0).toUpperCase() + print.rarity.slice(1)}
+                </p>
+                <p
+                  className={`text-xs absolute right-0 bottom-0 m-1 ${getCardQuality(print)}`}>
+                  {getCardQualityType(print)}
                 </p>
               </div>
             </div>
