@@ -1,5 +1,8 @@
+/* eslint-disable react/react-in-jsx-scope */
+
 const getIconApi = (mana: string) => {
-  let svgUrls: any = [];
+      /* eslint-disable @typescript-eslint/no-explicit-any */
+  const svgUrls: any = [];
   const manaSymbols = mana.match(/{[^}]+}/g);
   manaSymbols?.forEach(element => {
     // Define the base URL for the card symbols
