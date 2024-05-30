@@ -1,14 +1,14 @@
 import { Schema, model, Document } from 'mongoose';
 
-export interface CommentDocument extends Document {
+interface Comment extends Document {
    text: string;
    userId: number;
 }
 
-const CommentSchema = new Schema<CommentDocument>({
+const CommentSchema = new Schema<Comment>({
    text: { type: String, required: true },
-   userId: { type: Number, required: true },
+   userId: { type: Number, required: true }
 });
 
-const Comment = model<CommentDocument>('Comment', CommentSchema);
-export default Comment;
+const CommentModel = model<Comment>('Comment', CommentSchema);
+export default CommentModel;
