@@ -1,7 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 
 import plusButton from '../assets/plus.svg';
-import {navigate} from '../utils/navigate';
 
 const CardPlusButton = () => {
   return (
