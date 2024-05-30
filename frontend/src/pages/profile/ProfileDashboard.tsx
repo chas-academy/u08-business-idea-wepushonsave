@@ -31,7 +31,7 @@ const ProfileDashboard = () => {
       const data = await response.json();
       setUserData(data);
     } catch (error) {
-      console.error('Error fetching user data:', error);
+      console.error('Error fetching user data: ', error);
     }
   };
 
