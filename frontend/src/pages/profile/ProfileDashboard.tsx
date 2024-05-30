@@ -111,7 +111,7 @@ const ProfileDashboard = () => {
                   name="username"
                   value={userData.username || ''}
                   onChange={handleInputChange}
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                  className="text-black w-full mt-1 p-2 border border-gray-300 rounded-md"
                 />
               ) : (
                 <span className="ml-4">{userData.username || ''}</span>
@@ -125,7 +125,7 @@ const ProfileDashboard = () => {
                   name="email"
                   value={userData.email || ''}
                   onChange={handleInputChange}
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                  className="text-black w-full mt-1 p-2 border border-gray-300 rounded-md"
                 />
               ) : (
                 <span className="ml-4">{userData.email || ''}</span>
@@ -133,17 +133,7 @@ const ProfileDashboard = () => {
             </li>
             <li className="font-bold">
               Password:
-              {isEditing ? (
-                <input
-                  type="password"
-                  name="password"
-                  value={userData.password || ''}
-                  onChange={handleInputChange}
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-                />
-              ) : (
-                <span>**********</span>
-              )}
+              {<span>**********</span>}
             </li>
           </ul>
           {isEditing && (
