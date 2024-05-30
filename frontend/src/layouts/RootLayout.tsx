@@ -2,7 +2,6 @@ import {NavLink, Outlet, useLocation} from 'react-router-dom';
 /* eslint-disable react/react-in-jsx-scope */
 
 import {useState} from 'react';
-import App from '../App';
 import Navbar from '../components/navbar/Navbar';
 import Sidebar from '../components/sidebar/Sidebar';
 import SearchForm from '../components/search/SearchForm';
