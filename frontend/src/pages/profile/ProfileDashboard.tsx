@@ -1,5 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
-
 import {useState, useEffect} from 'react';
 
 const ProfileDashboard = () => {
@@ -34,20 +32,48 @@ const ProfileDashboard = () => {
     }
   };
 
-  // FOR LATER: edit
-
-  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const {name, value} = e.target;
-  //   setUserData({...userData, [name]: value});
-  // };
-
-  // // Handle form submission to update user data
-  // const handleFormSubmit = async (e: React.FormEvent) => {
-  // };
-
   // Toggle editing mode
   const toggleEdit = () => {
     setIsEditing(!isEditing);
+  };
+
+  // Handle input change
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = e.target;
+    setUserData({...userData, [name]: value});
+  };
+
+  // Handle form submission to update user data
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const updatedData = {
+      username: userData.username,
+      newEmail: userData.email,
+      password: userData.password,
+    };
+
+    try {
+      const response = await fetch('http://localhost:3000/api/profile-info', {
+        method: 'PUT',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(updatedData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update user data');
+      }
+
+      const data = await response.json();
+      setUserData(data.user);
+      setIsEditing(false); // Exit editing mode on success
+    } catch (error) {
+      console.error('Error updating user data:', error);
+    }
   };
 
   return (
@@ -75,9 +101,7 @@ const ProfileDashboard = () => {
             </svg>
           </button>
         </div>
-        <form>
-          {' '}
-          {/* onSubmit={handleFormSubmit} */}
+        <form onSubmit={handleFormSubmit}>
           <ul className="mb-6 space-y-4">
             <li className="font-bold">
               Username:
@@ -86,8 +110,8 @@ const ProfileDashboard = () => {
                   type="text"
                   name="username"
                   value={userData.username || ''}
-                  // onChange={handleInputChange}
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                  onChange={handleInputChange}
+                  className="text-black w-full mt-1 p-2 border border-gray-300 rounded-md"
                 />
               ) : (
                 <span className="ml-4">{userData.username || ''}</span>
@@ -100,35 +124,37 @@ const ProfileDashboard = () => {
                   type="email"
                   name="email"
                   value={userData.email || ''}
-                  // onChange={handleInputChange}
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                  onChange={handleInputChange}
+                  className="text-black w-full mt-1 p-2 border border-gray-300 rounded-md"
                 />
               ) : (
                 <span className="ml-4">{userData.email || ''}</span>
               )}
             </li>
             <li className="font-bold">
-              Password: **********
+              Password:
               {isEditing ? (
                 <input
                   type="password"
                   name="password"
                   value={userData.password || ''}
-                  // onChange={handleInputChange}
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                  onChange={handleInputChange}
+                  className="text-black w-full mt-1 p-2 border border-gray-300 rounded-md"
                 />
               ) : (
-                <span></span>
+                <span>**********</span>
               )}
             </li>
           </ul>
-          <div className="flex justify-end">
-            <button
-              type="submit"
-              className="px-4 py-1 text-white rounded-md hover:text-aubergine bg-btn-gradient">
-              Save
-            </button>
-          </div>
+          {isEditing && (
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                className="px-4 py-1 text-white rounded-md hover:text-aubergine bg-btn-gradient">
+                Save
+              </button>
+            </div>
+          )}
         </form>
       </div>
     </div>

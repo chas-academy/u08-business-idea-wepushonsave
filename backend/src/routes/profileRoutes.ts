@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { authMiddleware } from "../middleware/auth";
 import User from "../models/User";
+import bcrypt from "bcrypt";
 
 const router = express.Router();
 
@@ -25,7 +26,7 @@ router.get(
   }
 );
 
-// PUT profile info
+// PUT /profile-info
 router.put(
   "/profile-info",
   authMiddleware,
@@ -34,11 +35,17 @@ router.put(
     const { username, newEmail, password } = req.body;
 
     try {
-      const user = await User.findOneAndUpdate(
-        { email },
-        { username, email: newEmail, password },
-        { new: true }
-      ).exec();
+      let updateData: any = { username, email: newEmail };
+
+      if (password) {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        updateData.password = hashedPassword;
+      }
+
+      const user = await User.findOneAndUpdate({ email }, updateData, {
+        new: true,
+      }).exec();
 
       if (!user) {
         return res.status(404).json({ message: "User not found" });
