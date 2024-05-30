@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import {useState} from 'react';
+import {FormEvent, useState} from 'react';
 import Validation from './loginValidation';
 
 const loginUser = () => {
@@ -11,8 +11,8 @@ const loginUser = () => {
     email: '',
     password: '',
   });
-
-  const handleSubmit = (event: any) => {
+  /*   const handleSubmit = (event: any) => { */
+  const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
     const errorCheck = Validation(values);
@@ -34,7 +34,8 @@ const loginUser = () => {
       console.log('Errors');
     }
   };
-  const handleInput = (event: any) => {
+  /* const handleInput = (event: any) => { */
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues(prev => ({
       ...prev,
       [event.target.name]: event.target.value,

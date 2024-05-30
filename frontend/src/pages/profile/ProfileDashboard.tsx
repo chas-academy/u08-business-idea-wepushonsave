@@ -1,3 +1,5 @@
+/* eslint-disable react/react-in-jsx-scope */
+
 import {useState, useEffect} from 'react';
 
 const ProfileDashboard = () => {
