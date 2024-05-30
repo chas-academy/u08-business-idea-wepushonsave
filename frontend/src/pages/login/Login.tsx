@@ -2,7 +2,6 @@
 import {useState} from 'react';
 import Validation from './loginValidation';
 
-
 const loginUser = () => {
   const [values, setValues] = useState({
     email: '',
@@ -20,19 +19,17 @@ const loginUser = () => {
     setErrors(errorCheck);
 
     if (!errorCheck.email && !errorCheck.password) {
-      fetch('http://localhost:3000/api/user/signin', {
+      fetch('http://localhost:3000/api/user/login', {
         method: 'POST',
         mode: 'cors',
         headers: {
-          'Content-type': 'application/json'
+          'Content-type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify(values)
-      }).then(
-        (response) => {
-          console.log(response.headers)
-        }
-      );
+        body: JSON.stringify(values),
+      }).then(response => {
+        console.log(response.headers);
+      });
     } else {
       console.log('Errors');
     }
