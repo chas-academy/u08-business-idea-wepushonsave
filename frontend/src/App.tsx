@@ -1,11 +1,7 @@
-
+/* eslint-disable react/react-in-jsx-scope */
 
 function App() {
-  return (
-    <>
-    
-    </>
-  );
+  return <></>;
 }
 
 export default App;

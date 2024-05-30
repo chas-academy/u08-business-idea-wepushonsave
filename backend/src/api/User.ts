@@ -82,18 +82,28 @@ router.post("/login", (req: Request, res: Response) => {
     User.find({ email })
       .then((data) => {
         if (data.length) {
-          //User exists
+          // User exists
+          const userId = data[0]._id; // Access the userId from the user data
           const hashedPassword = data[0].password;
           const userEmail = data[0].email; // Access the email property of the user data
+
           bcrypt
             .compare(password, hashedPassword)
             .then((result) => {
               if (result) {
                 // Create token
-                const token = jwt.sign({ email: userEmail }, "jwt-secret-key", {
-                  expiresIn: "1d",
+                const token = jwt.sign(
+                  { email: userEmail, userId: userId },
+                  "jwt-secret-key",
+                  {
+                    expiresIn: "1d",
+                  }
+                ); // Include the userId in the token payload
+                res.cookie("token", token, {
+                  httpOnly: true,
+                  secure: process.env.NODE_ENV === "production", // Ensure the cookie is only sent over HTTPS in production
+                  sameSite: false, // Allows cross-site cookies
                 });
-                res.cookie("token", token);
                 return res
                   .status(200)
                   .json({ message: "User signed in successfully!" });
@@ -103,6 +113,10 @@ router.post("/login", (req: Request, res: Response) => {
                   .json({ message: "Invalid email or password!" });
               }
             })
+            .catch((_err) => {
+              return res.status(500).json({
+                message: "An error occurred while comparing passwords!",
+              });
             .catch((err: Error) => {
               console.log(err);
               return res
@@ -121,7 +135,7 @@ router.post("/login", (req: Request, res: Response) => {
         console.log(err);
         return res
           .status(500)
-          .json({ message: "An error occurred while finding user!" });
+          .json({ message: "An error occurred while retrieving user data!" });
       });
   }
 });
