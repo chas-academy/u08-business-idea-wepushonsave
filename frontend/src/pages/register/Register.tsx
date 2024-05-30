@@ -1,117 +1,108 @@
 /* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable  @typescript-eslint/no-explicit-any */ 
+import {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
-/*const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [register, setRegister] = useState(false);*/
+const RegisterUser = () => {
+  
+  const navigate = useNavigate() 
+  
+  const [currentError, setCurrentError] = useState('');
 
-const registerUser = () => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //console.log(e.target)
     const form = e.currentTarget;
-    // const formdata = {
-    //   email: form.email.value,
-    //   password: form.password.value
+    const formdata = {
+      username: form.username.value,
+      email: form.email.value,
+      password: form.password.value,
+    };
+console.log(form.email, form.username, form.password)
+    if (form.username.value && form.email.value && form.password.value) {
+      try {
+        const response = await fetch(
+          'http://localhost:3000/api/user/register',
+          {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formdata),
+          }
+        );
+        if (!response.ok) {
+          throw new Error('Register not successful, please try again');
+        } 
+        setCurrentError("")
+        navigate("/login")
 
-    // }
-
-    if (!form.email && !form.password) {
-      fetch('http://localhost:3000/api/user/signup', {
-        method: 'POST',
-        mode: 'no-cors',
-        body: JSON.stringify(form.username, form.email, form.password),
-      });
+      } catch (error: any) {
+        console.error(
+          'Register not successful...',
+          error
+        );
+        setCurrentError(error.message)
+      }
+      
     } else {
-      console.log('Errors');
+      setCurrentError('Username, email and password are required!');
     }
-
-    alert('User registered successfully!');
   };
 
   return (
     <>
-      <h1 className="text-3xl font-bold text-center">Register</h1>
-      <form
-        action=""
-        onSubmit={handleSubmit}
-        className="flex justify-center items-center h-screen">
-        <div className="bg-white rounded-lg shadow-md px-8 py-6 flex flex-col space-y-4">
-          <div className="flex flex-col">
-            <input
-              type="username"
-              id="username"
-              name="username"
-              className="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              placeholder="Username"
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              placeholder="Email"
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              placeholder="Password"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:offset-2 focus:ring-indigo-500">
-            Submit
-          </button>
+      <div className="flex flex-col items-center justify-center min-h-screen text-white">
+        <h1 className="text-3xl md:text-5xl md:mb-20 font-bold mb-4">
+          Register
+        </h1>
+        <div className="flex flex-col md:w-1/3 w-5/6 p-5 rounded-xl shadow-lg bg-profile-content">
+          <form onSubmit={handleSubmit}>
+            <ul className="mb-6 space-y-4">
+              <li className=" font-bold">
+                Username:
+                <input
+                  required
+                  type="text"
+                  name="username"
+                  className="w-full p-2 text-gray-700 placeholder:text-black placeholder-opacity-75 focus:outline-none"
+                  placeholder="Username"
+                />
+              </li>
+              <li className=" font-bold">
+                Email adress:
+                <input
+                  required
+                  type="email"
+                  name="email"
+                  className="w-full p-2 text-gray-700 placeholder:text-black placeholder-opacity-75 focus:outline-none"
+                  placeholder="Email"
+                />
+              </li>
+              <li className=" font-bold">
+                Password:
+                <input
+                  type="password"
+                  name="password"
+                  className="w-full p-2 mt-2 text-gray-700 placeholder:text-black placeholder-opacity-75 focus:outline-none"
+                  placeholder="Password"
+                />
+              </li>
+            </ul>
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                className="px-4 py-1 text-white rounded-md hover:text-aubergine bg-btn-gradient">
+                Register
+              </button>
+            </div>
+          </form>
+          <a href="/login">Already registred? Click here!</a>
         </div>
-      </form>
+        <div>{currentError}</div>
+      </div>
     </>
   );
 };
 
-export default registerUser;
-
-/*
-<h1 className="text-3xl font-bold text-center">Register</h1>
-      <form action="" onSubmit={handleSubmit}
-      className="flex flex-col space-y-4">
-        <div className="flex flex-col">
-          <label htmlFor="email" className="text-sm font-medium mb-2">
-            Email address
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            className="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="Email"            
-          />
-        </div>
-
-        <div className="flex flex-col">
-          <label htmlFor="password" className="text-sm font-medium mb-2">
-            Choose a password
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            className="appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="Password"
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
-          Submit
-        </button>
-      </form>
-*/
+export default RegisterUser;
