@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import React, { useState } from 'react';
 import manaSymbols from '../manaSymbols';
 

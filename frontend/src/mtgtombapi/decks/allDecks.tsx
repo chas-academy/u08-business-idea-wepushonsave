@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import React, {useEffect, useState} from 'react';
 import CustomDropdown from '../customs/customDropdown';
 import manaSymbols from '../manaSymbols';
@@ -52,8 +53,8 @@ const AllDecksComponent: React.FC = () => {
       )}&page=${page}&limit=${limit}`;
       console.log('Encoded URL:', url);
       const response = await fetch(url);
-      const result: any = await response.json();
-      const decks: any = result.docs;
+      const result = await response.json();
+      const decks = result.docs;
       setDeckResult(decks);
     } catch (error) {
       setError('Error fetching data');
@@ -90,7 +91,7 @@ const AllDecksComponent: React.FC = () => {
 
       <ul className="">
           {deckResult.map(deck => (
-            <div className='grid grid-cols-2 justify-items-center w-full'>
+            <div key={deck._id} className='grid grid-cols-2 justify-items-center w-full'>
             <li key={deck._id}>
                 <a href='https://svgs.scryfall.io/card-symbols/PW.svg' className="text-2xl">{deck.deckName}</a>
             </li>
