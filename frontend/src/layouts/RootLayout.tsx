@@ -27,6 +27,7 @@ const RootLayout: React.FC = () => {
         <NavLink to={'community'}>Community</NavLink> |{' '}
         <NavLink to={'gamerules'}>Game Rules</NavLink> |{' '}
         <NavLink to={'cardrules'}>Card Rules</NavLink> |{' '}
+        <NavLink to={'deck-builder'}>Deck Builder</NavLink> |{' '}
       </nav>
       <div>
         {isHomePage ? (
