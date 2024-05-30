@@ -1,6 +1,8 @@
 /* eslint-disable react/react-in-jsx-scope */
 
 const getIconApi = (mana: string) => {
+
+  
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const svgUrls: any = [];
   const manaSymbols = mana.match(/{[^}]+}/g);
@@ -17,10 +19,12 @@ const getIconApi = (mana: string) => {
     // Array to hold the svg URLs for each symbol
 
     // Iterate over each symbol and generate the svg URL
+
     // Remove the curly braces and construct the svg URL
     const formattedSymbol = element.replace(/[{}]/g, '');
     const svgUrl = `${baseUrl}${formattedSymbol}.svg`;
     svgUrls.push(svgUrl);
+
   });
   return svgUrls;
   // Return the array of SVG URLs

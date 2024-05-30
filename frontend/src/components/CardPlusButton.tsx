@@ -7,8 +7,8 @@ const CardPlusButton = () => {
     <>
       {/* hover:shadow-plum hover:bg-mint/60 */}
       {/* hover:border-white */}
-      <div className="card-plus-button-container w-full min-h-12 grid grid-cols-1 justify-items-center items-center ">
-        <button className="plus-button-circle rounded-full size-8 bg-btn-gradient shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 ml-16 mt-1">
+      <div className="card-plus-button-container grid grid-cols-1 items-center min-w-8 ">
+        <button className="border-2 border-amber-600 plus-button-circle rounded-full bg-btn-gradient shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 ">
           <img src={plusButton} alt="add-button" />
         </button>
       </div>

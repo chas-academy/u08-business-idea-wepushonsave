@@ -76,6 +76,7 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen, toggleSidebar}) => {
                   About
                 </button>
 
+
                 <div
                   className={`smooth ${expandedItem === 'about' ? 'max-h-[1000px]' : 'max-h-0'}`}
                   style={{
