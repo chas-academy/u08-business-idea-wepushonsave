@@ -1,6 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable  @typescript-eslint/no-explicit-any */ 
-
 import {useState, useEffect} from 'react';
 
 const ProfileDashboard = () => {
@@ -31,7 +28,7 @@ const ProfileDashboard = () => {
       const data = await response.json();
       setUserData(data);
     } catch (error) {
-      console.error('Error fetching user data: ', error);
+      console.error('Error fetching user data:', error);
     }
   };
 
@@ -78,7 +75,7 @@ const ProfileDashboard = () => {
       console.error('Error updating user data:', error);
     }
   };
-  
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen text-white">
       <h1 className="text-3xl md:text-5xl md:mb-20 font-bold mb-4">
@@ -104,9 +101,7 @@ const ProfileDashboard = () => {
             </svg>
           </button>
         </div>
-        <form>
-          {' '}
-          {/* onSubmit={handleFormSubmit} */}
+        <form onSubmit={handleFormSubmit}>
           <ul className="mb-6 space-y-4">
             <li className="font-bold">
               Username:
@@ -116,7 +111,7 @@ const ProfileDashboard = () => {
                   name="username"
                   value={userData.username || ''}
                   onChange={handleInputChange}
-                  className="text-black w-full mt-1 p-2 border border-gray-300 rounded-md"
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
                 />
               ) : (
                 <span className="ml-4">{userData.username || ''}</span>
@@ -130,7 +125,7 @@ const ProfileDashboard = () => {
                   name="email"
                   value={userData.email || ''}
                   onChange={handleInputChange}
-                  className="text-black w-full mt-1 p-2 border border-gray-300 rounded-md"
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
                 />
               ) : (
                 <span className="ml-4">{userData.email || ''}</span>
@@ -144,7 +139,7 @@ const ProfileDashboard = () => {
                   name="password"
                   value={userData.password || ''}
                   onChange={handleInputChange}
-                  className="text-black w-full mt-1 p-2 border border-gray-300 rounded-md"
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
                 />
               ) : (
                 <span>**********</span>
