@@ -2,7 +2,6 @@
 
 import {useState, useEffect} from 'react';
 
-//NO BACKEND YET, SO DON'T KNOW IF THIS CODE WORKS
 const ProfileDashboard = () => {
   const [userData, setUserData] = useState<any>({});
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -11,14 +10,23 @@ const ProfileDashboard = () => {
     fetchUserData();
   }, []);
 
-  // Taking user's information from db with token and update the state of userData with this data
+  // Fetch user's information from the server using the token and update the state
   const fetchUserData = async () => {
     try {
-      const response = await fetch('/api/user', {
+      const response = await fetch('http://localhost:3000/api/profile-info', {
+        credentials: 'include',
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          credentials: 'include',
+          mode: 'cors',
         },
       });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch user data');
+      }
+
       const data = await response.json();
       setUserData(data);
     } catch (error) {
@@ -26,36 +34,18 @@ const ProfileDashboard = () => {
     }
   };
 
-  // When event from HTML happens, this function will update the state of userData with the new data typed by the user
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = e.target;
-    setUserData({...userData, [name]: value});
-  };
+  // FOR LATER: edit
 
-  // When event from form happens, this functions will send a POST request in json format to the db tto update data
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const response = await fetch('/api/user', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-        body: JSON.stringify(userData),
-      });
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const {name, value} = e.target;
+  //   setUserData({...userData, [name]: value});
+  // };
 
-      if (!response.ok) {
-        throw new Error('Failed to update user data');
-      } else {
-        setIsEditing(false); // Disable editing mode after successful save
-      }
-    } catch (error) {
-      console.error('Error updating user data:', error);
-    }
-  };
+  // // Handle form submission to update user data
+  // const handleFormSubmit = async (e: React.FormEvent) => {
+  // };
 
-  // This function is used when the edit button is clicked, so it makes it possible to modify the information
+  // Toggle editing mode
   const toggleEdit = () => {
     setIsEditing(!isEditing);
   };
@@ -85,48 +75,50 @@ const ProfileDashboard = () => {
             </svg>
           </button>
         </div>
-        <form onSubmit={handleFormSubmit}>
+        <form>
+          {' '}
+          {/* onSubmit={handleFormSubmit} */}
           <ul className="mb-6 space-y-4">
-            <li className=" font-bold">
+            <li className="font-bold">
               Username:
               {isEditing ? (
                 <input
                   type="text"
                   name="username"
                   value={userData.username || ''}
-                  onChange={handleInputChange}
+                  // onChange={handleInputChange}
                   className="w-full mt-1 p-2 border border-gray-300 rounded-md"
                 />
               ) : (
-                <span>{userData.username || ''}</span>
+                <span className="ml-4">{userData.username || ''}</span>
               )}
             </li>
-            <li className=" font-bold">
+            <li className="font-bold">
               Email address:
               {isEditing ? (
                 <input
                   type="email"
                   name="email"
                   value={userData.email || ''}
-                  onChange={handleInputChange}
+                  // onChange={handleInputChange}
                   className="w-full mt-1 p-2 border border-gray-300 rounded-md"
                 />
               ) : (
-                <span>{userData.email || ''}</span>
+                <span className="ml-4">{userData.email || ''}</span>
               )}
             </li>
-            <li className=" font-bold">
-              Password:
+            <li className="font-bold">
+              Password: **********
               {isEditing ? (
                 <input
                   type="password"
                   name="password"
                   value={userData.password || ''}
-                  onChange={handleInputChange}
+                  // onChange={handleInputChange}
                   className="w-full mt-1 p-2 border border-gray-300 rounded-md"
                 />
               ) : (
-                <span>{userData.password || ''}</span>
+                <span></span>
               )}
             </li>
           </ul>
