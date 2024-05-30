@@ -1,7 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
-import {useState} from 'react';
+import {FormEvent, useState} from 'react';
 import Validation from './loginValidation';
-
 
 const loginUser = () => {
   const [values, setValues] = useState({
@@ -12,32 +11,31 @@ const loginUser = () => {
     email: '',
     password: '',
   });
-
-  const handleSubmit = (event: any) => {
+  /*   const handleSubmit = (event: any) => { */
+  const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
     const errorCheck = Validation(values);
     setErrors(errorCheck);
 
     if (!errorCheck.email && !errorCheck.password) {
-      fetch('http://localhost:3000/api/user/signin', {
+      fetch('http://localhost:3000/api/user/login', {
         method: 'POST',
         mode: 'cors',
         headers: {
-          'Content-type': 'application/json'
+          'Content-type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify(values)
-      }).then(
-        (response) => {
-          console.log(response.headers)
-        }
-      );
+        body: JSON.stringify(values),
+      }).then(response => {
+        console.log(response.headers);
+      });
     } else {
       console.log('Errors');
     }
   };
-  const handleInput = (event: any) => {
+  /* const handleInput = (event: any) => { */
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues(prev => ({
       ...prev,
       [event.target.name]: event.target.value,
