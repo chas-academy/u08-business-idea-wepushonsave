@@ -97,11 +97,7 @@ console.log(form.email, form.username, form.password)
               </button>
             </div>
           </form>
-          <h2
-          //onClick={() => navigateHome()}
-          >
-            Not registred yet? Click here!
-          </h2>
+          <a href="/login">Already registred? Click here!</a>
         </div>
         <div>{currentError}</div>
       </div>
