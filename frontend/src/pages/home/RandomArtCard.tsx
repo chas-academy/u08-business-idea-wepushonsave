@@ -34,19 +34,20 @@ const ArtCard: React.FC = () => {
 
    return (
 
-      <div className="flex justify-center h-1/2 md:size-1000">
+      <div className="flex justify-center items-start h-screen md:min-w-screen items">
          {card && (
             <>
-               <div className=" flex flex-col md:flex-row text-center items-center justify-center text-white/80 p-5  ">
-                  <div className='img-container flex flex-col justify-center items-center max-h-full md:size-1/3 md:max-h-[20vh]'>
-                     <img src={card.image_uris.border_crop} alt={card.name} className=" rounded-md mx-auto mb-4 max-h-600px " />
-                     <button onClick={handleRandomize} className=" bg-btn-gradient hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-                        Randomize
+               <div className=" randomsinglecard flex flex-col text-center items-center md:items justify-center text-white/80 p-5 md:pt-16 md:p-2 md:flex-row md:h-screen w-screen">
+                  <div className='img-container flex flex-col h-1/2 max-h-full md:max-h-full  md:size-80 md:w-1/4 justify-center items-center m-5 p-5'>
+                     <button onClick={handleRandomize} className=" bg-btn-gradient hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4 ">
+                        Another!
                      </button>
+                     <img src={card.image_uris.border_crop} alt={card.name} className=" rounded-md mx-auto size-50 " />
+
                   </div>
 
-                  <div className=' card-info flex flex-col md:w-1/3 md:my-40 md:mx-2 md:justify-end border-transparent '>
-                     <p className="text-lg mb-5 font-semi-bold">{card.name}</p>
+                  <div className=' info-container flex flex-col w-3/4 md:w-1/2 md:my-40 md:mx-2 md:justify-end border-transparent '>
+                     <p className="text-lg md:mb-5 font-semi-bold">{card.name}</p>
                      <p className="text-sm">{card.type_line}</p>
                      <p className="text-sm">{card.oracle_text}</p>
 
