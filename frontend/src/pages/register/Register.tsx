@@ -1,9 +1,10 @@
 /* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable  @typescript-eslint/no-explicit-any */ 
 import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterUser = () => {
-  //When registred successfully send to login
+  
   const navigate = useNavigate() 
   
   const [currentError, setCurrentError] = useState('');
@@ -43,8 +44,7 @@ console.log(form.email, form.username, form.password)
         );
         setCurrentError(error.message)
       }
-      //submit error in some state to display to user
-      //what happens after register, redirect to home
+      
     } else {
       setCurrentError('Username, email and password are required!');
     }

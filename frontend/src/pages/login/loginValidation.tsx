@@ -1,3 +1,5 @@
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 const Validation = (values: any) => {
   let errors: any = {};
   const email_pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;

@@ -65,36 +65,6 @@ const router = createBrowserRouter(
         }}
       />
       <Route path="community" element={<Threads />} />
-
-      <Route
-        path="card/:id"
-        element={<CardLayout />}
-        loader={({params}) => {
-          return singleCardLoader({params});
-        }}>
-        <Route
-          path="info"
-          element={<CardInfo />}
-          loader={({params}) => {
-            return singleCardLoader({params});
-          }}
-        />
-        <Route
-          path="market"
-          element={<CardMarket />}
-          loader={({params}) => {
-            return singleCardLoader({params});
-          }}
-        />
-        <Route
-          path="legalities"
-          element={<CardLegalities />}
-          loader={({params}) => {
-            return singleCardLoader({params});
-          }}
-        />
-        
-      </Route>
       <Route path="profile" element={<ProfilePage />} />
       <Route path="profile-dashboard" element={<ProfileDashboard />} />
       <Route path="mycollection" element={<MyCollectionCards />} />

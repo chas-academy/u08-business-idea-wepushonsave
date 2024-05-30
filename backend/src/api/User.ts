@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import express from "express";
 import bcrypt from "bcrypt";
 import User from "../models/User";
@@ -113,17 +114,12 @@ router.post("/login", (req: Request, res: Response) => {
                   .json({ message: "Invalid email or password!" });
               }
             })
-            .catch((_err) => {
-              return res.status(500).json({
-                message: "An error occurred while comparing passwords!",
-              });
             .catch((err: Error) => {
               console.log(err);
               return res
                 .status(500)
-                .json({
-                  message: "An error occurred while comparing passwords!",
-                });
+                .json({ message: "An error occurred while comparing passwords!" });
+           
             });
         } else {
           return res
