@@ -6,8 +6,12 @@ import CardValue from './CardValue';
 const CardFooter = () => {
   return (
     <>
-      <CardValue />
-      <CardPlusButton />
+      <div className="card-footer-value col-span-2 ">
+        <CardValue />
+      </div>
+      <div className="card-footer-plus-button-container w-9">
+        <CardPlusButton />
+      </div>
     </>
   );
 };
