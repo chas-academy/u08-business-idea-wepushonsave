@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import express from "express";
 import bcrypt from "bcrypt";
 import User from "../models/User";
@@ -7,13 +8,11 @@ import { IUser } from "../interfaces/IUser";
 
 const router = express.Router();
 
-// Signup
-router.post("/signup", (req: Request, res: Response) => {
-  /*let {email, password} = req.body;
-    email = email.trim();
-    password = password.trim();*/
-
+// Register
+router.post("/register", (req: Request, res: Response) => {
   const { email, password, username } = req.body;
+
+  console.log(email, password, username); //TEST
 
   if (!email || !password) {
     return res.status(400).json({ message: "Input email or password!" });
@@ -30,11 +29,8 @@ router.post("/signup", (req: Request, res: Response) => {
         console.log(result); //TEST
         // Handle the result
         if (result && result.length > 0) {
-          // User already exists
           return res.status(400).json({ message: "User already exists!" });
         } else {
-          // Try to create new user
-
           // password handling
           const saltRounds: number = 10;
           bcrypt
@@ -79,8 +75,6 @@ router.post("/signup", (req: Request, res: Response) => {
 // Login
 router.post("/login", (req: Request, res: Response) => {
   const { email, password } = req.body;
-  console.log(email, password); //TEST
-  console.log(req.body); //TEST
 
   if (email == "" || password == "") {
     return res.status(400).json({ message: "Input email or password!" });
@@ -120,10 +114,11 @@ router.post("/login", (req: Request, res: Response) => {
                   .json({ message: "Invalid email or password!" });
               }
             })
-            .catch((_err) => {
-              return res.status(500).json({
-                message: "An error occurred while comparing passwords!",
-              });
+            .catch((err: Error) => {
+              console.log(err);
+              return res
+                .status(500)
+                .json({ message: "An error occurred while comparing passwords!" });    
             });
         } else {
           return res
@@ -131,7 +126,8 @@ router.post("/login", (req: Request, res: Response) => {
             .json({ message: "Invalid credentials entered!" });
         }
       })
-      .catch((_err) => {
+      .catch((err: Error) => {
+        console.log(err);
         return res
           .status(500)
           .json({ message: "An error occurred while retrieving user data!" });
