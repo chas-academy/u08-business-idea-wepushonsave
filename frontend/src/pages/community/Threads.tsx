@@ -53,6 +53,7 @@ const Threads: React.FC = () => {
 
          if (response.ok) {
             const createdThread = await response.json();
+            console.log(createdThread);
             setNewThreadContent('');
             console.log(threads);
             fetchThreads();
