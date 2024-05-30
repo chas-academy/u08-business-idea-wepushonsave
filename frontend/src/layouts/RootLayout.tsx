@@ -22,7 +22,6 @@ const RootLayout: React.FC = () => {
       <Navbar toggleSidebar={toggleSidebar} />
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       <nav className="bg-gray-500">
-<<<<<<< HEAD
         <NavLink to={'/cards'}>Cards</NavLink> |{' '}
         <NavLink to={'/community'}>Community</NavLink> |{' '}
         <NavLink to={'/gamerules'}>Game Rules</NavLink> |{' '}
@@ -30,13 +29,6 @@ const RootLayout: React.FC = () => {
         <NavLink to={'/algoritm'}>Algoritm</NavLink> |{' '}
         <NavLink to={'/alldecks'}>All Decks</NavLink> |{' '}
         <NavLink to={'/topcommander'}>Top Commanders</NavLink>
-=======
-        <NavLink to={'cards'}>Cards</NavLink> |{' '}
-        <NavLink to={'community'}>Community</NavLink> |{' '}
-        <NavLink to={'gamerules'}>Game Rules</NavLink> |{' '}
-        <NavLink to={'cardrules'}>Card Rules</NavLink> |{' '}
-        <NavLink to={'deck-builder'}>Deck Builder</NavLink> |{' '}
->>>>>>> 703c6ca1ea2450c30cf546714f12df56a1493be9
       </nav>
       <div>
         {isHomePage ? (
