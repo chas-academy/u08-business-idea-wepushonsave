@@ -7,7 +7,6 @@ import Validation from './loginValidation';
 import {useNavigate} from 'react-router-dom';
 
 const LoginUser = () => {
-  
   const navigate = useNavigate();
 
   const [values, setValues] = useState({
@@ -18,7 +17,7 @@ const LoginUser = () => {
     email: '',
     password: '',
   });
-  const [loginError, setLoginError] = useState("test")
+  const [loginError, setLoginError] = useState('');
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -43,14 +42,14 @@ const LoginUser = () => {
         navigate('/');
       } catch (error: any) {
         console.log('Login not successful', error);
-        setLoginError(error.message)
+        setLoginError(error.message);
       }
     } else {
       console.log('Errors');
     }
-    
   };
-  const handleInput = (event: any) => {
+  /* const handleInput = (event: any) => { */
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues(prev => ({
       ...prev,
       [event.target.name]: event.target.value,
@@ -101,7 +100,7 @@ const LoginUser = () => {
               </button>
             </div>
           </form>
-          <h2>Not registred yet? Click here!</h2>
+          <a href="/register">Not registred yet? Click here!</a>
         </div>
         <div>{loginError}</div>
       </div>
