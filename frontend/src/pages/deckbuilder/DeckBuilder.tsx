@@ -1,4 +1,4 @@
-import {useLoaderData, useNavigate} from 'react-router-dom';
+import {useLoaderData} from 'react-router-dom';
 import BackButton from '../../components/BackButton';
 import CardPlusButton from '../../components/CardPlusButton';
 import SearchForm from '../../components/search/SearchForm';
@@ -6,14 +6,6 @@ import SearchForm from '../../components/search/SearchForm';
 const DeckBuilder = () => {
   const data: any = useLoaderData();
   console.log(data);
-
-  const setPath = useNavigate();
-  const navigate = (param: string) => {
-    const navigateToPath = async (params: string) => {
-      setPath(params);
-    };
-    return navigateToPath;
-  };
 
   return (
     <>

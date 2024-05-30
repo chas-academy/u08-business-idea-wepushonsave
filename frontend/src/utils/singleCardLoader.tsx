@@ -8,6 +8,7 @@ interface IId {
 export const singleCardLoader = async (params: IId) => {
   await delay(1000);
   const cardId = params?.params;
+  console.log(cardId);
 
   /* const url = `https://api.scryfall.com/cards/${id}`; */
   const url =
