@@ -32,6 +32,8 @@ import ProfileDashboard from './pages/profile/ProfileDashboard.tsx';
 import MyCollectionCards from './pages/profile/MyCollectionCards.tsx';
 import MyCollectionCommons from './pages/profile/MyCollectionCommons.tsx';
 import MyCollectionRare from './pages/profile/MyCollectionRare.tsx';
+import Login from './pages/login/Login.tsx';
+import Register from './pages/register/Register.tsx';
 
 // context
 import {SearchProvider} from './components/search/SearchContext.tsx';
@@ -75,6 +77,8 @@ const router = createBrowserRouter(
         element={<DeckBuilder />}
         loader={singleCardLoader}
       />
+      <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
     </Route>
   )
 );

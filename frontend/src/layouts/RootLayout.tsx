@@ -1,22 +1,21 @@
-// src/layouts/RootLayout.tsx
+import {NavLink, Outlet, useLocation} from 'react-router-dom';
 /* eslint-disable react/react-in-jsx-scope */
 
-import {NavLink, Outlet} from 'react-router-dom';
 import {useState} from 'react';
-import App from '../App';
 import Navbar from '../components/navbar/Navbar';
 import Sidebar from '../components/sidebar/Sidebar';
 import SearchForm from '../components/search/SearchForm';
-import welcomeMobile from '../assets/welcome.png';
+
+import ArtCard from '../pages/home/RandomArtCard';
 
 const RootLayout: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const location = useLocation(); // Get the current route
+  const isHomePage = location.pathname === '/';
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-
-  const isHomePage = window.location.pathname === '/';
 
   return (
     <>
@@ -35,20 +34,9 @@ const RootLayout: React.FC = () => {
             <div className="bg-mobile-search bg-cover w-full py-16 md:bg-desktop-search md:bg-fill md:p-5 md:bg-top md:mt-14 md:h-40">
               <SearchForm />
             </div>
-            <div className="welcome-img flex-grow flex items-center justify-center mt-4 p-2">
-              <img
-                src={welcomeMobile}
-                alt="Welcome"
-                className="max-w-full max-h-[60vh] mx-10"
-              />
-            </div>
+            <ArtCard></ArtCard>
           </>
-        ) : (
-          <SearchForm />
-        )}
-      </div>
-      <div>
-        <App />
+        ) : null}
       </div>
       <main>
         <Outlet />

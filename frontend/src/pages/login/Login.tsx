@@ -19,7 +19,7 @@ const loginUser = () => {
     setErrors(errorCheck);
 
     if (!errorCheck.email && !errorCheck.password) {
-      fetch('http://localhost:3000/api/user/signin', {
+      fetch('http://localhost:3000/api/user/login', {
         method: 'POST',
         mode: 'cors',
         headers: {
