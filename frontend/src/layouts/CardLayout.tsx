@@ -1,54 +1,87 @@
 /* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/prop-types */
 
-
-import {NavLink, Outlet} from 'react-router-dom';
-import CardImage from '../components/CardImage';
 import CardFooter from '../components/card/CardFooter';
+import CardInfo from '../components/card/CardInfo';
+import {Dispatch, useState} from 'react';
+import CardMarket from '../components/card/CardMarket';
+import CardLegalities from '../components/card/CardLegalities';
+import {ICard} from '../components/card/CardsArray';
+import CardImage from '../components/CardImage';
 
-const CardLayout = () => {
+export interface CardLayoutProps {
+  card: ICard;
+  onClose: () => void;
+  setActiveCard: Dispatch<ICard>;
+}
+
+const CardLayout: React.FC<CardLayoutProps> = ({
+  card,
+  onClose,
+  setActiveCard,
+}) => {
+  const [activeTab, setActiveTab] = useState<string | null>(null);
+
+  const toggleDropdown = (dropdownName: string) => {
+    if (activeTab === dropdownName) {
+      setActiveTab(null);
+    } else {
+      setActiveTab(dropdownName);
+    }
+  };
+
+  const renderActiveTab = () => {
+    switch (activeTab) {
+      case 'info':
+        return <CardInfo card={card} />;
+      case 'market':
+        return <CardMarket card={card} setActiveCard={setActiveCard} />;
+      case 'legalities':
+        return <CardLegalities card={card} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <div className="card-layout">
-        <section className="card-layout-image w-full h-full grid grid-cols-1 justify-items-center">
-          <CardImage />
-        </section>
+        <CardImage card={card} onClose={onClose} />
 
-        <section className=" card-layout-footer relative ml-4 mr-4 grid grid-cols-2 justify-items-center">
+        <section className="card-layout-footer relative ml-4 mr-4 grid grid-cols-2 justify-items-center ">
           <CardFooter />
         </section>
 
         <nav className="card-layout-nav grid grid-cols-3 bg-inactive-card-btn-gradient">
-          <NavLink
-            className={({isActive}) =>
-              isActive
+          <button
+            onClick={() => toggleDropdown('info')}
+            className={
+              activeTab === 'info'
                 ? 'card-details-active card-info'
                 : 'card-details-not-active'
-            }
-            to={'info'}>
+            }>
             Info
-          </NavLink>{' '}
-          <NavLink
-            className={({isActive}) =>
-              isActive
+          </button>
+          <button
+            onClick={() => toggleDropdown('market')}
+            className={
+              activeTab === 'market'
                 ? 'card-details-active card-market'
                 : 'card-details-not-active'
-            }
-            to={'market'}>
+            }>
             Market
-          </NavLink>{' '}
-          <NavLink
-            className={({isActive}) =>
-              isActive
+          </button>
+          <button
+            onClick={() => toggleDropdown('legalities')}
+            className={
+              activeTab === 'legalities'
                 ? 'card-details-active card-legalities'
                 : 'card-details-not-active'
-            }
-            to={'legalities'}>
+            }>
             Legalities
-          </NavLink>
+          </button>
         </nav>
-        <div className="card-layout-details">
-          <Outlet />
-        </div>
+        {activeTab && <>{renderActiveTab()}</>}
       </div>
     </>
   );

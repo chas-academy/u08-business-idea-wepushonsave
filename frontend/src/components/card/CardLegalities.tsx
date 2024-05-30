@@ -1,24 +1,21 @@
 /* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/prop-types */
 
-
-import {useLoaderData} from 'react-router-dom';
 import {convertObjectToArray} from '../../utils/convertObjectToArray';
+import {ICard} from './CardsArray';
 
-const CardLegalities = () => {
-  //FIXME See if there is any other data-type we can use for an unknown value
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  const cardData: any = useLoaderData();
-  /* eslint-enable @typescript-eslint/no-explicit-any */
-  const cardLegalities = convertObjectToArray(cardData.legalities);
+interface CardLegalitiesProps {
+  card: ICard;
+}
+const CardLegalities: React.FC<CardLegalitiesProps> = ({card}) => {
+  const cardLegalities = convertObjectToArray(card.legalities);
 
   return (
     <>
-
       <div className="grid grid-cols-2 bg-[#322929] gap-1">
         {cardLegalities.map(({key, value}, index) => (
           <div key={index} className="border border-black m-1 ">
             <p>
-
               <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
               {typeof value === 'object' ? value.join(', ') : value}
             </p>
