@@ -117,8 +117,8 @@ const Threads: React.FC = () => {
    };
 
    return (
-      <div className="flex flex-col items-center">
-         <h1 className="text-3xl font-bold mb-4">Community Threads</h1>
+      <div className="flex flex-col items-center p-2 ">
+         <h1 className="text-3xl text-white/80 font-bold mb-4">Community Threads</h1>
          <form onSubmit={handleNewThreadSubmit} className="w-full max-w-lg mb-4">
             <textarea
                placeholder="Thread Content"
@@ -132,52 +132,53 @@ const Threads: React.FC = () => {
                Create Thread
             </button>
          </form>
+         <div className='threadSection bg-white/30 flex flex-col-reverse'>
+            {threads.map(thread => (
+               <div key={thread._id} className=" w-full max-w-lg mb-4">
+                  <p className="min-h-20 text-white p-2">
+                     {thread.content}
+                  </p>
 
-         {threads.map(thread => (
-            <div key={thread._id} className="w-full max-w-lg mb-4 bg-blue-200">
-               <p className="min-h-20 text-gray-900 bg-pink-100 p-2">
-                  {thread.content}
-               </p>
-
-               <p
-                  className="text-blue-500 cursor-pointer"
-                  onClick={() => toggleComments(thread._id)}>
-                  {thread.collapsed ? 'See comments' : 'Hide comments'}
-               </p>
-
-               {!thread.collapsed && (
-                  <div>
-                     {thread.comments.map(comment => (
-                        <div
-                           key={comment._id}
-                           className="border border-white rounded p-2 m-2">
-                           <p className="text-gray-700">{comment.text}</p>
-                        </div>
-                     ))}
-                  </div>
-               )}
-
-               <form
-                  onSubmit={e =>
-                     handleCommentSubmit(e, thread._id, e.currentTarget.comment.value)
-                  }
-                  className="mt-2">
-                  <input
-                     type="text"
-                     name="comment"
-                     placeholder="Add a comment"
-                     required
-                     className="w-full bg-gray-200 border border-gray-400 rounded py-2 px-4 mb-2 focus:outline-none focus:bg-white focus:border-blue-500"
-                  />
-                  <input type="text" placeholder={`${thread._id}`} name="threadId" value={thread._id}></input>
                   <button
-                     type="submit"
-                     className="bg-btn-gradient hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                     Post Comment
+                     className="text-white text-sm bg-nav-gradient w-3/7 px-4 py-2 cursor-pointer rounded"
+                     onClick={() => toggleComments(thread._id)}>
+                     {thread.collapsed ? 'Hide comments' : 'Show comments'}
                   </button>
-               </form>
-            </div>
-         ))}
+
+                  {thread.collapsed && (
+                     <div>
+                        {thread.comments.map(comment => (
+                           <div
+                              key={comment._id}
+                              className="border border-white rounded p-2 m-2">
+                              <p className="text-white">{comment.text}</p>
+                           </div>
+                        ))}
+                     </div>
+                  )}
+
+                  <form
+                     onSubmit={e =>
+                        handleCommentSubmit(e, thread._id, e.currentTarget.comment.value)
+                     }
+                     className="mt-2">
+                     <input
+                        type="text"
+                        name="comment"
+                        placeholder="Add a comment"
+                        required
+                        className="w-full bg-white/30 border border-white/30 rounded py-2 px-4 mb-2 focus:outline-none focus:bg-white focus:border-blue-500"
+                     />
+                     {/*                      <input type="text" placeholder={`${thread._id}`} name="threadId" value={thread._id}></input>
+ */}                     <button
+                        type="submit"
+                        className="bg-btn-gradient hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Post Comment
+                     </button>
+                  </form>
+               </div>
+            ))}
+         </div>
       </div>
    );
 };
