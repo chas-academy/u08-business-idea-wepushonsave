@@ -122,6 +122,13 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen, toggleSidebar}) => {
                   <ul
                     className="GameRules bg-white/10 rounded-md p-2 max-h-[calc(100vh-300px)] overflow-y-auto"
                     style={scrollbarStyle}>
+                       <li className="py-1 text-sm">
+                      <a
+                        href="/gamerules/#pAPAabout"
+                        className="hover:text-white">
+                        About MTG
+                      </a>
+                    </li>
                     <li className="py-1 text-sm">
                       <a
                         href="/gamerules/#pAPAcommander-rules"
@@ -415,7 +422,7 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen, toggleSidebar}) => {
                       <a
                         href="/cardrules/#pAPAcreature"
                         className="hover:text-white">
-                        Cloud
+                        Creatures
                       </a>
                     </li>
                     <li className="py-1 text-sm">
@@ -525,7 +532,7 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen, toggleSidebar}) => {
                       <a
                         href="/cardrules/#pAPAartifacts"
                         className="hover:text-white">
-                        Artifacts: Key Concepts and Gameplay
+                        Artifacts
                       </a>
                     </li>
                     <li className="py-1 text-sm">
@@ -588,7 +595,7 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen, toggleSidebar}) => {
                       <a
                         href="/cardrules/#pAPAsorceries"
                         className="hover:text-white">
-                        Sorceries: Key Concepts and Gameplay
+                        Sorceries
                       </a>
                     </li>
                     <li className="py-1 text-sm">
@@ -700,7 +707,7 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen, toggleSidebar}) => {
                       <a
                         href="/cardrules/#pAPAplaneswalkers"
                         className="hover:text-white">
-                        Overview of Instants
+                        Overview of Planeswalkers
                       </a>
                     </li>
                     <li className="py-1 text-sm">
