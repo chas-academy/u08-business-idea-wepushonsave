@@ -4,7 +4,7 @@ export interface ManaSymbol {
     description: string;
   }
   
-  const manaSymbols: ManaSymbol[] = [
+export const manaSymbols: ManaSymbol[] = [
   // Tap and Untap
   {
     symbol: '{T}',
