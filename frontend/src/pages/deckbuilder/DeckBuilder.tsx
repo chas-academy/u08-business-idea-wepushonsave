@@ -3,8 +3,9 @@ import {useLoaderData} from 'react-router-dom';
 import BackButton from '../../components/BackButton';
 import CardPlusButton from '../../components/CardPlusButton';
 import SearchForm from '../../components/search/SearchForm';
+import SearchResults from '../../components/search/SearchResults';
 
-const DeckBuilder = () => {
+const DeckBuilder: React.FC = () => {
   const data: any = useLoaderData();
   console.log(data);
 
@@ -125,6 +126,9 @@ const DeckBuilder = () => {
           </div>
         </section>
       </div>
+      <section className="deck-builder-search-results">
+        <SearchResults />
+      </section>
     </>
   );
 };
