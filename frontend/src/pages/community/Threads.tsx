@@ -1,8 +1,12 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useState, useEffect } from 'react';
 
+interface ThreadsProps {
+   username: string;
+}
 interface Thread {
    _id: number;
+   creatorUsername: string;
    content: string;
    comments: Comment[];
    createdAt: string;
@@ -11,21 +15,20 @@ interface Thread {
 
 interface Comment {
    _id: number;
+   creatorUsername: string;
    text: string;
    createdAt: string;
    userId: number; // _id for user who commented
 }
 
-const Threads: React.FC = () => {
+const Threads: React.FC<ThreadsProps> = ({ username }) => {
    const [threads, setThreads] = useState<Thread[]>([]);
    const [newThreadContent, setNewThreadContent] = useState('');
 
    useEffect(() => {
-      // Fetch threads from the backend
-
-
       fetchThreads();
    }, []);
+
 
    const fetchThreads = async () => {
       try {
@@ -42,6 +45,7 @@ const Threads: React.FC = () => {
       e.preventDefault();
       const newThread: Omit<Thread, '_id' | 'createdAt'> = {
          content: newThreadContent,
+         creatorUsername: username,
          comments: [],
          collapsed: false,
       };
@@ -78,8 +82,12 @@ const Threads: React.FC = () => {
       e.preventDefault();
       const commentInput = e.currentTarget.elements.namedItem('comment') as HTMLInputElement;
       const commentText = commentInput.value;
+      console.log("Username:", username);
+
+
       const newComment: Omit<Comment, '_id' | 'createdAt'> = {
          text: commentText,
+         creatorUsername: username,
          userId: 1,
       };
 
@@ -146,6 +154,8 @@ const Threads: React.FC = () => {
 
 
                <div key={thread._id} className="eachThread flex flex-col bg-white/30 w-[80%] max-w-lg rounded-lg mb-4 p-2">
+                  <p>Creator: {thread.creatorUsername}</p>
+
                   <p className="flex text-white/30 text-xs w-full justify-start">created at: {new Date(thread.createdAt).toLocaleString()}</p>
 
                   <p className="min-h-20 w-full  text-white p-2">
@@ -167,6 +177,7 @@ const Threads: React.FC = () => {
                            <div
                               key={comment._id}
                               className="border border-white/20 bg-white/10 rounded p-2 m-1">
+                              <p className="text-white text-xs font-semibold ">Comment by: {comment.creatorUsername}</p>
                               <p className="text-white">{comment.text}</p>
                               <p className="text-white/50 text-xs">created at: {new Date(comment.createdAt).toLocaleString()}</p>
 

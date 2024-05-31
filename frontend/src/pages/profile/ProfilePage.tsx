@@ -1,7 +1,8 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 /* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable  @typescript-eslint/no-explicit-any */ 
-import {useNavigate} from 'react-router-dom';
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
+import { useNavigate } from 'react-router-dom';
 import profileIcon from '../../assets/profile-icon.webp';
 
 const ProfilePage = () => {
@@ -46,6 +47,7 @@ const ProfilePage = () => {
 
       const data = await response.json();
       setUserData(data);
+      return data.username;
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
@@ -87,10 +89,10 @@ const ProfilePage = () => {
             <div className="absolute right-0">
               <button
                 onClick={settingsClick}
-                className="block bg-collection-btn w-full text-center text-white px-6 py-1 mb-1 text-gray-700 rounded hover:bg-gray-100">
+                className="block bg-collection-btn w-full text-center text-white px-6 py-1 mb-1 rounded hover:bg-gray-100">
                 Settings
               </button>
-              <button className="block bg-collection-btn w-full text-center text-white px-6 py-1 text-gray-700 rounded hover:bg-gray-100">
+              <button className="block bg-collection-btn w-full text-center text-white px-6 py-1  rounded hover:bg-gray-100">
                 Logout
               </button>
             </div>
@@ -100,20 +102,18 @@ const ProfilePage = () => {
       <div className="bg-profile-content">
         <nav className="grid grid-cols-2 bg-inactive-card-btn-gradient">
           <button
-            className={`${
-              activeSection === 'info'
-                ? 'card-details-active card-info'
-                : 'card-details-not-active'
-            }`}
+            className={`${activeSection === 'info'
+              ? 'card-details-active card-info'
+              : 'card-details-not-active'
+              }`}
             onClick={() => setActiveSection('info')}>
             Collection
           </button>
           <button
-            className={`${
-              activeSection === 'lists'
-                ? 'card-details-active card-market'
-                : 'card-details-not-active'
-            }`}
+            className={`${activeSection === 'lists'
+              ? 'card-details-active card-market'
+              : 'card-details-not-active'
+              }`}
             onClick={() => setActiveSection('lists')}>
             Lists
           </button>
@@ -151,6 +151,8 @@ const ProfilePage = () => {
           )}
         </div>
       </div>
+      {/*       <Threads username={userData.username} />
+ */}
     </div>
   );
 };
