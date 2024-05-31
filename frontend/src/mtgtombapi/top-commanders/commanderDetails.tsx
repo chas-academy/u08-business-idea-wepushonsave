@@ -5,6 +5,8 @@ import {GiMagicSwirl} from 'react-icons/gi';
 import {LuSword} from 'react-icons/lu';
 import Capitalizer from '../customs/customCapitalizer';
 import manaSymbols from '../manaSymbols';
+import ThemeDropdown from '../customs/themeDropdown';
+import { CustomLoader } from '../customs/customLoader';
 
 interface Commander {
   _id: string;
@@ -154,7 +156,7 @@ const CommanderDetails: React.FC = () => {
   }, [commanderInfo?.rulings_uri]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className='w-full mt-80 flex justify-center content-center'><CustomLoader></CustomLoader></div> ;
   }
 
   if (error) {
@@ -175,7 +177,7 @@ const CommanderDetails: React.FC = () => {
         className="bg-custom-purple-800 rounded-lg flex flex-col items-center w-[382px] p-4 my-4 mx-6 cursor-pointer"
         onClick={() => toggleDropdown(category)}>
         <div className="grid grid-cols-2 w-full justify-items-center">
-          <h3 className="font-bold text-2xl mb-2">{title}</h3>
+          <h3 className="font-bold text-2xl mb-2 text-left w-full">{title}</h3>
           <div
             className={`transition-transform duration-300 ${openDropdown === category ? 'rotate-180' : ''}`}>
             <LuSword size={32} />
@@ -183,10 +185,10 @@ const CommanderDetails: React.FC = () => {
         </div>
       </div>
       <div
-        className={`transition-max-height duration-300 overflow-y-auto shaddow-inner mb-6 ${openDropdown === category ? 'max-h-[600px] max-w-[350px]' : 'max-h-0'}`}>
-        <ul className="space-y-4 p-4">
+        className={`transition-max-height duration-300 overflow-y-auto shaddow-inner mb-6 snap-y snap-mandatory ${openDropdown === category ? 'max-h-[600px] max-w-[350px]' : 'max-h-0'}`}>
+        <ul className="space-y-4 p-4 ">
           {cards.map((card, index) => (
-            <li key={index}>
+            <li key={index} className='snap-start'>
               <div className="bg-custom-purple-800 rounded-lg flex flex-col items-center p-4 my-4 mx-6">
                 <h2 className="font-bold text-xl mb-2">
                   <Capitalizer text={card.name} />
@@ -241,17 +243,13 @@ const CommanderDetails: React.FC = () => {
         />
         <p className="text-lg">Decks: {commander.num_decks}</p>
         <h3 className="font-bold mb-2 text-2xl">Themes</h3>
-        <ul className="grid grid-cols-6 gap-2">
-          {commander.themes.map((theme, index) => (
-            <li
-              key={index}
-              className={`shadow-inner p-2 text-center text-sm font-semibold col-span-2 rounded-lg ${activeTheme === theme ? 'bg-blue-500 text-white' : 'bg-plum'}`}>
-              <button onClick={() => handleThemeClick(theme)}>
-                <Capitalizer text={theme} />
-              </button>
-            </li>
-          ))}
-        </ul>
+        <div className="my-4">
+          <ThemeDropdown
+            options={commander.themes}
+            selectedValue={activeTheme || ''}
+            onSelect={handleThemeClick}
+          />
+        </div>
         {commanderInfo?.image_uris?.border_crop && (
           <div className="flex flex-col items-center mt-4 w-full">
             <div

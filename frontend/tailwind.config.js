@@ -41,4 +41,9 @@ export default {
     },
   },
   plugins: [],
+  corePlugins: {
+    scrollSnapType: true,
+    scrollSnapAlign: true,
+    scrollSnapStop: true,
+  },
 };
