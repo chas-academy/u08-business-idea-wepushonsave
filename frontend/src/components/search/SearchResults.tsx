@@ -56,9 +56,7 @@ const SearchResults: React.FC = () => {
     document.body.style.overflow = '';
   };
 
-  if (!results || results.length === 0) {
-    return <p className="text-center">Search for a card</p>;
-  }
+  if (!results || results.length === 0) return;
 
   return (
     <>
