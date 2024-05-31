@@ -7,6 +7,7 @@ import Sidebar from '../components/sidebar/Sidebar';
 import SearchForm from '../components/search/SearchForm';
 
 import ArtCard from '../pages/home/RandomArtCard';
+import Footer from '../components/footer/footer';
 
 const RootLayout: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -41,9 +42,14 @@ const RootLayout: React.FC = () => {
           </>
         ) : null}
       </div>
-      <main>
-        <Outlet />
-      </main>
+      <div className="flex flex-col min-h-screen justify-between">
+        <main className="">
+          <Outlet />
+        </main>
+        <footer>
+          <Footer />
+        </footer>
+      </div>
     </>
   );
 };
