@@ -6,6 +6,7 @@ import profileRouter from "./routes/profileRoutes";
 import threadRoutes from "./routes/threadRoutes";
 
 import connectDB from "./db/db";
+import listRoutes from "./routes/listRoutes";
 
 // Initialize Database Connection
 connectDB;
@@ -40,10 +41,10 @@ app.get("/test", (req, res) => {
 // User Routes
 app.use("/api/user", userRouter);
 
-// Profile Routes
+// Pages Routes
 app.use("/api", profileRouter);
-app.use('/threads', threadRoutes);
-
+app.use("/threads", threadRoutes);
+app.use("/api", listRoutes);
 
 // Export App for Server
 export default app;
