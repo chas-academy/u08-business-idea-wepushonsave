@@ -64,11 +64,11 @@ const SearchResults: React.FC = () => {
     <>
       <dialog
         ref={dialogRef}
-        className="border border-red-500 size-9/12 md:h-9/10 md:w-1/3 bg-transparent backdrop:bg-black/75 shadow-xl no-scrollbar flex h-min overflow-auto">
+        className=" size-9/12 md:h-9/10 md:w-1/3 bg-transparent backdrop:bg-black/75 shadow-xl no-scrollbar flex h-min overflow-auto">
         {activeCard && (
           <dialog
             open
-            className="border border-red-500 m-2 bg-[#17140D] text-white rounded-t-xl relative">
+            className=" m-2 bg-[#17140D] text-white rounded-t-xl relative">
             <CardLayout
               card={activeCard}
               onClose={closeModal}

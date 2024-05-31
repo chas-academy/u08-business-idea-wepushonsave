@@ -7,6 +7,7 @@ import Sidebar from '../components/sidebar/Sidebar';
 import SearchForm from '../components/search/SearchForm';
 import ArtCard from '../pages/home/RandomArtCard';
 import {SearchProvider} from '../components/search/SearchContext';
+import SearchResults from '../components/search/SearchResults';
 
 const RootLayout: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -22,11 +23,6 @@ const RootLayout: React.FC = () => {
       <Navbar toggleSidebar={toggleSidebar} />
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       <nav className="bg-gray-500">
-        <NavLink to={'cards'}>Cards</NavLink> |{' '}
-        <NavLink to={'community'}>Community</NavLink> |{' '}
-        <NavLink to={'gamerules'}>Game Rules</NavLink> |{' '}
-        <NavLink to={'cardrules'}>Card Rules</NavLink> |{' '}
-        <NavLink to={'deck-builder'}>Deck Builder</NavLink> |{' '}
         <NavLink to={'/algoritm'}>Algoritm</NavLink> |{' '}
         <NavLink to={'/alldecks'}>All Decks</NavLink> |{' '}
         <NavLink to={'/topcommander'}>Top Commanders</NavLink>
@@ -38,8 +34,10 @@ const RootLayout: React.FC = () => {
               <div className="bg-mobile-search bg-cover w-full py-16 md:bg-desktop-search md:bg-fill md:p-5 md:bg-top md:mt-14 md:h-40">
                 <SearchForm />
               </div>
+
+              <SearchResults />
+              <ArtCard></ArtCard>
             </SearchProvider>
-            <ArtCard></ArtCard>
           </>
         ) : null}
       </div>
