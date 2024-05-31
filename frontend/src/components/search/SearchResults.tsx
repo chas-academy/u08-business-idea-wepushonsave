@@ -8,7 +8,6 @@
 import {ICard} from '../card/CardsArray';
 import {getImageFromCardFaces} from '../../utils/getImageFromCardFaces';
 import {useEffect, useRef, useState} from 'react';
-import {delay} from '../../utils/setApiDelay';
 import CardLayout from '../../layouts/CardLayout';
 import {useSearch} from './SearchContext';
 
@@ -18,7 +17,6 @@ const SearchResults: React.FC = () => {
   const [activeCard, setActiveCard] = useState<ICard | undefined>(undefined);
 
   useEffect(() => {
-    delay(2000);
     if (!activeCard) return;
     dialogRef.current?.showModal();
 
@@ -37,7 +35,8 @@ const SearchResults: React.FC = () => {
    * Close view
    * @param e click-events outside the card window
    */
-  const handleOnClick = (e: MouseEvent) => {
+  const handleOnClick = (e: any) => {
+    if (e.target.tagName !== 'DIALOG') return;
     const dialogDimensions = dialogRef.current?.getBoundingClientRect();
     if (dialogDimensions != undefined) {
       if (
@@ -65,11 +64,11 @@ const SearchResults: React.FC = () => {
     <>
       <dialog
         ref={dialogRef}
-        className=" size-9/12 md:h-9/10 md:w-1/3 bg-transparent backdrop:bg-black/75 shadow-xl no-scrollbar flex">
+        className="border border-red-500 size-9/12 md:h-9/10 md:w-1/3 bg-transparent backdrop:bg-black/75 shadow-xl no-scrollbar flex h-min overflow-auto">
         {activeCard && (
           <dialog
             open
-            className="m-2 bg-[#17140D] text-white sm:size-9/12 self-auto rounded-t-xl">
+            className="border border-red-500 m-2 bg-[#17140D] text-white rounded-t-xl relative">
             <CardLayout
               card={activeCard}
               onClose={closeModal}
