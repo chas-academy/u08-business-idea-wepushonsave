@@ -28,6 +28,8 @@ const Threads: React.FC = () => {
    const fetchThreads = async () => {
       try {
          const response = await fetch('http://localhost:3000/threads/all'); // Adjust the endpoint as needed
+         //https://mtg-tomb.onrender.com
+
          const data = await response.json();
          setThreads(data);
       } catch (error) {
@@ -66,12 +68,14 @@ const Threads: React.FC = () => {
       }
    };
 
+   //handling comment submit 
    const handleCommentSubmit = async (
       e: React.FormEvent<HTMLFormElement>,
       threadId: number,
-      commentText: string
    ) => {
       e.preventDefault();
+      const commentInput = e.currentTarget.elements.namedItem('comment') as HTMLInputElement;
+      const commentText = commentInput.value;
       const newComment: Omit<Comment, '_id'> = {
          text: commentText,
          userId: 1, // Replace with actual user _id
@@ -93,7 +97,7 @@ const Threads: React.FC = () => {
                   ? {
                      ...thread,
                      comments: [...thread.comments, createdComment],
-                     collapsed: false, // Set collapsed to false to display all comments
+                     collapsed: true, // Set collapsed to false 
                   }
                   : thread
             );
@@ -118,32 +122,34 @@ const Threads: React.FC = () => {
    };
 
    return (
-      <div className="flex flex-col items-center p-2 ">
+      <div className="flex flex-col items-center">
          <h1 className="text-3xl text-white/80 font-bold mb-4">Community Threads</h1>
-         <form onSubmit={handleNewThreadSubmit} className="w-full max-w-lg mb-4">
+         <form onSubmit={handleNewThreadSubmit} className=" w-[80%] bg-white/50 p-2 rounded-lg max-w-lg flex flex-col mb-4 items-center">
             <textarea
                placeholder="Thread Content"
                value={newThreadContent}
                onChange={e => setNewThreadContent(e.target.value)}
-               className="w-full h-24 bg-gray-200 border border-gray-400 rounded py-2 px-4 mb-2 focus:outline-none focus:bg-white focus:border-blue-500"
+               className="w-full h-24 text-black bg-white/50 border border-white/10 rounded py-2 px-4 focus:outline-periwinkle focus:bg-white/80 "
             />
-            <button
-               type="submit"
-               className="bg-btn-gradient text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-               Create Thread
+            <button className="font-inter w-1/2 text-sm md:inline-block m-1 px-4 py-2 bg-btn-gradient text-white font-medium rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
+               <span className="absolute inset-0 border-2 border-transparent hover:border-white/30 rounded-lg"></span> Create Thread
             </button>
+
+            {/*display threads*/}
          </form>
-         <div className='threadSection bg-white/30 flex flex-col-reverse'>
+         <div className='threadSection  flex flex-col-reverse w-full items-center'>
             {threads.map(thread => (
-               <div key={thread._id} className=" w-full max-w-lg mb-4">
-                  <p className="min-h-20 text-white p-2">
+
+               <div key={thread._id} className="eachThread flex flex-col bg-white/30 w-[80%] max-w-lg rounded-lg mb-4 p-2">
+                  <p className="min-h-20 w-full  text-white p-2">
                      {thread.content}
                   </p>
 
+                  {/*display submitted comments*/}
                   <button
-                     className="text-white text-sm bg-nav-gradient w-3/7 px-4 py-2 cursor-pointer rounded"
+                     className="text-white/50 text-xs cursor-pointer rounded w-1/3 hover:text-white"
                      onClick={() => toggleComments(thread._id)}>
-                     {thread.collapsed ? 'Hide comments' : 'Show comments'}
+                     {thread.collapsed ? 'Hide comments' : 'Read comments'}
                   </button>
 
                   {thread.collapsed && (
@@ -151,30 +157,28 @@ const Threads: React.FC = () => {
                         {thread.comments.map(comment => (
                            <div
                               key={comment._id}
-                              className="border border-white rounded p-2 m-2">
+                              className="border border-white/20 bg-white/10 rounded p-2 m-1">
                               <p className="text-white">{comment.text}</p>
                            </div>
                         ))}
                      </div>
                   )}
 
+                  {/*make comments*/}
                   <form
-                     onSubmit={e =>
-                        handleCommentSubmit(e, thread._id, e.currentTarget.comment.value)
-                     }
-                     className="mt-2">
+                     onSubmit={e => handleCommentSubmit(e, thread._id)}
+                     className="mt-2"
+                  >
                      <input
                         type="text"
                         name="comment"
                         placeholder="Add a comment"
                         required
-                        className="w-full bg-white/30 border border-white/30 rounded py-2 px-4 mb-2 focus:outline-none focus:bg-white focus:border-blue-500"
+                        className="w-2/3 text:white placeholder-white/80 bg-white/30 py-2 px-4 m-1 border border-white/30 rounded focus:outline-solid focus:outline-periwinkle/80 focus:bg-white/80 "
                      />
-                     {/*                      <input type="text" placeholder={`${thread._id}`} name="threadId" value={thread._id}></input>
- */}                     <button
-                        type="submit"
-                        className="bg-btn-gradient hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                        Post Comment
+                     <button className="font-inter text-sm md:inline-block m-1 px-4 py-2 bg-btn-gradient text-white font-medium rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
+                        <span className="absolute inset-0 border-2 border-transparent hover:border-white/30 rounded-lg"></span>
+                        SEND
                      </button>
                   </form>
                </div>
