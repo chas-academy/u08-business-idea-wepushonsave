@@ -2,7 +2,9 @@ import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import userRouter from "./api/User";
-import profileRouter from "./routes/profileRoutes"; // Import the profile router from routes folder
+import profileRouter from "./routes/profileRoutes";
+import threadRoutes from "./routes/threadRoutes";
+
 import connectDB from "./db/db";
 
 // Initialize Database Connection
@@ -40,6 +42,8 @@ app.use("/api/user", userRouter);
 
 // Profile Routes
 app.use("/api", profileRouter);
+app.use('/threads', threadRoutes);
+
 
 // Export App for Server
 export default app;

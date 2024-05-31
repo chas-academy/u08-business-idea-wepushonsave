@@ -1,37 +1,38 @@
 /* eslint-disable react/react-in-jsx-scope */
-
-import { useState } from "react";
+import React from 'react';
 
 interface CollapsableProps {
   titles: string;
   content: JSX.Element;
+  isOpen: boolean;
   image?: JSX.Element;
+  onClick: () => void;
 }
 
-const Collapsable = ({ titles, content, image }: CollapsableProps) => {
-  const [collapsableOpen, setCollapsableOpen] = useState(false);
-
+const Collapsable: React.FC<CollapsableProps> = ({ titles, content, image, isOpen, onClick }) => {
   return (
-    <div className="py-2">
+    <div className="py-4 bg-white/10 px-2 rounded-lg my-2">
       <button
-        onClick={() => setCollapsableOpen(!collapsableOpen)}
-        className="flex justify-between w-full"
+        onClick={onClick}
+        className="flex justify-between w-full p-2"
       >
         <div className="flex items-center">
-          {image && <div className="mr-2 w-6 h-6">{image}</div>} {/* Display image if provided */}
-          <span className="font-semibold text-nowrap">{titles}</span>
+        {image && <div className="mr-2 w-8 h-8">{image}</div>}
+          <span className="font-semibold text-lg text-nowrap">{titles}</span>
         </div>
-        {collapsableOpen ? <span>-</span> : <span>+</span>}{' '}
+        <div className='text-2xl'>
+        {isOpen ? <p>-</p> : <p>+</p>}
+        </div>
       </button>
       <div
         className={`grid overflow-hidden transition-all duration-300 ease-in-out ${
-          collapsableOpen
+          isOpen
             ? 'grid-rows-[1fr] opacity-100'
             : 'grid-rows-[0fr] opacity-0'
         }`}
       >
-        {collapsableOpen && (
-          <div className="mt-2 p-2 bg-zinc-700 rounded">{content}</div>
+        {isOpen && (
+          <div className="mt-2 p-2 rounded">{content}</div>
         )}
       </div>
     </div>
