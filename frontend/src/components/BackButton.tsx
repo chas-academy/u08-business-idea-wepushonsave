@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import backIcon from '../assets/arrow-ios-back.svg';
 const BackButton = () => {
   return (
