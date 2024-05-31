@@ -4,8 +4,12 @@ import { useState, useEffect } from 'react';
 interface ThreadsProps {
    username: string;
 }
+interface ThreadsProps {
+   username: string;
+}
 interface Thread {
    _id: number;
+   creatorUsername: string;
    creatorUsername: string;
    content: string;
    comments: Comment[];
@@ -16,6 +20,7 @@ interface Thread {
 interface Comment {
    _id: number;
    creatorUsername: string;
+   creatorUsername: string;
    text: string;
    createdAt: string;
    createdAt: string;
@@ -23,13 +28,13 @@ interface Comment {
 }
 
 const Threads: React.FC<ThreadsProps> = ({ username }) => {
-
    const [threads, setThreads] = useState<Thread[]>([]);
    const [newThreadContent, setNewThreadContent] = useState('');
 
    useEffect(() => {
       fetchThreads();
    }, []);
+
 
 
    const fetchThreads = async () => {

@@ -1,5 +1,5 @@
 
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 
 const ProfileDashboard = () => {
   const [userData, setUserData] = useState<any>({});
@@ -104,50 +104,66 @@ const ProfileDashboard = () => {
           </button>
         </div>
         <form onSubmit={handleFormSubmit}>
-          <ul className="mb-6 space-y-4">
-            <li className="font-bold">
-              Username:
-              {isEditing ? (
-                <input
-                  type="text"
-                  name="username"
-                  value={userData.username || ''}
-                  onChange={handleInputChange}
-                  className="text-black w-full mt-1 p-2 border border-gray-300 rounded-md"
-                />
-              ) : (
-                <span className="ml-4">{userData.username || ''}</span>
-              )}
-            </li>
-            <li className="font-bold">
-              Email address:
-              {isEditing ? (
-                <input
-                  type="email"
-                  name="email"
-                  value={userData.email || ''}
-                  onChange={handleInputChange}
-                  className="text-black w-full mt-1 p-2 border border-gray-300 rounded-md"
-                />
-              ) : (
-                <span className="ml-4">{userData.email || ''}</span>
-              )}
-            </li>
-            <li className="font-bold">
-              Password:
-              {<span>**********</span>}
-            </li>
-          </ul>
-          {isEditing && (
-            <div className="flex justify-end">
-              <button
-                type="submit"
-                className="px-4 py-1 text-white rounded-md hover:text-aubergine bg-btn-gradient">
-                Save
-              </button>
-            </div>
-          )}
-        </form>
+          <form onSubmit={handleFormSubmit}>
+            <ul className="mb-6 space-y-4">
+              <li className="font-bold">
+                Username:
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="username"
+                    value={userData.username || ''}
+                    onChange={handleInputChange}
+                    className="text-black w-full mt-1 p-2 border border-gray-300 rounded-md"
+                    onChange={handleInputChange}
+                    className="text-black w-full mt-1 p-2 border border-gray-300 rounded-md"
+                  />
+                ) : (
+                  <span className="ml-4">{userData.username || ''}</span>
+                )}
+              </li>
+              <li className="font-bold">
+                Email address:
+                {isEditing ? (
+                  <input
+                    type="email"
+                    name="email"
+                    value={userData.email || ''}
+                    onChange={handleInputChange}
+                    className="text-black w-full mt-1 p-2 border border-gray-300 rounded-md"
+                    onChange={handleInputChange}
+                    className="text-black w-full mt-1 p-2 border border-gray-300 rounded-md"
+                  />
+                ) : (
+                  <span className="ml-4">{userData.email || ''}</span>
+                )}
+              </li>
+              <li className="font-bold">
+                Password:
+                {<span>**********</span>}
+                Password:
+                {<span>**********</span>}
+              </li>
+            </ul>
+            {isEditing && (
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  className="px-4 py-1 text-white rounded-md hover:text-aubergine bg-btn-gradient">
+                  Save
+                </button>
+              </div>
+            )}
+            {isEditing && (
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  className="px-4 py-1 text-white rounded-md hover:text-aubergine bg-btn-gradient">
+                  Save
+                </button>
+              </div>
+            )}
+          </form>
       </div>
     </div>
   );
