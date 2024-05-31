@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {useLoaderData} from 'react-router-dom';
 import BackButton from '../../components/BackButton';
 import CardPlusButton from '../../components/CardPlusButton';
