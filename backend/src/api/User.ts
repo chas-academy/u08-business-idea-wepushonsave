@@ -118,8 +118,7 @@ router.post("/login", (req: Request, res: Response) => {
               console.log(err);
               return res
                 .status(500)
-                .json({ message: "An error occurred while comparing passwords!" });
-           
+                .json({ message: "An error occurred while comparing passwords!" });    
             });
         } else {
           return res

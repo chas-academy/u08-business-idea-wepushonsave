@@ -46,7 +46,7 @@ const CommanderDetails: React.FC = () => {
   const {name} = useParams<{name: any}>();
   const location = useLocation();
   const state = location.state as {commander: Commander} | undefined;
-  const [commander, setCommander] = useState<Commander | null>(
+  const [commander] = useState<Commander | null>(
     state?.commander || null
   );
   const [commanderInfo, setCommanderInfo] = useState<CommanderInfo | null>(

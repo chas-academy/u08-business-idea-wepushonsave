@@ -14,7 +14,7 @@ const SearchInput: React.FC<SearchInputProps> = ({value, onChange}) => {
         type="search"
         value={value || ''}
         onChange={onChange}
-        placeholder="Search to a card"
+        placeholder="Search for a card"
       />
     </>
   );

@@ -16,7 +16,6 @@ import Threads from './pages/community/Threads.tsx';
 
 // components
 import CardsArray from './components/card/CardsArray.tsx';
-import SearchResults from './components/search/SearchResults.tsx';
 
 // layouts
 import RootLayout from './layouts/RootLayout.tsx';
@@ -24,7 +23,6 @@ import RootLayout from './layouts/RootLayout.tsx';
 // utils
 import {cardsArrayLoader} from './utils/cardsArrayLoader.tsx';
 import {cardSetLoader} from './utils/cardSetLoader.tsx';
-import {cardSearchLoader} from './utils/cardSearchLoader.tsx';
 
 //pages
 import ProfilePage from './pages/profile/ProfilePage.tsx';
@@ -63,12 +61,6 @@ const router = createBrowserRouter(
       <Route path="alldecks" element={<AllDecksComponent />} />
       <Route path="topcommander" element={<TopCommanders />} />
       <Route path="/commander/:name" element={<CommanderDetails />} />
-
-      <Route
-        path="search"
-        element={<SearchResults />}
-        loader={cardSearchLoader}
-      />
 
       <Route
         path="cards/:set"

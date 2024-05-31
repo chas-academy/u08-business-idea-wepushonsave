@@ -42,7 +42,7 @@ const Navbar: React.FC<NavbarProps> = ({toggleSidebar}) => {
         />
       </a>
       <a
-        href="/decks"
+        href="/deck-builder"
         className="decks-logo w-full md:w-24 block text-center 0">
         <img
           src={decksIcon}
