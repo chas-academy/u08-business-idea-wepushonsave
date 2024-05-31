@@ -5,12 +5,14 @@ interface Thread {
    _id: number;
    content: string;
    comments: Comment[];
+   createdAt: string;
    collapsed: boolean; // True on init, hides comments
 }
 
 interface Comment {
    _id: number;
    text: string;
+   createdAt: string;
    userId: number; // _id for user who commented
 }
 
@@ -38,10 +40,10 @@ const Threads: React.FC = () => {
    };
    const handleNewThreadSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      const newThread: Omit<Thread, '_id'> = {
+      const newThread: Omit<Thread, '_id' | 'createdAt'> = {
          content: newThreadContent,
          comments: [],
-         collapsed: false, // Collapse comments for thread on init
+         collapsed: false,
       };
 
       try {
@@ -76,9 +78,9 @@ const Threads: React.FC = () => {
       e.preventDefault();
       const commentInput = e.currentTarget.elements.namedItem('comment') as HTMLInputElement;
       const commentText = commentInput.value;
-      const newComment: Omit<Comment, '_id'> = {
+      const newComment: Omit<Comment, '_id' | 'createdAt'> = {
          text: commentText,
-         userId: 1, // Replace with actual user _id
+         userId: 1,
       };
 
       try {
@@ -128,6 +130,8 @@ const Threads: React.FC = () => {
             <textarea
                placeholder="Thread Content"
                value={newThreadContent}
+               wrap="soft"
+               onDoubleClick={(e) => (e.target as HTMLTextAreaElement).select()} // Selects all text on double-click
                onChange={e => setNewThreadContent(e.target.value)}
                className="w-full h-24 text-black bg-white/50 border border-white/10 rounded py-2 px-4 focus:outline-periwinkle focus:bg-white/80 "
             />
@@ -137,20 +141,25 @@ const Threads: React.FC = () => {
 
             {/*display threads*/}
          </form>
-         <div className='threadSection  flex flex-col-reverse w-full items-center'>
+         <div className='threadSection  flex flex-col w-full items-center'>
             {threads.map(thread => (
 
+
                <div key={thread._id} className="eachThread flex flex-col bg-white/30 w-[80%] max-w-lg rounded-lg mb-4 p-2">
+                  <p className="flex text-white/30 text-xs w-full justify-start">created at: {new Date(thread.createdAt).toLocaleString()}</p>
+
                   <p className="min-h-20 w-full  text-white p-2">
                      {thread.content}
                   </p>
 
+
                   {/*display submitted comments*/}
                   <button
-                     className="text-white/50 text-xs cursor-pointer rounded w-1/3 hover:text-white"
+                     className="text-white/80 text-sm cursor-pointer rounded w-fit hover:text-white"
                      onClick={() => toggleComments(thread._id)}>
                      {thread.collapsed ? 'Hide comments' : 'Read comments'}
                   </button>
+
 
                   {thread.collapsed && (
                      <div>
@@ -159,6 +168,8 @@ const Threads: React.FC = () => {
                               key={comment._id}
                               className="border border-white/20 bg-white/10 rounded p-2 m-1">
                               <p className="text-white">{comment.text}</p>
+                              <p className="text-white/50 text-xs">created at: {new Date(comment.createdAt).toLocaleString()}</p>
+
                            </div>
                         ))}
                      </div>
@@ -172,6 +183,8 @@ const Threads: React.FC = () => {
                      <input
                         type="text"
                         name="comment"
+                        onDoubleClick={(e) => (e.target as HTMLInputElement).select()}
+
                         placeholder="Add a comment"
                         required
                         className="w-2/3 text:white placeholder-white/80 bg-white/30 py-2 px-4 m-1 border border-white/30 rounded focus:outline-solid focus:outline-periwinkle/80 focus:bg-white/80 "
