@@ -40,9 +40,10 @@ import DeckBuilder from './pages/deckbuilder/DeckBuilder.tsx';
 import {singleCardLoader} from './utils/singleCardLoader.tsx';
 
 //API Components
-import SearchComponent from './mtgtombapi/algoritm/comRec.tsx';
 import AllDecksComponent from './mtgtombapi/decks/allDecks.tsx';
 import TopCommanders from './mtgtombapi/top-commanders/allTopCommanders.tsx';
+import CommanderRecSearch from './mtgtombapi/algoritm/comRec.tsx';
+import CommanderDetails from './mtgtombapi/top-commanders/commanderDetails.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -56,9 +57,10 @@ const router = createBrowserRouter(
         loader={cardsArrayLoader}
       />
 
-      <Route path="algoritm" element={<SearchComponent />} />
+      <Route path="algoritm" element={<CommanderRecSearch />} />
       <Route path="alldecks" element={<AllDecksComponent />} />
       <Route path="topcommander" element={<TopCommanders />} />
+      <Route path="/commander/:name" element={<CommanderDetails />} />
 
       <Route
         path="cards/:set"
