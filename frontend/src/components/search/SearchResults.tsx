@@ -5,16 +5,15 @@
  * Display the resaults after a given search
  */
 
-import {useLoaderData} from 'react-router-dom';
-import {IAPIResponse, ICard} from '../card/CardsArray';
+import {ICard} from '../card/CardsArray';
 import {getImageFromCardFaces} from '../../utils/getImageFromCardFaces';
 import {useEffect, useRef, useState} from 'react';
 import {delay} from '../../utils/setApiDelay';
 import CardLayout from '../../layouts/CardLayout';
+import {useSearch} from './SearchContext';
 
 const SearchResults: React.FC = () => {
-  const apiResponse = useLoaderData() as IAPIResponse;
-  const cards = apiResponse.data;
+  const {results} = useSearch();
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const [activeCard, setActiveCard] = useState<ICard | undefined>(undefined);
 
@@ -32,7 +31,7 @@ const SearchResults: React.FC = () => {
       dialogRef.current?.removeEventListener('close', closeModal);
       document.body.style.overflow = '';
     };
-  }, [activeCard]);
+  }, [activeCard, results]);
 
   /**
    * Close view
@@ -58,6 +57,10 @@ const SearchResults: React.FC = () => {
     document.body.style.overflow = '';
   };
 
+  if (!results || results.length === 0) {
+    return <p className="text-center">Search for a card</p>;
+  }
+
   return (
     <>
       <dialog
@@ -77,7 +80,7 @@ const SearchResults: React.FC = () => {
       </dialog>
 
       <div className=" grid grid-cols-3 sm:grid-cols-8 gap-4 m-4 relative sm:top-16">
-        {cards.map(card => {
+        {results.map((card: ICard) => {
           const imageUrl =
             card.card_faces && card.card_faces.length > 0
               ? getImageFromCardFaces(card.card_faces)

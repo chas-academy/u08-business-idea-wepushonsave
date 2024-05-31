@@ -5,8 +5,8 @@ import {useState} from 'react';
 import Navbar from '../components/navbar/Navbar';
 import Sidebar from '../components/sidebar/Sidebar';
 import SearchForm from '../components/search/SearchForm';
-
 import ArtCard from '../pages/home/RandomArtCard';
+import {SearchProvider} from '../components/search/SearchContext';
 
 const RootLayout: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -34,15 +34,19 @@ const RootLayout: React.FC = () => {
       <div>
         {isHomePage ? (
           <>
-            <div className="bg-mobile-search bg-cover w-full py-16 md:bg-desktop-search md:bg-fill md:p-5 md:bg-top md:mt-14 md:h-40">
-              <SearchForm />
-            </div>
+            <SearchProvider>
+              <div className="bg-mobile-search bg-cover w-full py-16 md:bg-desktop-search md:bg-fill md:p-5 md:bg-top md:mt-14 md:h-40">
+                <SearchForm />
+              </div>
+            </SearchProvider>
             <ArtCard></ArtCard>
           </>
         ) : null}
       </div>
       <main>
-        <Outlet />
+        <SearchProvider>
+          <Outlet />
+        </SearchProvider>
       </main>
     </>
   );
