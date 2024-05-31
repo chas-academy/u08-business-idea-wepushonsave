@@ -1,21 +1,51 @@
 /* eslint-disable react/react-in-jsx-scope */
 
+import {useState} from 'react';
 import Collapsable from './Collapsable';
 import CollapsableContent from './CollapsableContent';
 
-//här i vill man fylla ut texten och innehållet. Man skapar inhållet efter den färdiga layouten som collapsable och
-
 const FAQ_Game_rules = () => {
+  const [openMainCollapsibleId, setOpenMainCollapsibleId] = useState<
+    string | null
+  >(null);
+  const [openSubCollapsibleId, setOpenSubCollapsibleId] = useState<
+    string | null
+  >(null);
+
+  const handleMainCollapsibleToggle = (id: string) => {
+    setOpenMainCollapsibleId(prevId => (prevId === id ? null : id));
+  };
+
+  const handleSubCollapsibleToggle = (id: string) => {
+    setOpenSubCollapsibleId(prevId => (prevId === id ? null : id));
+  };
+
   return (
     <>
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className="text-white rounded-lg mt-4 bg-site-gradient"
+        id="pAPAabout">
+        <Collapsable
+          titles="About MTG"
+          content={
+            <CollapsableContent
+              title=""
+              items={[
+                'Magic: The Gathering is a collectible card game created by mathematician Richard Garfield and published by Wizards of the Coast in 1993. As the first trading card game of its kind, Magic has set the standard for the genre and has developed a massive, dedicated player base worldwide. In the game, players take on the roles of powerful spellcasters known as Planeswalkers, using customized decks of cards to cast spells, summon creatures, and engage in strategic battles against one another. With an ever-expanding library of cards, Magic: The Gathering combines elements of strategy, fantasy, and competitive play, making it a beloved and enduring game in the world of tabletop and digital gaming.',
+              ]}
+            />
+          }
+          isOpen={openMainCollapsibleId === 'pAPAhouse-rules'}
+          onClick={() => handleMainCollapsibleToggle('pAPAhouse-rules')}
+        />
+      </div>
+      <div
+        className="text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPACommander-rules">
         <Collapsable
-          titles="Commander Rules and Gameplay Guide"
+          titles="Commander Rules/Game Guide"
           content={
             <>
-              <CollapsableContent title="" items={[]} image="" />
               <div id="deck-construction-and-Setup">
                 <Collapsable
                   titles="Deck Construction and Setup"
@@ -32,6 +62,12 @@ const FAQ_Game_rules = () => {
                         '_',
                       ]}
                     />
+                  }
+                  isOpen={
+                    openSubCollapsibleId === 'deck-construction-and-Setup'
+                  }
+                  onClick={() =>
+                    handleSubCollapsibleToggle('deck-construction-and-Setup')
                   }
                 />
               </div>
@@ -50,6 +86,8 @@ const FAQ_Game_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'card-types'}
+                  onClick={() => handleSubCollapsibleToggle('card-types')}
                 />
               </div>
               <div id="turn-structure">
@@ -84,6 +122,8 @@ const FAQ_Game_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'turn-structure'}
+                  onClick={() => handleSubCollapsibleToggle('turn-structure')}
                 />
               </div>
               <div id="casting-spells">
@@ -100,6 +140,8 @@ const FAQ_Game_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'casting-spells'}
+                  onClick={() => handleSubCollapsibleToggle('casting-spells')}
                 />
               </div>
               <div id="combat">
@@ -115,6 +157,8 @@ const FAQ_Game_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'combat'}
+                  onClick={() => handleSubCollapsibleToggle('combat')}
                 />
               </div>
               <div id="damage-and-life">
@@ -130,6 +174,8 @@ const FAQ_Game_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'damage-and-life'}
+                  onClick={() => handleSubCollapsibleToggle('damage-and-life')}
                 />
               </div>
               <div id="keywords-and-abilities">
@@ -144,6 +190,10 @@ const FAQ_Game_rules = () => {
                         '_',
                       ]}
                     />
+                  }
+                  isOpen={openSubCollapsibleId === 'keywords-and-abilities'}
+                  onClick={() =>
+                    handleSubCollapsibleToggle('keywords-and-abilities')
                   }
                 />
               </div>
@@ -161,6 +211,8 @@ const FAQ_Game_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'win-conditions'}
+                  onClick={() => handleSubCollapsibleToggle('win-conditions')}
                 />
               </div>
               <div id="interaction-and-stack">
@@ -175,6 +227,10 @@ const FAQ_Game_rules = () => {
                         '_',
                       ]}
                     />
+                  }
+                  isOpen={openSubCollapsibleId === 'interaction-and-stack'}
+                  onClick={() =>
+                    handleSubCollapsibleToggle('interaction-and-stack')
                   }
                 />
               </div>
@@ -207,15 +263,20 @@ const FAQ_Game_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'mulligans-and-sideboarding'}
+                  onClick={() =>
+                    handleSubCollapsibleToggle('mulligans-and-sideboarding')
+                  }
                 />
               </div>
             </>
           }
+          isOpen={openMainCollapsibleId === 'pAPACommander-rules'}
+          onClick={() => handleMainCollapsibleToggle('pAPACommander-rules')}
         />
       </div>
-
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className="text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAphilosophy">
         <Collapsable
           titles="philosophy"
@@ -227,10 +288,13 @@ const FAQ_Game_rules = () => {
               ]}
             />
           }
+          isOpen={openMainCollapsibleId === 'pAPAphilosophy'}
+          onClick={() => handleMainCollapsibleToggle('pAPAphilosophy')}
         />
       </div>
+
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className="text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAthe-golden-rule">
         <Collapsable
           titles="The Golden Rule"
@@ -242,10 +306,13 @@ const FAQ_Game_rules = () => {
               ]}
             />
           }
+          isOpen={openMainCollapsibleId === 'pAPAthe-golden-rule'}
+          onClick={() => handleMainCollapsibleToggle('pAPAthe-golden-rule')}
         />
       </div>
+
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className="text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAhouse-rules">
         <Collapsable
           titles="House Rules"
@@ -258,10 +325,13 @@ const FAQ_Game_rules = () => {
               ]}
             />
           }
+          isOpen={openMainCollapsibleId === 'pAPAhouse-rules'}
+          onClick={() => handleMainCollapsibleToggle('pAPAhouse-rules')}
         />
       </div>
+
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className="text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPArules-sources">
         <Collapsable
           titles="Rules Sources"
@@ -273,10 +343,13 @@ const FAQ_Game_rules = () => {
               ]}
             />
           }
+          isOpen={openMainCollapsibleId === 'pAPArules-sources'}
+          onClick={() => handleMainCollapsibleToggle('pAPArules-sources')}
         />
       </div>
+
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className="text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAdeck-construction">
         <Collapsable
           titles="Deck Construction"
@@ -288,10 +361,13 @@ const FAQ_Game_rules = () => {
               ]}
             />
           }
+          isOpen={openMainCollapsibleId === 'pAPAdeck-construction'}
+          onClick={() => handleMainCollapsibleToggle('pAPAdeck-construction')}
         />
       </div>
+
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className="text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAstarting-the-game">
         <Collapsable
           titles="Starting the Game"
@@ -303,10 +379,13 @@ const FAQ_Game_rules = () => {
               ]}
             />
           }
+          isOpen={openMainCollapsibleId === 'pAPAstarting-the-game'}
+          onClick={() => handleMainCollapsibleToggle('pAPAstarting-the-game')}
         />
       </div>
+
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className="text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAcommander">
         <Collapsable
           titles="Commander"
@@ -318,10 +397,12 @@ const FAQ_Game_rules = () => {
               ]}
             />
           }
+          isOpen={openMainCollapsibleId === 'pAPAcommander'}
+          onClick={() => handleMainCollapsibleToggle('pAPAcommander')}
         />
       </div>
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className="text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAcard-legality">
         <Collapsable
           titles="Card Legality"
@@ -333,11 +414,14 @@ const FAQ_Game_rules = () => {
               ]}
             />
           }
+          isOpen={openMainCollapsibleId === 'pAPAcard-legality'}
+          onClick={() => handleMainCollapsibleToggle('pAPAcard-legality')}
         />
       </div>
+
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
-        id="pAPAcard-legality">
+        className="text-white rounded-lg mt-4 bg-site-gradient"
+        id="pAPAbanned-list">
         <Collapsable
           titles="Banned List"
           content={
@@ -349,10 +433,13 @@ const FAQ_Game_rules = () => {
               ]}
             />
           }
+          isOpen={openMainCollapsibleId === 'pAPAbanned-list'}
+          onClick={() => handleMainCollapsibleToggle('pAPAbanned-list')}
         />
       </div>
+
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className="text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAcolor-identity-and-color-indicator">
         <Collapsable
           titles="Color Identity and Color Indicator"
@@ -365,10 +452,19 @@ const FAQ_Game_rules = () => {
               ]}
             />
           }
+          isOpen={
+            openMainCollapsibleId === 'pAPAcolor-identity-and-color-indicator'
+          }
+          onClick={() =>
+            handleMainCollapsibleToggle(
+              'pAPAcolor-identity-and-color-indicator'
+            )
+          }
         />
       </div>
+
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className="text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAlimited-range-of-influence">
         <Collapsable
           titles="Limited Range of Influence"
@@ -380,10 +476,15 @@ const FAQ_Game_rules = () => {
               ]}
             />
           }
+          isOpen={openMainCollapsibleId === 'pAPAlimited-range-of-influence'}
+          onClick={() =>
+            handleMainCollapsibleToggle('pAPAlimited-range-of-influence')
+          }
         />
       </div>
+
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className="text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAofficial-announcements-and-rulings">
         <Collapsable
           titles="Official Announcements and Rulings"
@@ -395,10 +496,19 @@ const FAQ_Game_rules = () => {
               ]}
             />
           }
+          isOpen={
+            openMainCollapsibleId === 'pAPAofficial-announcements-and-rulings'
+          }
+          onClick={() =>
+            handleMainCollapsibleToggle(
+              'pAPAofficial-announcements-and-rulings'
+            )
+          }
         />
       </div>
+
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className="text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAobject-of-commander">
         <Collapsable
           titles="Object of Commander"
@@ -411,10 +521,13 @@ const FAQ_Game_rules = () => {
               ]}
             />
           }
+          isOpen={openMainCollapsibleId === 'pAPAobject-of-commander'}
+          onClick={() => handleMainCollapsibleToggle('pAPAobject-of-commander')}
         />
       </div>
+
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className="text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPArule-violations">
         <Collapsable
           titles="Rule Violations"
@@ -426,13 +539,16 @@ const FAQ_Game_rules = () => {
               ]}
             />
           }
+          isOpen={openMainCollapsibleId === 'pAPArule-violations'}
+          onClick={() => handleMainCollapsibleToggle('pAPArule-violations')}
         />
       </div>
+
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className="text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAadditional-rules-for-commander-games">
         <Collapsable
-          titles="Additional Rules for Commander Games"
+          titles="Additional Rules Commander"
           content={
             <CollapsableContent
               title=""
@@ -441,10 +557,19 @@ const FAQ_Game_rules = () => {
               ]}
             />
           }
+          isOpen={
+            openMainCollapsibleId === 'pAPAadditional-rules-for-commander-games'
+          }
+          onClick={() =>
+            handleMainCollapsibleToggle(
+              'pAPAadditional-rules-for-commander-games'
+            )
+          }
         />
       </div>
+
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className="text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAfaq-frequently-asked-questions">
         <Collapsable
           titles="FAQ (Frequently Asked Questions)"
@@ -456,10 +581,17 @@ const FAQ_Game_rules = () => {
               ]}
             />
           }
+          isOpen={
+            openMainCollapsibleId === 'pAPAfaq-frequently-asked-questions'
+          }
+          onClick={() =>
+            handleMainCollapsibleToggle('pAPAfaq-frequently-asked-questions')
+          }
         />
       </div>
     </>
   );
 };
-
 export default FAQ_Game_rules;
+
+//här i vill man fylla ut texten och innehållet. Man skapar inhållet efter den färdiga layouten som collapsable och
