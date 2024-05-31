@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import SearchResults from '../../components/search/SearchResults';
 import {useSearch} from '../../components/search/SearchContext';
 
 interface CardData {
