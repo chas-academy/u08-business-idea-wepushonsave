@@ -10,13 +10,14 @@ interface Thread {
    content: string;
    comments: Comment[];
    createdAt: string;
-olean; // True on init, hides comments
+   collapsed: boolean; // True on init, hides comments
 }
 
 interface Comment {
    _id: number;
    creatorUsername: string;
    text: string;
+   createdAt: string;
    createdAt: string;
    userId: number; // _id for user who commented
 }
