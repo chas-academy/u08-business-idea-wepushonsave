@@ -32,7 +32,7 @@ const Threads: React.FC<ThreadsProps> = ({ username }) => {
 
    const fetchThreads = async () => {
       try {
-         const response = await fetch('http://localhost:3000/threads/all'); // Adjust the endpoint as needed
+         const response = await fetch('https://mtg-tomb.onrender.com/threads/all'); // Adjust the endpoint as needed
          //https://mtg-tomb.onrender.com
 
          const data = await response.json();
@@ -51,7 +51,7 @@ const Threads: React.FC<ThreadsProps> = ({ username }) => {
       };
 
       try {
-         const response = await fetch('http://localhost:3000/threads/create', {
+         const response = await fetch('https://mtg-tomb.onrender.com/threads/create', {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ const Threads: React.FC<ThreadsProps> = ({ username }) => {
       };
 
       try {
-         const response = await fetch(`http://localhost:3000/threads/${threadId}/comments`, {
+         const response = await fetch(`https://mtg-tomb.onrender.com/threads/${threadId}/comments`, {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
