@@ -14,7 +14,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({toggleSidebar}) => {
   return (
-    <nav className=" z-30 fixed bottom-0 inset-x-0 bg-nav-gradient flex items-start text-sm text-blue-900 uppercase font-mono md:fixed md:top-0 md:bottom-auto md:w-full md:h-auto">
+    <nav className=" z-10 fixed bottom-0 inset-x-0 bg-nav-gradient flex items-start text-sm text-blue-900 uppercase font-mono md:fixed md:top-0 md:bottom-auto md:w-full md:h-auto">
       <a href="/" className="mtg-tomb-logo w-full md:w-24 block text-center 0">
         <img
           src={logo}
@@ -42,7 +42,7 @@ const Navbar: React.FC<NavbarProps> = ({toggleSidebar}) => {
         />
       </a>
       <a
-        href="/decks"
+        href="/deck-builder"
         className="decks-logo w-full md:w-24 block text-center 0">
         <img
           src={decksIcon}

@@ -10,7 +10,7 @@ interface Thread {
    content: string;
    comments: Comment[];
    createdAt: string;
-   collapsed: boolean; // True on init, hides comments
+olean; // True on init, hides comments
 }
 
 interface Comment {
@@ -22,6 +22,7 @@ interface Comment {
 }
 
 const Threads: React.FC<ThreadsProps> = ({ username }) => {
+
    const [threads, setThreads] = useState<Thread[]>([]);
    const [newThreadContent, setNewThreadContent] = useState('');
 
@@ -52,6 +53,7 @@ const Threads: React.FC<ThreadsProps> = ({ username }) => {
 
       try {
          const response = await fetch('https://mtg-tomb.onrender.com/threads/create', {
+
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
@@ -93,6 +95,7 @@ const Threads: React.FC<ThreadsProps> = ({ username }) => {
 
       try {
          const response = await fetch(`https://mtg-tomb.onrender.com/threads/${threadId}/comments`, {
+
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
@@ -108,6 +111,7 @@ const Threads: React.FC<ThreadsProps> = ({ username }) => {
                      ...thread,
                      comments: [...thread.comments, createdComment],
                      collapsed: true, // Set collapsed to false 
+
                   }
                   : thread
             );
@@ -181,6 +185,7 @@ const Threads: React.FC<ThreadsProps> = ({ username }) => {
                               <p className="text-white">{comment.text}</p>
                               <p className="text-white/50 text-xs">created at: {new Date(comment.createdAt).toLocaleString()}</p>
 
+
                            </div>
                         ))}
                      </div>
@@ -203,6 +208,7 @@ const Threads: React.FC<ThreadsProps> = ({ username }) => {
                      <button className="font-inter text-sm md:inline-block m-1 px-4 py-2 bg-btn-gradient text-white font-medium rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
                         <span className="absolute inset-0 border-2 border-transparent hover:border-white/30 rounded-lg"></span>
                         SEND
+
                      </button>
                   </form>
                </div>

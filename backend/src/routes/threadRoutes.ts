@@ -11,6 +11,7 @@ router.get('/all', async (req, res) => {
    } catch (error) {
       console.error('Error fetching threads:', error);
       res.status(500).json({ message: 'Error fetching threads' });
+
    }
 });
 
@@ -24,6 +25,7 @@ router.post('/create', async (req, res) => {
    } catch (error) {
       console.error('Error creating thread:', error);
       res.status(500).json({ message: 'Error creating thread' });
+
    }
 });
 
@@ -40,12 +42,14 @@ router.post('/:threadId/comments', async (req, res) => {
 
       thread.comments.push({ text, userId });
       thread.collapsed = false;
+
       const updatedThread = await thread.save();
 
       res.status(201).json(updatedThread.comments[updatedThread.comments.length - 1]);
    } catch (error) {
       console.error('Error adding comment:', error);
       res.status(500).json({ message: 'Error adding comment' });
+
    }
 });
 

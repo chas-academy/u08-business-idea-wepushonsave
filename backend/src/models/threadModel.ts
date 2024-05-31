@@ -20,11 +20,13 @@ const CommentSchema = new Schema<CommentDocument>({
    userId: { type: Number, required: true },
 }, { timestamps: true });
 
+
 const ThreadSchema = new Schema<ThreadDocument>({
    content: { type: String, required: true },
    comments: { type: [CommentSchema], default: [] },
    collapsed: { type: Boolean, default: true },
 }, { timestamps: true });
+
 
 const Thread = model<ThreadDocument>('Thread', ThreadSchema);
 

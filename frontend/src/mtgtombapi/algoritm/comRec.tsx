@@ -1,20 +1,24 @@
 /* eslint-disable react/react-in-jsx-scope */
-import {useState} from 'react';
+import { useState } from 'react';
 
-const SearchComponent = () => {
+const CommanderRecSearch = ({ setSearchResult }:any) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResult, setSearchResult] = useState([]);
 
   const handleSearch = async () => {
     const encodedSearch = encodeURIComponent(searchQuery);
     const url = `https://MTGTombAPI.onrender.com/api/recommendation/${encodedSearch}`;
-    console.log('Encoded URL:', url);
-    const response = await fetch(url);
-    const result = await response.json();
-    setSearchResult(result);
-    console.log(result);
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const result = await response.json();
+      setSearchResult(result); 
+    } catch (error:any) {
+      console.error('Error fetching data:', error.message);
+    }
   };
-  console.log(searchResult);
+
   return (
     <div>
       <input
@@ -25,8 +29,7 @@ const SearchComponent = () => {
       />
       <button onClick={handleSearch}>Search</button>
     </div>
-    
   );
 };
 
-export default SearchComponent;
+export default CommanderRecSearch;

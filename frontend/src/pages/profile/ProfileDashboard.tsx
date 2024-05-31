@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+
+import {useState, useEffect} from 'react';
 
 const ProfileDashboard = () => {
   const [userData, setUserData] = useState<any>({});
@@ -41,6 +42,7 @@ const ProfileDashboard = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
+
   };
 
   // Handle form submission to update user data
