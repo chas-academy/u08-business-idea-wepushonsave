@@ -32,10 +32,19 @@ import ProfileDashboard from './pages/profile/ProfileDashboard.tsx';
 import MyCollectionCards from './pages/profile/MyCollectionCards.tsx';
 import MyCollectionCommons from './pages/profile/MyCollectionCommons.tsx';
 import MyCollectionRare from './pages/profile/MyCollectionRare.tsx';
+import Login from './pages/login/Login.tsx';
+import Register from './pages/register/Register.tsx';
 
 // context
 import {SearchProvider} from './components/search/SearchContext.tsx';
 import CardDisplay from './components/listOrGrid/CardsDisplay.tsx';
+import DeckBuilder from './pages/deckbuilder/DeckBuilder.tsx';
+import {singleCardLoader} from './utils/singleCardLoader.tsx';
+
+//API Components
+import SearchComponent from './mtgtombapi/algoritm/comRec.tsx';
+import AllDecksComponent from './mtgtombapi/decks/allDecks.tsx';
+import TopCommanders from './mtgtombapi/top-commanders/allTopCommanders.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -48,6 +57,10 @@ const router = createBrowserRouter(
         element={<CardDisplay />}
         loader={cardsArrayLoader}
       />
+
+      <Route path="algoritm" element={<SearchComponent />} />
+      <Route path="alldecks" element={<AllDecksComponent />} />
+      <Route path="topcommander" element={<TopCommanders />} />
 
       <Route
         path="search"
@@ -68,6 +81,13 @@ const router = createBrowserRouter(
       <Route path="mycollection" element={<MyCollectionCards />} />
       <Route path="mycollection-commmons" element={<MyCollectionCommons />} />
       <Route path="mycollection-rare" element={<MyCollectionRare />} />
+      <Route
+        path="deck-builder"
+        element={<DeckBuilder />}
+        loader={singleCardLoader}
+      />
+      <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
     </Route>
   )
 );

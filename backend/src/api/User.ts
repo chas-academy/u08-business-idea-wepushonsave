@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import express from "express";
 import bcrypt from "bcrypt";
 import User from "../models/User";
@@ -7,13 +8,11 @@ import { IUser } from "../interfaces/IUser";
 
 const router = express.Router();
 
-// Signup
-router.post("/signup", (req: Request, res: Response) => {
-  /*let {email, password} = req.body;
-    email = email.trim();
-    password = password.trim();*/
-
+// Register
+router.post("/register", (req: Request, res: Response) => {
   const { email, password, username } = req.body;
+
+  console.log(email, password, username); //TEST
 
   if (!email || !password) {
     return res.status(400).json({ message: "Input email or password!" });
@@ -30,11 +29,8 @@ router.post("/signup", (req: Request, res: Response) => {
         console.log(result); //TEST
         // Handle the result
         if (result && result.length > 0) {
-          // User already exists
           return res.status(400).json({ message: "User already exists!" });
         } else {
-          // Try to create new user
-
           // password handling
           const saltRounds: number = 10;
           bcrypt
@@ -76,11 +72,9 @@ router.post("/signup", (req: Request, res: Response) => {
   }
 });
 
-// Signin
-router.post("/signin", (req: Request, res: Response) => {
+// Login
+router.post("/login", (req: Request, res: Response) => {
   const { email, password } = req.body;
-  console.log(email, password); //TEST
-  console.log(req.body); //TEST
 
   if (email == "" || password == "") {
     return res.status(400).json({ message: "Input email or password!" });
@@ -89,19 +83,28 @@ router.post("/signin", (req: Request, res: Response) => {
     User.find({ email })
       .then((data) => {
         if (data.length) {
-          //User exists
-
+          // User exists
+          const userId = data[0]._id; // Access the userId from the user data
           const hashedPassword = data[0].password;
           const userEmail = data[0].email; // Access the email property of the user data
+
           bcrypt
             .compare(password, hashedPassword)
             .then((result) => {
               if (result) {
                 // Create token
-                const token = jwt.sign({ email: userEmail }, "jwt-secret-key", {
-                  expiresIn: "1d",
-                }); // Use the userEmail variable
-                res.cookie("token", token);
+                const token = jwt.sign(
+                  { email: userEmail, userId: userId },
+                  "jwt-secret-key",
+                  {
+                    expiresIn: "1d",
+                  }
+                ); // Include the userId in the token payload
+                res.cookie("token", token, {
+                  httpOnly: true,
+                  secure: process.env.NODE_ENV === "production", // Ensure the cookie is only sent over HTTPS in production
+                  sameSite: false, // Allows cross-site cookies
+                });
                 return res
                   .status(200)
                   .json({ message: "User signed in successfully!" });
@@ -111,12 +114,11 @@ router.post("/signin", (req: Request, res: Response) => {
                   .json({ message: "Invalid email or password!" });
               }
             })
-            .catch((_err) => {
+            .catch((err: Error) => {
+              console.log(err);
               return res
                 .status(500)
-                .json({
-                  message: "An error occurred while comparing passwords!",
-                });
+                .json({ message: "An error occurred while comparing passwords!" });    
             });
         } else {
           return res
@@ -124,10 +126,11 @@ router.post("/signin", (req: Request, res: Response) => {
             .json({ message: "Invalid credentials entered!" });
         }
       })
-      .catch((_err) => {
+      .catch((err: Error) => {
+        console.log(err);
         return res
           .status(500)
-          .json({ message: "An error occurred while finding user!" });
+          .json({ message: "An error occurred while retrieving user data!" });
       });
   }
 });

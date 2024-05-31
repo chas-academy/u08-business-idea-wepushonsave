@@ -1,6 +1,7 @@
+import {useEffect, useState} from 'react';
 /* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable  @typescript-eslint/no-explicit-any */ 
 
-import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import profileIcon from '../../assets/profile-icon.webp';
 
@@ -8,6 +9,7 @@ const ProfilePage = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('info');
+  const [userData, setUserData] = useState<any>({});
 
   const settingsClick = () => {
     navigate('/profile-dashboard');
@@ -22,6 +24,34 @@ const ProfilePage = () => {
     navigate('/mycollection-commmons');
   };
 
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  // Fetch user's information from the server using the token and update the state
+  const fetchUserData = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/profile-info', {
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          credentials: 'include',
+          mode: 'cors',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch user data');
+      }
+
+      const data = await response.json();
+      setUserData(data);
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
+
   return (
     <div className="shadow-md md:pt-32 ">
       <div className="flex justify-between items-start p-6 h-64 bg-profile-background bg-cover h-full w-full md:bg-profile-background-desktop">
@@ -31,8 +61,10 @@ const ProfilePage = () => {
             alt="Profile"
             className="w-28 h-28 mt-28 mb-1 rounded-full bg-custom-purple-600 border-4 border-custom-purple-800"
           />
-          <div className="ml-4 mb-5">
-            <h1 className="text-xl font-bold text-white">Username</h1>
+          <div className="mb-5">
+            <h1 className="text-xl font-bold text-white">
+              {userData.username || ''}
+            </h1>
           </div>
         </div>
         <div className="relative">

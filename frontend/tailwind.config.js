@@ -15,6 +15,7 @@ export default {
         orange: '#FF6C19',
       },
       backgroundImage: {
+        'search-gradient': 'linear-gradient(to bottom, #322929, #51435E)',
         'nav-gradient': 'linear-gradient(to bottom, #462F64, #757BC0, #DEE8E0)',
         'btn-gradient': 'linear-gradient(to bottom, #462F64, #757BC0, #DEE8E0)',
         'active-card-btn-gradient':
