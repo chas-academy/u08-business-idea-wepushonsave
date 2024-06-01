@@ -50,11 +50,11 @@ const ArtCard: React.FC<ArtCardProps> = ({ card: initialCard, showRandomizeButto
   return (
     <>
       {results.length <= 0 && (
-        <div className={`flex justify-center h-1/2 items-start ${standalone ? 'h-fit md:min-w-screen' : ''}`}>
+        <div className={`flex justify-center items-start ${standalone ? 'h-fit md:min-w-screen' : ''}`}>
           {card && (
             <>
-              <div className={`randomsinglecard flex flex-col text-center size-30 items-center md:items justify-center text-white/80 md:p-2 ${standalone ? 'md:flex-row md:h-screen w-screen ' : ''}`}>
-                <div className={`img-container flex flex-col   ${standalone ? 'md:size-80 md:w-1/4 justify-center items-center m-5 p-5 md:flex-row md:h-screen w-screen max-h-full md:max-h-full ' : ''}`}>
+              <div className={`randomsinglecard flex flex-col text-center items-center md:items justify-center text-white/80 md:p-2 ${standalone ? 'md:flex-row md:h-screen w-screen ' : ''}`}>
+                <div className={`img-container flex flex-col  ${standalone ? 'md:size-80 md:w-1/4 justify-center items-center m-5 p-5 md:flex-row md:h-screen w-screen max-h-full md:max-h-full ' : ''}`}>
 
                   <img
                     src={card.image_uris.border_crop}
