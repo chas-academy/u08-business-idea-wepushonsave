@@ -23,7 +23,7 @@ const SearchForm: React.FC = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div className="search-container text-white grid grid-cols-9 sm:grid-cols-12 w-full max-h-12 sm:h-16 relative sm:top-14 gap-1">
+        <div className="search-container text-white max-h-12 sm:h-16 relative gap-3 flex justify-center items-center">
           <div className="search-bar-container bg-[#827C81] shadow rounded-xl col-start-2 sm:col-start-5 col-span-5 sm:col-span-3 grid grid-cols-5 sm:grid-cols-7">
             <div className="search-icon-container self-center content-center m-1 sm:size-9">
               <SearchIcon />
@@ -36,7 +36,7 @@ const SearchForm: React.FC = () => {
               />
             </div>
           </div>
-          <div className="search-btn-container border col-start-7 sm:col-start-8  rounded-lg bg-[#827C81] text-center w-fit h-fit p-2 flex justify-center self-center">
+          <div className="search-btn-container border col-start-7 sm:col-start-8 rounded-lg sm:rounded-xl bg-[#827C81] text-center flex justify-center self-center ">
             <SearchBtn />
           </div>
         </div>

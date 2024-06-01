@@ -6,19 +6,22 @@ import CardInfo from '../components/card/CardInfo';
 import {Dispatch, useState} from 'react';
 import CardMarket from '../components/card/CardMarket';
 import CardLegalities from '../components/card/CardLegalities';
-import {ICard} from '../components/card/CardsArray';
+
 import CardImage from '../components/CardImage';
+import {ICard} from '../utils/ScryfallInterfaces';
 
 export interface CardLayoutProps {
   card: ICard;
   onClose: () => void;
   setActiveCard: Dispatch<ICard>;
+  addCardToDeck: (card: ICard) => void;
 }
 
 const CardLayout: React.FC<CardLayoutProps> = ({
   card,
   onClose,
   setActiveCard,
+  addCardToDeck,
 }) => {
   const [activeTab, setActiveTab] = useState<string | null>(null);
 
@@ -49,7 +52,7 @@ const CardLayout: React.FC<CardLayoutProps> = ({
         <CardImage card={card} onClose={onClose} />
 
         <section className="card-layout-footer relative grid grid-cols-3 justify-items-center items-center ">
-          <CardFooter />
+          <CardFooter card={card} addCardToDeck={addCardToDeck} />
         </section>
 
         <nav className="card-layout-nav grid grid-cols-3 bg-inactive-card-btn-gradient">
