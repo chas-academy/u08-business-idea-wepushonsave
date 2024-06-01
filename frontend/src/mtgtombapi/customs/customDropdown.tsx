@@ -89,7 +89,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({ options, selectedValue,
       </button>
 
       {isOpen && (
-        <ul className="absolute z-10 mt-1 w-full bg-mint shadow-lg max-h-60 rounded-md py-1 ring-1 ring-black ring-opacity-5 overflow-auto">
+        <ul className="absolute z-10 mt-1 w-full bg-mint shadow-lg max-h-60 rounded-md py-1 ring-1 ring-black ring-opacity-5 overflow-auto no-scrollbar">
           {options.map(option => (
             <li
               key={option}
