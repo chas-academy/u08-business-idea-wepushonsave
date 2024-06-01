@@ -45,5 +45,16 @@ app.use("/api", profileRouter);
 app.use('/threads', threadRoutes);
 
 
+/*app.post('/logout', (req: Request, res: Response) => {
+  req.session.destroy(err => {
+    if(err) {
+      return res.redirect('/profile');
+    }
+
+    res.clearCookie('token');
+    return res.redirect('/login');
+  });
+});*/
+
 // Export App for Server
 export default app;

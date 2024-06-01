@@ -1,18 +1,60 @@
 // src/components/navbar/Navbar.tsx
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
-
+import {useEffect, useState} from 'react';
 import logo from '../../assets/logo-MTG-TOMB.webp';
 import docIcon from '../../assets/doc-icon.webp';
 import profileIcon from '../../assets/profile-icon.webp';
 import decksIcon from '../../assets/decks-icon.webp';
 import communityIcon from '../../assets/community-icon.webp';
+import {useNavigate} from 'react-router-dom';
 
 interface NavbarProps {
   toggleSidebar: () => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({toggleSidebar}) => {
+
+ const [visible, setVisible] = useState(false);
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
+
+  const checkLogin = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/user/login', {
+          method: 'GET',
+          mode: 'cors',
+          credentials: 'include',
+        });
+        if (response.ok) {
+          setVisible(false);
+        }
+    } catch (e) {
+      setIsLoggedIn(false);
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    checkLogin();
+  }, []);
+
+  const Logout = async () => {
+    try {
+      localStorage.removeItem('token');
+      navigate('/login');
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
+
+  const hide = () => {
+    setVisible(!visible);
+  };
+
+
   return (
     <nav className=" z-10 fixed bottom-0 inset-x-0 bg-nav-gradient flex items-start text-sm text-blue-900 uppercase font-mono md:fixed md:top-0 md:bottom-auto md:w-full md:h-auto">
       <a href="/" className="mtg-tomb-logo w-full md:w-24 block text-center 0">
@@ -60,18 +102,38 @@ const Navbar: React.FC<NavbarProps> = ({toggleSidebar}) => {
         />
       </a>
       {/* Desktop screen */}
-      <a href="/login" className="login-logo-desktop ml-auto 0">
-        <button className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
-          <span className="absolute inset-0 border-2 border-transparent hover:border-white rounded-lg"></span>
-          LOGIN
-        </button>
-      </a>
-      <a href="/register" className="register-logo-desktop 0">
-        <button className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
-          <span className="absolute inset-0 border-2 border-transparent hover:border-white rounded-lg"></span>
-          REGISTER
-        </button>
-      </a>
+      {!isLoggedIn ? (
+        <div>
+          <a href="/login" className="login-logo-desktop ml-auto 0">
+            <button
+              onClick={hide}
+              className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
+              <span className="absolute inset-0 border-2 border-transparent hover:border-white rounded-lg"></span>
+              LOGIN
+            </button>
+          </a>
+          <a href="/register" className="register-logo-desktop 0">
+            <button 
+            onClick={hide}
+            className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
+              <span className="absolute inset-0 border-2 border-transparent hover:border-white rounded-lg"></span>
+              REGISTER
+            </button>
+          </a>
+        </div>
+      ) : (
+        
+          <a href="/login" className="login-logo-desktop ml-auto 0">
+            <button
+              onClick={Logout}
+              className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
+              <span className="absolute inset-0 border-2 border-transparent hover:border-white rounded-lg"></span>
+              LOG OUT
+            </button>
+          </a>
+        
+      )}
+
       <a
         href="/profile"
         className="profile-logo-desktop hidden md:block md:items-center md:w-24 0">

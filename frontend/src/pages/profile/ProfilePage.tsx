@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react';
 /* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable  @typescript-eslint/no-explicit-any */ 
-
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import {useNavigate} from 'react-router-dom';
 import profileIcon from '../../assets/profile-icon.webp';
 
@@ -22,6 +21,10 @@ const ProfilePage = () => {
   };
   const mycollectionCommonsClick = () => {
     navigate('/mycollection-commmons');
+  };
+  const logout = () => {
+    localStorage.removeItem('token')
+    navigate('/login');
   };
 
   useEffect(() => {
@@ -91,7 +94,9 @@ const ProfilePage = () => {
                 className="block bg-collection-btn w-full text-center text-white px-6 py-1 mb-1 text-gray-700 rounded hover:bg-gray-100">
                 Settings
               </button>
-              <button className="block bg-collection-btn w-full text-center text-white px-6 py-1 text-gray-700 rounded hover:bg-gray-100">
+              <button
+                onClick={logout}
+                className="block bg-collection-btn w-full text-center text-white px-6 py-1 text-gray-700 rounded hover:bg-gray-100">
                 Logout
               </button>
             </div>
