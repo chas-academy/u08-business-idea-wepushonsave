@@ -68,10 +68,10 @@ const CardMarket: React.FC<CardMarketProps> = ({card, setActiveCard}) => {
   };
 
   const getCardRarity = (print: IPrintsData) => {
-    if (print.rarity === 'common') return 'text-yellow-300';
-    if (print.rarity === 'uncommon') return 'text-yellow-500';
-    if (print.rarity === 'rare') return 'text-orange-400';
-    if (print.rarity === 'mythic') return 'text-red-500';
+    if (print.rarity === 'common') return 'text-common';
+    if (print.rarity === 'uncommon') return 'text-uncommon';
+    if (print.rarity === 'rare') return 'text-rare';
+    if (print.rarity === 'mythic') return 'text-mythic';
   };
 
   return (
