@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {useSearch} from '../../components/search/SearchContext';
+import { useState, useEffect } from 'react';
+import { useSearch } from '../../components/search/SearchContext';
 
 interface CardData {
   object: string;
@@ -12,13 +12,22 @@ interface CardData {
   };
 }
 
-const ArtCard: React.FC = () => {
-  const [card, setCard] = useState<CardData | null>(null);
-  const {results} = useSearch();
+interface ArtCardProps {
+  card?: CardData;
+  showRandomizeButton?: boolean;
+}
+
+
+
+const ArtCard: React.FC<ArtCardProps> = ({ card: initialCard, showRandomizeButton = true }) => {
+  const [card, setCard] = useState<CardData | null>(initialCard || null);
+  const { results } = useSearch();
 
   useEffect(() => {
-    getRandomCard();
-  }, []);
+    if (!initialCard) {
+      getRandomCard();
+    }
+  }, [initialCard]);
 
   const getRandomCard = async () => {
     try {
@@ -42,11 +51,13 @@ const ArtCard: React.FC = () => {
             <>
               <div className=" randomsinglecard flex flex-col text-center items-center md:items justify-center text-white/80 p-5 md:pt-16 md:p-2 md:flex-row md:h-screen w-screen">
                 <div className="img-container flex flex-col h-1/2 max-h-full md:max-h-full  md:size-80 md:w-1/4 justify-center items-center m-5 p-5">
-                  <button
-                    onClick={handleRandomize}
-                    className=" bg-btn-gradient hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4 ">
-                    Another!
-                  </button>
+                  {showRandomizeButton && (
+                    <button
+                      onClick={handleRandomize}
+                      className=" bg-btn-gradient hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4 ">
+                      Another!
+                    </button>
+                  )}
                   <img
                     src={card.image_uris.border_crop}
                     alt={card.name}

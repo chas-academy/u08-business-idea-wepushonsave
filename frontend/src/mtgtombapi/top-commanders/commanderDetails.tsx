@@ -1,8 +1,8 @@
 /* eslint-disable react/react-in-jsx-scope */
-import {useEffect, useState} from 'react';
-import {useParams, useLocation} from 'react-router-dom';
-import {GiMagicSwirl} from 'react-icons/gi';
-import {LuSword} from 'react-icons/lu';
+import { useEffect, useState } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
+import { GiMagicSwirl } from 'react-icons/gi';
+import { LuSword } from 'react-icons/lu';
 import Capitalizer from '../customs/customCapitalizer';
 import manaSymbols from '../manaSymbols';
 
@@ -43,9 +43,9 @@ interface Recommendations {
 }
 
 const CommanderDetails: React.FC = () => {
-  const {name} = useParams<{name: any}>();
+  const { name } = useParams<{ name: any }>();
   const location = useLocation();
-  const state = location.state as {commander: Commander} | undefined;
+  const state = location.state as { commander: Commander } | undefined;
   const [commander] = useState<Commander | null>(
     state?.commander || null
   );
@@ -197,7 +197,7 @@ const CommanderDetails: React.FC = () => {
                   className="rounded-2xl drop-shadow-md"
                 />
                 <div className="grid grid-cols-10 gap-1 my-2">
-                {card.cardInfo.mana_cost
+                  {card.cardInfo.mana_cost
                     .split('}{')
                     .map((mana: string, index: number) => {
                       const formattedMana = `{${mana.replace(/[{}]/g, '')}}`;
