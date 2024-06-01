@@ -14,6 +14,6 @@ deckBuilderRouter.post("/", authMiddleware, createDeckController);
 deckBuilderRouter.get("/", authMiddleware, getDecksController);
 deckBuilderRouter.get("/:id", authMiddleware, getDeckController);
 deckBuilderRouter.post("/:id/cards", authMiddleware, addCardToDeckController);
-deckBuilderRouter.delete("/:id/", authMiddleware, deleteDeckController);
+deckBuilderRouter.delete("/:id", authMiddleware, deleteDeckController);
 
 export default deckBuilderRouter;
