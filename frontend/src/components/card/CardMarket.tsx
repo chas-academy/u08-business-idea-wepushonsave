@@ -5,8 +5,8 @@ import {Dispatch, useEffect, useState} from 'react';
 import {IPrices, IPrintsAPIResponse, IPrintsData} from './IPrints';
 import {delay} from '../../utils/setApiDelay';
 import {getImageFromCardFaces} from '../../utils/getImageFromCardFaces';
-import {ICard} from './CardsArray';
 import {useNavigate} from 'react-router-dom';
+import {ICard} from '../../utils/ScryfallInterfaces';
 
 interface CardMarketProps {
   card: ICard;
