@@ -38,8 +38,8 @@ import Register from './pages/register/Register.tsx';
 // context
 import {SearchProvider} from './components/search/SearchContext.tsx';
 import CardDisplay from './components/listOrGrid/CardsDisplay.tsx';
-import DeckBuilder from './pages/deckbuilder/DeckBuilder.tsx';
-import {singleCardLoader} from './utils/singleCardLoader.tsx';
+//import DeckBuilder from './pages/deckbuilder/DeckBuilder.tsx';
+//import {singleCardLoader} from './utils/singleCardLoader.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -73,9 +73,9 @@ const router = createBrowserRouter(
       <Route path="mycollection-commmons" element={<MyCollectionCommons />} />
       <Route path="mycollection-rare" element={<MyCollectionRare />} />
       <Route
-        path="deck-builder"
-        element={<DeckBuilder />}
-        loader={singleCardLoader}
+        //path="deck-builder"
+        //element={<DeckBuilder />}
+        //loader={singleCardLoader}
       />
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
