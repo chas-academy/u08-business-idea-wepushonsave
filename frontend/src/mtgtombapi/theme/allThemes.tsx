@@ -67,7 +67,7 @@ const AllThemes: React.FC = () => {
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-4xl font-bold my-4">All Themes</h1>
         <div>
-          <GiEvilWings size={56} />
+          <GiEvilWings size={60} />
         </div>
         <div className="grid grid-cols-5 mb-3 mt-6 justify-items-center mx-6">
           <button
@@ -103,10 +103,10 @@ const AllThemes: React.FC = () => {
           </button>
         </div>
       </div>
-      <div className="overflow-y-auto h-[650px] pb-2 px-4 no-scrollbar">
+      <div className="overflow-y-auto h-[650px] mt-3 pb-2 px-4 no-scrollbar shaddow-inner snap-y snap-mandatory">
         <ul className="space-y-4">
           {themes.map(theme => (
-            <li key={theme._id}>
+            <li key={theme._id} className='snap-start flex-shrink-0 mx-2 top-0'>
               <div
                 className="bg-custom-purple-800 rounded-lg flex flex-col items-center p-4 my-4 mx-6 cursor-pointer"
                 onClick={() =>
@@ -119,9 +119,9 @@ const AllThemes: React.FC = () => {
                 </h2>
                 <p className="text-lg">{theme.explanation}</p>
                 <p className="text-lg font-semibold">Keywords:</p>
-                <ul className="flex flex-row">
+                <ul className="grid grid-cols-2 gap-2">
                   {theme.criteria.oracle_text.map((text, index) => (
-                    <li key={index} className='mx-2'>
+                    <li key={index} className='mx-2 rounded-lg p-2 shadow-inner bg-plum text-center'>
                         <Capitalizer text={text} />
                     </li>
                   ))}
