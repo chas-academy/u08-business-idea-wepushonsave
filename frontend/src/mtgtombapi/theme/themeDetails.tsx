@@ -83,7 +83,7 @@ const ThemeDetail: React.FC = () => {
     const fetchThemeInfo = async () => {
       try {
         const response = await fetch(
-          `https://mtgtombapi.onrender.com/api/theme/details?name=${encodeURIComponent(name)}`
+          `https://mtgtombapi.onrender.com/api/theme/details/${encodeURIComponent(name)}`
         );
         if (!response.ok) {
           throw new Error('Network response was not ok');
