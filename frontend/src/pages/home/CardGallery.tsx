@@ -1,16 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import ArtCard from './RandomArtCard';
+import { CardData } from './StandaloneCardProps';
 
-interface CardData {
-   object: string;
-   id: string;
-   name: string;
-   type_line: string;
-   oracle_text: string;
-   image_uris: {
-      border_crop: string;
-   };
-}
 
 const CardGallery: React.FC = () => {
    const [cards, setCards] = useState<CardData[]>([]);
@@ -35,11 +26,11 @@ const CardGallery: React.FC = () => {
    };
 
    return (
-      <section className="card-gallery-section">
-         <div className="cards-grid flex flex-row">
+      <section className="card-gallery-section  bg-gray-100/50 p-4 overflow-x-auto">
+         <div className="flex space-x-4">
             {cards.map((card) => (
-               <div key={card.id} className="card-item">
-                  <ArtCard card={card} showRandomizeButton={false} />
+               <div key={card.id} className="rounded-lg overflow-hidden shadow-md flex-none" style={{ minWidth: '300px' }}>
+                  <ArtCard card={card} showRandomizeButton={false} showInfoText={false} />
                </div>
             ))}
          </div>

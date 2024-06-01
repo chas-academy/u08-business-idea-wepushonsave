@@ -9,17 +9,21 @@ interface CardData {
   oracle_text: string;
   image_uris: {
     border_crop: string;
+    normal: string;
+    small: string;
   };
 }
 
 interface ArtCardProps {
   card?: CardData;
   showRandomizeButton?: boolean;
+  showInfoText?: boolean;
+  standalone?: boolean;
 }
 
 
 
-const ArtCard: React.FC<ArtCardProps> = ({ card: initialCard, showRandomizeButton = true }) => {
+const ArtCard: React.FC<ArtCardProps> = ({ card: initialCard, showRandomizeButton = true, showInfoText = true, standalone = false }) => {
   const [card, setCard] = useState<CardData | null>(initialCard || null);
   const { results } = useSearch();
 
@@ -46,30 +50,33 @@ const ArtCard: React.FC<ArtCardProps> = ({ card: initialCard, showRandomizeButto
   return (
     <>
       {results.length <= 0 && (
-        <div className="flex justify-center items-start h-screen md:min-w-screen items">
+        <div className={`flex justify-center h-1/2 items-start ${standalone ? 'h-fit md:min-w-screen' : ''}`}>
           {card && (
             <>
-              <div className=" randomsinglecard flex flex-col text-center items-center md:items justify-center text-white/80 p-5 md:pt-16 md:p-2 md:flex-row md:h-screen w-screen">
-                <div className="img-container flex flex-col h-1/2 max-h-full md:max-h-full  md:size-80 md:w-1/4 justify-center items-center m-5 p-5">
-                  {showRandomizeButton && (
-                    <button
-                      onClick={handleRandomize}
-                      className=" bg-btn-gradient hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4 ">
-                      Another!
-                    </button>
-                  )}
+              <div className={`randomsinglecard flex flex-col text-center size-30 items-center md:items justify-center text-white/80 md:p-2 ${standalone ? 'md:flex-row md:h-screen w-screen ' : ''}`}>
+                <div className={`img-container flex flex-col   ${standalone ? 'md:size-80 md:w-1/4 justify-center items-center m-5 p-5 md:flex-row md:h-screen w-screen max-h-full md:max-h-full ' : ''}`}>
+
                   <img
                     src={card.image_uris.border_crop}
                     alt={card.name}
-                    className=" rounded-md mx-auto size-50 "
+                    className=" rounded-md mx-auto "
                   />
                 </div>
 
-                <div className=" info-container flex flex-col w-3/4 md:w-1/2 md:my-40 md:mx-2 md:justify-end border-transparent ">
-                  <p className="text-lg md:mb-5 font-semi-bold">{card.name}</p>
-                  <p className="text-sm">{card.type_line}</p>
-                  <p className="text-sm">{card.oracle_text}</p>
-                </div>
+                {showInfoText && (
+                  <div className=" info-container flex flex-col  w-3/4 md:w-1/2 md:my-10 md:mx-2 md:justify-end border-transparent ">
+                    <p className="text-lg md:mb-2 font-semi-bold ">{card.name}</p>
+                    <p className="text-sm ">{card.type_line}</p>
+                    <p className="text-sm min-h-36">{card.oracle_text}</p>
+                  </div>
+                )}
+                {showRandomizeButton && (
+                  <button
+                    onClick={handleRandomize}
+                    className=" bg-btn-gradient hover:bg-blue-700 text-white font-bold py-2 px-4 mb-3 rounded ">
+                    Another!
+                  </button>
+                )}
               </div>
             </>
           )}
