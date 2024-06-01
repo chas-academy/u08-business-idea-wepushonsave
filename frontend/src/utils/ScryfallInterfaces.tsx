@@ -71,7 +71,7 @@ export interface ICard {
   id: string;
   image_uris: IImageUris;
   card_faces: ICardFaces[];
-  mana_cost: string[];
+  mana_cost: string;
   cmc: number;
   power: string;
   toughness: string;

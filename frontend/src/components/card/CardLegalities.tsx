@@ -1,8 +1,8 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
 
+import {ICard} from '../../utils/ScryfallInterfaces';
 import {convertObjectToArray} from '../../utils/convertObjectToArray';
-import {ICard} from './CardsArray';
 
 interface CardLegalitiesProps {
   card: ICard;
