@@ -44,6 +44,7 @@ const RootLayout: React.FC = () => {
             <NavLink to={'/algoritm'}>Algorithm</NavLink> |{' '}
             <NavLink to={'/alldecks'}>All Decks</NavLink> |{' '}
             <NavLink to={'/topcommander'}>Top Commanders</NavLink> |{' '}
+            <NavLink to={'/allthemes'}>All Themes</NavLink> |{' '}
           </nav>
           <SearchProvider>
             <Outlet />

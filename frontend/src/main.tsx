@@ -44,6 +44,7 @@ import AllDecksComponent from './mtgtombapi/decks/allDecks.tsx';
 import TopCommanders from './mtgtombapi/top-commanders/allTopCommanders.tsx';
 import CommanderRecSearch from './mtgtombapi/algoritm/comRec.tsx';
 import CommanderDetails from './mtgtombapi/top-commanders/commanderDetails.tsx';
+import AllThemes from './mtgtombapi/theme/allThemes.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -61,6 +62,7 @@ const router = createBrowserRouter(
       <Route path="alldecks" element={<AllDecksComponent />} />
       <Route path="topcommander" element={<TopCommanders />} />
       <Route path="/commander/:name" element={<CommanderDetails />} />
+      <Route path="/allthemes" element={<AllThemes />} />
 
       <Route
         path="cards/:set"
