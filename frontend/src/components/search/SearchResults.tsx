@@ -4,15 +4,14 @@
  * when searching for @card @set @list @commander
  * Display the resaults after a given search
  */
-
-import {ICard} from '../card/CardsArray';
+import {ICard} from '../../utils/ScryfallInterfaces';
 import {getImageFromCardFaces} from '../../utils/getImageFromCardFaces';
 import {useEffect, useRef, useState} from 'react';
 import CardLayout from '../../layouts/CardLayout';
 import {useSearch} from './SearchContext';
 
 const SearchResults: React.FC = () => {
-  const {results} = useSearch();
+  const {results, addCardToDeck} = useSearch();
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const [activeCard, setActiveCard] = useState<ICard | undefined>(undefined);
 
@@ -56,10 +55,8 @@ const SearchResults: React.FC = () => {
     document.body.style.overflow = '';
   };
 
-  if (!results || results.length === 0) {
-    return <p className="text-center">Search for a card</p>;
-  }
-
+  if (!results || results.length === 0) return;
+  console.log(results);
   return (
     <>
       <dialog
@@ -73,6 +70,7 @@ const SearchResults: React.FC = () => {
               card={activeCard}
               onClose={closeModal}
               setActiveCard={setActiveCard}
+              addCardToDeck={addCardToDeck}
             />
           </dialog>
         )}

@@ -1,11 +1,14 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import userRouter from "./api/User";
+import connectDB from "./db/db";
+
+// routes
+import deckBuilderRouter from "./deckBuilder/deckBuilderRoutes";
 import profileRouter from "./routes/profileRoutes";
 import threadRoutes from "./routes/threadRoutes";
-
-import connectDB from "./db/db";
+import userRouter from "./api/User";
+import { authMiddleware } from "./middleware/auth";
 
 // Initialize Database Connection
 connectDB;
@@ -42,8 +45,11 @@ app.use("/api/user", userRouter);
 
 // Profile Routes
 app.use("/api", profileRouter);
-app.use('/threads', threadRoutes);
+app.use("/threads", threadRoutes);
 
+// Deck Builder Routes
+app.use("/auth", authMiddleware);
+app.use("/decks", deckBuilderRouter);
 
 /*app.post('/logout', (req: Request, res: Response) => {
   req.session.destroy(err => {

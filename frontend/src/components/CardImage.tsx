@@ -2,8 +2,8 @@
 /* eslint-disable react/prop-types */
 
 import {getImageFromCardFaces} from '../utils/getImageFromCardFaces';
-import {ICard} from './card/CardsArray';
 import x from '../assets/x-letter.svg';
+import {ICard} from '../utils/ScryfallInterfaces';
 
 interface CardImageProps {
   card: ICard;
