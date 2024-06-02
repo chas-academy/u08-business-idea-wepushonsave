@@ -4,8 +4,9 @@ import emailIcon from '../../assets/emailIcon.svg';
 
 const Footer = () => {
   return (
-    <footer className="bg-zinc-700 w-full flex justify-around ">
-      <div className=" pt-2 flex flex-nowrap ">
+    <footer className="bg-zinc-700 w-full flex justify-around">
+      <div className=" pt-2 flex flex-nowrap justify-center w-screen">
+        <div className='w-1/2 flex justify-center'>
         <ul>
           <a href="https://github.com/JosephGros">
             <div className="flex flex-nowrap hover:border-white hover:shadow-lg hover:shadow-plum hover:bg-mint/60 rounded-lg">
@@ -56,9 +57,9 @@ const Footer = () => {
             </div>
           </a>
         </ul>
-
-        <div className="border-r-4 flex justify-evenly p-2"></div>
-        <div className=" ml-8 pt-10">
+        </div>
+        <div className="border-r-4 flex justify-center p-2"></div>
+        <div className=" ml-8 pt-10 w-1/2 flex justify-center">
           <ul>
             <li className="w-full font-semibold">MTG TOMB</li>
             <div className="hover:border-white hover:shadow-lg hover:shadow-plum hover:bg-mint/60 rounded-lg">

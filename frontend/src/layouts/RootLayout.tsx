@@ -8,6 +8,7 @@ import SearchForm from '../components/search/SearchForm';
 import ArtCard from '../pages/home/RandomArtCard';
 import {SearchProvider} from '../components/search/SearchContext';
 import SearchResults from '../components/search/SearchResults';
+import Footer from '../components/footer/footer';
 
 const RootLayout: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -51,6 +52,9 @@ const RootLayout: React.FC = () => {
           </SearchProvider>
         </div>
       </main>
+      <footer>
+        <Footer/>
+      </footer>
     </div>
     </>
   );
