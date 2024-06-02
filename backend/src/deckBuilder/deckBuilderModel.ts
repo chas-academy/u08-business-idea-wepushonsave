@@ -1,3 +1,4 @@
+import { ICard } from "../interfaces/ICard";
 import { Deck } from "../interfaces/IDeck";
 /**
  * @Deck
@@ -22,18 +23,16 @@ export const createDeck = (name: string, userId: string): Deck => {
 };
 /**
  *
- * @returns a list of @Deck objects
- * specific to the user
+ * @returns a list of @Deck objects specific to the user
  */
-export const getDecks = (userId: string): Deck[] =>
-  decks.filter((deck) => deck.userId === userId);
+export const getDecks = (): Deck[] => decks;
 /**
  *
  * @param id @Deck content/cards
  * @returns
  */
-export const getDeck = (id: string, userId: string): Deck | undefined =>
-  decks.find((deck) => deck.id === id && deck.userId === userId);
+export const getDeck = (id: string): Deck | undefined =>
+  decks.find((deck) => deck.id === id);
 /**
  *
  * @param id card_id
@@ -43,15 +42,28 @@ export const getDeck = (id: string, userId: string): Deck | undefined =>
 export const addCardToDeck = (
   id: string,
   userId: string,
-  card: string
+  card: ICard
 ): Deck | undefined => {
   const deck = decks.find((deck) => deck.id === id && deck.userId === userId);
+
+  if (!deck) return undefined;
+
+  // Checks if card is in the deck and does not have a mana_cost = ''
+  const cardExists = deck.cards.some((existingCard) => {
+    existingCard.id === card.id &&
+      existingCard.name === card.name &&
+      existingCard.type_line.includes("Basic Land");
+  });
+
+  if (cardExists) return undefined; // Card is in this deck already
+
   if (deck && deck.cards.length < 100) {
     deck.cards.push(card);
     return deck;
   }
-  return undefined;
+  return undefined; // The deck has > or = 100 cards
 };
+
 /**
  *
  * @param id
