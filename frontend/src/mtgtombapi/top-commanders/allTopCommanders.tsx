@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Capitalizer from '../customs/customCapitalizer';
 import { GiCrownedSkull } from "react-icons/gi";
+import { CustomLoader } from '../customs/customLoader';
 
 interface Commander {
   _id: string;
@@ -47,7 +48,7 @@ const TopCommanders: React.FC = () => {
   }, [page]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className='w-full mt-80 flex justify-center content-center'><CustomLoader></CustomLoader></div>;
   }
 
   if (error) {

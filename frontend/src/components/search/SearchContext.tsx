@@ -10,6 +10,8 @@ interface ISearchContext {
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   results: ICard[];
   setResults: React.Dispatch<React.SetStateAction<ICard[]>>;
+  deck: ICard[];
+  addCardToDeck: (card: ICard) => void;
 }
 
 const SearchContext = createContext<ISearchContext | undefined>(undefined);
@@ -19,6 +21,7 @@ export const SearchProvider: React.FC<{children: React.ReactNode}> = ({
 }) => {
   const [query, setQuery] = useState<string>('');
   const [results, setResults] = useState<ICard[]>([]);
+  const [deck, setDeck] = useState<ICard[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,8 +39,13 @@ export const SearchProvider: React.FC<{children: React.ReactNode}> = ({
     fetchData();
   }, [query]);
 
+  const addCardToDeck = (card: ICard) => {
+    setDeck([...deck, card]);
+  };
+
   return (
-    <SearchContext.Provider value={{query, setQuery, results, setResults}}>
+    <SearchContext.Provider
+      value={{query, setQuery, results, setResults, deck, addCardToDeck}}>
       {children}
     </SearchContext.Provider>
   );

@@ -10,6 +10,9 @@ import SearchResults from '../components/search/SearchResults';
 import ArtCard from '../pages/home/RandomArtCard';
 import CardGallery from '../pages/home/CardGallery';
 
+import Footer from '../components/footer/footer';
+
+
 const RootLayout: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation(); // Get the current route
@@ -54,6 +57,10 @@ const RootLayout: React.FC = () => {
           </div>
         </main>
       </div>
+
+    <footer className='absolut bottom-0 pb-16 md:p-0'>
+        <Footer/>
+      </footer>
     </>
   );
 };
