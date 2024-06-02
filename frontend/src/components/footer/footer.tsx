@@ -4,7 +4,7 @@ import emailIcon from '../../assets/emailIcon.svg';
 
 const Footer = () => {
   return (
-    <footer className="bg-zinc-700 w-full flex justify-around">
+    <footer className="bg-footer text-white/80 w-full flex justify-around">
       <div className=" pt-2 flex flex-nowrap justify-center w-screen">
         <div className='w-1/2 flex justify-center'>
         <ul>
