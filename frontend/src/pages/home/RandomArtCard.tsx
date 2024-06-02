@@ -1,21 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSearch } from '../../components/search/SearchContext';
+import { ICard } from '../../utils/ScryfallInterfaces';
+import CardLayout from '../../layouts/CardLayout';
 
-interface CardData {
-  object: string;
-  id: string;
-  name: string;
-  type_line: string;
-  oracle_text: string;
-  image_uris: {
-    border_crop: string;
-    normal: string;
-    small: string;
-  };
-}
 
 interface ArtCardProps {
-  card?: CardData;
+  card?: ICard;
   showRandomizeButton?: boolean;
   showInfoText?: boolean;
   standalone?: boolean;
@@ -25,19 +15,18 @@ interface ArtCardProps {
 }
 
 
-
-
 const ArtCard: React.FC<ArtCardProps> = ({
   card: initialCard,
   showRandomizeButton = true,
   showInfoText = true,
   standalone = false,
   containerStyles,
-  imgStyles,
   infoStyles,
 }) => {
-  const [card, setCard] = useState<CardData | null>(initialCard || null);
+  const [card, setCard] = useState<ICard | null>(initialCard || null);
   const { results } = useSearch();
+  const [activeCard, setActiveCard] = useState<ICard | null>(null);
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   useEffect(() => {
     if (!initialCard) {
@@ -55,36 +44,73 @@ const ArtCard: React.FC<ArtCardProps> = ({
     }
   };
 
+
   const handleRandomize = () => {
     getRandomCard();
   };
 
+  const handleClickCard = () => {
+    setActiveCard(card);
+    dialogRef.current?.showModal();
+    document.body.style.overflow = 'hidden';
+  };
+
+  const handleCloseDialog = () => {
+    dialogRef.current?.close();
+    setActiveCard(null);
+    document.body.style.overflow = '';
+  };
+
+  const imageUrl = card?.card_faces && card.card_faces.length > 0
+    ? card.card_faces[0].image_uris.border_crop
+    : card?.image_uris.border_crop;
+
   return (
     <>
+      <dialog
+        ref={dialogRef}
+        className="size-9/12 md:h-9/10 md:w-1/3 bg-transparent backdrop:bg-black/75 shadow-xl no-scrollbar flex h-min overflow-auto">
+        {activeCard && (
+          <dialog
+            open
+            className="m-2 bg-[#17140D] text-white rounded-t-xl relative">
+            <CardLayout
+              card={activeCard}
+              onClose={handleCloseDialog}
+              setActiveCard={setActiveCard} addCardToDeck={function (_card: ICard): void {
+                throw new Error('Function not implemented.');
+              }} />
+          </dialog>
+        )}
+      </dialog>
+
       {results.length <= 0 && (
         <>
+
           {card && (
             <>
               <div
-                className={`randomSingleCard flex flex-col text-center items-center md:items justify-center md:flex-row text-white/80 md:p-2 ${standalone ? ' md:flex-row bg-red-500 w-screen ' : ''}`}
-                style={containerStyles}
-              >
-                <div className="img-container flex flex-col" style={imgStyles}>
-                  <img
-                    src={card.image_uris.border_crop}
-                    alt={card.name}
-                    className="rounded-md mx-auto"
-                    style={{ maxHeight: '300px', objectFit: 'contain' }}
+                className={`randomSingleCard flex flex-col text-center items-center m-2 md:items justify-center md:flex-row text-white/80 md:p-2 ${standalone ? ' md:flex-row w-screen ' : ''}`}
+                style={containerStyles}>
 
-                  />
-                </div>
-                <div className='text-container flex flex-col md:w-1/3 items-center p-2'>
+                <button onClick={handleClickCard}>
+                  <div className="img-container flex flex-col rounded-md" style={{ border: '2px solid transparent', transition: 'border-color 0.3s' }} onMouseEnter={(e) => e.currentTarget.style.borderColor = '#757BC0'} onMouseLeave={(e) => e.currentTarget.style.borderColor = 'transparent'}>
+                    <img
+                      src={imageUrl}
+                      alt={card.name}
+                      className="rounded-md mx-auto"
+                      style={{ maxHeight: '300px', objectFit: 'contain' }}
+
+                    />
+                  </div>
+                </button>
+                <div className='text-container flex flex-col w-1/2 md:w-1/3 items-center p-2'>
                   {showInfoText && (
                     <div
                       style={infoStyles}
                     >
                       <p className="text-lg md:mb-2 font-semi-bold">{card.name}</p>
-                      <p className="text-md w-[30vw]">{card.type_line}</p>
+                      <p className="text-md ">{card.type_line}</p>
                       <p className="text-sm min-h-36 italic">{card.oracle_text}</p>
                     </div>
                   )}

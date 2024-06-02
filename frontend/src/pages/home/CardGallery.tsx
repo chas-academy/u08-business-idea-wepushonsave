@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import ArtCard from './RandomArtCard';
-import { CardData } from './StandaloneCardProps';
+import { ICard } from '../../utils/ScryfallInterfaces';
 
 
 const CardGallery: React.FC = () => {
-   const [cards, setCards] = useState<CardData[]>([]);
+   const [cards, setCards] = useState<ICard[]>([]);
 
    useEffect(() => {
       fetchRandomCards();

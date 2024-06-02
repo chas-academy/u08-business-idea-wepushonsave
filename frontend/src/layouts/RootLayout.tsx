@@ -46,7 +46,7 @@ const RootLayout: React.FC = () => {
 
         <main className="md:pt-24">
           <div className="container mx-auto p-4">
-            <nav className="bg-gray-500 p-4 rounded-lg mb-4">
+            <nav className="bg-pink-500 p-4 rounded-lg mb-4">
               <NavLink to={'/algoritm'}>Algorithm</NavLink> |{' '}
               <NavLink to={'/alldecks'}>All Decks</NavLink> |{' '}
               <NavLink to={'/topcommander'}>Top Commanders</NavLink> |{' '}
@@ -58,8 +58,8 @@ const RootLayout: React.FC = () => {
         </main>
       </div>
 
-    <footer className='absolut bottom-0 pb-16 md:p-0'>
-        <Footer/>
+      <footer className='absolut bottom-0 pb-16 md:p-0'>
+        <Footer />
       </footer>
     </>
   );
