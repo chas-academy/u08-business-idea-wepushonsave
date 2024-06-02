@@ -19,11 +19,23 @@ interface ArtCardProps {
   showRandomizeButton?: boolean;
   showInfoText?: boolean;
   standalone?: boolean;
+  containerStyles?: React.CSSProperties;
+  imgStyles?: React.CSSProperties;
+  infoStyles?: React.CSSProperties;
 }
 
 
 
-const ArtCard: React.FC<ArtCardProps> = ({ card: initialCard, showRandomizeButton = true, showInfoText = true, standalone = false }) => {
+
+const ArtCard: React.FC<ArtCardProps> = ({
+  card: initialCard,
+  showRandomizeButton = true,
+  showInfoText = true,
+  standalone = false,
+  containerStyles,
+  imgStyles,
+  infoStyles,
+}) => {
   const [card, setCard] = useState<CardData | null>(initialCard || null);
   const { results } = useSearch();
 
@@ -50,37 +62,46 @@ const ArtCard: React.FC<ArtCardProps> = ({ card: initialCard, showRandomizeButto
   return (
     <>
       {results.length <= 0 && (
-        <div className={`flex justify-center items-start ${standalone ? 'h-fit md:min-w-screen' : ''}`}>
+        <>
           {card && (
             <>
-              <div className={`randomsinglecard flex flex-col text-center items-center md:items justify-center text-white/80 md:p-2 ${standalone ? 'md:flex-row md:h-screen w-screen ' : ''}`}>
-                <div className={`img-container flex flex-col  ${standalone ? 'md:size-80 md:w-1/4 justify-center items-center m-5 p-5 md:flex-row md:h-screen w-screen max-h-full md:max-h-full ' : ''}`}>
-
+              <div
+                className={`randomSingleCard flex flex-col text-center items-center md:items justify-center md:flex-row text-white/80 md:p-2 ${standalone ? ' md:flex-row bg-red-500 w-screen ' : ''}`}
+                style={containerStyles}
+              >
+                <div className="img-container flex flex-col" style={imgStyles}>
                   <img
                     src={card.image_uris.border_crop}
                     alt={card.name}
-                    className=" rounded-md mx-auto "
+                    className="rounded-md mx-auto"
+                    style={{ maxHeight: '300px', objectFit: 'contain' }}
+
                   />
                 </div>
+                <div className='text-container flex flex-col md:w-1/3 items-center p-2'>
+                  {showInfoText && (
+                    <div
+                      style={infoStyles}
+                    >
+                      <p className="text-lg md:mb-2 font-semi-bold">{card.name}</p>
+                      <p className="text-md w-[30vw]">{card.type_line}</p>
+                      <p className="text-sm min-h-36 italic">{card.oracle_text}</p>
+                    </div>
+                  )}
 
-                {showInfoText && (
-                  <div className=" info-container flex flex-col  w-3/4 md:w-1/2 md:my-10 md:mx-2 md:justify-end border-transparent ">
-                    <p className="text-lg md:mb-2 font-semi-bold ">{card.name}</p>
-                    <p className="text-sm ">{card.type_line}</p>
-                    <p className="text-sm min-h-36">{card.oracle_text}</p>
-                  </div>
-                )}
-                {showRandomizeButton && (
-                  <button
-                    onClick={handleRandomize}
-                    className=" bg-btn-gradient hover:bg-blue-700 text-white font-bold py-2 px-4 mb-3 rounded ">
-                    Another!
-                  </button>
-                )}
+                  {showRandomizeButton && (
+                    <button
+                      onClick={handleRandomize}
+                      className="bg-btn-gradient hover:bg-periwinkle  text-white/80 hover:text-white font-bold py-2 px-4 mb-3 rounded w-1/2"
+                    >
+                      Another!
+                    </button>
+                  )}
+                </div>
               </div>
             </>
           )}
-        </div>
+        </>
       )}
     </>
   );
