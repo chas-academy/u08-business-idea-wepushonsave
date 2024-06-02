@@ -7,6 +7,8 @@ import connectDB from "./db/db";
 import deckBuilderRouter from "./deckBuilder/deckBuilderRoutes";
 import profileRouter from "./routes/profileRoutes";
 import threadRoutes from "./routes/threadRoutes";
+import connectDB from "./db/db";
+import listRoutes from "./routes/listRoutes";
 import userRouter from "./api/User";
 import { authMiddleware } from "./middleware/auth";
 
@@ -43,9 +45,10 @@ app.get("/test", (req, res) => {
 // User Routes
 app.use("/api/user", userRouter);
 
-// Profile Routes
+// Pages Routes
 app.use("/api", profileRouter);
 app.use("/threads", threadRoutes);
+app.use("/api", listRoutes);
 
 // Deck Builder Routes
 app.use("/auth", authMiddleware);

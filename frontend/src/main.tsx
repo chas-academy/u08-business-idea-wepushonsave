@@ -16,6 +16,8 @@ import Threads from './pages/community/Threads.tsx';
 
 // components
 import CardsArray from './components/card/CardsArray.tsx';
+import SearchResults from './components/search/SearchResults.tsx';
+import CardDisplay from './components/listOrGrid/CardsDisplay.tsx';
 
 // layouts
 import RootLayout from './layouts/RootLayout.tsx';
@@ -27,15 +29,11 @@ import {cardSetLoader} from './utils/cardSetLoader.tsx';
 //pages
 import ProfilePage from './pages/profile/ProfilePage.tsx';
 import ProfileDashboard from './pages/profile/ProfileDashboard.tsx';
-import MyCollectionCards from './pages/profile/MyCollectionCards.tsx';
-import MyCollectionCommons from './pages/profile/MyCollectionCommons.tsx';
-import MyCollectionRare from './pages/profile/MyCollectionRare.tsx';
 import Login from './pages/login/Login.tsx';
 import Register from './pages/register/Register.tsx';
 
 // context
 import {SearchProvider} from './components/search/SearchContext.tsx';
-import CardDisplay from './components/listOrGrid/CardsDisplay.tsx';
 import DeckBuilder from './pages/deckbuilder/DeckBuilder.tsx';
 import {singleCardLoader} from './utils/singleCardLoader.tsx';
 
@@ -53,7 +51,7 @@ const router = createBrowserRouter(
       <Route path="gamerules" element={<GameRules />} />
       <Route path="cardrules" element={<CardRules />} />
       <Route
-        path="cards-display"
+        path="cards-display/:listId"
         element={<CardDisplay />}
         loader={cardsArrayLoader}
       />
@@ -74,9 +72,6 @@ const router = createBrowserRouter(
       <Route path="community" element={<Threads />} />
       <Route path="profile" element={<ProfilePage />} />
       <Route path="profile-dashboard" element={<ProfileDashboard />} />
-      <Route path="mycollection" element={<MyCollectionCards />} />
-      <Route path="mycollection-commmons" element={<MyCollectionCommons />} />
-      <Route path="mycollection-rare" element={<MyCollectionRare />} />
       <Route
         path="deck-builder"
         element={<DeckBuilder />}
