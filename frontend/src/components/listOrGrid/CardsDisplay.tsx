@@ -1,9 +1,7 @@
-/* eslint-disable react/react-in-jsx-scope */
-import {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {singleCardLoader} from '../../utils/singleCardLoader';
 import {ICard} from '../../utils/ScryfallInterfaces';
-const [activeCard, setActiveCard] = useState<ICard | null>(null);
 import ArtCard from '../../pages/home/RandomArtCard';
 
 interface IListData {
@@ -16,9 +14,9 @@ const CardDisplay: React.FC = () => {
   const [listData, setListData] = useState<IListData | null>(null);
   const [cards, setCards] = useState<ICard[]>([]);
   const [isGridView, setIsGridView] = useState(true);
+  const [activeCard, setActiveCard] = useState<ICard | null>(null); // Moved useState here
 
   useEffect(() => {
-    // Fetch list data from the backend when the component mounts
     const fetchListData = async () => {
       try {
         const response = await fetch(
@@ -37,15 +35,12 @@ const CardDisplay: React.FC = () => {
         }
 
         const data: IListData = await response.json();
-        console.log('Fetched list data:', data);
         setListData(data);
 
-        // Fetch detailed card information using singleCardLoader
         const cardDetailsPromises = data.cardIds.map(id =>
           singleCardLoader({params: {id}})
         );
         const cardDetails = await Promise.all(cardDetailsPromises);
-        console.log('Fetched card details:', cardDetails);
         setCards(cardDetails);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -55,21 +50,20 @@ const CardDisplay: React.FC = () => {
     fetchListData();
   }, [listId]);
 
-  // Function used in the view button so the user is able to choose the way to display cards (list or grid)
   const handleViewToggle = () => {
     setIsGridView(!isGridView);
   };
-  // Function to extract the first word from the type_line to sort cards by types
+
   const extractPrimaryType = (typeLine: string) => {
     return typeLine.split(' ')[0];
   };
-  // Function that sorts the cards in the list view
+
   const sortedCards = [...cards].sort((a, b) => {
     const primaryTypeA = extractPrimaryType(a.type_line);
     const primaryTypeB = extractPrimaryType(b.type_line);
     return primaryTypeA.localeCompare(primaryTypeB);
   });
-  // This function completes sortedCards() by counting the number of cards in each primary category
+
   const getTypeCounts = () => {
     const counts: {[type: string]: number} = {};
     sortedCards.forEach(card => {
@@ -81,7 +75,6 @@ const CardDisplay: React.FC = () => {
 
   const typeCounts = getTypeCounts();
 
-  // DIALOG: Pop-up to disoplay card information
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   const handleClickCard = (card: ICard) => {
@@ -97,7 +90,6 @@ const CardDisplay: React.FC = () => {
           {listData ? listData.title : 'Loading...'}
         </h1>
 
-        {/* CARD POP-UP */}
         <dialog
           ref={dialogRef}
           className="size-9/12 md:h-9/10 md:w-1/3 bg-transparent backdrop:bg-black/75 shadow-xl no-scrollbar flex h-min overflow-auto">
@@ -125,7 +117,6 @@ const CardDisplay: React.FC = () => {
             {isGridView ? 'List view' : 'Grid view'}
           </button>
         </div>
-        {/* GRID VIEW  */}
         {isGridView ? (
           <div className="grid grid-cols-3 gap-1">
             {sortedCards.map(card => (
@@ -140,7 +131,6 @@ const CardDisplay: React.FC = () => {
           </div>
         ) : (
           <div>
-            {/* LIST VIEW  */}
             {Array.from(
               new Set(
                 sortedCards.map(card => extractPrimaryType(card.type_line))

@@ -1,7 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import connectDB from "./db/db";
 
 // routes
 import deckBuilderRouter from "./deckBuilder/deckBuilderRoutes";
