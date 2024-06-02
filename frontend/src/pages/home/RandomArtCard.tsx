@@ -1,22 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSearch } from '../../components/search/SearchContext';
-import { ICard, ICardFaces } from '../../utils/ScryfallInterfaces';
+import { ICard } from '../../utils/ScryfallInterfaces';
 import CardLayout from '../../layouts/CardLayout';
 
-
-/* interface CardData {
-  object: string;
-  id: string;
-  name: string;
-  type_line: string;
-  oracle_text: string;
-  card_faces: ICardFaces[];
-  image_uris: {
-    border_crop: string;
-    normal: string;
-    small: string;
-  };
-} */
 
 interface ArtCardProps {
   card?: ICard;
@@ -35,7 +21,6 @@ const ArtCard: React.FC<ArtCardProps> = ({
   showInfoText = true,
   standalone = false,
   containerStyles,
-  imgStyles,
   infoStyles,
 }) => {
   const [card, setCard] = useState<ICard | null>(initialCard || null);
