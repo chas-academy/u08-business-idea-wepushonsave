@@ -17,6 +17,8 @@ interface Comment {
 const Threads: React.FC = () => {
    const [threads, setThreads] = useState<Thread[]>([]);
    const [newThreadContent, setNewThreadContent] = useState('');
+   const [userData, setUserData] = useState<any>({});
+
 
    useEffect(() => {
       // Fetch threads from the backend
@@ -136,6 +138,9 @@ const Threads: React.FC = () => {
          <div className='threadSection bg-white/30 flex flex-col-reverse'>
             {threads.map(thread => (
                <div key={thread._id} className=" w-full max-w-lg mb-4">
+                  <h3 className="text-xl font-bold text-white">
+                     {userData.username || ''}
+                  </h3>
                   <p className="min-h-20 text-white p-2">
                      {thread.content}
                   </p>
