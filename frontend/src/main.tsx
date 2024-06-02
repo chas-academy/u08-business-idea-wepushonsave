@@ -16,7 +16,6 @@ import Threads from './pages/community/Threads.tsx';
 
 // components
 import CardsArray from './components/card/CardsArray.tsx';
-import SearchResults from './components/search/SearchResults.tsx';
 import CardDisplay from './components/listOrGrid/CardsDisplay.tsx';
 
 // layouts

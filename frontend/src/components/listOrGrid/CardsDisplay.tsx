@@ -2,20 +2,9 @@
 import {useEffect, useRef, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {singleCardLoader} from '../../utils/singleCardLoader';
+import {ICard} from '../../utils/ScryfallInterfaces';
 const [activeCard, setActiveCard] = useState<ICard | null>(null);
-import ArtCard from '../home/RandomArtCard';
-
-interface IImageUris {
-  border_crop: string;
-}
-
-interface ICard {
-  name: string;
-  id: string;
-  type_line: string;
-  mana_cost?: string;
-  image_uris: IImageUris;
-}
+import ArtCard from '../../pages/home/RandomArtCard';
 
 interface IListData {
   title: string;
@@ -101,13 +90,6 @@ const CardDisplay: React.FC = () => {
     document.body.style.overflow = 'hidden';
   };
 
-  // Function to close dialog
-  const handleCloseDialog = () => {
-    dialogRef.current?.close();
-    setActiveCard(null);
-    document.body.style.overflow = '';
-  };
-
   return (
     <>
       <div className="">
@@ -123,7 +105,15 @@ const CardDisplay: React.FC = () => {
             <dialog
               open
               className="m-2 bg-[#17140D] text-white rounded-t-xl relative">
-              <ArtCard card={activeCard} onClose={handleCloseDialog} />
+              <ArtCard
+                card={activeCard}
+                showRandomizeButton={true}
+                showInfoText={true}
+                standalone={false}
+                containerStyles={{}}
+                imgStyles={{}}
+                infoStyles={{}}
+              />
             </dialog>
           )}
         </dialog>
