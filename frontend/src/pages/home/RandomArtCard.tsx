@@ -1,66 +1,136 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useSearch } from '../../components/search/SearchContext';
+import { ICard } from '../../utils/ScryfallInterfaces';
+import CardLayout from '../../layouts/CardLayout';
 
-interface CardData {
-   object: string;
-   id: string;
-   name: string;
-   type_line: string;
-   oracle_text: string;
-   image_uris: {
-      border_crop: string;
-   };
+
+interface ArtCardProps {
+  card?: ICard;
+  showRandomizeButton?: boolean;
+  showInfoText?: boolean;
+  standalone?: boolean;
+  containerStyles?: React.CSSProperties;
+  imgStyles?: React.CSSProperties;
+  infoStyles?: React.CSSProperties;
 }
 
-const ArtCard: React.FC = () => {
-   const [card, setCard] = useState<CardData | null>(null);
 
-   useEffect(() => {
+const ArtCard: React.FC<ArtCardProps> = ({
+  card: initialCard,
+  showRandomizeButton = true,
+  showInfoText = true,
+  standalone = false,
+  containerStyles,
+  infoStyles,
+}) => {
+  const [card, setCard] = useState<ICard | null>(initialCard || null);
+  const { results } = useSearch();
+  const [activeCard, setActiveCard] = useState<ICard | null>(null);
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
+
+  useEffect(() => {
+    if (!initialCard) {
       getRandomCard();
-   }, []);
+    }
+  }, [initialCard]);
 
-   const getRandomCard = async () => {
-      try {
-         const response = await fetch('https://api.scryfall.com/cards/random');
-         const data = await response.json();
-         setCard(data);
-      } catch (error) {
-         console.error('Error fetching random card:', error);
-      }
-   };
+  const getRandomCard = async () => {
+    try {
+      const response = await fetch('https://api.scryfall.com/cards/random');
+      const data = await response.json();
+      setCard(data);
+    } catch (error) {
+      console.error('Error fetching random card:', error);
+    }
+  };
 
-   const handleRandomize = () => {
-      getRandomCard();
-   };
 
-   return (
+  const handleRandomize = () => {
+    getRandomCard();
+  };
 
-      <div className="flex justify-center items-start h-screen md:min-w-screen items">
-         {card && (
+  const handleClickCard = () => {
+    setActiveCard(card);
+    dialogRef.current?.showModal();
+    document.body.style.overflow = 'hidden';
+  };
+
+  const handleCloseDialog = () => {
+    dialogRef.current?.close();
+    setActiveCard(null);
+    document.body.style.overflow = '';
+  };
+
+  const imageUrl = card?.card_faces && card.card_faces.length > 0
+    ? card.card_faces[0].image_uris.border_crop
+    : card?.image_uris.border_crop;
+
+  return (
+    <>
+      <dialog
+        ref={dialogRef}
+        className="size-9/12 md:h-9/10 md:w-1/3 bg-transparent backdrop:bg-black/75 shadow-xl no-scrollbar flex h-min overflow-auto">
+        {activeCard && (
+          <dialog
+            open
+            className="m-2 bg-[#17140D] text-white rounded-t-xl relative">
+            <CardLayout
+              card={activeCard}
+              onClose={handleCloseDialog}
+              setActiveCard={setActiveCard} addCardToDeck={function (_card: ICard): void {
+                throw new Error('Function not implemented.');
+              }} />
+          </dialog>
+        )}
+      </dialog>
+
+      {results.length <= 0 && (
+        <>
+
+          {card && (
             <>
-               <div className=" randomsinglecard flex flex-col text-center items-center md:items justify-center text-white/80 p-5 md:pt-16 md:p-2 md:flex-row md:h-screen w-screen">
-                  <div className='img-container flex flex-col h-1/2 max-h-full md:max-h-full  md:size-80 md:w-1/4 justify-center items-center m-5 p-5'>
-                     <button onClick={handleRandomize} className=" bg-btn-gradient hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4 ">
-                        Another!
-                     </button>
-                     <img src={card.image_uris.border_crop} alt={card.name} className=" rounded-md mx-auto size-50 " />
+              <div
+                className={`randomSingleCard flex flex-col text-center items-center m-2 md:items justify-center md:flex-row text-white/80 md:p-2 ${standalone ? ' md:flex-row w-screen ' : ''}`}
+                style={containerStyles}>
 
+                <button onClick={handleClickCard}>
+                  <div className="img-container flex flex-col rounded-md" style={{ border: '2px solid transparent', transition: 'border-color 0.3s' }} onMouseEnter={(e) => e.currentTarget.style.borderColor = '#757BC0'} onMouseLeave={(e) => e.currentTarget.style.borderColor = 'transparent'}>
+                    <img
+                      src={imageUrl}
+                      alt={card.name}
+                      className="rounded-md mx-auto"
+                      style={{ maxHeight: '300px', objectFit: 'contain' }}
+
+                    />
                   </div>
+                </button>
+                <div className='text-container flex flex-col w-1/2 md:w-1/3 items-center p-2'>
+                  {showInfoText && (
+                    <div
+                      style={infoStyles}
+                    >
+                      <p className="text-lg md:mb-2 font-semi-bold">{card.name}</p>
+                      <p className="text-md ">{card.type_line}</p>
+                      <p className="text-sm min-h-36 italic">{card.oracle_text}</p>
+                    </div>
+                  )}
 
-                  <div className=' info-container flex flex-col w-3/4 md:w-1/2 md:my-40 md:mx-2 md:justify-end border-transparent '>
-                     <p className="text-lg md:mb-5 font-semi-bold">{card.name}</p>
-                     <p className="text-sm">{card.type_line}</p>
-                     <p className="text-sm">{card.oracle_text}</p>
-
-
-                  </div>
-
-               </div>
-
+                  {showRandomizeButton && (
+                    <button
+                      onClick={handleRandomize}
+                      className="bg-btn-gradient hover:bg-periwinkle  text-white/80 hover:text-white font-bold py-2 px-4 mb-3 rounded w-1/2"
+                    >
+                      Another!
+                    </button>
+                  )}
+                </div>
+              </div>
             </>
-         )}
-
-      </div>
-   );
+          )}
+        </>
+      )}
+    </>
+  );
 };
 
 export default ArtCard;

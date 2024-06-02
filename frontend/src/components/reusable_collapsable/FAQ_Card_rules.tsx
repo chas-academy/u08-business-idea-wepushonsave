@@ -1,5 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 
+import {useState} from 'react';
 import Collapsable from './Collapsable';
 import CollapsableContent from './CollapsableContent';
 import getIconApi from './iconApi';
@@ -11,11 +12,25 @@ const FAQ_Card_rules = () => {
   const forest = getIconApi('{G}');
   const island = getIconApi('{U}');
   const colorLess = getIconApi('{C}');
+  const [openMainCollapsibleId, setOpenMainCollapsibleId] = useState<
+    string | null
+  >(null);
+  const [openSubCollapsibleId, setOpenSubCollapsibleId] = useState<
+    string | null
+  >(null);
+
+  const handleMainCollapsibleToggle = (id: string) => {
+    setOpenMainCollapsibleId(prevId => (prevId === id ? null : id));
+  };
+
+  const handleSubCollapsibleToggle = (id: string) => {
+    setOpenSubCollapsibleId(prevId => (prevId === id ? null : id));
+  };
 
   return (
     <>
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className=" text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAland-types">
         <Collapsable
           titles="Land Types"
@@ -33,6 +48,8 @@ const FAQ_Card_rules = () => {
                     ]}
                   />
                 }
+                isOpen={openSubCollapsibleId === 'swamp'}
+                onClick={() => handleSubCollapsibleToggle('swamp')}
               />
               <Collapsable
                 titles="Mountain"
@@ -45,6 +62,8 @@ const FAQ_Card_rules = () => {
                     ]}
                   />
                 }
+                isOpen={openSubCollapsibleId === 'mountain'}
+                onClick={() => handleSubCollapsibleToggle('mountain')}
               />
               <Collapsable
                 titles="Plains"
@@ -57,6 +76,8 @@ const FAQ_Card_rules = () => {
                     ]}
                   />
                 }
+                isOpen={openSubCollapsibleId === 'plains'}
+                onClick={() => handleSubCollapsibleToggle('plains')}
               />
               <Collapsable
                 titles="Forest"
@@ -69,6 +90,8 @@ const FAQ_Card_rules = () => {
                     ]}
                   />
                 }
+                isOpen={openSubCollapsibleId === 'forest'}
+                onClick={() => handleSubCollapsibleToggle('forest')}
               />
               <Collapsable
                 titles="Island"
@@ -81,6 +104,8 @@ const FAQ_Card_rules = () => {
                     ]}
                   />
                 }
+                isOpen={openSubCollapsibleId === 'island'}
+                onClick={() => handleSubCollapsibleToggle('island')}
               />
               <Collapsable
                 titles="Colorless"
@@ -93,6 +118,8 @@ const FAQ_Card_rules = () => {
                     ]}
                   />
                 }
+                isOpen={openSubCollapsibleId === 'colorless'}
+                onClick={() => handleSubCollapsibleToggle('colorless')}
               />
               <Collapsable
                 titles="Cave"
@@ -104,8 +131,9 @@ const FAQ_Card_rules = () => {
                     ]}
                   />
                 }
+                isOpen={openSubCollapsibleId === 'cave'}
+                onClick={() => handleSubCollapsibleToggle('cave')}
               />
-
               <Collapsable
                 titles="Desert"
                 content={
@@ -116,8 +144,9 @@ const FAQ_Card_rules = () => {
                     ]}
                   />
                 }
+                isOpen={openSubCollapsibleId === 'desert'}
+                onClick={() => handleSubCollapsibleToggle('desert')}
               />
-
               <Collapsable
                 titles="Gate"
                 content={
@@ -128,8 +157,9 @@ const FAQ_Card_rules = () => {
                     ]}
                   />
                 }
+                isOpen={openSubCollapsibleId === 'gate'}
+                onClick={() => handleSubCollapsibleToggle('gate')}
               />
-
               <Collapsable
                 titles="Lair"
                 content={
@@ -140,8 +170,9 @@ const FAQ_Card_rules = () => {
                     ]}
                   />
                 }
+                isOpen={openSubCollapsibleId === 'lair'}
+                onClick={() => handleSubCollapsibleToggle('lair')}
               />
-
               <Collapsable
                 titles="Locus"
                 content={
@@ -152,8 +183,9 @@ const FAQ_Card_rules = () => {
                     ]}
                   />
                 }
+                isOpen={openSubCollapsibleId === 'locus'}
+                onClick={() => handleSubCollapsibleToggle('locus')}
               />
-
               <Collapsable
                 titles="Sphere"
                 content={
@@ -164,8 +196,9 @@ const FAQ_Card_rules = () => {
                     ]}
                   />
                 }
+                isOpen={openSubCollapsibleId === 'sphere'}
+                onClick={() => handleSubCollapsibleToggle('sphere')}
               />
-
               <Collapsable
                 titles="Urza's"
                 content={
@@ -176,8 +209,9 @@ const FAQ_Card_rules = () => {
                     ]}
                   />
                 }
+                isOpen={openSubCollapsibleId === 'urzas'}
+                onClick={() => handleSubCollapsibleToggle('urzas')}
               />
-
               <Collapsable
                 titles="Cloud"
                 content={
@@ -188,139 +222,133 @@ const FAQ_Card_rules = () => {
                     ]}
                   />
                 }
+                isOpen={openSubCollapsibleId === 'cloud'}
+                onClick={() => handleSubCollapsibleToggle('cloud')}
               />
             </>
           }
+          isOpen={openMainCollapsibleId === 'landTypes'}
+          onClick={() => handleMainCollapsibleToggle('landTypes')}
         />
       </div>
-      <div className="p-4 text-white rounded-lg mt-4 bg-zinc-700" id="pAPAcreature">
+      <div
+        className=" text-white rounded-lg mt-4 bg-site-gradient"
+        id="pAPAcreature">
         <Collapsable
           titles="Creature"
           content={
             <>
               <CollapsableContent title="" items={[]} image="" />
-              <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
-                id="creature-types">
-                <Collapsable
-                  titles="Creature Types"
-                  content={
-                    <CollapsableContent
-                      title="Creature Types:"
-                      items={[
-                        'In Magic: The Gathering, creatures are a fundamental card type representing characters, monsters, and other entities that can attack, defend, and interact with other cards. Here are some key points about creature types:',
-                        '_',
-                      ]}
-                    />
-                  }
-                />
-              </div>
-              <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
-                id="characteristics">
-                <Collapsable
-                  titles="Characteristics"
-                  content={
-                    <CollapsableContent
-                      title="1. Characteristics:"
-                      items={[
-                        'Creatures have several characteristics that define their gameplay, including power, toughness, mana cost, creature types, abilities, and flavor text. Power and toughness determine a creature’s combat effectiveness, while abilities and creature types provide additional strategic options and synergies.',
-                        '_',
-                      ]}
-                    />
-                  }
-                />
-              </div>
-              <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
-                id="types-and-subtypes">
-                <Collapsable
-                  titles="Types and Subtypes"
-                  content={
-                    <CollapsableContent
-                      title="2. Types and Subtypes:"
-                      items={[
-                        '-Creature Types:',
-                        '*Creature types categorize creatures into various tribes or species, such as Human, Goblin, or Elf. These types often interact with other cards and mechanics that care about specific creature types, enabling tribal synergies and strategies.',
-                        '-Subtypes:',
-                        '*Some creatures have additional subtypes that further define their characteristics or abilities, such as Zombie, Warrior, or Wizard. Subtypes can impact gameplay by triggering abilities or interactions with other cards that care about specific subtypes.',
-                        '_',
-                      ]}
-                    />
-                  }
-                />
-              </div>
-              <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
-                id="summoning-sickness">
-                <Collapsable
-                  titles="Summoning Sickness"
-                  content={
-                    <CollapsableContent
-                      title="3. Summoning Sickness:"
-                      items={[
-                        'When a creature enters the battlefield under a player’s control, it is affected by summoning sickness until the beginning of its controller’s next turn. A creature with summoning sickness cannot attack, activate abilities requiring the tap symbol, or pay costs that include tapping the creature.',
-                        '_',
-                      ]}
-                    />
-                  }
-                />
-              </div>
-              <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
-                id="creature-abilities">
-                <Collapsable
-                  titles="Creature Abilities"
-                  content={
-                    <CollapsableContent
-                      title="4. Creature Abilities:"
-                      items={[
-                        'Many creatures have abilities that enhance their effectiveness, provide utility, or interact with other cards and game mechanics. These abilities can be activated, triggered, or static, and they often define a creature’s role within a deck or strategy.',
-                        '_',
-                      ]}
-                    />
-                  }
-                />
-              </div>
-              <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
-                id="combat">
-                <Collapsable
-                  titles="Combat"
-                  content={
-                    <CollapsableContent
-                      title="5. Combat:"
-                      items={[
-                        'Creatures play a central role in combat, attacking and blocking to deal damage to opponents or defend against attacks. Understanding combat mechanics, including blocking, attacking, damage assignment, and combat tricks, is essential for mastering Magic: The Gathering gameplay.',
-                        '_',
-                      ]}
-                    />
-                  }
-                />
-              </div>
-              <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
-                id="creature-token">
-                <Collapsable
-                  titles="Creature Tokens"
-                  content={
-                    <CollapsableContent
-                      title="6. Creature Tokens:"
-                      items={[
-                        'Creature tokens are temporary creatures created by spells, abilities, or other game effects. Tokens enter the battlefield with the characteristics defined by the effect that created them, such as power, toughness, creature types, and abilities. Tokens are commonly used to represent summoned creatures, summoned creatures, and other ephemeral entities.',
-                        '_',
-                      ]}
-                    />
-                  }
-                />
-              </div>
+              <Collapsable
+                titles="Creature Types"
+                content={
+                  <CollapsableContent
+                    title="Creature Types:"
+                    items={[
+                      'In Magic: The Gathering, creatures are a fundamental card type representing characters, monsters, and other entities that can attack, defend, and interact with other cards. Here are some key points about creature types:',
+                      '_',
+                    ]}
+                  />
+                }
+                isOpen={openSubCollapsibleId === 'creatureTypes'}
+                onClick={() => handleSubCollapsibleToggle('creatureTypes')}
+              />
+              <Collapsable
+                titles="Characteristics"
+                content={
+                  <CollapsableContent
+                    title="1. Characteristics:"
+                    items={[
+                      'Creatures have several characteristics that define their gameplay, including power, toughness, mana cost, creature types, abilities, and flavor text. Power and toughness determine a creature’s combat effectiveness, while abilities and creature types provide additional strategic options and synergies.',
+                      '_',
+                    ]}
+                  />
+                }
+                isOpen={openSubCollapsibleId === 'characteristics'}
+                onClick={() => handleSubCollapsibleToggle('characteristics')}
+              />
+              <Collapsable
+                titles="Types and Subtypes"
+                content={
+                  <CollapsableContent
+                    title="2. Types and Subtypes:"
+                    items={[
+                      '-Creature Types:',
+                      '*Creature types categorize creatures into various tribes or species, such as Human, Goblin, or Elf. These types often interact with other cards and mechanics that care about specific creature types, enabling tribal synergies and strategies.',
+                      '-Subtypes:',
+                      '*Some creatures have additional subtypes that further define their characteristics or abilities, such as Zombie, Warrior, or Wizard. Subtypes can impact gameplay by triggering abilities or interactions with other cards that care about specific subtypes.',
+                      '_',
+                    ]}
+                  />
+                }
+                isOpen={openSubCollapsibleId === 'typesAndSubtypes'}
+                onClick={() => handleSubCollapsibleToggle('typesAndSubtypes')}
+              />
+              <Collapsable
+                titles="Summoning Sickness"
+                content={
+                  <CollapsableContent
+                    title="3. Summoning Sickness:"
+                    items={[
+                      'When a creature enters the battlefield under a player’s control, it is affected by summoning sickness until the beginning of its controller’s next turn. A creature with summoning sickness cannot attack, activate abilities requiring the tap symbol, or pay costs that include tapping the creature.',
+                      '_',
+                    ]}
+                  />
+                }
+                isOpen={openSubCollapsibleId === 'summoningSickness'}
+                onClick={() => handleSubCollapsibleToggle('summoningSickness')}
+              />
+              <Collapsable
+                titles="Creature Abilities"
+                content={
+                  <CollapsableContent
+                    title="4. Creature Abilities:"
+                    items={[
+                      'Many creatures have abilities that enhance their effectiveness, provide utility, or interact with other cards and game mechanics. These abilities can be activated, triggered, or static, and they often define a creature’s role within a deck or strategy.',
+                      '_',
+                    ]}
+                  />
+                }
+                isOpen={openSubCollapsibleId === 'creatureAbilities'}
+                onClick={() => handleSubCollapsibleToggle('creatureAbilities')}
+              />
+              <Collapsable
+                titles="Combat"
+                content={
+                  <CollapsableContent
+                    title="5. Combat:"
+                    items={[
+                      'Creatures play a central role in combat, attacking and blocking to deal damage to opponents or defend against attacks. Understanding combat mechanics, including blocking, attacking, damage assignment, and combat tricks, is essential for mastering Magic: The Gathering gameplay.',
+                      '_',
+                    ]}
+                  />
+                }
+                isOpen={openSubCollapsibleId === 'combat'}
+                onClick={() => handleSubCollapsibleToggle('combat')}
+              />
+              <Collapsable
+                titles="Creature Tokens"
+                content={
+                  <CollapsableContent
+                    title="6. Creature Tokens:"
+                    items={[
+                      'Creature tokens are temporary creatures created by spells, abilities, or other game effects. Tokens enter the battlefield with the characteristics defined by the effect that created them, such as power, toughness, creature types, and abilities. Tokens are commonly used to represent summoned creatures, summoned creatures, and other ephemeral entities.',
+                      '_',
+                    ]}
+                  />
+                }
+                isOpen={openSubCollapsibleId === 'creatureTokens'}
+                onClick={() => handleSubCollapsibleToggle('creatureTokens')}
+              />
             </>
           }
+          isOpen={openMainCollapsibleId === 'creature'}
+          onClick={() => handleMainCollapsibleToggle('creature')}
         />
       </div>
 
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className=" text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAenchantment">
         <Collapsable
           titles="Enchantment"
@@ -328,7 +356,6 @@ const FAQ_Card_rules = () => {
             <>
               <CollapsableContent title="" items={[]} image="" />
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="enchantments">
                 <Collapsable
                   titles="Enchantments"
@@ -341,10 +368,11 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'enchantments'}
+                  onClick={() => handleSubCollapsibleToggle('enchantments')}
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="flavor-and-identity">
                 <Collapsable
                   titles="Flavor and Identity"
@@ -357,10 +385,13 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'flavorAndIdentity'}
+                  onClick={() =>
+                    handleSubCollapsibleToggle('flavorAndIdentity')
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="types-of-enchantments">
                 <Collapsable
                   titles="Types of Enchantments"
@@ -376,10 +407,13 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'typesOfEnchantments'}
+                  onClick={() =>
+                    handleSubCollapsibleToggle('typesOfEnchantments')
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="continuous-effects-enchantments">
                 <Collapsable
                   titles="Continuous Effects"
@@ -392,10 +426,13 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'continuousEffects'}
+                  onClick={() =>
+                    handleSubCollapsibleToggle('continuousEffects')
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="strategic-value-enchantments">
                 <Collapsable
                   titles="Strategic Value"
@@ -408,10 +445,11 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'strategicValue'}
+                  onClick={() => handleSubCollapsibleToggle('strategicValue')}
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="interaction-with-other-cards-enchantments">
                 <Collapsable
                   titles="Interaction with Other Cards"
@@ -424,10 +462,13 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'interactionWithOtherCards'}
+                  onClick={() =>
+                    handleSubCollapsibleToggle('interactionWithOtherCards')
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="enchantress-effects">
                 <Collapsable
                   titles="Enchantress Effects"
@@ -440,15 +481,21 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'enchantressEffects'}
+                  onClick={() =>
+                    handleSubCollapsibleToggle('enchantressEffects')
+                  }
                 />
               </div>
             </>
           }
+          isOpen={openMainCollapsibleId === 'enchantment'}
+          onClick={() => handleMainCollapsibleToggle('enchantment')}
         />
       </div>
 
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className=" text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAartifacts">
         <Collapsable
           titles="Artifacts"
@@ -456,10 +503,9 @@ const FAQ_Card_rules = () => {
             <>
               <CollapsableContent title="" items={[]} image="" />
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="artifacts-key-concepts-and-gameplay">
                 <Collapsable
-                  titles="Artifacts: Key Concepts and Gameplay"
+                  titles="Artifacts: Key Concepts/Gameplay"
                   content={
                     <CollapsableContent
                       title="Artifacts: Key Concepts and Gameplay"
@@ -470,10 +516,17 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={
+                    openSubCollapsibleId === 'artifactsKeyConceptsAndGameplay'
+                  }
+                  onClick={() =>
+                    handleSubCollapsibleToggle(
+                      'artifactsKeyConceptsAndGameplay'
+                    )
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="overview-of-artifacts">
                 <Collapsable
                   titles="Overview of Artifacts"
@@ -487,10 +540,13 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'overviewOfArtifacts'}
+                  onClick={() =>
+                    handleSubCollapsibleToggle('overviewOfArtifacts')
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="types-of-artifacts">
                 <Collapsable
                   titles="Types of Artifacts"
@@ -505,10 +561,11 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'typesOfArtifacts'}
+                  onClick={() => handleSubCollapsibleToggle('typesOfArtifacts')}
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="continuous-effects">
                 <Collapsable
                   titles="Continuous Effects"
@@ -521,10 +578,13 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'continuousEffects'}
+                  onClick={() =>
+                    handleSubCollapsibleToggle('continuousEffects')
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="strategic-value-artifacts">
                 <Collapsable
                   titles="Strategic Value"
@@ -538,10 +598,11 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'strategicValue'}
+                  onClick={() => handleSubCollapsibleToggle('strategicValue')}
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="interaction-with-other-cards-artifacts">
                 <Collapsable
                   titles="Interaction with Other Cards"
@@ -555,10 +616,13 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'interactionWithOtherCards'}
+                  onClick={() =>
+                    handleSubCollapsibleToggle('interactionWithOtherCards')
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="artifact-deck-themes">
                 <Collapsable
                   titles="Artifact Deck Themes"
@@ -573,10 +637,13 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'artifactDeckThemes'}
+                  onClick={() =>
+                    handleSubCollapsibleToggle('artifactDeckThemes')
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="artifact-creatures-and-animation">
                 <Collapsable
                   titles="Artifact Creatures and Animation"
@@ -590,15 +657,23 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={
+                    openSubCollapsibleId === 'artifactCreaturesAndAnimation'
+                  }
+                  onClick={() =>
+                    handleSubCollapsibleToggle('artifactCreaturesAndAnimation')
+                  }
                 />
               </div>
             </>
           }
+          isOpen={openMainCollapsibleId === 'artifacts'}
+          onClick={() => handleMainCollapsibleToggle('artifacts')}
         />
       </div>
 
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className=" text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAsorceries">
         <Collapsable
           titles="Sorcery"
@@ -606,10 +681,9 @@ const FAQ_Card_rules = () => {
             <>
               <CollapsableContent title="" items={[]} image="" />
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="sorceries-key-concepts-and-gameplay">
                 <Collapsable
-                  titles="Sorceries: Key Concepts and Gameplay"
+                  titles="Sorceries: Key Concepts/Gameplay"
                   content={
                     <CollapsableContent
                       title="Sorceries: Key Concepts and Gameplay"
@@ -620,10 +694,17 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={
+                    openSubCollapsibleId === 'sorceriesKeyConceptsAndGameplay'
+                  }
+                  onClick={() =>
+                    handleSubCollapsibleToggle(
+                      'sorceriesKeyConceptsAndGameplay'
+                    )
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="overview-of-sorceries">
                 <Collapsable
                   titles="Overview of Sorceries"
@@ -637,10 +718,13 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'overviewOfSorceries'}
+                  onClick={() =>
+                    handleSubCollapsibleToggle('overviewOfSorceries')
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="types-of-sorceries">
                 <Collapsable
                   titles="Types of Sorceries"
@@ -655,10 +739,11 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'typesOfSorceries'}
+                  onClick={() => handleSubCollapsibleToggle('typesOfSorceries')}
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="casting-sorceries">
                 <Collapsable
                   titles="Casting Sorceries"
@@ -672,10 +757,11 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'castingSorceries'}
+                  onClick={() => handleSubCollapsibleToggle('castingSorceries')}
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="strategic-value-sorceries">
                 <Collapsable
                   titles="Strategic Value"
@@ -689,10 +775,11 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'strategicValue'}
+                  onClick={() => handleSubCollapsibleToggle('strategicValue')}
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="interaction-with-other-cards-sorceries">
                 <Collapsable
                   titles="Interaction with Other Cards"
@@ -706,10 +793,13 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'interactionWithOtherCards'}
+                  onClick={() =>
+                    handleSubCollapsibleToggle('interactionWithOtherCards')
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="deck-themes-sorceries">
                 <Collapsable
                   titles="Deck Themes"
@@ -724,15 +814,19 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'deckThemes'}
+                  onClick={() => handleSubCollapsibleToggle('deckThemes')}
                 />
               </div>
             </>
           }
+          isOpen={openMainCollapsibleId === 'sorceries'}
+          onClick={() => handleMainCollapsibleToggle('sorceries')}
         />
       </div>
 
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className=" text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAinstants">
         <Collapsable
           titles="Instants"
@@ -740,10 +834,9 @@ const FAQ_Card_rules = () => {
             <>
               <CollapsableContent title="" items={[]} image="" />
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="instants-key-concepts-and-gameplay">
                 <Collapsable
-                  titles="Instants: Key Concepts and Gameplay"
+                  titles="Instants: Key Concepts/Gameplay"
                   content={
                     <CollapsableContent
                       title="Instants: Key Concepts and Gameplay"
@@ -754,10 +847,15 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={
+                    openSubCollapsibleId === 'instantsKeyConceptsAndGameplay'
+                  }
+                  onClick={() =>
+                    handleSubCollapsibleToggle('instantsKeyConceptsAndGameplay')
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="overview-of-instants">
                 <Collapsable
                   titles="Overview of Instants"
@@ -771,10 +869,13 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'overviewOfInstants'}
+                  onClick={() =>
+                    handleSubCollapsibleToggle('overviewOfInstants')
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="types-of-instants">
                 <Collapsable
                   titles="Types of Instants"
@@ -789,10 +890,11 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'typesOfInstants'}
+                  onClick={() => handleSubCollapsibleToggle('typesOfInstants')}
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="casting-instants">
                 <Collapsable
                   titles="Casting Instants"
@@ -806,10 +908,11 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'castingInstants'}
+                  onClick={() => handleSubCollapsibleToggle('castingInstants')}
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="strategic-value-instants">
                 <Collapsable
                   titles="Strategic Value"
@@ -823,10 +926,11 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'strategicValue'}
+                  onClick={() => handleSubCollapsibleToggle('strategicValue')}
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="interaction-with-other-cards-instants">
                 <Collapsable
                   titles="Interaction with Other Cards"
@@ -840,10 +944,13 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'interactionWithOtherCards'}
+                  onClick={() =>
+                    handleSubCollapsibleToggle('interactionWithOtherCards')
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="deck-themes-instants">
                 <Collapsable
                   titles="Deck Themes"
@@ -858,15 +965,18 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'deckThemes'}
+                  onClick={() => handleSubCollapsibleToggle('deckThemes')}
                 />
               </div>
             </>
           }
+          isOpen={openMainCollapsibleId === 'instants'}
+          onClick={() => handleMainCollapsibleToggle('instants')}
         />
       </div>
-
       <div
-        className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
+        className=" text-white rounded-lg mt-4 bg-site-gradient"
         id="pAPAplaneswalkers">
         <Collapsable
           titles="Planeswalkers"
@@ -874,10 +984,9 @@ const FAQ_Card_rules = () => {
             <>
               <CollapsableContent title="" items={[]} image="" />
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="planeswalkers-key-concepts-and-gameplay">
                 <Collapsable
-                  titles="Planeswalkers: Key Concepts and Gameplay"
+                  titles="Planeswalkers"
                   content={
                     <CollapsableContent
                       title="Planeswalkers: Key Concepts and Gameplay"
@@ -888,10 +997,18 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={
+                    openSubCollapsibleId ===
+                    'planeswalkersKeyConceptsAndGameplay'
+                  }
+                  onClick={() =>
+                    handleSubCollapsibleToggle(
+                      'planeswalkersKeyConceptsAndGameplay'
+                    )
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="overview-of-planeswalkers">
                 <Collapsable
                   titles="Overview of Planeswalkers"
@@ -905,10 +1022,13 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'overviewOfPlaneswalkers'}
+                  onClick={() =>
+                    handleSubCollapsibleToggle('overviewOfPlaneswalkers')
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="types-of-planeswalker-abilities">
                 <Collapsable
                   titles="Types of Planeswalker Abilities"
@@ -923,10 +1043,15 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={
+                    openSubCollapsibleId === 'typesOfPlaneswalkerAbilities'
+                  }
+                  onClick={() =>
+                    handleSubCollapsibleToggle('typesOfPlaneswalkerAbilities')
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="activating-planeswalker-abilities">
                 <Collapsable
                   titles="Activating Planeswalker Abilities"
@@ -940,10 +1065,17 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={
+                    openSubCollapsibleId === 'activatingPlaneswalkerAbilities'
+                  }
+                  onClick={() =>
+                    handleSubCollapsibleToggle(
+                      'activatingPlaneswalkerAbilities'
+                    )
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="strategic-value">
                 <Collapsable
                   titles="Strategic Value"
@@ -957,10 +1089,11 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'strategicValue'}
+                  onClick={() => handleSubCollapsibleToggle('strategicValue')}
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="interaction-with-other-cards">
                 <Collapsable
                   titles="Interaction with Other Cards"
@@ -974,10 +1107,13 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'interactionWithOtherCards'}
+                  onClick={() =>
+                    handleSubCollapsibleToggle('interactionWithOtherCards')
+                  }
                 />
               </div>
               <div
-                className="p-4 text-white rounded-lg mt-4 bg-zinc-700"
                 id="deck-themes">
                 <Collapsable
                   titles="Deck Themes"
@@ -992,10 +1128,14 @@ const FAQ_Card_rules = () => {
                       ]}
                     />
                   }
+                  isOpen={openSubCollapsibleId === 'deckThemes'}
+                  onClick={() => handleSubCollapsibleToggle('deckThemes')}
                 />
               </div>
             </>
           }
+          isOpen={openMainCollapsibleId === 'pAPAplaneswalkers'}
+          onClick={() => handleMainCollapsibleToggle('pAPAplaneswalkers')}
         />
       </div>
     </>

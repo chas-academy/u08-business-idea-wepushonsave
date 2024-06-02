@@ -1,12 +1,16 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import userRouter from "./api/User";
+import connectDB from "./db/db";
+
+// routes
+import deckBuilderRouter from "./deckBuilder/deckBuilderRoutes";
 import profileRouter from "./routes/profileRoutes";
 import threadRoutes from "./routes/threadRoutes";
-
 import connectDB from "./db/db";
 import listRoutes from "./routes/listRoutes";
+import userRouter from "./api/User";
+import { authMiddleware } from "./middleware/auth";
 
 // Initialize Database Connection
 connectDB;
@@ -45,6 +49,10 @@ app.use("/api/user", userRouter);
 app.use("/api", profileRouter);
 app.use("/threads", threadRoutes);
 app.use("/api", listRoutes);
+
+// Deck Builder Routes
+app.use("/auth", authMiddleware);
+app.use("/decks", deckBuilderRouter);
 
 // Export App for Server
 export default app;

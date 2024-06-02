@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        footer: '#21162F',
         mint: '#DEE8E0',
         periwinkle: '#757BC0',
         plum: '#462F64',
@@ -32,8 +33,12 @@ export default {
         'mobile-search': "url('/src/assets/mobile-hero.png')",
         'desktop-search': "url('/src/assets/desktop-hero.png')",
         filter: 'rgba(50, 41, 41, 0.8)',
-        'collection-btn':
-          'linear-gradient(to bottom, #FF9A61, rgba(86, 87, 108, 0.8))',
+      },
+      fill: {
+        'common': '#000000',
+        'uncommon': '#5BB1F1',
+        'rare': '#E3B217',
+        'mythic': '#E86100',
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
@@ -41,4 +46,9 @@ export default {
     },
   },
   plugins: [],
+  corePlugins: {
+    scrollSnapType: true,
+    scrollSnapAlign: true,
+    scrollSnapStop: true,
+  },
 };
