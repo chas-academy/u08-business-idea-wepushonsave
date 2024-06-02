@@ -52,10 +52,10 @@ const RootLayout: React.FC = () => {
           </SearchProvider>
         </div>
       </main>
-      <footer>
+    </div>
+    <footer className='absolut bottom-0 pb-16 md:p-0'>
         <Footer/>
       </footer>
-    </div>
     </>
   );
 };
