@@ -29,11 +29,7 @@ export const createDeckController = (req: Request, res: Response) => {
  * @returns
  */
 export const getDecksController = (_req: Request, res: Response) => {
-  const userId = _req.userId;
-
-  if (!userId) return res.status(400).json({ error: "Unauthorized" });
-
-  const decks = getDecks(userId);
+  const decks = getDecks();
   res.json(decks);
 };
 /**
@@ -44,11 +40,8 @@ export const getDecksController = (_req: Request, res: Response) => {
  */
 export const getDeckController = (req: Request, res: Response) => {
   const { id } = req.params;
-  const userId = req.userId;
 
-  if (!userId) return res.status(400).json({ error: "Unauthorized" });
-
-  const deck = getDeck(id, userId);
+  const deck = getDeck(id);
   if (!deck) {
     return res.status(400).json({ error: "Deck not found" });
   }
@@ -66,7 +59,8 @@ export const addCardToDeckController = (req: Request, res: Response) => {
   const userId = req.userId;
 
   if (!userId) return res.status(400).json({ error: "Unauthorized" });
-  if (!card) return res.status(400).json({ error: "Card is required" });
+  if (!card || !card.id || !card.name)
+    return res.status(400).json({ error: "Requires card id and name" });
 
   const updateDeck = addCardToDeck(id, userId, card);
   if (!updateDeck) {
