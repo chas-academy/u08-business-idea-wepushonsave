@@ -12,50 +12,50 @@ interface NavbarProps {
   toggleSidebar: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({toggleSidebar}) => {
+const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
 
-//in the backend do: res.clear(cookies) when get invalid token clear tokens, it will from frontend
+  //in the backend do: res.clear(cookies) when get invalid token clear tokens, it will from frontend
 
-//const navigate = useNavigate();
-//const [visible, setVisible] = useState(false); // State to check if button is visible or not set to false witch means it is not visible
+  //const navigate = useNavigate();
+  //const [visible, setVisible] = useState(false); // State to check if button is visible or not set to false witch means it is not visible
 
-const [isLoggedIn, setIsLoggedIn] = useState(false); // State to check if user is logged in or not set to false witch means user is not logged in
-const checkLogin = async () => { // Async function to check login status
-  try {
-    const response = await fetch('http://localhost:3000/api/user/login', {
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to check if user is logged in or not set to false witch means user is not logged in
+  const checkLogin = async () => { // Async function to check login status
+    try {
+      const response = await fetch('https://mtg-tomb.onrender.com/api/user/login', {
         method: "get",
         mode: "cors",
         credentials: "include",
       });
-    if (!response.ok && response.status !== 401) {
-      // Handle non-200 OK responses (e.g., errors from the server)
-      throw new Error('Login failed'); // if check for 404
+      if (!response.ok && response.status !== 401) {
+        // Handle non-200 OK responses (e.g., errors from the server)
+        throw new Error('Login failed'); // if check for 404
+      }
+      if (response.status === 401) {
+        setIsLoggedIn(false);
+      } else {
+        const userData = await response.json(); // Parse the JSON from the response and save it in userData
+        setIsLoggedIn(userData.isLoggedIn); // Check for "isLoggedIn" field in response data  || false
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error); // Log the error
     }
-    if (response.status === 401) {
-      setIsLoggedIn(false);
-    } else {
-    const userData = await response.json(); // Parse the JSON from the response and save it in userData
-    setIsLoggedIn(userData.isLoggedIn); // Check for "isLoggedIn" field in response data  || false
-    }
-  } catch (error) {
-    console.error('Error fetching user data:', error); // Log the error
-  }
-};
-useEffect(() => { // useEffect to run the checkLogin function
-  checkLogin();
-}, []); // Run checkLogin on component mount
-
-// Function to hide the login button
-/*const hide = () => {
-  setIsLoggedIn(isLogged);
-};
-
- const logout = () => {
-    //localStorage.removeItem('token')
-    set.clear(cookies.get('token');
-    navigate('/login');
   };
-*/
+  useEffect(() => { // useEffect to run the checkLogin function
+    checkLogin();
+  }, []); // Run checkLogin on component mount
+
+  // Function to hide the login button
+  /*const hide = () => {
+    setIsLoggedIn(isLogged);
+  };
+  
+   const logout = () => {
+      //localStorage.removeItem('token')
+      set.clear(cookies.get('token');
+      navigate('/login');
+    };
+  */
 
   return (
     <nav className=" z-10 fixed bottom-0 inset-x-0 bg-nav-gradient flex items-start text-sm text-blue-900 uppercase font-mono md:fixed md:top-0 md:bottom-auto md:w-full md:h-auto">
@@ -81,7 +81,7 @@ useEffect(() => { // useEffect to run the checkLogin function
         <img
           src={profileIcon}
           alt="Profile Icon"
-          style={{width: '4.25rem', height: '4.25rem'}}
+          style={{ width: '4.25rem', height: '4.25rem' }}
           className="mx-auto bg-custom-purple-600 rounded-full border-4 border-plum hover:border-mint hover:shadow-md hover:shadow-plum"
         />
       </a>
@@ -108,7 +108,7 @@ useEffect(() => { // useEffect to run the checkLogin function
         <div>
           <a href="/login" className="login-logo-desktop ml-auto 0">
             <button
-                          className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
+              className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
               <span className="absolute inset-0 border-2 border-transparent hover:border-white rounded-lg"></span>
               LOGIN
             </button>
@@ -124,7 +124,7 @@ useEffect(() => { // useEffect to run the checkLogin function
         <div>
           <a href="/login" className="login-logo-desktop ml-auto 0">
             <button
-             
+
               className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
               <span className="absolute inset-0 border-2 border-transparent hover:border-white rounded-lg"></span>
               LOG OUT

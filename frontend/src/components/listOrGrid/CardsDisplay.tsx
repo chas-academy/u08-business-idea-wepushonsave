@@ -1,7 +1,7 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {useParams} from 'react-router-dom';
-import {singleCardLoader} from '../../utils/singleCardLoader';
-import {ICard} from '../../utils/ScryfallInterfaces';
+import React, { useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { singleCardLoader } from '../../utils/singleCardLoader';
+import { ICard } from '../../utils/ScryfallInterfaces';
 import ArtCard from '../../pages/home/RandomArtCard';
 
 interface IListData {
@@ -10,7 +10,7 @@ interface IListData {
 }
 
 const CardDisplay: React.FC = () => {
-  const {listId} = useParams<{listId: string}>();
+  const { listId } = useParams<{ listId: string }>();
   const [listData, setListData] = useState<IListData | null>(null);
   const [cards, setCards] = useState<ICard[]>([]);
   const [isGridView, setIsGridView] = useState(true);
@@ -20,7 +20,7 @@ const CardDisplay: React.FC = () => {
     const fetchListData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/lists/${listId}`,
+          `https://mtg-tomb.onrender.com/api/lists/${listId}`,
           {
             credentials: 'include',
             headers: {
@@ -38,7 +38,7 @@ const CardDisplay: React.FC = () => {
         setListData(data);
 
         const cardDetailsPromises = data.cardIds.map(id =>
-          singleCardLoader({params: {id}})
+          singleCardLoader({ params: { id } })
         );
         const cardDetails = await Promise.all(cardDetailsPromises);
         setCards(cardDetails);
@@ -65,7 +65,7 @@ const CardDisplay: React.FC = () => {
   });
 
   const getTypeCounts = () => {
-    const counts: {[type: string]: number} = {};
+    const counts: { [type: string]: number } = {};
     sortedCards.forEach(card => {
       const primaryType = extractPrimaryType(card.type_line);
       counts[primaryType] = (counts[primaryType] || 0) + 1;
