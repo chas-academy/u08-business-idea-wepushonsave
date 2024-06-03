@@ -3,7 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 
 // routes
-import deckBuilderRouter from "./deckBuilder/deckBuilderRoutes";
+import deckBuilderRouter from "./routes/deckBuilderRoutes";
 import profileRouter from "./routes/profileRoutes";
 import threadRoutes from "./routes/threadRoutes";
 import connectDB from "./db/db";
@@ -25,7 +25,7 @@ app.use(cookieParser());
 // Sets up CORS to allow requests from the frontend domain and allows cookies to be included
 app.use(
   cors({
-    origin: "https://mtg-tomb.netlify.app",
+    origin: ["http://localhost:5173", "https://mtg-tomb.netlify.app"],
     methods: ["GET", "POST", "PUT"],
     credentials: true,
   })
@@ -52,7 +52,6 @@ app.use("/api", listRoutes);
 // Deck Builder Routes
 app.use("/auth", authMiddleware);
 app.use("/decks", deckBuilderRouter);
-
 
 // Export App for Server
 export default app;

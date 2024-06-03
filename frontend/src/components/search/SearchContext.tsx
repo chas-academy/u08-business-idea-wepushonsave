@@ -16,7 +16,7 @@ interface ISearchContext {
   setResults: React.Dispatch<React.SetStateAction<ICard[]>>;
   deck: ICard[];
   setDeck: React.Dispatch<React.SetStateAction<ICard[]>>;
-  addCardToDeck: (card: ICard) => Promise<void>;
+  addCardToDeck: (card: ICard) => void;
 }
 
 const SearchContext = createContext<ISearchContext | undefined>(undefined);
@@ -29,6 +29,9 @@ export const SearchProvider: React.FC<{children: React.ReactNode}> = ({
   const [deck, setDeck] = useState<ICard[]>([]);
   const [currentDeckId, setCurrentDeckId] = useState<string | null>(null);
 
+  /**
+   * Search response
+   */
   useEffect(() => {
     const fetchData = async () => {
       if (query) {
@@ -40,21 +43,24 @@ export const SearchProvider: React.FC<{children: React.ReactNode}> = ({
           .then(data => setResults(data.data));
       }
     };
-    console.log('Context useEffect - Query:', query);
-    console.log('Context useEffect - Results:', results);
     fetchData();
   }, [query]);
 
+  /**
+   * Add card to deck
+   * @param card
+   * @param deckId
+   */
   const addCardToDeck = async (card: ICard) => {
     if (!currentDeckId) {
-      const newDeck = await createDeckDB(
-        'New Deck',
-        '665dc3f827a85f1d3f4f6a33'
-      );
-      setCurrentDeckId(newDeck.id);
+      const newDeck = await createDeckDB('New Deck');
+      setCurrentDeckId(newDeck._id);
+      const updatedDeck = await addCardToDeckDB(newDeck._id, card);
+      setDeck(updatedDeck.cards);
+    } else {
+      const updatedDeck = await addCardToDeckDB(currentDeckId, card);
+      setDeck(updatedDeck.cards);
     }
-    const updatedDeck = await addCardToDeckDB(currentDeckId!, card, 'user-id');
-    setDeck(updatedDeck.cards);
   };
 
   return (

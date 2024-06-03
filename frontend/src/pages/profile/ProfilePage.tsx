@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import profileIcon from '../../assets/profile-icon.webp';
 
 interface IList {
@@ -38,14 +38,14 @@ const ProfilePage = () => {
   const handleCreateList = async () => {
     try {
       // Call the createList function here with newListName
-      const response = await fetch('https://mtg-tomb.onrender.com/api/lists', {
+      const response = await fetch('http://localhost:3000/api/lists', {
         method: 'POST',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify({ title: newListName }),
+        body: JSON.stringify({title: newListName}),
       });
 
       if (!response.ok) {
@@ -62,7 +62,7 @@ const ProfilePage = () => {
 
   const fetchLists = async () => {
     try {
-      const response = await fetch('https://mtg-tomb.onrender.com/api/lists', {
+      const response = await fetch('http://localhost:3000/api/lists', {
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ const ProfilePage = () => {
   // Fetch user's information from the server using the token and update the state
   const fetchUserData = async () => {
     try {
-      const response = await fetch('https://mtg-tomb.onrender.com/api/profile-info', {
+      const response = await fetch('http://localhost:3000/api/profile-info', {
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
@@ -115,8 +115,8 @@ const ProfilePage = () => {
   };
 
   const logout = () => {
-    navigate("/login")
-  }
+    navigate('/login');
+  };
 
   return (
     <div className="shadow-md md:pt-32 ">
@@ -169,18 +169,20 @@ const ProfilePage = () => {
       <div className="bg-profile-content">
         <nav className="grid grid-cols-2 bg-inactive-card-btn-gradient">
           <button
-            className={`${activeSection === 'info'
-              ? 'card-details-active card-info'
-              : 'card-details-not-active'
-              }`}
+            className={`${
+              activeSection === 'info'
+                ? 'card-details-active card-info'
+                : 'card-details-not-active'
+            }`}
             onClick={() => setActiveSection('info')}>
             Collection
           </button>
           <button
-            className={`${activeSection === 'lists'
-              ? 'card-details-active card-market'
-              : 'card-details-not-active'
-              }`}
+            className={`${
+              activeSection === 'lists'
+                ? 'card-details-active card-market'
+                : 'card-details-not-active'
+            }`}
             onClick={() => setActiveSection('lists')}>
             Lists
           </button>

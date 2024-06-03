@@ -1,8 +1,9 @@
-import { ICard } from "./ICard";
+import { Types } from "mongoose";
 
-export interface Deck {
-  id: string;
+export interface IDeck extends Document {
+  userId: Types.ObjectId;
   name: string;
-  cards: ICard[];
-  userId?: string | undefined;
+  cards: Types.ObjectId[];
+  createdAt: Date;
+  updatedAt: Date;
 }
