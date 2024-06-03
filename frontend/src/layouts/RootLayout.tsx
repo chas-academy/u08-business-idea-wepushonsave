@@ -1,17 +1,16 @@
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import {NavLink, Outlet, useLocation} from 'react-router-dom';
 /* eslint-disable react/react-in-jsx-scope */
 
-import { useState } from 'react';
+import {useState} from 'react';
 import Navbar from '../components/navbar/Navbar';
 import Sidebar from '../components/sidebar/Sidebar';
 import SearchForm from '../components/search/SearchForm';
-import { SearchProvider } from '../components/search/SearchContext';
+import {SearchProvider} from '../components/search/SearchContext';
 import SearchResults from '../components/search/SearchResults';
 import ArtCard from '../pages/home/RandomArtCard';
 import CardGallery from '../pages/home/CardGallery';
 
 import Footer from '../components/footer/footer';
-
 
 const RootLayout: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -38,7 +37,6 @@ const RootLayout: React.FC = () => {
                 <SearchResults />
                 <ArtCard />
                 <CardGallery />
-
               </SearchProvider>
             </>
           ) : null}
@@ -52,6 +50,7 @@ const RootLayout: React.FC = () => {
               <NavLink to={'/topcommander'}>Top Commanders</NavLink> |{' '}
               <NavLink to={'/allthemes'}>Themes</NavLink> |{' '}
               <NavLink to={'/usernav'}>User Nav</NavLink> |{' '}
+              <NavLink to={'/my-decks'}>My Decks</NavLink>
             </nav>
             <SearchProvider>
               <Outlet />
@@ -60,7 +59,7 @@ const RootLayout: React.FC = () => {
         </main>
       </div>
 
-      <footer className='absolut bottom-0 pb-16 md:p-0'>
+      <footer className="absolut bottom-0 pb-16 md:p-0">
         <Footer />
       </footer>
     </>

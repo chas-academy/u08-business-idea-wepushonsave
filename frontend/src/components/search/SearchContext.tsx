@@ -8,6 +8,7 @@ import {
   addCardToDeckDB,
   createDeckDB,
 } from '../../pages/deckbuilder/deckApiService';
+import {User} from '../../utils/MTGTombAPIInterfaces';
 
 interface ISearchContext {
   query: string;
@@ -17,6 +18,7 @@ interface ISearchContext {
   deck: ICard[];
   setDeck: React.Dispatch<React.SetStateAction<ICard[]>>;
   addCardToDeck: (card: ICard) => void;
+  userId: User;
 }
 
 const SearchContext = createContext<ISearchContext | undefined>(undefined);
@@ -28,6 +30,7 @@ export const SearchProvider: React.FC<{children: React.ReactNode}> = ({
   const [results, setResults] = useState<ICard[]>([]);
   const [deck, setDeck] = useState<ICard[]>([]);
   const [currentDeckId, setCurrentDeckId] = useState<string | null>(null);
+  const [userId, setUserId] = useState<User | any>();
 
   /**
    * Search response
@@ -46,16 +49,36 @@ export const SearchProvider: React.FC<{children: React.ReactNode}> = ({
     fetchData();
   }, [query]);
 
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) return;
+      const response = await fetch(`http://localhost:3000/user/me`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) throw new Error('Network response was not ok');
+
+      const data = await response.json();
+      setUserId(data._id);
+      console.log(data._id);
+    };
+    fetchUserInfo();
+  }, [userId]);
+
   /**
    * Add card to deck
    * @param card
    * @param deckId
    */
   const addCardToDeck = async (card: ICard) => {
-    if (!currentDeckId) {
-      const newDeck = await createDeckDB('New Deck');
+    if (currentDeckId === null) {
+      const newDeck = await createDeckDB('New Deck', userId);
       setCurrentDeckId(newDeck._id);
-      const updatedDeck = await addCardToDeckDB(newDeck._id, card);
+      const updatedDeck = await addCardToDeckDB(currentDeckId!, card);
       setDeck(updatedDeck.cards);
     } else {
       const updatedDeck = await addCardToDeckDB(currentDeckId, card);
@@ -73,6 +96,7 @@ export const SearchProvider: React.FC<{children: React.ReactNode}> = ({
         deck,
         setDeck,
         addCardToDeck,
+        userId,
       }}>
       {children}
     </SearchContext.Provider>

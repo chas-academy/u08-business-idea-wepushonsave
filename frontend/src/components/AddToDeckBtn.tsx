@@ -10,8 +10,13 @@ interface AddToDeckProps {
 
 const AddToDeckBtn: React.FC<AddToDeckProps> = ({card}) => {
   const {addCardToDeck} = useSearch();
+  const {userId} = useSearch();
+  console.log(userId);
 
   const handleAddCardToDeck = () => {
+    if (userId != undefined) {
+      console.log(userId);
+    }
     addCardToDeck(card);
   };
 

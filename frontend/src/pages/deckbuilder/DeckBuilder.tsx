@@ -17,6 +17,7 @@ export interface IDeck {
 const DeckBuilder: React.FC = () => {
   const data: any = useLoaderData();
   const {deck} = useSearch();
+  console.log(deck);
 
   return (
     <>
@@ -26,7 +27,7 @@ const DeckBuilder: React.FC = () => {
             <BackButton />
           </div>
           <div className="deck-builder-name-container size-fit m-4">
-            <h1 className="deck-builder-name text-2xl ">My awesome Deck</h1>
+            <h1 className="deck-builder-name text-2xl ">{}</h1>
           </div>
           <section className="deck-builder-commander-card-section grid grid-cols-2">
             <div className="deck-builder-commander-container m-2 sm:w-2/3">

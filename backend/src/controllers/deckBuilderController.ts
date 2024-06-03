@@ -3,8 +3,7 @@ import Deck from "../models/deckModel";
 import Card from "../models/cardModel";
 
 export const createDeckController = async (req: Request, res: Response) => {
-  const { name } = req.body;
-  const userId = "23432ibwqre78";
+  const { name, userId } = req.body;
 
   if (!name) return res.status(400).json({ error: "Deck name is required" });
   if (!userId) return res.status(400).json({ error: "Unauthorized" });

@@ -1,5 +1,4 @@
 import express from "express";
-import { authMiddleware } from "../middleware/auth";
 import {
   addCardToDeckController,
   createDeckController,
@@ -10,10 +9,10 @@ import {
 
 const deckRouter = express.Router();
 
-deckRouter.post("/", authMiddleware, createDeckController);
-deckRouter.get("/", authMiddleware, getDecksController);
-deckRouter.get("/:id", authMiddleware, getDeckController);
-deckRouter.post("/:id/cards", authMiddleware, addCardToDeckController);
-deckRouter.delete("/:id", authMiddleware, deleteDeckController);
+deckRouter.post("/", createDeckController);
+deckRouter.get("/", getDecksController);
+deckRouter.get("/:id", getDeckController);
+deckRouter.post("/:id/cards", addCardToDeckController);
+deckRouter.delete("/:id", deleteDeckController);
 
 export default deckRouter;

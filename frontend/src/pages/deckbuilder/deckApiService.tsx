@@ -1,12 +1,12 @@
 import {ICard} from '../../utils/ScryfallInterfaces';
 
-export const createDeckDB = async (name: string) => {
+export const createDeckDB = async (name: string, userId: string) => {
   const response = await fetch('http://localhost:3000/decks', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({name}),
+    body: JSON.stringify({name, userId}),
   });
   if (!response.ok) {
     throw new Error('Failed to create deck');
