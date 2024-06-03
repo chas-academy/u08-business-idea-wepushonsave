@@ -1,6 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
 
+import { manaCostRe } from '../../utils/apiExport';
 import {convertObjectToArray} from '../../utils/convertObjectToArray';
 import {ICard} from '../../utils/ScryfallInterfaces';
 
@@ -44,7 +45,7 @@ const CardInfo: React.FC<CardInfoProps> = ({card}) => {
 
   const cardInfo = extractCardData(card);
   const info = convertObjectToArray(cardInfo);
-
+  const manaIcons = manaCostRe(cardInfo.mana_cost);
   return (
     <>
       <div>
@@ -52,7 +53,13 @@ const CardInfo: React.FC<CardInfoProps> = ({card}) => {
           {info.map(({key, value}, index) => (
             <div key={index} className="border border-black m-1">
               <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
-              {typeof value === 'object' ? value.join(', ') : value}
+              {key === 'mana_cost' ? (
+                <div className='flex flex-row'>
+                  {manaIcons}
+                </div>
+              ) : (
+                typeof value === 'object' ? value.join(', ') : value
+              )}
             </div>
           ))}
         </div>

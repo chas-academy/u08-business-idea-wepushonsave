@@ -1,4 +1,5 @@
 
+
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
@@ -7,6 +8,7 @@ import docIcon from '../../assets/doc-icon.webp';
 import profileIcon from '../../assets/profile-icon.webp';
 import decksIcon from '../../assets/decks-icon.webp';
 import communityIcon from '../../assets/community-icon.webp';
+import { useNavigate } from 'react-router-dom';
 
 interface NavbarProps {
   toggleSidebar: () => void;
@@ -14,15 +16,13 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
 
-  //in the backend do: res.clear(cookies) when get invalid token clear tokens, it will from frontend
+const navigate = useNavigate();
 
-  //const navigate = useNavigate();
-  //const [visible, setVisible] = useState(false); // State to check if button is visible or not set to false witch means it is not visible
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to check if user is logged in or not set to false witch means user is not logged in
-  const checkLogin = async () => { // Async function to check login status
-    try {
+const [isLoggedIn, setIsLoggedIn] = useState(false);
+const checkLogin = async () => {
+  try {
       const response = await fetch('https://mtg-tomb.onrender.com/api/user/login', {
+
         method: "get",
         mode: "cors",
         credentials: "include",
@@ -40,22 +40,33 @@ const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
     } catch (error) {
       console.error('Error fetching user data:', error); // Log the error
     }
-  };
-  useEffect(() => { // useEffect to run the checkLogin function
-    checkLogin();
-  }, []); // Run checkLogin on component mount
 
-  // Function to hide the login button
-  /*const hide = () => {
-    setIsLoggedIn(isLogged);
+    if (response.status === 401) {
+      setIsLoggedIn(false);
+    } else {
+    const userData = await response.json(); // Parse the JSON from the response and save it in userData
+    setIsLoggedIn(userData.isLoggedIn); // Check for "isLoggedIn" field in response data  || false
+    }
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+  }
+};
+useEffect(() => { 
+  checkLogin();
+}, []);
+
+
+ const logout = async () => {
+  const response = await fetch('mtg-tomb.onrender.com/api/user/logout', {
+    method: "get",
+    mode: "cors",
+    credentials: "include",
+  });
+  if (!response.ok) {
+    navigate('/profile')
+  }
+    navigate('/login');
   };
-  
-   const logout = () => {
-      //localStorage.removeItem('token')
-      set.clear(cookies.get('token');
-      navigate('/login');
-    };
-  */
 
   return (
     <nav className=" z-10 fixed bottom-0 inset-x-0 bg-nav-gradient flex items-start text-sm text-blue-900 uppercase font-mono md:fixed md:top-0 md:bottom-auto md:w-full md:h-auto">
@@ -105,7 +116,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
       </a>
       {/* Desktop screen */}
       {!isLoggedIn ? ( // If user is not logged in
-        <div>
+        <>
           <a href="/login" className="login-logo-desktop ml-auto 0">
             <button
               className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
@@ -119,18 +130,19 @@ const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
               REGISTER
             </button>
           </a>
-        </div>
-      ) : ( // If user is logged in
-        <div>
+        </>
+      ) : ( 
+        <>
           <a href="/login" className="login-logo-desktop ml-auto 0">
             <button
 
+             onClick={logout}
               className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
               <span className="absolute inset-0 border-2 border-transparent hover:border-white rounded-lg"></span>
               LOG OUT
             </button>
           </a>
-        </div>
+        </>
       )}
 
       <a

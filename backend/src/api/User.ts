@@ -6,6 +6,7 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { IUser } from "../interfaces/IUser";
 import { authMiddleware } from "../middleware/auth";
+import { authMiddleware } from "../middleware/auth";
 
 const router = express.Router();
 
@@ -13,7 +14,6 @@ const router = express.Router();
 router.post("/register", (req: Request, res: Response) => {
   const { email, password, username } = req.body;
 
-  console.log(email, password, username); //TEST
 
   if (!email || !password) {
     return res.status(400).json({ message: "Input email or password!" });
@@ -74,6 +74,25 @@ router.post("/register", (req: Request, res: Response) => {
 });
 
 // Login
+
+router.get('/logout', async (req: Request, res: Response) => {
+  try {
+    // Clear the cookie (assuming you want to clear the 'token' cookie)
+    res.clearCookie('token');
+
+    // Check if the cookie exists after clearing (optional)
+    const hasCookie = req.cookies.token !== undefined; // Assuming presence indicates existence
+
+    return res.status(200).json({
+      message: 'Cookie cleared successfully!',
+      // Add a property indicating cookie existence (optional)
+      cookieExists: !hasCookie,
+    });
+  } catch (error) {
+    console.error('Error clearing cookie:', error);
+    res.status(500).json({ message: 'An error occurred while clearing the cookie.' });
+  }
+});
 
 router.get("/login", authMiddleware, async (req: Request, res: Response) => {
   res.send({ isLoggedIn: true });
