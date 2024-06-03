@@ -161,9 +161,9 @@ const Threads: React.FC = () => {
                Create Thread
             </button>
          </form>
-         <div className='threadSection bg-white/30 flex flex-col-reverse'>
+         <div className='threadSection  flex flex-col-reverse'>
             {threads.map(thread => (
-               <div key={thread._id} className=" w-full max-w-lg mb-4">
+               <div key={thread._id} className=" bg-white/30 w-full max-w-lg mb-4 rounded-md p-2 ">
                   <h3 className="text-xl font-bold text-white">
                      {userData.username || ''}
                   </h3>
@@ -172,9 +172,9 @@ const Threads: React.FC = () => {
                   </p>
 
                   <button
-                     className="text-white text-sm bg-nav-gradient w-3/7 px-4 py-2 cursor-pointer rounded"
+                     className="text-white text-xs bg-nav-gradient w-3/7 px-4 py-2 cursor-pointer rounded hover:shadow-md"
                      onClick={() => toggleComments(thread._id)}>
-                     {thread.collapsed ? 'Hide comments' : 'Show comments'}
+                     {thread.collapsed ? 'Read comments' : 'Hide comments'}
                   </button>
 
                   {!thread.collapsed && (
@@ -199,13 +199,13 @@ const Threads: React.FC = () => {
                         name="comment"
                         placeholder="Add a comment"
                         required
-                        className="w-full bg-white/30 border border-white/30 rounded py-2 px-4 mb-2 focus:outline-none focus:bg-white focus:border-blue-500"
+                        className="w-full bg-white/40 border border-white/30 rounded py-2 px-4 mb-2 focus:outline-periwinkle focus:bg-white text-white/80"
                      />
                      {/*                      <input type="text" placeholder={`${thread._id}`} name="threadId" value={thread._id}></input>
  */}                     <button
                         type="submit"
-                        className="bg-btn-gradient hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                        Post Comment
+                        className="bg-btn-gradient hover:bg-plum text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:shadow-md">
+                        Send
                      </button>
                   </form>
                </div>
