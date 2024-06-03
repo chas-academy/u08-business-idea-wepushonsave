@@ -5,14 +5,15 @@ import User from "../models/User";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { IUser } from "../interfaces/IUser";
+import List from "../models/listModel";
 
 const router = express.Router();
 
 // Register
-router.post("/register", (req: Request, res: Response) => {
+router.post("/register", async (req: Request, res: Response) => {
   const { email, password, username } = req.body;
 
-  console.log(email, password, username); //TEST
+  console.log(email, password, username); // TEST
 
   if (!email || !password) {
     return res.status(400).json({ message: "Input email or password!" });
@@ -23,52 +24,47 @@ router.post("/register", (req: Request, res: Response) => {
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ message: "Invalid email!" });
   } else {
-    // Check if user already exists
-    User.find({ email })
-      .then((result: IUser[]) => {
-        console.log(result); //TEST
-        // Handle the result
-        if (result && result.length > 0) {
-          return res.status(400).json({ message: "User already exists!" });
-        } else {
-          // password handling
-          const saltRounds: number = 10;
-          bcrypt
-            .hash(password, saltRounds)
-            .then((hashedPassword: string) => {
-              const newUser = new User({
-                username,
-                email,
-                password: hashedPassword,
-              });
+    try {
+      console.log("Checking if user already exists...");
+      const existingUser = await User.findOne({ email });
+      console.log("Existing user:", existingUser);
+      if (existingUser) {
+        console.log("User already exists!");
+        return res.status(400).json({ message: "User already exists!" });
+      }
 
-              newUser
-                .save()
-                .then((result: IUser) => {
-                  return res.status(201).json({
-                    message: "User created successfully!",
-                    data: result,
-                  });
-                })
-                .catch((err: Error) => {
-                  console.log(err);
-                  return res
-                    .status(500)
-                    .json({ message: "An error occurred while saving user!" });
-                });
-            })
-            .catch((err: Error) => {
-              console.log(err);
-              return res
-                .status(500)
-                .json({ message: "An error occurred while hashing password!" });
-            });
-        }
-      })
-      .catch((err: Error) => {
-        console.log(err);
-        return res.status(500).json({ message: "Internal server error!" });
+      // password handling
+      const saltRounds: number = 10;
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+      const newUser = new User({
+        username,
+        email,
+        password: hashedPassword,
       });
+
+      const savedUser = await newUser.save();
+
+      // Create default lists for the user
+      const lists = [
+        { userId: savedUser._id, title: "My card collection", cardIds: "" },
+        { userId: savedUser._id, title: "Binder - Rares", cardIds: "" },
+        { userId: savedUser._id, title: "Binder - Commons", cardIds: "" },
+      ];
+
+      await List.insertMany(lists);
+      console.log("Lists created successfully!");
+
+      return res.status(201).json({
+        message: "User created successfully!",
+        data: savedUser,
+      });
+    } catch (err) {
+      console.log(err);
+      return res
+        .status(500)
+        .json({ message: "An error occurred during registration!" });
+    }
   }
 });
 
@@ -116,9 +112,9 @@ router.post("/login", (req: Request, res: Response) => {
             })
             .catch((err: Error) => {
               console.log(err);
-              return res
-                .status(500)
-                .json({ message: "An error occurred while comparing passwords!" });    
+              return res.status(500).json({
+                message: "An error occurred while comparing passwords!",
+              });
             });
         } else {
           return res

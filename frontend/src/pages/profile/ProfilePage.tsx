@@ -1,7 +1,4 @@
 import {useEffect, useState} from 'react';
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable  @typescript-eslint/no-explicit-any */
-
 import {useNavigate} from 'react-router-dom';
 import profileIcon from '../../assets/profile-icon.webp';
 
@@ -18,51 +15,41 @@ const ProfilePage = () => {
   const [lists, setLists] = useState<IList[]>([]);
   const [showCreateListModal, setShowCreateListModal] = useState(false);
   const [newListName, setNewListName] = useState('');
-  const settingsClick = () => {
-    navigate('/profile-dashboard');
-  };
-  const mycollectionClick = () => {
-    navigate('/mycollection');
-  };
-  const mycollectionRareClick = () => {
-    navigate('/mycollection-rare');
-  };
-  const mycollectionCommonsClick = () => {
-    navigate('/mycollection-commmons');
-  };
 
-  const createListClick = async () => {
-    setShowCreateListModal(true);
-  };
+  useEffect(() => {
+    fetchUserData();
+    fetchLists();
+  }, []);
 
-  const handleCreateList = async () => {
+  const fetchUserData = async () => {
     try {
-      // Call the createList function here with newListName
-      const response = await fetch('http://localhost:3000/api/lists', {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({title: newListName}),
-      });
+      const response = await fetch(
+        'https://mtg-tomb.onrender.com/api/profile-info',
+        {
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            credentials: 'include',
+            mode: 'cors',
+          },
+        }
+      );
 
       if (!response.ok) {
-        throw new Error('Failed to create list');
+        throw new Error('Failed to fetch user data');
       }
 
-      // Refresh the list of lists after creating a new one
-      fetchLists();
-      setShowCreateListModal(false);
+      const data = await response.json();
+      setUserData(data);
     } catch (error) {
-      console.error('Error creating list:', error);
+      console.error('Error fetching user data:', error);
     }
   };
 
   const fetchLists = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/lists', {
+      const response = await fetch('https://mtg-tomb.onrender.com/api/lists', {
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
@@ -76,42 +63,45 @@ const ProfilePage = () => {
 
       const data = await response.json();
       setLists(data);
+      console.log('Fetched lists:', data);
     } catch (error) {
       console.error('Error fetching lists:', error);
     }
   };
 
-  useEffect(() => {
-    fetchUserData();
-    fetchLists();
-  }, []);
+  const handleListClick = (listId: string) => {
+    navigate(`/cards-display/${listId}`);
+  };
 
-  // Fetch user's information from the server using the token and update the state
-  const fetchUserData = async () => {
+  const settingsClick = () => {
+    navigate('/profile-dashboard');
+  };
+
+  const createListClick = async () => {
+    setShowCreateListModal(true);
+  };
+
+  const handleCreateList = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/profile-info', {
+      const response = await fetch('https://mtg-tomb.onrender.com/api/lists', {
+        method: 'POST',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
-          credentials: 'include',
-          mode: 'cors',
         },
+        body: JSON.stringify({title: newListName}),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch user data');
+        throw new Error('Failed to create list');
       }
 
-      const data = await response.json();
-      setUserData(data);
+      fetchLists();
+      setShowCreateListModal(false);
     } catch (error) {
-      console.error('Error fetching user data:', error);
+      console.error('Error creating list:', error);
     }
-  };
-
-  const handleListClick = (listId: string) => {
-    navigate(`/cards-display/${listId}`);
   };
 
   return (
@@ -185,21 +175,23 @@ const ProfilePage = () => {
         <div className="mt-6">
           {activeSection === 'info' && (
             <div className="flex flex-col items-center">
-              <button
-                className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-center text-white font-bold mb-5 bg-collection-btn shadow-md"
-                onClick={mycollectionClick}>
-                MY CARD COLLECTION
-              </button>
-              <button
-                className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
-                onClick={mycollectionRareClick}>
-                RARE
-              </button>
-              <button
-                className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
-                onClick={mycollectionCommonsClick}>
-                COMMONS
-              </button>
+              {lists.map(list => {
+                if (
+                  list.title === 'My card collection' ||
+                  list.title === 'Binder - Rares' ||
+                  list.title === 'Binder - Commons'
+                ) {
+                  return (
+                    <button
+                      key={list._id}
+                      className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
+                      onClick={() => handleListClick(list._id)}>
+                      {list.title}
+                    </button>
+                  );
+                }
+                return null;
+              })}
             </div>
           )}
 
@@ -210,14 +202,21 @@ const ProfilePage = () => {
                 className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange">
                 CREATE A LIST
               </button>
-              {lists.map(list => (
-                <button
-                  key={list._id}
-                  className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
-                  onClick={() => handleListClick(list._id)}>
-                  {list.title}
-                </button>
-              ))}
+              {lists
+                .filter(
+                  list =>
+                    list.title !== 'My card collection' &&
+                    list.title !== 'Binder - Rares' &&
+                    list.title !== 'Binder - Commons'
+                )
+                .map(list => (
+                  <button
+                    key={list._id}
+                    className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
+                    onClick={() => handleListClick(list._id)}>
+                    {list.title}
+                  </button>
+                ))}
             </div>
           )}
 

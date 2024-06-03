@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {singleCardLoader} from '../../utils/singleCardLoader';
 import {ICard} from '../../utils/ScryfallInterfaces';
-// import {manaCostRe} from '../';
+import {manaCostRe} from '../../utils/apiExport';
 import CardLayout from '../../layouts/CardLayout';
 
 interface IListData {
@@ -22,7 +22,7 @@ const CardDisplay: React.FC = () => {
     const fetchListData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/lists/${listId}`,
+          `https://mtg-tomb.onrender.com/api/lists/${listId}`,
           {
             credentials: 'include',
             headers: {
@@ -164,9 +164,9 @@ const CardDisplay: React.FC = () => {
                       <span className="pl-2 text-gray-200 text-sm">
                         {card.name}
                       </span>
-                      {/* {card.mana_cost && (
+                      {card.mana_cost && (
                         <div className="ml-2">{manaCostRe(card.mana_cost)}</div>
-                      )} */}
+                      )}
                     </div>
                   ))}
               </div>

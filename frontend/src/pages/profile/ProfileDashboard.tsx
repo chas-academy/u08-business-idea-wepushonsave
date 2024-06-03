@@ -11,15 +11,18 @@ const ProfileDashboard = () => {
   // Fetch user's information from the server using the token and update the state
   const fetchUserData = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/profile-info', {
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
+      const response = await fetch(
+        'https://mtg-tomb.onrender.com/api/profile-info',
+        {
           credentials: 'include',
-          mode: 'cors',
-        },
-      });
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            credentials: 'include',
+            mode: 'cors',
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error('Failed to fetch user data');
@@ -54,15 +57,18 @@ const ProfileDashboard = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:3000/api/profile-info', {
-        method: 'PUT',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(updatedData),
-      });
+      const response = await fetch(
+        'https://mtg-tomb.onrender.com/api/profile-info',
+        {
+          method: 'PUT',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify(updatedData),
+        }
+      );
 
       if (!response.ok) {
         throw new Error('Failed to update user data');
