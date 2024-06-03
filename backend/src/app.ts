@@ -26,13 +26,8 @@ app.use(cookieParser());
 // Sets up CORS to allow requests from the frontend domain and allows cookies to be included
 app.use(
   cors({
-<<<<<<< HEAD
-    origin: "http://localhost:5173",
+    origin: "https://mtg-tomb.onrender.com",
     methods: ["GET", "POST", "PUT", "DELETE"],
-=======
-    origin: "https://mtg-tomb.netlify.app",
-    methods: ["GET", "POST", "PUT"],
->>>>>>> da7ee51f6d22f0e644e34ed59680312cbd1e35bb
     credentials: true,
   })
 );
