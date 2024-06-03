@@ -4,6 +4,10 @@
 import {createContext, useContext, useEffect, useState} from 'react';
 import {delay} from '../../utils/setApiDelay';
 import {ICard} from '../../utils/ScryfallInterfaces';
+import {
+  addCardToDeckDB,
+  createDeckDB,
+} from '../../pages/deckbuilder/deckApiService';
 
 interface ISearchContext {
   query: string;
@@ -11,7 +15,8 @@ interface ISearchContext {
   results: ICard[];
   setResults: React.Dispatch<React.SetStateAction<ICard[]>>;
   deck: ICard[];
-  addCardToDeck: (card: ICard) => void;
+  setDeck: React.Dispatch<React.SetStateAction<ICard[]>>;
+  addCardToDeck: (card: ICard) => Promise<void>;
 }
 
 const SearchContext = createContext<ISearchContext | undefined>(undefined);
@@ -22,6 +27,7 @@ export const SearchProvider: React.FC<{children: React.ReactNode}> = ({
   const [query, setQuery] = useState<string>('');
   const [results, setResults] = useState<ICard[]>([]);
   const [deck, setDeck] = useState<ICard[]>([]);
+  const [currentDeckId, setCurrentDeckId] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,13 +45,26 @@ export const SearchProvider: React.FC<{children: React.ReactNode}> = ({
     fetchData();
   }, [query]);
 
-  const addCardToDeck = (card: ICard) => {
-    setDeck([...deck, card]);
+  const addCardToDeck = async (card: ICard) => {
+    if (!currentDeckId) {
+      const newDeck = await createDeckDB('New Deck', 'user-id');
+      setCurrentDeckId(newDeck.id);
+    }
+    const updatedDeck = await addCardToDeckDB(currentDeckId!, card, 'user-id');
+    setDeck(updatedDeck.cards);
   };
 
   return (
     <SearchContext.Provider
-      value={{query, setQuery, results, setResults, deck, addCardToDeck}}>
+      value={{
+        query,
+        setQuery,
+        results,
+        setResults,
+        deck,
+        setDeck,
+        addCardToDeck,
+      }}>
       {children}
     </SearchContext.Provider>
   );

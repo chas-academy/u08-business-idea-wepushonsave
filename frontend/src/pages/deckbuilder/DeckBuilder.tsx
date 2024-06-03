@@ -6,8 +6,15 @@ import SearchForm from '../../components/search/SearchForm';
 import SearchResults from '../../components/search/SearchResults';
 import {useSearch} from '../../components/search/SearchContext';
 import manaSymbols from '../../mtgtombapi/manaSymbols';
+import {ICard} from '../../utils/ScryfallInterfaces';
 
-const DeckBuilder = () => {
+export interface IDeck {
+  id: string;
+  name: string;
+  cards: ICard[];
+}
+
+const DeckBuilder: React.FC = () => {
   const data: any = useLoaderData();
   const {deck} = useSearch();
 
