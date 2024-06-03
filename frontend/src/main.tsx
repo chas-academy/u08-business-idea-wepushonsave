@@ -29,7 +29,7 @@ import {cardSetLoader} from './utils/cardSetLoader.tsx';
 import ProfilePage from './pages/profile/ProfilePage.tsx';
 import ProfileDashboard from './pages/profile/ProfileDashboard.tsx';
 import Login from './pages/login/Login.tsx';
-import Register from './pages/register/Register.tsx';
+import Register from './pages/login/Register.tsx';
 
 // context
 import {SearchProvider} from './components/search/SearchContext.tsx';
@@ -42,6 +42,8 @@ import TopCommanders from './mtgtombapi/top-commanders/allTopCommanders.tsx';
 import CommanderRecSearch from './mtgtombapi/algoritm/comRec.tsx';
 import CommanderDetails from './mtgtombapi/top-commanders/commanderDetails.tsx';
 import AllThemes from './mtgtombapi/theme/allThemes.tsx';
+import Logout from './pages/login/Logout.tsx';
+import Navigation2 from './pages/login/UserNav.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -59,7 +61,8 @@ const router = createBrowserRouter(
       <Route path="alldecks" element={<AllDecksComponent />} />
       <Route path="topcommander" element={<TopCommanders />} />
       <Route path="/commander/:name" element={<CommanderDetails />} />
-      <Route path="/allthemes" element={<AllThemes />} />
+      <Route path="allthemes" element={<AllThemes />} />
+      <Route path="usernav" element={<Navigation2 />} />
 
       <Route
         path="cards/:set"
