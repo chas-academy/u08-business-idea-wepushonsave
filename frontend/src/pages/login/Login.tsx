@@ -48,7 +48,7 @@ const LoginUser = () => {
       console.log('Errors');
     }
   };
-  /* const handleInput = (event: any) => { */
+  
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues(prev => ({
       ...prev,
