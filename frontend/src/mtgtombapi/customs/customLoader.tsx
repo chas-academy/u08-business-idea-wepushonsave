@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import {trefoil} from 'ldrs';
+import { trefoil } from 'ldrs';
 
 trefoil.register();
 
