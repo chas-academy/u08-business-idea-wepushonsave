@@ -6,7 +6,6 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { IUser } from "../interfaces/IUser";
 import { authMiddleware } from "../middleware/auth";
-import { authMiddleware } from "../middleware/auth";
 
 const router = express.Router();
 
