@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import Thread from '../models/threadModel';
+import { IUser } from '../interfaces/IUser';
 
 const router = Router();
 
@@ -16,8 +17,8 @@ router.get('/all', async (req, res) => {
 // Create a new thread
 router.post('/create', async (req, res) => {
    try {
-      const { content } = req.body;
-      const newThread = new Thread({ content, comments: [], collapsed: false });
+      const { content, userId } = req.body;
+      const newThread = new Thread({ content, userId, comments: [], collapsed: false });
       const savedThread = await newThread.save();
       res.status(201).json(savedThread);
    } catch (error) {
