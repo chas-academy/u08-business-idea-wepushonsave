@@ -6,14 +6,12 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { IUser } from "../interfaces/IUser";
 import { authMiddleware } from "../middleware/auth";
-import { authMiddleware } from "../middleware/auth";
 
 const router = express.Router();
 
 // Register
 router.post("/register", (req: Request, res: Response) => {
   const { email, password, username } = req.body;
-
 
   if (!email || !password) {
     return res.status(400).json({ message: "Input email or password!" });
@@ -75,34 +73,38 @@ router.post("/register", (req: Request, res: Response) => {
 
 // Login
 
-router.get('/logout', async (req: Request, res: Response) => {
+router.get("/logout", async (req: Request, res: Response) => {
   try {
     // Clear the cookie (assuming you want to clear the 'token' cookie)
-    res.clearCookie('token');
+    res.clearCookie("token");
 
     // Check if the cookie exists after clearing (optional)
     const hasCookie = req.cookies.token !== undefined; // Assuming presence indicates existence
 
     return res.status(200).json({
-      message: 'Cookie cleared successfully!',
+      message: "Cookie cleared successfully!",
       // Add a property indicating cookie existence (optional)
       cookieExists: !hasCookie,
     });
   } catch (error) {
-    console.error('Error clearing cookie:', error);
-    res.status(500).json({ message: 'An error occurred while clearing the cookie.' });
+    console.error("Error clearing cookie:", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while clearing the cookie." });
   }
 });
 
 router.get("/login", authMiddleware, async (req: Request, res: Response) => {
   res.send({ isLoggedIn: true });
-})
+});
 
 router.post("/login", async (req: Request, res: Response) => {
   try {
     // Validate email and password presence
     if (!req.body.email || !req.body.password) {
-      return res.status(400).json({ message: "Please provide both email and password." });
+      return res
+        .status(400)
+        .json({ message: "Please provide both email and password." });
     }
 
     // Find user by email
@@ -114,7 +116,9 @@ router.post("/login", async (req: Request, res: Response) => {
     }
 
     // Create authentication token (consider using a refresh token strategy)
-    const token = jwt.sign({ userId: user._id }, "jwt-secret-key", { expiresIn: "1d" });
+    const token = jwt.sign({ userId: user._id }, "jwt-secret-key", {
+      expiresIn: "1d",
+    });
 
     // Set secure cookies (adjust based on your needs)
     res.cookie("token", token, {
