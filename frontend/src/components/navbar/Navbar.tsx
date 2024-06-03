@@ -3,7 +3,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
-import { useEffect, useState } from 'react';
 import logo from '../../assets/logo-MTG-TOMB.webp';
 import docIcon from '../../assets/doc-icon.webp';
 import profileIcon from '../../assets/profile-icon.webp';
