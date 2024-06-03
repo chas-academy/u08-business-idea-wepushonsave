@@ -114,6 +114,10 @@ const ProfilePage = () => {
     navigate(`/cards-display/${listId}`);
   };
 
+  const logout = () => {
+    navigate("/login")
+  }
+
   return (
     <div className="shadow-md md:pt-32 ">
       <div className="flex justify-between items-start p-6 h-64 bg-profile-background bg-cover h-full w-full md:bg-profile-background-desktop">
