@@ -45,7 +45,9 @@ app.use("/api", profileRouter);
 app.use('/threads', threadRoutes);
 
 
-/*app.post('/logout', (req: Request, res: Response) => {
+// Logout Route here??
+/*
+app.post('/logout', (req: Request, res: Response) => {
   req.session.destroy(err => {
     if(err) {
       return res.redirect('/profile');
