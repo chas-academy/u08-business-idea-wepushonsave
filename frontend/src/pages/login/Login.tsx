@@ -1,7 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-<<<<<<< HEAD
 interface FormData {
     email: string;
     password: string;
@@ -11,12 +10,6 @@ const Login: React.FC = () => {
     const [formData, setFormData] = useState<FormData>({ email: '', password: '' });
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
-=======
-import { useState } from 'react';
-import Validation from './loginValidation';
-
-import { useNavigate } from 'react-router-dom';
->>>>>>> da7ee51f6d22f0e644e34ed59680312cbd1e35bb
 
     const { email, password } = formData;
 
@@ -38,7 +31,6 @@ import { useNavigate } from 'react-router-dom';
                 body: JSON.stringify({ email, password })
             });
 
-<<<<<<< HEAD
             const data = await response.json();
 
             if (!response.ok) {
@@ -51,38 +43,6 @@ import { useNavigate } from 'react-router-dom';
             setError(err.message);
         }
     };
-=======
-    if (!errorCheck.email && !errorCheck.password) {
-      try {
-        const response = await fetch('https://mtg-tomb.onrender.com/api/user/login', {
-          method: 'POST',
-          mode: 'cors',
-          headers: {
-            'Content-type': 'application/json',
-          },
-          credentials: 'include',
-          body: JSON.stringify(values),
-        });
-        if (!response.ok) {
-          throw new Error('Login not successful, please try again');
-        }
-        navigate('/');
-      } catch (error: any) {
-        console.log('Login not successful', error);
-        setLoginError(error.message);
-      }
-    } else {
-      console.log('Errors');
-    }
-  };
-  
-  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValues(prev => ({
-      ...prev,
-      [event.target.name]: event.target.value,
-    }));
-  };
->>>>>>> da7ee51f6d22f0e644e34ed59680312cbd1e35bb
 
     return (
         <div>
@@ -116,9 +76,5 @@ import { useNavigate } from 'react-router-dom';
         </div>
     );
 };
-<<<<<<< HEAD
 
 export default Login;
-=======
-export default LoginUser;
->>>>>>> da7ee51f6d22f0e644e34ed59680312cbd1e35bb
