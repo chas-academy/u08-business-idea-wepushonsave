@@ -8,7 +8,7 @@ dotenv.config();
 const port = 5000;
 
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: 'https://mtg-tomb.onrender.com',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 };
