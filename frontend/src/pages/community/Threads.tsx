@@ -32,7 +32,7 @@ const Threads: React.FC = () => {
                'Content-Type': 'application/json',
                Accept: 'application/json',
                credentials: 'include',
-               mode: 'no-cors',
+               mode: 'cors',
             },
          });
 
