@@ -8,6 +8,7 @@ interface Comment {
 interface ThreadDocument extends Document {
    content: string;
    comments: Comment[];
+   userId: string | undefined;
    collapsed: boolean;
 }
 
