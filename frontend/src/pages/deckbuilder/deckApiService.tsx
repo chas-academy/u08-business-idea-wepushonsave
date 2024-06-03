@@ -1,12 +1,10 @@
 import {ICard} from '../../utils/ScryfallInterfaces';
 
-const baseUrl = 'http://localhost:3000';
-const userId = '665ca94931ac5c37fb748c2a';
+const baseUrl = 'https://mtg-tomb.onrender.com';
 
 export const createDeckDB = async (deckName: string, userId: string) => {
-  const response = await fetch(`${baseUrl}/decks`, {
+  const response = await fetch(`${baseUrl}/decks/`, {
     method: 'POST',
-    mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -26,7 +24,7 @@ export const addCardToDeckDB = async (
   card: ICard,
   userId: string
 ) => {
-  const response = await fetch(`${baseUrl}/${deckId}/cards`, {
+  const response = await fetch(`${baseUrl}/${deckId}/add-card`, {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',
