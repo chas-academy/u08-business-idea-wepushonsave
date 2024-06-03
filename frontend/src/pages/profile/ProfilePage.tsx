@@ -114,6 +114,10 @@ const ProfilePage = () => {
     navigate(`/cards-display/${listId}`);
   };
 
+  const logout = () => {
+    navigate("/login")
+  }
+
   return (
     <div className="shadow-md md:pt-32 ">
       <div className="flex justify-between items-start p-6 h-64 bg-profile-background bg-cover h-full w-full md:bg-profile-background-desktop">
@@ -153,7 +157,9 @@ const ProfilePage = () => {
                 className="block bg-collection-btn w-full text-center text-white px-6 py-1 mb-1 text-gray-700 rounded hover:bg-gray-100">
                 Settings
               </button>
-              <button className="block bg-collection-btn w-full text-center text-white px-6 py-1 text-gray-700 rounded hover:bg-gray-100">
+              <button
+                onClick={logout}
+                className="block bg-collection-btn w-full text-center text-white px-6 py-1 text-gray-700 rounded hover:bg-gray-100">
                 Logout
               </button>
             </div>
