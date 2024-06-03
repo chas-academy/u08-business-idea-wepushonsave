@@ -2,7 +2,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
-
 import logo from '../../assets/logo-MTG-TOMB.webp';
 import docIcon from '../../assets/doc-icon.webp';
 import profileIcon from '../../assets/profile-icon.webp';
@@ -16,14 +15,10 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({toggleSidebar}) => {
 
-//in the backend do: res.clear(cookies) when get invalid token clear tokens, it will from frontend
-
 const navigate = useNavigate();
 
-//const [visible, setVisible] = useState(false); // State to check if button is visible or not set to false witch means it is not visible
-
-const [isLoggedIn, setIsLoggedIn] = useState(false); // State to check if user is logged in or not set to false witch means user is not logged in
-const checkLogin = async () => { // Async function to check login status
+const [isLoggedIn, setIsLoggedIn] = useState(false);
+const checkLogin = async () => {
   try {
     const response = await fetch('http://localhost:3000/api/user/login', {
         method: "get",
@@ -41,17 +36,13 @@ const checkLogin = async () => { // Async function to check login status
     setIsLoggedIn(userData.isLoggedIn); // Check for "isLoggedIn" field in response data  || false
     }
   } catch (error) {
-    console.error('Error fetching user data:', error); // Log the error
+    console.error('Error fetching user data:', error);
   }
 };
-useEffect(() => { // useEffect to run the checkLogin function
+useEffect(() => { 
   checkLogin();
-}, []); // Run checkLogin on component mount
+}, []);
 
-// Function to hide the login button
-/*const hide = () => {
-  setIsLoggedIn(isLogged);
-};*/
 
  const logout = async () => {
   const response = await fetch('http://localhost:3000/api/user/logout', {
