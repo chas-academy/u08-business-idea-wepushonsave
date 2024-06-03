@@ -50,6 +50,8 @@ const RootLayout: React.FC = () => {
               <NavLink to={'/algoritm'}>Algorithm</NavLink> |{' '}
               <NavLink to={'/alldecks'}>All Decks</NavLink> |{' '}
               <NavLink to={'/topcommander'}>Top Commanders</NavLink> |{' '}
+              <NavLink to={'/allthemes'}>Themes</NavLink> |{' '}
+              <NavLink to={'/usernav'}>User Nav</NavLink> |{' '}
             </nav>
             <SearchProvider>
               <Outlet />

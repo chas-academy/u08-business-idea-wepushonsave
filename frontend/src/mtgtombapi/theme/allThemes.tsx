@@ -17,6 +17,12 @@ interface Theme {
   commanderCards: string[];
 }
 
+interface User {
+  _id: string;
+  username: string;
+  email:string;
+}
+
 const AllThemes: React.FC = () => {
   const [themes, setThemes] = useState<Theme[]>([]);
   const [loading, setLoading] = useState(true);
@@ -25,6 +31,7 @@ const AllThemes: React.FC = () => {
   const limit = 20;
   const [totalPages, setTotalPages] = useState<number>(1);
   const navigate = useNavigate();
+  const [user, setUser] = useState<User | null>(null);
 
   const fetchThemes = async (page: number) => {
     setLoading(true);
@@ -46,8 +53,38 @@ const AllThemes: React.FC = () => {
     }
   };
 
+  const fetchUser = async () => {
+
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(
+        `http://localhost:5000/user/me`, {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+          }
+      }
+      );
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setUser(data);
+    } catch (error) {
+      setError('Error fetching data');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchThemes(page);
+    fetchUser();
   }, [page]);
 
   if (loading) {
@@ -66,6 +103,11 @@ const AllThemes: React.FC = () => {
     <div>
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-4xl font-bold my-4">All Themes</h1>
+        <div>
+          <p>Id: {user?._id}</p>
+          <p>Username: {user?.username}</p>
+          <p>Email: {user?.email}</p>
+        </div>
         <div>
           <GiEvilWings size={56} />
         </div>

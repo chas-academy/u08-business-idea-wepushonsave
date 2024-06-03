@@ -17,17 +17,45 @@ interface Comment {
 const Threads: React.FC = () => {
    const [threads, setThreads] = useState<Thread[]>([]);
    const [newThreadContent, setNewThreadContent] = useState('');
+   const [userData, setUserData] = useState<any>({});
 
    useEffect(() => {
-      // Fetch threads from the backend
+      fetchUserData();
+   }, []);
+
+   // Fetch user's information from the server using the token and update the state
+   const fetchUserData = async () => {
+      try {
+         const response = await fetch('https://mtg-tomb.onrender.com/api/profile-info', {
+            credentials: 'include',
+            headers: {
+               'Content-Type': 'application/json',
+               Accept: 'application/json',
+               credentials: 'include',
+               mode: 'cors',
+            },
+         });
+
+         if (!response.ok) {
+            throw new Error('Failed to fetch user data');
+         }
+
+         const data = await response.json();
+         setUserData(data);
+
+      } catch (error) {
+         console.error('Error fetching user data:', error);
+      }
+   };
 
 
+   useEffect(() => {
       fetchThreads();
    }, []);
 
    const fetchThreads = async () => {
       try {
-         const response = await fetch('http://localhost:3000/threads/all'); // Adjust the endpoint as needed
+         const response = await fetch('https://mtg-tomb.onrender.com/threads/all'); // Adjust the endpoint as needed
          const data = await response.json();
          setThreads(data);
       } catch (error) {
@@ -43,7 +71,7 @@ const Threads: React.FC = () => {
       };
 
       try {
-         const response = await fetch('http://localhost:3000/threads/create', {
+         const response = await fetch('https://mtg-tomb.onrender.com/threads/create', {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
@@ -78,7 +106,7 @@ const Threads: React.FC = () => {
       };
 
       try {
-         const response = await fetch(`http://localhost:3000/threads/${threadId}/comments`, {
+         const response = await fetch(`https://mtg-tomb.onrender.com/threads/${threadId}/comments`, {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
@@ -136,6 +164,9 @@ const Threads: React.FC = () => {
          <div className='threadSection bg-white/30 flex flex-col-reverse'>
             {threads.map(thread => (
                <div key={thread._id} className=" w-full max-w-lg mb-4">
+                  <h3 className="text-xl font-bold text-white">
+                     {userData.username || ''}
+                  </h3>
                   <p className="min-h-20 text-white p-2">
                      {thread.content}
                   </p>
@@ -146,7 +177,7 @@ const Threads: React.FC = () => {
                      {thread.collapsed ? 'Hide comments' : 'Show comments'}
                   </button>
 
-                  {thread.collapsed && (
+                  {!thread.collapsed && (
                      <div>
                         {thread.comments.map(comment => (
                            <div

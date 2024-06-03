@@ -1,5 +1,7 @@
 import {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import profileIcon from '../../assets/profile-icon.webp';
 
 interface IList {
@@ -104,6 +106,11 @@ const ProfilePage = () => {
     }
   };
 
+
+  const logout = () => {
+    navigate("/login")
+  }
+  
   return (
     <div className="shadow-md md:pt-32 ">
       <div className="flex justify-between items-start p-6 h-64 bg-profile-background bg-cover h-full w-full md:bg-profile-background-desktop">
@@ -143,7 +150,9 @@ const ProfilePage = () => {
                 className="block bg-collection-btn w-full text-center text-white px-6 py-1 mb-1 text-gray-700 rounded hover:bg-gray-100">
                 Settings
               </button>
-              <button className="block bg-collection-btn w-full text-center text-white px-6 py-1 text-gray-700 rounded hover:bg-gray-100">
+              <button
+                onClick={logout}
+                className="block bg-collection-btn w-full text-center text-white px-6 py-1 text-gray-700 rounded hover:bg-gray-100">
                 Logout
               </button>
             </div>
@@ -153,20 +162,18 @@ const ProfilePage = () => {
       <div className="bg-profile-content">
         <nav className="grid grid-cols-2 bg-inactive-card-btn-gradient">
           <button
-            className={`${
-              activeSection === 'info'
-                ? 'card-details-active card-info'
-                : 'card-details-not-active'
-            }`}
+            className={`${activeSection === 'info'
+              ? 'card-details-active card-info'
+              : 'card-details-not-active'
+              }`}
             onClick={() => setActiveSection('info')}>
             Collection
           </button>
           <button
-            className={`${
-              activeSection === 'lists'
-                ? 'card-details-active card-market'
-                : 'card-details-not-active'
-            }`}
+            className={`${activeSection === 'lists'
+              ? 'card-details-active card-market'
+              : 'card-details-not-active'
+              }`}
             onClick={() => setActiveSection('lists')}>
             Lists
           </button>
