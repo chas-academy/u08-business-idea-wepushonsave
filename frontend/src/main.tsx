@@ -42,6 +42,7 @@ import TopCommanders from './mtgtombapi/top-commanders/allTopCommanders.tsx';
 import CommanderRecSearch from './mtgtombapi/algoritm/comRec.tsx';
 import CommanderDetails from './mtgtombapi/top-commanders/commanderDetails.tsx';
 import AllThemes from './mtgtombapi/theme/allThemes.tsx';
+import AuthenticatedRoute from './routes/authentificatedRoute.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -69,7 +70,9 @@ const router = createBrowserRouter(
         }}
       />
       <Route path="community" element={<Threads />} />
-      <Route path="profile" element={<ProfilePage />} />
+      <Route path="/profile" element={<AuthenticatedRoute />}>
+        <Route path="" element={<ProfilePage />} />
+      </Route>
       <Route path="profile-dashboard" element={<ProfileDashboard />} />
       <Route
         path="deck-builder"

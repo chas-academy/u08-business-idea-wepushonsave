@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {singleCardLoader} from '../../utils/singleCardLoader';
 import {ICard} from '../../utils/ScryfallInterfaces';
-import getIconApi from '../reusable_collapsable/iconApi';
+// import {manaCostRe} from '../';
 import CardLayout from '../../layouts/CardLayout';
 
 interface IListData {
@@ -164,20 +164,9 @@ const CardDisplay: React.FC = () => {
                       <span className="pl-2 text-gray-200 text-sm">
                         {card.name}
                       </span>
-                      {card.mana_cost && (
-                        <div className="ml-2">
-                          {getIconApi('card.mana_cost').map(
-                            (url: string, index: number) => (
-                              <img
-                                key={index}
-                                src={url}
-                                alt={`Mana Symbol ${index}`}
-                                className="mana-symbol"
-                              />
-                            )
-                          )}
-                        </div>
-                      )}
+                      {/* {card.mana_cost && (
+                        <div className="ml-2">{manaCostRe(card.mana_cost)}</div>
+                      )} */}
                     </div>
                   ))}
               </div>
