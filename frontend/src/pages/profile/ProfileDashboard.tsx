@@ -19,7 +19,7 @@ const ProfileDashboard = () => {
           credentials: 'include',
           mode: 'cors',
         },
-      });
+      );
 
       if (!response.ok) {
         throw new Error('Failed to fetch user data');
