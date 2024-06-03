@@ -19,11 +19,37 @@ const Threads: React.FC = () => {
    const [newThreadContent, setNewThreadContent] = useState('');
    const [userData, setUserData] = useState<any>({});
 
+   useEffect(() => {
+      fetchUserData();
+   }, []);
+
+   // Fetch user's information from the server using the token and update the state
+   const fetchUserData = async () => {
+      try {
+         const response = await fetch('http://localhost:3000/api/profile-info', {
+            credentials: 'include',
+            headers: {
+               'Content-Type': 'application/json',
+               Accept: 'application/json',
+               credentials: 'include',
+               mode: 'cors',
+            },
+         });
+
+         if (!response.ok) {
+            throw new Error('Failed to fetch user data');
+         }
+
+         const data = await response.json();
+         setUserData(data);
+
+      } catch (error) {
+         console.error('Error fetching user data:', error);
+      }
+   };
+
 
    useEffect(() => {
-      // Fetch threads from the backend
-
-
       fetchThreads();
    }, []);
 
@@ -151,7 +177,7 @@ const Threads: React.FC = () => {
                      {thread.collapsed ? 'Hide comments' : 'Show comments'}
                   </button>
 
-                  {thread.collapsed && (
+                  {!thread.collapsed && (
                      <div>
                         {thread.comments.map(comment => (
                            <div
