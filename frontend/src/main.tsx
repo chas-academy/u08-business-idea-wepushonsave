@@ -16,7 +16,7 @@ import Threads from './pages/community/Threads.tsx';
 
 // components
 import CardsArray from './components/card/CardsArray.tsx';
-import SearchResults from './components/search/SearchResults.tsx';
+import CardDisplay from './components/listOrGrid/CardsDisplay.tsx';
 
 // layouts
 import RootLayout from './layouts/RootLayout.tsx';
@@ -24,27 +24,24 @@ import RootLayout from './layouts/RootLayout.tsx';
 // utils
 import {cardsArrayLoader} from './utils/cardsArrayLoader.tsx';
 import {cardSetLoader} from './utils/cardSetLoader.tsx';
-import {cardSearchLoader} from './utils/cardSearchLoader.tsx';
 
 //pages
 import ProfilePage from './pages/profile/ProfilePage.tsx';
 import ProfileDashboard from './pages/profile/ProfileDashboard.tsx';
-import MyCollectionCards from './pages/profile/MyCollectionCards.tsx';
-import MyCollectionCommons from './pages/profile/MyCollectionCommons.tsx';
-import MyCollectionRare from './pages/profile/MyCollectionRare.tsx';
 import Login from './pages/login/Login.tsx';
 import Register from './pages/register/Register.tsx';
 
 // context
 import {SearchProvider} from './components/search/SearchContext.tsx';
-import CardDisplay from './components/listOrGrid/CardsDisplay.tsx';
 import DeckBuilder from './pages/deckbuilder/DeckBuilder.tsx';
 import {singleCardLoader} from './utils/singleCardLoader.tsx';
 
 //API Components
-import SearchComponent from './mtgtombapi/algoritm/comRec.tsx';
 import AllDecksComponent from './mtgtombapi/decks/allDecks.tsx';
 import TopCommanders from './mtgtombapi/top-commanders/allTopCommanders.tsx';
+import CommanderRecSearch from './mtgtombapi/algoritm/comRec.tsx';
+import CommanderDetails from './mtgtombapi/top-commanders/commanderDetails.tsx';
+import AllThemes from './mtgtombapi/theme/allThemes.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -53,20 +50,16 @@ const router = createBrowserRouter(
       <Route path="gamerules" element={<GameRules />} />
       <Route path="cardrules" element={<CardRules />} />
       <Route
-        path="cards-display"
+        path="cards-display/:listId"
         element={<CardDisplay />}
         loader={cardsArrayLoader}
       />
 
-      <Route path="algoritm" element={<SearchComponent />} />
+      <Route path="algoritm" element={<CommanderRecSearch />} />
       <Route path="alldecks" element={<AllDecksComponent />} />
       <Route path="topcommander" element={<TopCommanders />} />
-
-      <Route
-        path="search"
-        element={<SearchResults />}
-        loader={cardSearchLoader}
-      />
+      <Route path="/commander/:name" element={<CommanderDetails />} />
+      <Route path="/allthemes" element={<AllThemes />} />
 
       <Route
         path="cards/:set"
@@ -78,9 +71,6 @@ const router = createBrowserRouter(
       <Route path="community" element={<Threads />} />
       <Route path="profile" element={<ProfilePage />} />
       <Route path="profile-dashboard" element={<ProfileDashboard />} />
-      <Route path="mycollection" element={<MyCollectionCards />} />
-      <Route path="mycollection-commmons" element={<MyCollectionCommons />} />
-      <Route path="mycollection-rare" element={<MyCollectionRare />} />
       <Route
         path="deck-builder"
         element={<DeckBuilder />}
