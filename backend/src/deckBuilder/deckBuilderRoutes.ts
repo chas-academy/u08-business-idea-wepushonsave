@@ -10,14 +10,14 @@ import {
 
 const deckBuilderRouter = express.Router();
 
-deckBuilderRouter.post("/", /* authMiddleware */ createDeckController);
+deckBuilderRouter.post("/", authMiddleware, createDeckController);
 deckBuilderRouter.get("/", getDecksController);
 deckBuilderRouter.get("/:id", getDeckController);
 deckBuilderRouter.post(
   "/:id/add-card",
-  /* authMiddleware */
+  authMiddleware,
   addCardToDeckController
 );
-deckBuilderRouter.delete("/:id", /* authMiddleware */ deleteDeckController);
+deckBuilderRouter.delete("/:id", authMiddleware, deleteDeckController);
 
 export default deckBuilderRouter;

@@ -47,7 +47,10 @@ export const SearchProvider: React.FC<{children: React.ReactNode}> = ({
 
   const addCardToDeck = async (card: ICard) => {
     if (!currentDeckId) {
-      const newDeck = await createDeckDB('New Deck', 'user-id');
+      const newDeck = await createDeckDB(
+        'New Deck',
+        '665dc3f827a85f1d3f4f6a33'
+      );
       setCurrentDeckId(newDeck.id);
     }
     const updatedDeck = await addCardToDeckDB(currentDeckId!, card, 'user-id');
