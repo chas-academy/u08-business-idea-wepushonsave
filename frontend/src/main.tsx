@@ -42,7 +42,6 @@ import TopCommanders from './mtgtombapi/top-commanders/allTopCommanders.tsx';
 import CommanderRecSearch from './mtgtombapi/algoritm/comRec.tsx';
 import CommanderDetails from './mtgtombapi/top-commanders/commanderDetails.tsx';
 import AllThemes from './mtgtombapi/theme/allThemes.tsx';
-import Logout from './pages/login/Logout.tsx';
 import Navigation2 from './pages/login/UserNav.tsx';
 
 const router = createBrowserRouter(
