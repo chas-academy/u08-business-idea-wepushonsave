@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        footer: '#21162F',
         mint: '#DEE8E0',
         periwinkle: '#757BC0',
         plum: '#462F64',

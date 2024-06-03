@@ -11,8 +11,8 @@ import {
 const deckBuilderRouter = express.Router();
 
 deckBuilderRouter.post("/", authMiddleware, createDeckController);
-deckBuilderRouter.get("/", authMiddleware, getDecksController);
-deckBuilderRouter.get("/:id", authMiddleware, getDeckController);
+deckBuilderRouter.get("/", getDecksController);
+deckBuilderRouter.get("/:id", getDeckController);
 deckBuilderRouter.post("/:id/cards", authMiddleware, addCardToDeckController);
 deckBuilderRouter.delete("/:id", authMiddleware, deleteDeckController);
 

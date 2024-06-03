@@ -1,15 +1,23 @@
 import {useEffect, useState} from 'react';
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable  @typescript-eslint/no-explicit-any */
+
 import {useNavigate} from 'react-router-dom';
 import profileIcon from '../../assets/profile-icon.webp';
+
+interface IList {
+  _id: string;
+  title: string;
+}
 
 const ProfilePage = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('info');
   const [userData, setUserData] = useState<any>({});
-
+  const [lists, setLists] = useState<IList[]>([]);
+  const [showCreateListModal, setShowCreateListModal] = useState(false);
+  const [newListName, setNewListName] = useState('');
   const settingsClick = () => {
     navigate('/profile-dashboard');
   };
@@ -22,13 +30,60 @@ const ProfilePage = () => {
   const mycollectionCommonsClick = () => {
     navigate('/mycollection-commmons');
   };
-  const logout = () => {
-    localStorage.removeItem('token')
-    navigate('/login');
+
+  const createListClick = async () => {
+    setShowCreateListModal(true);
+  };
+
+  const handleCreateList = async () => {
+    try {
+      // Call the createList function here with newListName
+      const response = await fetch('http://localhost:3000/api/lists', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({title: newListName}),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create list');
+      }
+
+      // Refresh the list of lists after creating a new one
+      fetchLists();
+      setShowCreateListModal(false);
+    } catch (error) {
+      console.error('Error creating list:', error);
+    }
+  };
+
+  const fetchLists = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/lists', {
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch lists');
+      }
+
+      const data = await response.json();
+      setLists(data);
+    } catch (error) {
+      console.error('Error fetching lists:', error);
+    }
   };
 
   useEffect(() => {
     fetchUserData();
+    fetchLists();
   }, []);
 
   // Fetch user's information from the server using the token and update the state
@@ -53,6 +108,10 @@ const ProfilePage = () => {
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
+  };
+
+  const handleListClick = (listId: string) => {
+    navigate(`/cards-display/${listId}`);
   };
 
   return (
@@ -148,11 +207,49 @@ const ProfilePage = () => {
 
           {activeSection === 'lists' && (
             <div className="flex flex-col items-center">
-              <button className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange">
-                {' '}
-                {/* Add the OnCLick here to the function created by Lollo */}
+              <button
+                onClick={createListClick}
+                className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange">
                 CREATE A LIST
               </button>
+              {lists.map(list => (
+                <button
+                  key={list._id}
+                  className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
+                  onClick={() => handleListClick(list._id)}>
+                  {list.title}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Create List Modal */}
+          {showCreateListModal && (
+            <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+              <div className="bg-white p-6 rounded-md shadow-md">
+                <h2 className="text-lg font-semibold mb-4">
+                  Create a New List
+                </h2>
+                <input
+                  type="text"
+                  value={newListName}
+                  onChange={e => setNewListName(e.target.value)}
+                  placeholder="Enter list name"
+                  className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
+                />
+                <div className="flex justify-end">
+                  <button
+                    onClick={handleCreateList}
+                    className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 mr-2">
+                    Create
+                  </button>
+                  <button
+                    onClick={() => setShowCreateListModal(false)}
+                    className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md shadow-md hover:bg-gray-400">
+                    Cancel
+                  </button>
+                </div>
+              </div>
             </div>
           )}
         </div>
