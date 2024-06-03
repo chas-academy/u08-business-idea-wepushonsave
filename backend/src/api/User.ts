@@ -4,12 +4,11 @@ import bcrypt from "bcrypt";
 import User from "../models/User";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { IUser } from "../interfaces/IUser";
 import List from "../models/listModel";
 import { authMiddleware } from "../middleware/auth";
 const router = express.Router();
 
-router.post("/register", (req: Request, res: Response) => {
+router.post("/register", async (req: Request, res: Response) => {
   const { email, password, username } = req.body;
 
   if (!email || !password) {
@@ -44,9 +43,9 @@ router.post("/register", (req: Request, res: Response) => {
 
       // Create default lists for the user
       const lists = [
-        { userId: savedUser._id, title: "My card collection", cardIds: "" },
-        { userId: savedUser._id, title: "Binder - Rares", cardIds: "" },
-        { userId: savedUser._id, title: "Binder - Commons", cardIds: "" },
+        { userId: savedUser._id, title: "My card collection", cardIds: [] },
+        { userId: savedUser._id, title: "Binder - Rares", cardIds: [] },
+        { userId: savedUser._id, title: "Binder - Commons", cardIds: [] },
       ];
 
       await List.insertMany(lists);
@@ -65,31 +64,34 @@ router.post("/register", (req: Request, res: Response) => {
   }
 });
 
-
-router.get('/logout', async (req: Request, res: Response) => {
+router.get("/logout", async (req: Request, res: Response) => {
   try {
-    res.clearCookie('token');
+    res.clearCookie("token");
 
     const hasCookie = req.cookies.token !== undefined;
 
     return res.status(200).json({
-      message: 'Cookie cleared successfully!',
+      message: "Cookie cleared successfully!",
       cookieExists: !hasCookie,
     });
   } catch (error) {
-    console.error('Error clearing cookie:', error);
-    res.status(500).json({ message: 'An error occurred while clearing the cookie.' });
+    console.error("Error clearing cookie:", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while clearing the cookie." });
   }
 });
 
 router.get("/login", authMiddleware, async (req: Request, res: Response) => {
   res.send({ isLoggedIn: true });
-})
+});
 
 router.post("/login", async (req: Request, res: Response) => {
   try {
     if (!req.body.email || !req.body.password) {
-      return res.status(400).json({ message: "Please provide both email and password." });
+      return res
+        .status(400)
+        .json({ message: "Please provide both email and password." });
     }
 
     const user = await User.findOne({ email: req.body.email });
@@ -98,7 +100,9 @@ router.post("/login", async (req: Request, res: Response) => {
       return res.status(400).json({ message: "Invalid email or password." });
     }
 
-    const token = jwt.sign({ userId: user._id }, "jwt-secret-key", { expiresIn: "1d" });
+    const token = jwt.sign({ userId: user._id }, "jwt-secret-key", {
+      expiresIn: "1d",
+    });
 
     res.cookie("token", token, {
       httpOnly: true,
