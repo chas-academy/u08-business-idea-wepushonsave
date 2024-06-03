@@ -1,3 +1,5 @@
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import {useEffect, useState} from 'react';
 import {Navigate, Outlet} from 'react-router-dom';
 
