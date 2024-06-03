@@ -17,9 +17,14 @@ const ProfileDashboard = () => {
           'Content-Type': 'application/json',
           Accept: 'application/json',
           credentials: 'include',
-          mode: 'cors',
-        },
-      });
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            credentials: 'include',
+            mode: 'cors',
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error('Failed to fetch user data');
