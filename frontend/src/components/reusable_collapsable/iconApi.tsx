@@ -21,7 +21,8 @@ const getIconApi = (mana: string) => {
     // Iterate over each symbol and generate the svg URL
 
     // Remove the curly braces and construct the svg URL
-    const formattedSymbol = element.replace(/[{}]/g, '');
+    const formattedSymbol = element.replace(/[{}]/g, '').replace(/\//g, '');
+    
     const svgUrl = `${baseUrl}${formattedSymbol}.svg`;
     svgUrls.push(svgUrl);
 

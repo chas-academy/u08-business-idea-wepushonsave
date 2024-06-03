@@ -5,14 +5,13 @@ import User from "../models/User";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { IUser } from "../interfaces/IUser";
+import { authMiddleware } from "../middleware/auth";
 
 const router = express.Router();
 
 // Register
 router.post("/register", (req: Request, res: Response) => {
   const { email, password, username } = req.body;
-
-  console.log(email, password, username); //TEST
 
   if (!email || !password) {
     return res.status(400).json({ message: "Input email or password!" });
@@ -73,65 +72,65 @@ router.post("/register", (req: Request, res: Response) => {
 });
 
 // Login
-router.post("/login", (req: Request, res: Response) => {
-  const { email, password } = req.body;
 
-  if (email == "" || password == "") {
-    return res.status(400).json({ message: "Input email or password!" });
-  } else {
-    // Check if user exists
-    User.find({ email })
-      .then((data) => {
-        if (data.length) {
-          // User exists
-          const userId = data[0]._id; // Access the userId from the user data
-          const hashedPassword = data[0].password;
-          const userEmail = data[0].email; // Access the email property of the user data
+router.get("/logout", async (req: Request, res: Response) => {
+  try {
+    // Clear the cookie (assuming you want to clear the 'token' cookie)
+    res.clearCookie("token");
 
-          bcrypt
-            .compare(password, hashedPassword)
-            .then((result) => {
-              if (result) {
-                // Create token
-                const token = jwt.sign(
-                  { email: userEmail, userId: userId },
-                  "jwt-secret-key",
-                  {
-                    expiresIn: "1d",
-                  }
-                ); // Include the userId in the token payload
-                res.cookie("token", token, {
-                  httpOnly: true,
-                  secure: process.env.NODE_ENV === "production", // Ensure the cookie is only sent over HTTPS in production
-                  sameSite: false, // Allows cross-site cookies
-                });
-                return res
-                  .status(200)
-                  .json({ message: "User signed in successfully!" });
-              } else {
-                return res
-                  .status(400)
-                  .json({ message: "Invalid email or password!" });
-              }
-            })
-            .catch((err: Error) => {
-              console.log(err);
-              return res
-                .status(500)
-                .json({ message: "An error occurred while comparing passwords!" });    
-            });
-        } else {
-          return res
-            .status(400)
-            .json({ message: "Invalid credentials entered!" });
-        }
-      })
-      .catch((err: Error) => {
-        console.log(err);
-        return res
-          .status(500)
-          .json({ message: "An error occurred while retrieving user data!" });
-      });
+    // Check if the cookie exists after clearing (optional)
+    const hasCookie = req.cookies.token !== undefined; // Assuming presence indicates existence
+
+    return res.status(200).json({
+      message: "Cookie cleared successfully!",
+      // Add a property indicating cookie existence (optional)
+      cookieExists: !hasCookie,
+    });
+  } catch (error) {
+    console.error("Error clearing cookie:", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while clearing the cookie." });
+  }
+});
+
+router.get("/login", authMiddleware, async (req: Request, res: Response) => {
+  res.send({ isLoggedIn: true });
+});
+
+router.post("/login", async (req: Request, res: Response) => {
+  try {
+    // Validate email and password presence
+    if (!req.body.email || !req.body.password) {
+      return res
+        .status(400)
+        .json({ message: "Please provide both email and password." });
+    }
+
+    // Find user by email
+    const user = await User.findOne({ email: req.body.email });
+
+    // Check if user exists and passwords match
+    if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
+      return res.status(400).json({ message: "Invalid email or password." });
+    }
+
+    // Create authentication token (consider using a refresh token strategy)
+    const token = jwt.sign({ userId: user._id }, "jwt-secret-key", {
+      expiresIn: "1d",
+    });
+
+    // Set secure cookies (adjust based on your needs)
+    res.cookie("token", token, {
+      httpOnly: true, // Prevent client-side JS access
+      secure: process.env.NODE_ENV === "production", // Send over HTTPS in production
+      sameSite: "lax", // Allow cross-site requests with proper CSRF protection
+    });
+
+    return res.status(200).json({ message: "User signed in successfully!" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "An error occurred during login." });
   }
 });
 

@@ -1,12 +1,11 @@
 /* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable  @typescript-eslint/no-explicit-any */ 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import {useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 const RegisterUser = () => {
-  
-  const navigate = useNavigate() 
-  
+  const navigate = useNavigate();
+
   const [currentError, setCurrentError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -17,7 +16,7 @@ const RegisterUser = () => {
       email: form.email.value,
       password: form.password.value,
     };
-console.log(form.email, form.username, form.password)
+    console.log(form.email, form.username, form.password);
     if (form.username.value && form.email.value && form.password.value) {
       try {
         const response = await fetch(
@@ -33,18 +32,13 @@ console.log(form.email, form.username, form.password)
         );
         if (!response.ok) {
           throw new Error('Register not successful, please try again');
-        } 
-        setCurrentError("")
-        navigate("/login")
-
+        }
+        setCurrentError('');
+        navigate('/login');
       } catch (error: any) {
-        console.error(
-          'Register not successful...',
-          error
-        );
-        setCurrentError(error.message)
+        console.error('Register not successful...', error);
+        setCurrentError(error.message);
       }
-      
     } else {
       setCurrentError('Username, email and password are required!');
     }
