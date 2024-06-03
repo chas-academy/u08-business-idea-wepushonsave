@@ -23,7 +23,7 @@ const ProfileDashboard = () => {
             credentials: 'include',
             mode: 'cors',
           },
-        }
+        },
       );
 
       if (!response.ok) {
