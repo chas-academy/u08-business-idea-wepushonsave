@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 
 const ProfileDashboard = () => {
   const [userData, setUserData] = useState<any>({});
@@ -11,7 +11,7 @@ const ProfileDashboard = () => {
   // Fetch user's information from the server using the token and update the state
   const fetchUserData = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/profile-info', {
+      const response = await fetch('https://mtg-tomb.onrender.com/api/profile-info', {
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
@@ -39,8 +39,8 @@ const ProfileDashboard = () => {
 
   // Handle input change
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = e.target;
-    setUserData({...userData, [name]: value});
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
   };
 
   // Handle form submission to update user data
@@ -54,7 +54,7 @@ const ProfileDashboard = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:3000/api/profile-info', {
+      const response = await fetch('https://mtg-tomb.onrender.com/api/profile-info', {
         method: 'PUT',
         credentials: 'include',
         headers: {

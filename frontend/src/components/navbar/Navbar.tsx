@@ -1,6 +1,8 @@
 
+
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react';
 import { useEffect, useState } from 'react';
 import logo from '../../assets/logo-MTG-TOMB.webp';
 import docIcon from '../../assets/doc-icon.webp';
@@ -80,7 +82,7 @@ useEffect(() => {
         <img
           src={profileIcon}
           alt="Profile Icon"
-          style={{width: '4.25rem', height: '4.25rem'}}
+          style={{ width: '4.25rem', height: '4.25rem' }}
           className="mx-auto bg-custom-purple-600 rounded-full border-4 border-plum hover:border-mint hover:shadow-md hover:shadow-plum"
         />
       </a>

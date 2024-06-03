@@ -1,10 +1,10 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable  @typescript-eslint/no-explicit-any */ // Line 42
 
-import {useState} from 'react';
+import { useState } from 'react';
 import Validation from './loginValidation';
 
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const LoginUser = () => {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const LoginUser = () => {
 
     if (!errorCheck.email && !errorCheck.password) {
       try {
-        const response = await fetch('http://localhost:3000/api/user/login', {
+        const response = await fetch('https://mtg-tomb.onrender.com/api/user/login', {
           method: 'POST',
           mode: 'cors',
           headers: {
