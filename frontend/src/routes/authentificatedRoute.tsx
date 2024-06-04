@@ -4,30 +4,24 @@ import {useEffect, useState} from 'react';
 import {Navigate, Outlet} from 'react-router-dom';
 
 const AuthenticatedRoute = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState<null | boolean>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await fetch(
-          'https://mtg-tomb.onrender.com/api/auth/check',
-          {
-            method: 'GET',
-            credentials: 'include',
-          }
-        );
+  const checkAuth = async () => {
+    try {
+      const token = localStorage.getItem('token');
 
-        if (response.ok) {
-          setIsAuthenticated(true);
-        } else {
-          setIsAuthenticated(false);
-        }
-      } catch (error) {
-        console.error('Error checking authentication', error);
+      if (token) {
+        setIsAuthenticated(true);
+      } else {
         setIsAuthenticated(false);
       }
-    };
+    } catch (error) {
+      console.error('Error checking authentication', error);
+      setIsAuthenticated(false);
+    }
+  };
 
+  useEffect(() => {
     checkAuth();
   }, []);
 

@@ -11,7 +11,7 @@ interface IListData {
 }
 
 const CardDisplay: React.FC = () => {
-  const { listId } = useParams<{ listId: string }>();
+  const {listId} = useParams<{listId: string}>();
   const [listData, setListData] = useState<IListData | null>(null);
   const [cards, setCards] = useState<ICard[]>([]);
   const [isGridView, setIsGridView] = useState(true);
@@ -22,7 +22,7 @@ const CardDisplay: React.FC = () => {
     const fetchListData = async () => {
       try {
         const response = await fetch(
-          `https://mtg-tomb.onrender.com/api/lists/${listId}`,
+          `http://mtg-tomb.netlify.app/api/lists/${listId}`,
           {
             credentials: 'include',
             headers: {
@@ -40,7 +40,7 @@ const CardDisplay: React.FC = () => {
         setListData(data);
 
         const cardDetailsPromises = data.cardIds.map(id =>
-          singleCardLoader({ params: { id } })
+          singleCardLoader({params: {id}})
         );
         const cardDetails = await Promise.all(cardDetailsPromises);
         setCards(cardDetails);
@@ -71,7 +71,7 @@ const CardDisplay: React.FC = () => {
   });
 
   const getTypeCounts = () => {
-    const counts: { [type: string]: number } = {};
+    const counts: {[type: string]: number} = {};
     sortedCards.forEach(card => {
       const primaryType = extractPrimaryType(card.type_line);
       counts[primaryType] = (counts[primaryType] || 0) + 1;
@@ -165,7 +165,9 @@ const CardDisplay: React.FC = () => {
                         {card.name}
                       </span>
                       {card.mana_cost && (
-                        <div className="ml-2">{manaCostRe(card.mana_cost)}</div>
+                        <div className="ml-2 flex flex-row">
+                          {manaCostRe(card.mana_cost)}
+                        </div>
                       )}
                     </div>
                   ))}

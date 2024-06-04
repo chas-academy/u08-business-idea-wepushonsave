@@ -5,12 +5,12 @@ import app from "./app";
 connectDB;
 
 dotenv.config();
-const port = 5000;
+const port = 3000;
 
 const corsOptions = {
-  origin: 'https://mtg-tomb.netlify.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  origin: "https://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 
 app

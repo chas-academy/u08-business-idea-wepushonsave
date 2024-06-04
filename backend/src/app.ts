@@ -26,7 +26,7 @@ app.use(cookieParser());
 // Sets up CORS to allow requests from the frontend domain and allows cookies to be included
 app.use(
   cors({
-    origin: "https://mtg-tomb.netlify.app",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -56,7 +56,7 @@ app.use("/auth", authMiddleware);
 app.use("/decks", deckBuilderRouter);
 
 // Check if user logged in
-app.get("/api/auth/check", authMiddleware, (req, res) => {
+app.get("/auth/check", (req, res) => {
   res.status(200).json({ message: "Authenticated" });
 });
 
