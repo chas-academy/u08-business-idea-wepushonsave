@@ -128,9 +128,9 @@ const Threads: React.FC = () => {
                Create Thread
             </button>
          </form>
-         <div className="threadSection bg-white/30 flex flex-col-reverse">
+         <div className="threadSection  flex flex-col-reverse">
             {threads.map(thread => (
-               <div key={thread._id} className="w-full max-w-lg mb-4">
+               <div key={thread._id} className="bg-white/30 w-full max-w-lg mb-4">
                   <p className="min-h-20 text-white p-2">{thread.content}</p>
 
                   <button
