@@ -112,7 +112,7 @@ const Register: React.FC = () => {
                         className="px-4 py-1 text-white rounded-md hover:text-aubergine bg-btn-gradient">
                         Register</button>
                 </form>
-                <p>Already Registered? Login<a href="/register"> here!</a></p>
+                <p>Already Registered? Login<a href="/login"> here!</a></p>
 
             </div>
         </div>
