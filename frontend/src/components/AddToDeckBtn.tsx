@@ -6,6 +6,7 @@ import {useSearch} from './search/SearchContext';
 
 interface AddToDeckProps {
   card: ICard;
+  addCardToDeck: any;
 }
 
 const AddToDeckBtn: React.FC<AddToDeckProps> = ({card}) => {

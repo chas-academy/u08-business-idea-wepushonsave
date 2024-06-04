@@ -1,5 +1,4 @@
 /* eslint-disable react/react-in-jsx-scope */
-import {useLoaderData} from 'react-router-dom';
 import BackButton from '../../components/BackButton';
 import CardPlusButton from '../../components/CardPlusButton';
 import SearchForm from '../../components/search/SearchForm';
@@ -15,7 +14,6 @@ export interface IDeck {
 }
 
 const DeckBuilder: React.FC = () => {
-  const data: any = useLoaderData();
   const {deck} = useSearch();
   console.log(deck);
 
@@ -36,14 +34,15 @@ const DeckBuilder: React.FC = () => {
                 <div className="deck-builder-commander-btn  absolute z-10 w-16">
                   <CardPlusButton />
                 </div>
+
                 <img
                   className="rounded-xl blur-sm"
-                  src={data.image_uris.border_crop}
-                  alt=""
+                  src="https://cards.scryfall.io/border_crop/front/b/d/bd0d5a0c-5dec-439c-b037-9d17dda5ead3.jpg?1687551819"
+                  alt="atraxa, praetors voice"
                 />
               </div>
             </div>
-            <div className="deck-builder-cards-added ">
+            <div className="deck-builder-cards-added max-h-10 border ">
               <p className=" text-center">Added cards</p>
               {deck.map((card, index) => (
                 <section

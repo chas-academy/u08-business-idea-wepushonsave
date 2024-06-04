@@ -1,4 +1,4 @@
-import { Schema, model, Document, Types } from "mongoose";
+import { Schema, model } from "mongoose";
 import { IDeck } from "../interfaces/IDeck";
 
 const deckSchema = new Schema<IDeck>(

@@ -11,7 +11,6 @@ import listRoutes from "./routes/listRoutes";
 import userRouter from "./api/User";
 import { authMiddleware } from "./middleware/auth";
 import usersRouter from "./routes/userRoutes";
-import { getMe } from "./controllers/userController";
 
 // Initialize Database Connection
 connectDB;

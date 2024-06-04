@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {useNavigate} from 'react-router-dom';
 import mtgLogo from '../../assets/logo-MTG-TOMB.webp';
 import {User} from '../../utils/MTGTombAPIInterfaces';

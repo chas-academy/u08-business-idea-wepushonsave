@@ -75,6 +75,7 @@ export const SearchProvider: React.FC<{children: React.ReactNode}> = ({
    * @param deckId
    */
   const addCardToDeck = async (card: ICard) => {
+    setDeck([...deck, card]);
     if (currentDeckId === null) {
       const newDeck = await createDeckDB('New Deck', userId);
       setCurrentDeckId(newDeck._id);
