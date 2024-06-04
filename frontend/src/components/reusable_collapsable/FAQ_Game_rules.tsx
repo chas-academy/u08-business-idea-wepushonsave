@@ -1,10 +1,11 @@
 /* eslint-disable react/react-in-jsx-scope */
 
-import {useState} from 'react';
+import { useState} from 'react';
 import Collapsable from './Collapsable';
 import CollapsableContent from './CollapsableContent';
 
 const FAQ_Game_rules = () => {
+
   const [openMainCollapsibleId, setOpenMainCollapsibleId] = useState<
     string | null
   >(null);
