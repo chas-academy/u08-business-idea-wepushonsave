@@ -7,6 +7,12 @@ connectDB;
 dotenv.config();
 const port = 3000;
 
+const corsOptions = {
+  origin: "https://mtg-tomb.netlify.app/",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
 app
   .listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
