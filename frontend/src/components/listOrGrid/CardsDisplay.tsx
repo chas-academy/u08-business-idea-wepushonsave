@@ -165,7 +165,9 @@ const CardDisplay: React.FC = () => {
                         {card.name}
                       </span>
                       {card.mana_cost && (
-                        <div className="ml-2">{manaCostRe(card.mana_cost)}</div>
+                        <div className="ml-2 flex flex-row">
+                          {manaCostRe(card.mana_cost)}
+                        </div>
                       )}
                     </div>
                   ))}

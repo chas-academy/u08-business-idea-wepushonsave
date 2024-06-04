@@ -1,59 +1,58 @@
-
-
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import logo from '../../assets/logo-MTG-TOMB.webp';
 import docIcon from '../../assets/doc-icon.webp';
 import profileIcon from '../../assets/profile-icon.webp';
 import decksIcon from '../../assets/decks-icon.webp';
 import communityIcon from '../../assets/community-icon.webp';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 interface NavbarProps {
   toggleSidebar: () => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({toggleSidebar}) => {
+  const navigate = useNavigate();
 
-const navigate = useNavigate();
-
-const [isLoggedIn, setIsLoggedIn] = useState(false);
-const checkLogin = async () => {
-  try {
-    const response = await fetch('http://localhost:3000/api/user/login', {
-        method: "get",
-        mode: "cors",
-        credentials: "include",
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const checkLogin = async () => {
+    try {
+      const response = await fetch('https://mtg-tomb.onrender.com/user/login', {
+        method: 'get',
+        mode: 'no-cors',
+        credentials: 'include',
       });
-    if (!response.ok && response.status !== 401) {
-      // Handle non-200 OK responses (e.g., errors from the server)
-      throw new Error('Login failed'); // if check for 404
+      if (!response.ok && response.status !== 401) {
+        // Handle non-200 OK responses (e.g., errors from the server)
+        throw new Error('Login failed'); // if check for 404
+      }
+      if (response.status === 401) {
+        setIsLoggedIn(false);
+      } else {
+        const userData = await response.json(); // Parse the JSON from the response and save it in userData
+        setIsLoggedIn(userData.isLoggedIn); // Check for "isLoggedIn" field in response data  || false
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
     }
-    if (response.status === 401) {
-      setIsLoggedIn(false);
-    } else {
-    const userData = await response.json(); // Parse the JSON from the response and save it in userData
-    setIsLoggedIn(userData.isLoggedIn); // Check for "isLoggedIn" field in response data  || false
+  };
+  useEffect(() => {
+    checkLogin();
+  }, []);
+
+  const logout = async () => {
+    const response = await fetch(
+      'https://mtg-tomb.onrender.com/api/user/logout',
+      {
+        method: 'get',
+        mode: 'cors',
+        credentials: 'include',
+      }
+    );
+    if (!response.ok) {
+      navigate('/profile');
     }
-  } catch (error) {
-    console.error('Error fetching user data:', error);
-  }
-};
-useEffect(() => { 
-  checkLogin();
-}, []);
-
-
- const logout = async () => {
-  const response = await fetch('http://localhost:3000/api/user/logout', {
-    method: "get",
-    mode: "cors",
-    credentials: "include",
-  });
-  if (!response.ok) {
-    navigate('/profile')
-  }
     navigate('/login');
   };
 
@@ -81,7 +80,7 @@ useEffect(() => {
         <img
           src={profileIcon}
           alt="Profile Icon"
-          style={{ width: '4.25rem', height: '4.25rem' }}
+          style={{width: '4.25rem', height: '4.25rem'}}
           className="mx-auto bg-custom-purple-600 rounded-full border-4 border-plum hover:border-mint hover:shadow-md hover:shadow-plum"
         />
       </a>
@@ -107,8 +106,7 @@ useEffect(() => {
       {!isLoggedIn ? ( // If user is not logged in
         <>
           <a href="/login" className="login-logo-desktop ml-auto 0">
-            <button
-                          className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
+            <button className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
               <span className="absolute inset-0 border-2 border-transparent hover:border-white rounded-lg"></span>
               LOGIN
             </button>
@@ -120,11 +118,11 @@ useEffect(() => {
             </button>
           </a>
         </>
-      ) : ( 
+      ) : (
         <>
           <a href="/login" className="login-logo-desktop ml-auto 0">
             <button
-             onClick={logout}
+              onClick={logout}
               className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
               <span className="absolute inset-0 border-2 border-transparent hover:border-white rounded-lg"></span>
               LOG OUT

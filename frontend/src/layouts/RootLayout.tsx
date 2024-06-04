@@ -34,6 +34,40 @@ const RootLayout: React.FC = () => {
                 <div className="bg-mobile-search bg-cover w-full py-16 md:bg-desktop-search md:bg-fill md:p-5 md:bg-top md:mt-14 md:h-40">
                   <SearchForm />
                 </div>
+                <header className="flex flex-col items-center text-center py-4">
+                  <h1 className="text-[10vh] font-bold text-white/80">
+                    MTG-Tomb
+                  </h1>
+                  <p className="text-white/60 mt-2">
+                    Welcome to MTG-Tomb! <br /> This is your hub for building
+                    decks, searching cards, sorting your collection online,{' '}
+                    <br /> and getting inspired by other Magic: The Gathering
+                    players.
+                  </p>
+                </header>
+                <nav className="flex p-4 rounded-lg mb-4 justify-around items-center">
+                  <NavLink
+                    to={'/alldecks'}
+                    className={
+                      'flex justify-center w-[30vw] bg-btn-gradient px-4 py-2 rounded-md'
+                    }>
+                    All Decks
+                  </NavLink>{' '}
+                  <NavLink
+                    to={'/topcommander'}
+                    className={
+                      'flex justify-center w-[30vw] bg-btn-gradient px-4 py-2 rounded-md'
+                    }>
+                    Top Commanders
+                  </NavLink>{' '}
+                  <NavLink
+                    to={'/allthemes'}
+                    className={
+                      'flex justify-center w-[30vw] bg-btn-gradient px-4 py-2 rounded-md'
+                    }>
+                    Themes
+                  </NavLink>{' '}
+                </nav>
                 <SearchResults />
                 <ArtCard />
                 <CardGallery />

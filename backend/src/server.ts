@@ -7,13 +7,6 @@ connectDB;
 dotenv.config();
 const port = 3000;
 
-//FIXME Never used
-const corsOptions = {
-  origin: "http://localhost:5173",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
-
 app
   .listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);

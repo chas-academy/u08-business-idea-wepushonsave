@@ -55,7 +55,7 @@ app.use("/api", listRoutes);
 app.use("/decks", deckBuilderRouter);
 
 // Check if user logged in
-app.get("/api/auth/check", authMiddleware, (req, res) => {
+app.get("/auth/check", (req, res) => {
   res.status(200).json({ message: "Authenticated" });
 });
 

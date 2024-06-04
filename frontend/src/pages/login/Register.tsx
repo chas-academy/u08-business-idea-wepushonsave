@@ -55,51 +55,66 @@ const Register: React.FC = () => {
     };
 
     return (
-        <div>
-            <h1>Register</h1>
-            <form onSubmit={onSubmit}>
-                <div>
-                    <input
-                        type="text"
-                        placeholder="Username"
-                        name="username"
-                        value={username}
-                        onChange={onChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <input
-                        type="email"
-                        placeholder="Email Address"
-                        name="email"
-                        value={email}
-                        onChange={onChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        value={password}
-                        onChange={onChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <input
-                        type="password"
-                        placeholder="Confirm Password"
-                        name="password2"
-                        value={password2}
-                        onChange={onChange}
-                        required
-                    />
-                </div>
-                <button type="submit">Register</button>
-            </form>
+        <div className="flex flex-col bg-site-gradient items-center justify-center min-h-screen text-white">
+            <h1 className="text-3xl md:text-5xl md:mb-20 font-bold mb-4">Register</h1>
+            <div className="flex flex-col md:w-1/3 w-5/6 p-5 rounded-xl shadow-lg bg-site-gradient">
+
+                <form onSubmit={onSubmit}>
+                    <div>
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            name="username"
+                            value={username}
+                            onChange={onChange}
+                            required
+                            className="w-full p-2 text-gray-700 placeholder:text-gray-500/80 m-1  focus:outline-periwinkle"
+
+                        />
+                    </div>
+                    <div>
+                        <input
+                            type="email"
+                            placeholder="Email Address"
+                            name="email"
+                            value={email}
+                            onChange={onChange}
+                            required
+                            className="w-full p-2 text-gray-700 placeholder:text-gray-500/80 m-1 focus:outline-periwinkle"
+
+                        />
+                    </div>
+                    <div>
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            name="password"
+                            value={password}
+                            onChange={onChange}
+                            required
+                            className="w-full p-2 text-gray-700 placeholder:text-gray-500/80 m-1 focus:outline-periwinkle"
+
+                        />
+                    </div>
+                    <div>
+                        <input
+                            type="password"
+                            placeholder="Confirm Password"
+                            name="password2"
+                            value={password2}
+                            onChange={onChange}
+                            required
+                            className="w-full p-2 text-gray-700 placeholder:text-gray-500/80 m-1 focus:outline-periwinkle"
+
+                        />
+                    </div>
+                    <button type="submit"
+                        className="px-4 py-1 text-white rounded-md hover:text-aubergine bg-btn-gradient">
+                        Register</button>
+                </form>
+                <p>Already Registered? Login<a href="/register"> here!</a></p>
+
+            </div>
         </div>
     );
 };

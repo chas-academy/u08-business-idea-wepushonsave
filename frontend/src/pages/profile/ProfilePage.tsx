@@ -13,49 +13,46 @@ const ProfilePage = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('info');
-  const [userData, setUserData] = useState<any>({});
+  const [userId, setUserId] = useState<any>();
+  const [username1, setUsername] = useState<any>();
   const [lists, setLists] = useState<IList[]>([]);
   const [showCreateListModal, setShowCreateListModal] = useState(false);
-  const [newListName, setNewListName] = useState('');
+  const [title, setTitle] = useState('');
 
   useEffect(() => {
-    fetchUserData();
-    fetchLists();
-  }, []);
-
-  const fetchUserData = async () => {
-    try {
-      // Call the createList function here with newListName
-      const response = await fetch('http://localhost:3000/api/lists', {
-        method: 'POST',
-        credentials: 'include',
+    const fetchUserInfo = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) return;
+      const response = await fetch(`https://mtg-tomb.onrender.com/user/me`, {
+        method: 'GET',
         headers: {
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
-          Accept: 'application/json',
         },
-        body: JSON.stringify({title: newListName}),
       });
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch user data');
-      }
+      if (!response.ok) throw new Error('Network response was not ok');
 
       const data = await response.json();
-      setUserData(data);
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  };
+      setUserId(data._id);
+      setUsername(data.username);
+    };
+    fetchUserInfo();
+    fetchLists();
+  }, [username1]);
 
   const fetchLists = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/lists', {
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      });
+      const response = await fetch(
+        'https://mtg-tomb.onrender.com/api/allLists',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({userId}),
+        }
+      );
 
       if (!response.ok) {
         throw new Error('Failed to fetch lists');
@@ -83,13 +80,13 @@ const ProfilePage = () => {
 
   const handleCreateList = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/profile-info', {
-        credentials: 'include',
+      const response = await fetch('https://mtg-tomb.onrender.com/api/lists', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify({title: newListName}),
+        body: JSON.stringify({userId, title}),
       });
 
       if (!response.ok) {
@@ -117,9 +114,7 @@ const ProfilePage = () => {
             className="w-28 h-28 mt-28 mb-1 rounded-full bg-custom-purple-600 border-4 border-custom-purple-800"
           />
           <div className="mb-5">
-            <h1 className="text-xl font-bold text-white">
-              {userData.username || ''}
-            </h1>
+            <h1 className="text-xl font-bold text-white">{username1 || ''}</h1>
           </div>
         </div>
         <div className="relative">
@@ -234,8 +229,8 @@ const ProfilePage = () => {
                 </h2>
                 <input
                   type="text"
-                  value={newListName}
-                  onChange={e => setNewListName(e.target.value)}
+                  value={title}
+                  onChange={e => setTitle(e.target.value)}
                   placeholder="Enter list name"
                   className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
                 />
