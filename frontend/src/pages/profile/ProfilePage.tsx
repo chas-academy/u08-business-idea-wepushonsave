@@ -23,7 +23,7 @@ const ProfilePage = () => {
     const fetchUserInfo = async () => {
       const token = localStorage.getItem('token');
       if (!token) return;
-      const response = await fetch(`http://mtg-tomb.netlify.app/user/me`, {
+      const response = await fetch(`https://mtg-tomb.netlify.app/user/me`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -42,14 +42,17 @@ const ProfilePage = () => {
 
   const fetchLists = async () => {
     try {
-      const response = await fetch('http://mtg-tomb.netlify.app/api/allLists', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({userId}),
-      });
+      const response = await fetch(
+        'https://mtg-tomb.netlify.app/api/allLists',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({userId}),
+        }
+      );
 
       if (!response.ok) {
         throw new Error('Failed to fetch lists');
@@ -77,7 +80,7 @@ const ProfilePage = () => {
 
   const handleCreateList = async () => {
     try {
-      const response = await fetch('http://mtg-tomb.netlify.app/api/lists', {
+      const response = await fetch('https://mtg-tomb.netlify.app/api/lists', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
