@@ -57,7 +57,7 @@ const Register: React.FC = () => {
     return (
         <div className="flex flex-col bg-site-gradient items-center justify-center min-h-screen text-white">
             <h1 className="text-3xl md:text-5xl md:mb-20 font-bold mb-4">Register</h1>
-            <div className="flex flex-col md:w-1/3 w-5/6 p-5 rounded-xl shadow-lg bg-profile-content">
+            <div className="flex flex-col md:w-1/3 w-5/6 p-5 rounded-xl shadow-lg bg-site-gradient">
 
                 <form onSubmit={onSubmit}>
                     <div>
