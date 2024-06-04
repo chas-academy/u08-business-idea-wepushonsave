@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useSearch } from '../../components/search/SearchContext';
 import { ICard } from '../../utils/ScryfallInterfaces';
 import CardLayout from '../../layouts/CardLayout';
+import { getImageFromCardFaces } from '../../utils/getImageFromCardFaces';
 
 
 interface ArtCardProps {
@@ -39,6 +40,7 @@ const ArtCard: React.FC<ArtCardProps> = ({
          const response = await fetch('https://api.scryfall.com/cards/random');
          const data = await response.json();
          setCard(data);
+         console.log(data);
       } catch (error) {
          console.error('Error fetching random card:', error);
       }
@@ -62,19 +64,16 @@ const ArtCard: React.FC<ArtCardProps> = ({
    };
 
    const imageUrl = card?.card_faces && card.card_faces.length > 0
-      ? card.card_faces[0].image_uris.border_crop
-      : card?.image_uris.border_crop;
+      ? getImageFromCardFaces(card.card_faces)
+      : card?.image_uris?.border_crop;
 
+   const cardname =
+      card?.card_faces && card.card_faces.length > 0
+         ? card.card_faces[0].name
+         : card?.name
    return (
       <>
-         <header className="flex flex-col items-center text-center py-4">
-            <h1 className="text-[10vh] font-bold text-white/80">
-               MTG-Tomb
-            </h1>
-            <p className="text-white/60 mt-2">
-               Welcome to MTG-Tomb! <br /> This is your hub for building decks, searching cards, sorting your collection online, <br /> and getting inspired by other Magic: The Gathering players.
-            </p>
-         </header>
+
 
          <dialog
             ref={dialogRef}
@@ -106,7 +105,7 @@ const ArtCard: React.FC<ArtCardProps> = ({
                            <div className="img-container flex flex-col rounded-md" style={{ border: '2px solid transparent', transition: 'border-color 0.3s' }} onMouseEnter={(e) => e.currentTarget.style.borderColor = '#757BC0'} onMouseLeave={(e) => e.currentTarget.style.borderColor = 'transparent'}>
                               <img
                                  src={imageUrl}
-                                 alt={card.name}
+                                 alt={cardname}
                                  className="rounded-md mx-auto"
                                  style={{ maxHeight: '300px', objectFit: 'contain' }}
 
@@ -118,7 +117,7 @@ const ArtCard: React.FC<ArtCardProps> = ({
                               <div
                                  style={infoStyles}
                               >
-                                 <p className="text-lg md:mb-2 font-semi-bold">{card.name}</p>
+                                 <p className="text-lg md:mb-2 font-semi-bold">{cardname}</p>
                                  <p className="text-md ">{card.type_line}</p>
                                  <p className="text-sm min-h-36 italic">{card.oracle_text}</p>
                               </div>
