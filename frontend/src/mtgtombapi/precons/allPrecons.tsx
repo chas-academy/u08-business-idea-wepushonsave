@@ -61,7 +61,7 @@ const PreconYearsList: React.FC = () => {
   }
 
   return (
-    <div className='flex flex-col justify-center'>
+    <div className='flex flex-col justify-center '>
       <h1 className="text-4xl font-bold text-center">Commander Precons</h1>
       <div className='flex justify-center m-3'>
       <GiBleedingHeart size={60} />

@@ -77,7 +77,7 @@ const RootLayout: React.FC = () => {
         </div>
 
         <main className="md:pt-24">
-          <div className="container mx-auto p-4 flex flex-col items-center">
+          <div className="container mx-auto p-4">
             <nav className="bg-pink-500 p-4 rounded-lg mb-4">
               {/* <NavLink to={'/algoritm'}>Algorithm</NavLink> |{' '}
               <NavLink to={'/alldecks'}>All Decks</NavLink> |{' '}
