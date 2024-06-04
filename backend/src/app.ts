@@ -26,7 +26,7 @@ app.use(cookieParser());
 // Sets up CORS to allow requests from the frontend domain and allows cookies to be included
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "http://mtg-tomb.netlify.app/",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })

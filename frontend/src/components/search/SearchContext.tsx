@@ -53,7 +53,7 @@ export const SearchProvider: React.FC<{children: React.ReactNode}> = ({
     const fetchUserInfo = async () => {
       const token = localStorage.getItem('token');
       if (!token) return;
-      const response = await fetch(`http://localhost:3000/user/me`, {
+      const response = await fetch(`https://mtg-tomb.onrender.com/user/me`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,

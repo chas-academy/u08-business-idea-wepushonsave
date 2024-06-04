@@ -28,7 +28,7 @@ const MyDecks = () => {
     const fetchUserInfo = async () => {
       const token = localStorage.getItem('token');
       if (!token) return;
-      const response = await fetch(`http://localhost:3000/user/me`, {
+      const response = await fetch(`https://mtg-tomb.onrender.com/user/me`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -46,7 +46,7 @@ const MyDecks = () => {
 
   const handleCreateDeck = async () => {
     try {
-      const response = await fetch('http://localhost:3000/decks', {
+      const response = await fetch('https://mtg-tomb.onrender.com/decks', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -71,7 +71,7 @@ const MyDecks = () => {
 
   const fetchDecks = async () => {
     try {
-      const response = await fetch('http://localhost:3000/decks', {
+      const response = await fetch('https://mtg-tomb.onrender.com/decks', {
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',

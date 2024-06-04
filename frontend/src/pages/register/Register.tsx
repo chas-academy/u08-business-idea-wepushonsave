@@ -20,7 +20,7 @@ const RegisterUser = () => {
     if (form.username.value && form.email.value && form.password.value) {
       try {
         const response = await fetch(
-          'http://localhost:3000/api/user/register',
+          'https://mtg-tomb.onrender.com/api/user/register',
           {
             method: 'POST',
             mode: 'cors',
