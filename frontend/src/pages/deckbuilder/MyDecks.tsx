@@ -19,6 +19,7 @@ const MyDecks = () => {
   const navigateDeckBuilder = () => {
     navigate('/deck-builder');
   };
+  console.log(decks);
   const createDeckClick = async () => {
     setShowCreateDeckModal(true);
   };

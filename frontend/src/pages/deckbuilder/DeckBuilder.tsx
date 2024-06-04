@@ -1,6 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
 import BackButton from '../../components/BackButton';
-import CardPlusButton from '../../components/CardPlusButton';
 import SearchForm from '../../components/search/SearchForm';
 import SearchResults from '../../components/search/SearchResults';
 import {useSearch} from '../../components/search/SearchContext';
