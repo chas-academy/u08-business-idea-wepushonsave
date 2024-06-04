@@ -5,6 +5,7 @@ import SearchResults from '../../components/search/SearchResults';
 import {useSearch} from '../../components/search/SearchContext';
 import manaSymbols from '../../mtgtombapi/manaSymbols';
 import {ICard} from '../../utils/ScryfallInterfaces';
+import {NavLink} from 'react-router-dom';
 
 export interface IDeck {
   id: string;
@@ -21,6 +22,9 @@ const DeckBuilder: React.FC = () => {
         <div className="deck-builder-container text-white max-w-2xl">
           <div className="deck-builder-back-button-container size-fit">
             <BackButton />
+          </div>
+          <div className="border rounded-md size-fit m-px pl-1 pr-1">
+            <NavLink to={'/my-decks'}>My Decks</NavLink>
           </div>
           <div className="deck-builder-name-container size-fit m-4">
             <h1 className="deck-builder-name text-2xl ">my deck</h1>
