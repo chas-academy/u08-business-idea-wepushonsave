@@ -4,14 +4,12 @@ import bcrypt from "bcrypt";
 import User from "../models/User";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { IUser } from "../interfaces/IUser";
+import List from "../models/listModel";
 import { authMiddleware } from "../middleware/auth";
-
 const router = express.Router();
 
-router.post("/register", (req: Request, res: Response) => {
+router.post("/register", async (req: Request, res: Response) => {
   const { email, password, username } = req.body;
-
 
   if (!email || !password) {
     return res.status(400).json({ message: "Input email or password!" });
@@ -22,77 +20,78 @@ router.post("/register", (req: Request, res: Response) => {
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ message: "Invalid email!" });
   } else {
-    User.find({ email })
-      .then((result: IUser[]) => {
-        console.log(result);
-        if (result && result.length > 0) {
-          return res.status(400).json({ message: "User already exists!" });
-        } else {
-          const saltRounds: number = 10;
-          bcrypt
-            .hash(password, saltRounds)
-            .then((hashedPassword: string) => {
-              const newUser = new User({
-                username,
-                email,
-                password: hashedPassword,
-              });
+    try {
+      console.log("Checking if user already exists...");
+      const existingUser = await User.findOne({ email });
+      console.log("Existing user:", existingUser);
+      if (existingUser) {
+        console.log("User already exists!");
+        return res.status(400).json({ message: "User already exists!" });
+      }
 
-              newUser
-                .save()
-                .then((result: IUser) => {
-                  return res.status(201).json({
-                    message: "User created successfully!",
-                    data: result,
-                  });
-                })
-                .catch((err: Error) => {
-                  console.log(err);
-                  return res
-                    .status(500)
-                    .json({ message: "An error occurred while saving user!" });
-                });
-            })
-            .catch((err: Error) => {
-              console.log(err);
-              return res
-                .status(500)
-                .json({ message: "An error occurred while hashing password!" });
-            });
-        }
-      })
-      .catch((err: Error) => {
-        console.log(err);
-        return res.status(500).json({ message: "Internal server error!" });
+      // password handling
+      const saltRounds: number = 10;
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+      const newUser = new User({
+        username,
+        email,
+        password: hashedPassword,
       });
+
+      const savedUser = await newUser.save();
+
+      // Create default lists for the user
+      const lists = [
+        { userId: savedUser._id, title: "My card collection", cardIds: [] },
+        { userId: savedUser._id, title: "Binder - Rares", cardIds: [] },
+        { userId: savedUser._id, title: "Binder - Commons", cardIds: [] },
+      ];
+
+      await List.insertMany(lists);
+      console.log("Lists created successfully!");
+
+      return res.status(201).json({
+        message: "User created successfully!",
+        data: savedUser,
+      });
+    } catch (err) {
+      console.log(err);
+      return res
+        .status(500)
+        .json({ message: "An error occurred during registration!" });
+    }
   }
 });
 
-
-router.get('/logout', async (req: Request, res: Response) => {
+router.get("/logout", async (req: Request, res: Response) => {
   try {
-    res.clearCookie('token');
+    res.clearCookie("token");
 
     const hasCookie = req.cookies.token !== undefined;
 
     return res.status(200).json({
-      message: 'Cookie cleared successfully!',
+      message: "Cookie cleared successfully!",
       cookieExists: !hasCookie,
     });
   } catch (error) {
-    console.error('Error clearing cookie:', error);
-    res.status(500).json({ message: 'An error occurred while clearing the cookie.' });
+    console.error("Error clearing cookie:", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while clearing the cookie." });
   }
 });
 
 router.get("/login", authMiddleware, async (req: Request, res: Response) => {
   res.send({ isLoggedIn: true });
-})
+});
 
 router.post("/login", async (req: Request, res: Response) => {
   try {
     if (!req.body.email || !req.body.password) {
-      return res.status(400).json({ message: "Please provide both email and password." });
+      return res
+        .status(400)
+        .json({ message: "Please provide both email and password." });
     }
 
     const user = await User.findOne({ email: req.body.email });
@@ -101,7 +100,9 @@ router.post("/login", async (req: Request, res: Response) => {
       return res.status(400).json({ message: "Invalid email or password." });
     }
 
-    const token = jwt.sign({ userId: user._id }, "jwt-secret-key", { expiresIn: "1d" });
+    const token = jwt.sign({ userId: user._id }, "jwt-secret-key", {
+      expiresIn: "1d",
+    });
 
     res.cookie("token", token, {
       httpOnly: true,
