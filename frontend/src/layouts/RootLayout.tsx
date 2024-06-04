@@ -44,9 +44,9 @@ const RootLayout: React.FC = () => {
                   </p>
                 </header>
                 <nav className="flex p-4 rounded-lg mb-4 justify-around items-center">
-                  <NavLink to={'/alldecks'} className={"w-[20vw] bg-btn-gradient px-4 py-2 rounded-md"}>All Decks</NavLink> {' '}
-                  <NavLink to={'/topcommander'} className={"bg-btn-gradient px-4 py-2 rounded-md"}>Top Commanders</NavLink> {' '}
-                  <NavLink to={'/allthemes'} className={"bg-btn-gradient px-4 py-2 rounded-md"}>Themes</NavLink> {' '}
+                  <NavLink to={'/alldecks'} className={"flex justify-center w-[30vw] bg-btn-gradient px-4 py-2 rounded-md"}>All Decks</NavLink> {' '}
+                  <NavLink to={'/topcommander'} className={"flex justify-center w-[30vw] bg-btn-gradient px-4 py-2 rounded-md"}>Top Commanders</NavLink> {' '}
+                  <NavLink to={'/allthemes'} className={"flex justify-center w-[30vw] bg-btn-gradient px-4 py-2 rounded-md"}>Themes</NavLink> {' '}
                 </nav>
                 <SearchResults />
                 <ArtCard />
