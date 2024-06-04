@@ -20,15 +20,15 @@ const DeckBuilder: React.FC = () => {
   return (
     <>
       <div className="flex justify-center sm:mt-14">
-        <div className="deck-builder-container text-white  max-w-2xl">
+        <div className="deck-builder-container text-white max-w-2xl">
           <div className="deck-builder-back-button-container size-fit">
             <BackButton />
           </div>
           <div className="deck-builder-name-container size-fit m-4">
             <h1 className="deck-builder-name text-2xl ">{}</h1>
           </div>
-          <section className="deck-builder-commander-card-section grid grid-cols-2">
-            <div className="deck-builder-commander-container m-2 sm:w-2/3">
+          <section className="deck-builder-commander-card-section grid grid-cols-2  h-1/2 md:h-2/3 max-h-[40vh] md:max-h-[80vh]">
+            <div className="deck-builder-commander-container  m-3  h-full">
               <p className="text-center bg-transparent">Commander</p>
               <div className="deck-builder-commander-image-container overflow-hidden relative flex justify-center items-center shadow-lg shadow-blue-400">
                 <div className="deck-builder-commander-btn  absolute z-10 w-16">
@@ -42,7 +42,7 @@ const DeckBuilder: React.FC = () => {
                 />
               </div>
             </div>
-            <div className="deck-builder-cards-added max-h-10 border ">
+            <div className="deck-builder-cards-added m-3 overflow-y-auto no-scrollbar ">
               <p className=" text-center">Added cards</p>
               {deck.map((card, index) => (
                 <section
