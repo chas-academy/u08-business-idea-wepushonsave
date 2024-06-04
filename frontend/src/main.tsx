@@ -46,6 +46,8 @@ import CommanderRecSearch from './mtgtombapi/algoritm/comRec.tsx';
 import CommanderDetails from './mtgtombapi/top-commanders/commanderDetails.tsx';
 import AllThemes from './mtgtombapi/theme/allThemes.tsx';
 import ThemeDetail from './mtgtombapi/theme/themeDetails.tsx';
+import AllPrecons from './mtgtombapi/precons/allPrecons.tsx';
+import PreconDetail from './mtgtombapi/precons/onePrecon.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -65,6 +67,8 @@ const router = createBrowserRouter(
       <Route path="/commander/:name" element={<CommanderDetails />} />
       <Route path="/allthemes" element={<AllThemes />} />
       <Route path="/theme/:name" element={<ThemeDetail />} />
+      <Route path="/allprecons" element={<AllPrecons />} />
+      <Route path="/precons/:name" element={<PreconDetail />} />
 
       <Route
         path="cards/:set"

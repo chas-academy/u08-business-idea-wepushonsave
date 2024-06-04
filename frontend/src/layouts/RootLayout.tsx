@@ -39,12 +39,14 @@ const RootLayout: React.FC = () => {
         </div>
 
       <main className="md:pt-24">
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto p-4 flex flex-col items-center">
           <nav className="bg-gray-500 p-4 rounded-lg mb-4">
             <NavLink to={'/algoritm'}>Algorithm</NavLink> |{' '}
             <NavLink to={'/alldecks'}>All Decks</NavLink> |{' '}
             <NavLink to={'/topcommander'}>Top Commanders</NavLink> |{' '}
             <NavLink to={'/allthemes'}>All Themes</NavLink> |{' '}
+            <NavLink to={'/allprecons'}>All Precons</NavLink> |{' '}
+            <NavLink to={'/precon'}>Precon</NavLink> |{' '}
           </nav>
           <SearchProvider>
             <Outlet />

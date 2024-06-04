@@ -56,7 +56,7 @@ const TopCommanders: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className='flex flex-col content-center max-w-[600px] text-silverpine'>
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-4xl font-bold my-4">Top Commanders </h1>
         <div><GiCrownedSkull size={48} /></div>
@@ -94,23 +94,23 @@ const TopCommanders: React.FC = () => {
           </button>
         </div>
       </div>
-      <div className="overflow-y-auto h-[650px] pb-2 px-4 no-scrollbar">
-        <ul className="space-y-4">
+      <div className="transition-max-height duration-300 overflow-x-auto shadow-inner snap-x snap-mandatory no-scrollbar w-[400px]">
+        <ul className="pb-4 px-4 flex flex-row">
           {commanders.map(commander => (
-            <li key={commander._id}>
+            <li key={commander._id} className='snap-start flex-shrink-0 mx-2 top-0 w-[350px]'>
               <div 
-                className="bg-custom-purple-800 rounded-lg flex flex-col items-center p-4 my-4 mx-6 cursor-pointer"
+                className="bg-custom-purple-800 rounded-lg flex flex-col items-center p-4 my-4 mx-6 cursor-pointer h-full w-[350px]"
                 onClick={() => navigate(`/commander/${encodeURIComponent(commander.name)}`, { state: { commander } })}
               >
-                <h2 className="font-bold text-2xl mb-2">Rank: {commander.rank}</h2>
+                <h2 className="font-bold text-xl mb-2">Rank: {commander.rank}</h2>
                 <img
                   src={commander.imgSrc}
                   alt={commander.name}
-                  className="rounded-2xl drop-shadow-md"
+                  className="rounded-lg drop-shadow-md h-56"
                 />
-                <h2 className="text-2xl font-bold my-2">{commander.name}</h2>
-                <p className="text-lg">Decks: {commander.num_decks}</p>
-                <h3 className="font-bold mb-2 text-2xl">Themes</h3>
+                <h2 className="text-lg font-bold my-2">{commander.name}</h2>
+                <p>Decks: {commander.num_decks}</p>
+                <h3 className="font-bold mb-2">Themes</h3>
                 <ul className="grid grid-cols-6 gap-2">
                   {commander.themes.slice(0, 3).map((theme, index) => (
                     <li

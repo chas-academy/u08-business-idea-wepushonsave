@@ -63,7 +63,7 @@ const AllThemes: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className='flex flex-col content-center max-w-[600px] text-silverpine h-full'>
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-4xl font-bold my-4">All Themes</h1>
         <div>
@@ -103,12 +103,12 @@ const AllThemes: React.FC = () => {
           </button>
         </div>
       </div>
-      <div className="overflow-y-auto h-[650px] mt-3 pb-2 px-4 no-scrollbar shaddow-inner snap-y snap-mandatory">
-        <ul className="space-y-4">
+      <div className=" max-w-[400px] max-h-0">
+        <ul className="pb-4 px-4 flex flex-row transition-max-height duration-300 overflow-x-auto shadow-inner snap-x snap-mandatory no-scrollbar">
           {themes.map(theme => (
-            <li key={theme._id} className='snap-start flex-shrink-0 mx-2 top-0'>
+            <li key={theme._id} className='snap-start flex-shrink-0 mx-2 top-0 w-[350px] items-center m-10'>
               <div
-                className="bg-custom-purple-800 rounded-lg flex flex-col items-center p-4 my-4 mx-6 cursor-pointer"
+                className="bg-custom-purple-800 rounded-lg flex flex-col items-center p-4 my-4 mx-6 cursor-pointer h-full"
                 onClick={() =>
                   navigate(`/theme/${encodeURIComponent(theme.name)}`, {
                     state: {theme},
