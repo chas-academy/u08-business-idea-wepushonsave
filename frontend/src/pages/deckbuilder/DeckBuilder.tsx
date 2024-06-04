@@ -15,7 +15,6 @@ export interface IDeck {
 
 const DeckBuilder: React.FC = () => {
   const {deck} = useSearch();
-  console.log(deck);
 
   return (
     <>
@@ -25,18 +24,18 @@ const DeckBuilder: React.FC = () => {
             <BackButton />
           </div>
           <div className="deck-builder-name-container size-fit m-4">
-            <h1 className="deck-builder-name text-2xl ">{}</h1>
+            <h1 className="deck-builder-name text-2xl ">my deck</h1>
           </div>
           <section className="deck-builder-commander-card-section grid grid-cols-2  h-1/2 md:h-2/3 max-h-[40vh] md:max-h-[80vh]">
             <div className="deck-builder-commander-container  m-3  h-full">
               <p className="text-center bg-transparent">Commander</p>
               <div className="deck-builder-commander-image-container overflow-hidden relative flex justify-center items-center shadow-lg shadow-blue-400">
                 <div className="deck-builder-commander-btn  absolute z-10 w-16">
-                  <CardPlusButton />
+                  {/* <CardPlusButton /> */}
                 </div>
 
                 <img
-                  className="rounded-xl blur-sm"
+                  className="rounded-xl"
                   src="https://cards.scryfall.io/border_crop/front/b/d/bd0d5a0c-5dec-439c-b037-9d17dda5ead3.jpg?1687551819"
                   alt="atraxa, praetors voice"
                 />

@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import mtgLogo from '../../assets/logo-MTG-TOMB.webp';
 import {User} from '../../utils/MTGTombAPIInterfaces';
 import {useEffect, useState} from 'react';
+import plusButton from '../../assets/plus.svg';
 
 interface IDeck {
   _id: string;
@@ -89,44 +90,51 @@ const MyDecks = () => {
   };
   return (
     <>
-      <div className=" my-decks-page h-screen">
-        <div className=" my-decks-nav flex justify-between">
-          <div className="  my-decks-nav-icon w-20 flex justify-center items-center m-2">
-            <img className="size-fit" src={mtgLogo} alt="" />
+      <div className="my-decks-page h-screen">
+        <div className="flex justify-center ">
+          <div className="my-decks-nav flex justify-between w-full max-w-xl">
+            <div className=" my-decks-nav-icon justify-start w-20 m-2">
+              <img className="size-fit" src={mtgLogo} alt="" />
+            </div>
+            <div className="my-decks-add-button w-20 m-2">
+              <button
+                onClick={createDeckClick}
+                className="border-2 border-amber-600 plus-button-circle rounded-full bg-btn-gradient shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 ">
+                <img src={plusButton} alt="add-button" />
+              </button>
+            </div>
           </div>
-          <div className=" my-decks-add-button w-20 flex justify-center items-center m-2">
-            <button onClick={createDeckClick}>Create a deck</button>
-          </div>
-          <div className="create-deck-modal">
-            {showCreateDeckModal && (
-              <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
-                <div className="bg-white p-6 rounded-md shadow-md">
-                  <h2 className="text-lg font-semibold mb-4">
-                    Create a New Deck
-                  </h2>
-                  <input
-                    type="text"
-                    value={newDeckName}
-                    onChange={e => setNewDeckName(e.target.value)}
-                    placeholder="Enter deck name"
-                    className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
-                  />
-                  <div className="flex justify-between">
-                    <button
-                      onClick={handleCreateDeck}
-                      className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 mr-2">
-                      Create
-                    </button>
-                    <button
-                      onClick={() => setShowCreateDeckModal(false)}
-                      className="border px-4 py-2 bg-gray-300 text-gray-700 rounded-md shadow-md hover:bg-gray-400">
-                      Cancel
-                    </button>
-                  </div>
+        </div>
+
+        <div className="border create-deck-modal">
+          {showCreateDeckModal && (
+            <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+              <div className="bg-white p-6 rounded-md shadow-md">
+                <h2 className="text-lg font-semibold mb-4">
+                  Create a New Deck
+                </h2>
+                <input
+                  type="text"
+                  value={newDeckName}
+                  onChange={e => setNewDeckName(e.target.value)}
+                  placeholder="Enter deck name"
+                  className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
+                />
+                <div className="flex justify-between">
+                  <button
+                    onClick={handleCreateDeck}
+                    className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 mr-2">
+                    Create
+                  </button>
+                  <button
+                    onClick={() => setShowCreateDeckModal(false)}
+                    className="border px-4 py-2 bg-gray-300 text-gray-700 rounded-md shadow-md hover:bg-gray-400">
+                    Cancel
+                  </button>
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
         <section className="  w-full my-decks-body">
           <div className=" my-decks-h1 text-2xl text-center text-white">
