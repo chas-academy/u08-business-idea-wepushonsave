@@ -1,14 +1,16 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import connectDB from "./db/db";
 
 // routes
-import deckBuilderRouter from "./deckBuilder/deckBuilderRoutes";
+import deckBuilderRouter from "./routes/deckBuilderRoutes";
 import profileRouter from "./routes/profileRoutes";
 import threadRoutes from "./routes/threadRoutes";
+import connectDB from "./db/db";
+import listRoutes from "./routes/listRoutes";
 import userRouter from "./api/User";
 import { authMiddleware } from "./middleware/auth";
+import usersRouter from "./routes/userRoutes";
 
 // Initialize Database Connection
 connectDB;
@@ -24,8 +26,8 @@ app.use(cookieParser());
 // Sets up CORS to allow requests from the frontend domain and allows cookies to be included
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST", "PUT"],
+    origin: "https://mtg-tomb.netlify.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
@@ -42,14 +44,20 @@ app.get("/test", (req, res) => {
 
 // User Routes
 app.use("/api/user", userRouter);
+app.use("/user", usersRouter);
 
-// Profile Routes
+// Pages Routes
 app.use("/api", profileRouter);
 app.use("/threads", threadRoutes);
+app.use("/api", listRoutes);
 
 // Deck Builder Routes
-app.use("/auth", authMiddleware);
 app.use("/decks", deckBuilderRouter);
+
+// Check if user logged in
+app.get("/auth/check", (req, res) => {
+  res.status(200).json({ message: "Authenticated" });
+});
 
 // Export App for Server
 export default app;

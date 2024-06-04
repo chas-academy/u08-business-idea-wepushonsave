@@ -1,4 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
+
 import {useEffect, useState} from 'react';
 import {useParams, useLocation} from 'react-router-dom';
 import {GiFireGem, GiMagicSwirl} from 'react-icons/gi';
@@ -46,8 +47,9 @@ interface Recommendations {
 }
 
 const CommanderDetails: React.FC = () => {
-  const {name} = useParams<{name: any}>();
+  const { name } = useParams<{ name: any }>();
   const location = useLocation();
+
   const state = location.state as {commander: Commander} | undefined;
   const [commander] = useState<Commander | null>(state?.commander || null);
   const [commanderInfo, setCommanderInfo] = useState<CommanderInfo | null>(
@@ -217,6 +219,7 @@ const CommanderDetails: React.FC = () => {
                   alt={card.name}
                   className="rounded-2xl drop-shadow-md"
                 />
+
                 <div className="flex flex-col items-center mt-4 w-full">
                   <div className="p-1 rounded-lg shadow-inner bg-plum">
                     <div className="grid grid-cols-4 gap-x-2 text-center">

@@ -1,54 +1,103 @@
 import {useEffect, useState} from 'react';
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable  @typescript-eslint/no-explicit-any */ 
-
 import {useNavigate} from 'react-router-dom';
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import profileIcon from '../../assets/profile-icon.webp';
+import Logout from '../login/Logout';
+
+interface IList {
+  _id: string;
+  title: string;
+}
 
 const ProfilePage = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('info');
-  const [userData, setUserData] = useState<any>({});
+  const [userId, setUserId] = useState<any>();
+  const [username1, setUsername] = useState<any>();
+  const [lists, setLists] = useState<IList[]>([]);
+  const [showCreateListModal, setShowCreateListModal] = useState(false);
+  const [title, setTitle] = useState('');
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) return;
+      const response = await fetch(`https://mtg-tomb.onrender.com/user/me`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) throw new Error('Network response was not ok');
+
+      const data = await response.json();
+      setUserId(data._id);
+      setUsername(data.username);
+    };
+    fetchUserInfo();
+    fetchLists();
+  }, [username1]);
+
+  const fetchLists = async () => {
+    try {
+      const response = await fetch(
+        'https://mtg-tomb.onrender.com/api/allLists',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({userId}),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch lists');
+      }
+
+      const data = await response.json();
+      setLists(data);
+      console.log('Fetched lists:', data);
+    } catch (error) {
+      console.error('Error fetching lists:', error);
+    }
+  };
+
+  const handleListClick = (listId: string) => {
+    navigate(`/cards-display/${listId}`);
+  };
 
   const settingsClick = () => {
     navigate('/profile-dashboard');
   };
-  const mycollectionClick = () => {
-    navigate('/mycollection');
-  };
-  const mycollectionRareClick = () => {
-    navigate('/mycollection-rare');
-  };
-  const mycollectionCommonsClick = () => {
-    navigate('/mycollection-commmons');
+
+  const createListClick = async () => {
+    setShowCreateListModal(true);
   };
 
-  useEffect(() => {
-    fetchUserData();
-  }, []);
-
-  // Fetch user's information from the server using the token and update the state
-  const fetchUserData = async () => {
+  const handleCreateList = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/profile-info', {
-        credentials: 'include',
+      const response = await fetch('https://mtg-tomb.onrender.com/api/lists', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
-          credentials: 'include',
-          mode: 'cors',
         },
+        body: JSON.stringify({userId, title}),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch user data');
+        throw new Error('Failed to create list');
       }
 
-      const data = await response.json();
-      setUserData(data);
+      fetchLists();
+      setShowCreateListModal(false);
     } catch (error) {
-      console.error('Error fetching user data:', error);
+      console.error('Error creating list:', error);
     }
   };
 
@@ -62,9 +111,7 @@ const ProfilePage = () => {
             className="w-28 h-28 mt-28 mb-1 rounded-full bg-custom-purple-600 border-4 border-custom-purple-800"
           />
           <div className="mb-5">
-            <h1 className="text-xl font-bold text-white">
-              {userData.username || ''}
-            </h1>
+            <h1 className="text-xl font-bold text-white">{username1 || ''}</h1>
           </div>
         </div>
         <div className="relative">
@@ -91,9 +138,12 @@ const ProfilePage = () => {
                 className="block bg-collection-btn w-full text-center text-white px-6 py-1 mb-1 text-gray-700 rounded hover:bg-gray-100">
                 Settings
               </button>
-              <button className="block bg-collection-btn w-full text-center text-white px-6 py-1 text-gray-700 rounded hover:bg-gray-100">
+              {/* <button
+                onClick={logout}
+                className="block bg-collection-btn w-full text-center text-white px-6 py-1 text-gray-700 rounded hover:bg-gray-100">
                 Logout
-              </button>
+              </button> */}
+              <Logout />
             </div>
           )}
         </div>
@@ -123,31 +173,78 @@ const ProfilePage = () => {
         <div className="mt-6">
           {activeSection === 'info' && (
             <div className="flex flex-col items-center">
-              <button
-                className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-center text-white font-bold mb-5 bg-collection-btn shadow-md"
-                onClick={mycollectionClick}>
-                MY CARD COLLECTION
-              </button>
-              <button
-                className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
-                onClick={mycollectionRareClick}>
-                RARE
-              </button>
-              <button
-                className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
-                onClick={mycollectionCommonsClick}>
-                COMMONS
-              </button>
+              {lists.map(list => {
+                if (
+                  list.title === 'My card collection' ||
+                  list.title === 'Binder - Rares' ||
+                  list.title === 'Binder - Commons'
+                ) {
+                  return (
+                    <button
+                      key={list._id}
+                      className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
+                      onClick={() => handleListClick(list._id)}>
+                      {list.title}
+                    </button>
+                  );
+                }
+                return null;
+              })}
             </div>
           )}
 
           {activeSection === 'lists' && (
             <div className="flex flex-col items-center">
-              <button className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange">
-                {' '}
-                {/* Add the OnCLick here to the function created by Lollo */}
+              <button
+                onClick={createListClick}
+                className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange">
                 CREATE A LIST
               </button>
+              {lists
+                .filter(
+                  list =>
+                    list.title !== 'My card collection' &&
+                    list.title !== 'Binder - Rares' &&
+                    list.title !== 'Binder - Commons'
+                )
+                .map(list => (
+                  <button
+                    key={list._id}
+                    className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
+                    onClick={() => handleListClick(list._id)}>
+                    {list.title}
+                  </button>
+                ))}
+            </div>
+          )}
+
+          {/* Create List Modal */}
+          {showCreateListModal && (
+            <div className="z-30 fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+              <div className="bg-white p-6 rounded-md shadow-md">
+                <h2 className="text-lg font-semibold mb-4">
+                  Create a New List
+                </h2>
+                <input
+                  type="text"
+                  value={title}
+                  onChange={e => setTitle(e.target.value)}
+                  placeholder="Enter list name"
+                  className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
+                />
+                <div className="flex justify-end">
+                  <button
+                    onClick={handleCreateList}
+                    className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 mr-2">
+                    Create
+                  </button>
+                  <button
+                    onClick={() => setShowCreateListModal(false)}
+                    className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md shadow-md hover:bg-gray-400">
+                    Cancel
+                  </button>
+                </div>
+              </div>
             </div>
           )}
         </div>

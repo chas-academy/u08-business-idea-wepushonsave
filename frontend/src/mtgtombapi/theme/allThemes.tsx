@@ -66,6 +66,7 @@ const AllThemes: React.FC = () => {
     <div className='flex flex-col content-center max-w-[600px] text-silverpine h-full'>
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-4xl font-bold my-4">All Themes</h1>
+
         <div>
           <GiEvilWings size={60} />
         </div>

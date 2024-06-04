@@ -16,6 +16,7 @@ import Threads from './pages/community/Threads.tsx';
 
 // components
 import CardsArray from './components/card/CardsArray.tsx';
+import CardDisplay from './components/listOrGrid/CardsDisplay.tsx';
 
 // layouts
 import RootLayout from './layouts/RootLayout.tsx';
@@ -27,15 +28,11 @@ import {cardSetLoader} from './utils/cardSetLoader.tsx';
 //pages
 import ProfilePage from './pages/profile/ProfilePage.tsx';
 import ProfileDashboard from './pages/profile/ProfileDashboard.tsx';
-import MyCollectionCards from './pages/profile/MyCollectionCards.tsx';
-import MyCollectionCommons from './pages/profile/MyCollectionCommons.tsx';
-import MyCollectionRare from './pages/profile/MyCollectionRare.tsx';
 import Login from './pages/login/Login.tsx';
-import Register from './pages/register/Register.tsx';
+import Register from './pages/login/Register.tsx';
 
 // context
 import {SearchProvider} from './components/search/SearchContext.tsx';
-import CardDisplay from './components/listOrGrid/CardsDisplay.tsx';
 import DeckBuilder from './pages/deckbuilder/DeckBuilder.tsx';
 import {singleCardLoader} from './utils/singleCardLoader.tsx';
 
@@ -48,6 +45,8 @@ import AllThemes from './mtgtombapi/theme/allThemes.tsx';
 import ThemeDetail from './mtgtombapi/theme/themeDetails.tsx';
 import AllPrecons from './mtgtombapi/precons/allPrecons.tsx';
 import PreconDetail from './mtgtombapi/precons/onePrecon.tsx';
+import AuthenticatedRoute from './routes/authentificatedRoute.tsx';
+import MyDecks from './pages/deckbuilder/MyDecks.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -56,7 +55,7 @@ const router = createBrowserRouter(
       <Route path="gamerules" element={<GameRules />} />
       <Route path="cardrules" element={<CardRules />} />
       <Route
-        path="cards-display"
+        path="cards-display/:listId"
         element={<CardDisplay />}
         loader={cardsArrayLoader}
       />
@@ -69,6 +68,7 @@ const router = createBrowserRouter(
       <Route path="/theme/:name" element={<ThemeDetail />} />
       <Route path="/allprecons" element={<AllPrecons />} />
       <Route path="/precons/:name" element={<PreconDetail />} />
+      <Route path="allthemes" element={<AllThemes />} />
 
       <Route
         path="cards/:set"
@@ -78,16 +78,16 @@ const router = createBrowserRouter(
         }}
       />
       <Route path="community" element={<Threads />} />
-      <Route path="profile" element={<ProfilePage />} />
+      <Route path="/profile" element={<AuthenticatedRoute />}>
+        <Route path="" element={<ProfilePage />} />
+      </Route>
       <Route path="profile-dashboard" element={<ProfileDashboard />} />
-      <Route path="mycollection" element={<MyCollectionCards />} />
-      <Route path="mycollection-commmons" element={<MyCollectionCommons />} />
-      <Route path="mycollection-rare" element={<MyCollectionRare />} />
       <Route
         path="deck-builder"
         element={<DeckBuilder />}
         loader={singleCardLoader}
       />
+      <Route path="my-decks" element={<MyDecks />} />
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
     </Route>
