@@ -11,6 +11,7 @@ interface Thread {
 interface Comment {
    _id: number;
    text: string;
+
 }
 
 const Threads: React.FC = () => {
@@ -62,6 +63,7 @@ const Threads: React.FC = () => {
       }
    };
 
+
    const handleCommentSubmit = async (
       e: React.FormEvent<HTMLFormElement>,
       threadId: number,
@@ -80,6 +82,7 @@ const Threads: React.FC = () => {
             },
             body: JSON.stringify(newComment),
          });
+
 
          if (response.ok) {
             const createdComment = await response.json();
@@ -115,6 +118,7 @@ const Threads: React.FC = () => {
    return (
       <div className="flex flex-col items-center p-2">
          <h1 className="text-3xl text-white/80 font-bold mb-4">Community Threads</h1>
+
          <form onSubmit={handleNewThreadSubmit} className="w-full max-w-lg mb-4">
             <textarea
                placeholder="Thread Content"
@@ -131,13 +135,14 @@ const Threads: React.FC = () => {
          <div className="threadSection  flex flex-col-reverse">
             {threads.map(thread => (
                <div key={thread._id} className="bg-white/40 w-full max-w-lg mb-4">
+
                   <p className="min-h-20 text-white p-2">{thread.content}</p>
 
                   <button
                      className="text-white text-sm bg-nav-gradient w-3/7 px-4 py-2 cursor-pointer rounded"
                      onClick={() => toggleComments(thread._id)}>
                      {thread.collapsed ? 'Show comments' : 'Hide comments'}
-                  </button>
+     </button>
 
                   {!thread.collapsed && (
                      <div>
@@ -170,6 +175,7 @@ const Threads: React.FC = () => {
                      <button
                         type="submit"
                         className="bg-btn-gradient hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+
                         Post Comment
                      </button>
                   </form>
