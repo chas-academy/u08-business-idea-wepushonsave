@@ -18,7 +18,7 @@ const Navbar: React.FC<NavbarProps> = ({toggleSidebar}) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const checkLogin = async () => {
     try {
-      const response = await fetch('http://mtg-tomb.netlify.app/user/login', {
+      const response = await fetch('https://mtg-tomb.onrender.com/user/login', {
         method: 'get',
         mode: 'no-cors',
         credentials: 'include',
@@ -43,7 +43,7 @@ const Navbar: React.FC<NavbarProps> = ({toggleSidebar}) => {
 
   const logout = async () => {
     const response = await fetch(
-      'http://mtg-tomb.netlify.app/api/user/logout',
+      'https://mtg-tomb.onrender.com/api/user/logout',
       {
         method: 'get',
         mode: 'cors',

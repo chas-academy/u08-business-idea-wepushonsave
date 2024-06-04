@@ -22,7 +22,7 @@ const CardDisplay: React.FC = () => {
     const fetchListData = async () => {
       try {
         const response = await fetch(
-          `https://mtg-tomb.netlify.app/api/lists/${listId}`,
+          `https://mtg-tomb.onrender.com/api/lists/${listId}`,
           {
             credentials: 'include',
             headers: {

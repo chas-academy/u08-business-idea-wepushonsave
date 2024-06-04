@@ -14,7 +14,7 @@ const ProfileDashboard = () => {
   const fetchUserInfo = async () => {
     const token = localStorage.getItem('token');
     if (!token) return;
-    const response = await fetch(`https://mtg-tomb.netlify.app/user/me`, {
+    const response = await fetch(`https://mtg-tomb.onrender.com/user/me`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,

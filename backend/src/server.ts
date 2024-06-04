@@ -8,7 +8,7 @@ dotenv.config();
 const port = 3000;
 
 const corsOptions = {
-  origin: "https://localhost:5173",
+  origin: "https://mtg-tomb.netlify.app/",
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
