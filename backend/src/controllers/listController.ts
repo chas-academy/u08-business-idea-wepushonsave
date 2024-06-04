@@ -9,10 +9,8 @@ function isError(error: unknown): error is Error {
 
 // CRUD LIST
 export const createList = async (req: Request, res: Response) => {
+  const { userId, title } = req.body;
   try {
-    const { title } = req.body;
-    const userId = req.userId;
-
     const newList = new List({ userId, title, cardIds: [] });
     await newList.save();
 
@@ -27,9 +25,9 @@ export const createList = async (req: Request, res: Response) => {
 };
 
 export const getLists = async (req: Request, res: Response) => {
+  const { userId } = req.body;
   try {
-    const userId = req.userId;
-    const lists = await List.find({ userId });
+    const lists = await List.find({ userId: userId });
 
     res.status(200).json(lists);
   } catch (error) {

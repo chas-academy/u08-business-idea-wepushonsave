@@ -11,8 +11,8 @@ import { authMiddleware } from "../middleware/auth";
 
 const router = Router();
 
-router.post("/lists", authMiddleware, createList);
-router.get("/lists", authMiddleware, getLists);
+router.post("/lists", createList);
+router.post("/allLists", getLists);
 router.get("/lists/:listId", getListById);
 router.put("/lists/:id", authMiddleware, updateList);
 router.delete("/lists/:id", authMiddleware, deleteList);

@@ -2,16 +2,25 @@
 
 import deckButton from '../assets/decks-icon.webp';
 import {ICard} from '../utils/ScryfallInterfaces';
+import {useSearch} from './search/SearchContext';
 
 interface AddToDeckProps {
   card: ICard;
-  addCardToDeck: (card: ICard) => void;
+  addCardToDeck: any;
 }
 
-const AddToDeckBtn: React.FC<AddToDeckProps> = ({card, addCardToDeck}) => {
+const AddToDeckBtn: React.FC<AddToDeckProps> = ({card}) => {
+  const {addCardToDeck} = useSearch();
+  const {userId} = useSearch();
+  console.log(userId);
+
   const handleAddCardToDeck = () => {
+    if (userId != undefined) {
+      console.log(userId);
+    }
     addCardToDeck(card);
   };
+
   return (
     <>
       {/* hover:shadow-plum hover:bg-mint/60 */}

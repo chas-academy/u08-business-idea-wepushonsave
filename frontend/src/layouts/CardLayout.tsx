@@ -51,7 +51,7 @@ const CardLayout: React.FC<CardLayoutProps> = ({
       <div className="card-layout">
         <CardImage card={card} onClose={onClose} />
 
-        <section className="card-layout-footer relative grid grid-cols-3 justify-items-center items-center ">
+        <section className="card-layout-footer flex justify-between items-center m-px">
           <CardFooter card={card} addCardToDeck={addCardToDeck} />
         </section>
 

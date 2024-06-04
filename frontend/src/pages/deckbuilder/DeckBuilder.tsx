@@ -1,41 +1,46 @@
 /* eslint-disable react/react-in-jsx-scope */
-import {useLoaderData} from 'react-router-dom';
 import BackButton from '../../components/BackButton';
-import CardPlusButton from '../../components/CardPlusButton';
 import SearchForm from '../../components/search/SearchForm';
 import SearchResults from '../../components/search/SearchResults';
 import {useSearch} from '../../components/search/SearchContext';
 import manaSymbols from '../../mtgtombapi/manaSymbols';
+import {ICard} from '../../utils/ScryfallInterfaces';
 
-const DeckBuilder = () => {
-  const data: any = useLoaderData();
+export interface IDeck {
+  id: string;
+  name: string;
+  cards: ICard[];
+}
+
+const DeckBuilder: React.FC = () => {
   const {deck} = useSearch();
 
   return (
     <>
       <div className="flex justify-center sm:mt-14">
-        <div className="deck-builder-container text-white  max-w-2xl">
+        <div className="deck-builder-container text-white max-w-2xl">
           <div className="deck-builder-back-button-container size-fit">
             <BackButton />
           </div>
           <div className="deck-builder-name-container size-fit m-4">
-            <h1 className="deck-builder-name text-2xl ">My awesome Deck</h1>
+            <h1 className="deck-builder-name text-2xl ">my deck</h1>
           </div>
-          <section className="deck-builder-commander-card-section grid grid-cols-2">
-            <div className="deck-builder-commander-container m-2 sm:w-2/3">
+          <section className="deck-builder-commander-card-section grid grid-cols-2  h-1/2 md:h-2/3 max-h-[40vh] md:max-h-[80vh]">
+            <div className="deck-builder-commander-container  m-3  h-full">
               <p className="text-center bg-transparent">Commander</p>
               <div className="deck-builder-commander-image-container overflow-hidden relative flex justify-center items-center shadow-lg shadow-blue-400">
                 <div className="deck-builder-commander-btn  absolute z-10 w-16">
-                  <CardPlusButton />
+                  {/* <CardPlusButton /> */}
                 </div>
+
                 <img
-                  className="rounded-xl blur-sm"
-                  src={data.image_uris.border_crop}
-                  alt=""
+                  className="rounded-xl"
+                  src="https://cards.scryfall.io/border_crop/front/b/d/bd0d5a0c-5dec-439c-b037-9d17dda5ead3.jpg?1687551819"
+                  alt="atraxa, praetors voice"
                 />
               </div>
             </div>
-            <div className="deck-builder-cards-added ">
+            <div className="deck-builder-cards-added m-3 overflow-y-auto no-scrollbar ">
               <p className=" text-center">Added cards</p>
               {deck.map((card, index) => (
                 <section
