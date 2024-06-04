@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom';
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import profileIcon from '../../assets/profile-icon.webp';
+import Logout from '../login/Logout';
 
 interface IList {
   _id: string;
@@ -100,10 +101,6 @@ const ProfilePage = () => {
     }
   };
 
-  const logout = () => {
-    navigate('/login');
-  };
-
   return (
     <div className="shadow-md md:pt-32 ">
       <div className="flex justify-between items-start p-6 h-64 bg-profile-background bg-cover h-full w-full md:bg-profile-background-desktop">
@@ -141,11 +138,12 @@ const ProfilePage = () => {
                 className="block bg-collection-btn w-full text-center text-white px-6 py-1 mb-1 text-gray-700 rounded hover:bg-gray-100">
                 Settings
               </button>
-              <button
+              {/* <button
                 onClick={logout}
                 className="block bg-collection-btn w-full text-center text-white px-6 py-1 text-gray-700 rounded hover:bg-gray-100">
                 Logout
-              </button>
+              </button> */}
+              <Logout />
             </div>
           )}
         </div>
@@ -222,7 +220,7 @@ const ProfilePage = () => {
 
           {/* Create List Modal */}
           {showCreateListModal && (
-            <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+            <div className="z-30 fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
               <div className="bg-white p-6 rounded-md shadow-md">
                 <h2 className="text-lg font-semibold mb-4">
                   Create a New List

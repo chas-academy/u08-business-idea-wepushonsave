@@ -63,12 +63,12 @@ const AllThemes: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className='flex flex-col content-center max-w-[600px] text-silverpine h-full'>
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-4xl font-bold my-4">All Themes</h1>
 
         <div>
-          <GiEvilWings size={56} />
+          <GiEvilWings size={60} />
         </div>
         <div className="grid grid-cols-5 mb-3 mt-6 justify-items-center mx-6">
           <button
@@ -104,12 +104,12 @@ const AllThemes: React.FC = () => {
           </button>
         </div>
       </div>
-      <div className="overflow-y-auto h-[650px] pb-2 px-4 no-scrollbar">
-        <ul className="space-y-4">
+      <div className=" max-w-[400px] max-h-0">
+        <ul className="pb-4 px-4 flex flex-row transition-max-height duration-300 overflow-x-auto shadow-inner snap-x snap-mandatory no-scrollbar">
           {themes.map(theme => (
-            <li key={theme._id}>
+            <li key={theme._id} className='snap-start flex-shrink-0 mx-2 top-0 w-[350px] items-center m-10'>
               <div
-                className="bg-custom-purple-800 rounded-lg flex flex-col items-center p-4 my-4 mx-6 cursor-pointer"
+                className="bg-custom-purple-800 rounded-lg flex flex-col items-center p-4 my-4 mx-6 cursor-pointer h-full"
                 onClick={() =>
                   navigate(`/theme/${encodeURIComponent(theme.name)}`, {
                     state: {theme},
@@ -120,10 +120,10 @@ const AllThemes: React.FC = () => {
                 </h2>
                 <p className="text-lg">{theme.explanation}</p>
                 <p className="text-lg font-semibold">Keywords:</p>
-                <ul className="flex flex-row">
+                <ul className="grid grid-cols-2 gap-2">
                   {theme.criteria.oracle_text.map((text, index) => (
-                    <li key={index} className="mx-2">
-                      <Capitalizer text={text} />
+                    <li key={index} className='mx-2 rounded-lg p-2 shadow-inner bg-plum text-center'>
+                        <Capitalizer text={text} />
                     </li>
                   ))}
                 </ul>

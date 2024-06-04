@@ -16,6 +16,9 @@ const Navbar: React.FC<NavbarProps> = ({toggleSidebar}) => {
   const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState(false);
+  console.log(isLoggedIn); ////DELETE LATER!!!!!!!!!!
+
   const checkLogin = async () => {
     try {
       const response = await fetch('https://mtg-tomb.onrender.com/user/login', {
@@ -41,19 +44,21 @@ const Navbar: React.FC<NavbarProps> = ({toggleSidebar}) => {
     checkLogin();
   }, []);
 
-  const logout = async () => {
-    const response = await fetch(
-      'https://mtg-tomb.onrender.com/api/user/logout',
-      {
-        method: 'get',
-        mode: 'cors',
-        credentials: 'include',
+  useEffect(() => {
+    const getTokenFromLocalStorage = async () => {
+      const storedToken = localStorage.getItem('token');
+      if (storedToken) {
+        setToken(true);
       }
-    );
-    if (!response.ok) {
-      navigate('/profile');
-    }
-    navigate('/login');
+    };
+
+    getTokenFromLocalStorage();
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/');
+    window.location.reload();
   };
 
   return (
@@ -103,15 +108,15 @@ const Navbar: React.FC<NavbarProps> = ({toggleSidebar}) => {
         />
       </a>
       {/* Desktop screen */}
-      {!isLoggedIn ? ( // If user is not logged in
+      {!token ? ( // If user is not logged in
         <>
-          <a href="/login" className="login-logo-desktop ml-auto 0">
+          <a href="/login" className="login-logo-desktop ml-auto">
             <button className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
               <span className="absolute inset-0 border-2 border-transparent hover:border-white rounded-lg"></span>
               LOGIN
             </button>
           </a>
-          <a href="/register" className="register-logo-desktop 0">
+          <a href="/register" className="register-logo-desktop">
             <button className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
               <span className="absolute inset-0 border-2 border-transparent hover:border-white rounded-lg"></span>
               REGISTER
@@ -120,14 +125,14 @@ const Navbar: React.FC<NavbarProps> = ({toggleSidebar}) => {
         </>
       ) : (
         <>
-          <a href="/login" className="login-logo-desktop ml-auto 0">
+          <div className="register-logo-desktop ml-auto">
             <button
-              onClick={logout}
+              onClick={handleLogout}
               className="hidden font-inter text-sm md:inline-block m-3 mt-4 p-4 bg-btn-gradient text-white font-semibold md:rounded-lg shadow-md hover:shadow-lg hover:shadow-plum hover:bg-mint/60 relative overflow-hidden">
               <span className="absolute inset-0 border-2 border-transparent hover:border-white rounded-lg"></span>
-              LOG OUT
+              LOGOUT
             </button>
-          </a>
+          </div>
         </>
       )}
 

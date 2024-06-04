@@ -41,6 +41,7 @@ const Login: React.FC = () => {
 
       localStorage.setItem('token', data.token);
       navigate('/');
+      window.location.reload();
     } catch (err: any) {
       setError(err.message);
     }

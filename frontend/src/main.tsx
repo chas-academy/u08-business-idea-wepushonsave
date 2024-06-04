@@ -42,8 +42,10 @@ import TopCommanders from './mtgtombapi/top-commanders/allTopCommanders.tsx';
 import CommanderRecSearch from './mtgtombapi/algoritm/comRec.tsx';
 import CommanderDetails from './mtgtombapi/top-commanders/commanderDetails.tsx';
 import AllThemes from './mtgtombapi/theme/allThemes.tsx';
+import ThemeDetail from './mtgtombapi/theme/themeDetails.tsx';
+import AllPrecons from './mtgtombapi/precons/allPrecons.tsx';
+import PreconDetail from './mtgtombapi/precons/onePrecon.tsx';
 import AuthenticatedRoute from './routes/authentificatedRoute.tsx';
-import Navigation2 from './pages/login/UserNav.tsx';
 import MyDecks from './pages/deckbuilder/MyDecks.tsx';
 
 const router = createBrowserRouter(
@@ -62,8 +64,11 @@ const router = createBrowserRouter(
       <Route path="alldecks" element={<AllDecksComponent />} />
       <Route path="topcommander" element={<TopCommanders />} />
       <Route path="/commander/:name" element={<CommanderDetails />} />
+      <Route path="/allthemes" element={<AllThemes />} />
+      <Route path="/theme/:name" element={<ThemeDetail />} />
+      <Route path="/allprecons" element={<AllPrecons />} />
+      <Route path="/precons/:name" element={<PreconDetail />} />
       <Route path="allthemes" element={<AllThemes />} />
-      <Route path="usernav" element={<Navigation2 />} />
 
       <Route
         path="cards/:set"

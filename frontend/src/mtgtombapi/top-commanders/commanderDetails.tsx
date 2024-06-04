@@ -225,11 +225,11 @@ const CommanderDetails: React.FC = () => {
                     <div className="grid grid-cols-4 gap-x-2 text-center">
                       <p className="font-semibold text-green-200">Normal</p>
                       <p className="flex flex-row items-center">
-                        <FaEuroSign /> {card.cardInfo.prices.eur || '?'}
+                        <FaEuroSign /> {card.cardInfo.prices.eur || 'N/A'}
                       </p>
                       <p className="font-semibold text-[#f0ae58]">Foil</p>
                       <p className="flex flex-row items-center">
-                        <FaEuroSign /> {card.cardInfo.prices.eur_foil || '?'}
+                        <FaEuroSign /> {card.cardInfo.prices.eur_foil || 'N/A'}
                       </p>
                     </div>
                     <div className="grid grid-cols-10 gap-1 my-2">
@@ -298,7 +298,7 @@ const CommanderDetails: React.FC = () => {
   })();
 
   return (
-    <div className="flex flex-col items-center justify-center w-full">
+    <div className="flex flex-col items-center justify-center w-full flex flex-col content-center max-w-[600px] text-silverpine">
       <div className="bg-custom-purple-800 rounded-lg flex flex-col items-center p-4 my-4 mx-6">
         <h2 className="font-bold text-2xl mb-2">{commander.name}</h2>
         <img

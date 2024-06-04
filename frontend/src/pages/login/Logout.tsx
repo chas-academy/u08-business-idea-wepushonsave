@@ -9,7 +9,8 @@ const Logout: React.FC = () => {
     navigate('/login');
   };
 
-  return <button onClick={handleLogout}>Logout</button>;
+  return <button onClick={handleLogout}
+  className='block bg-collection-btn w-full text-center text-white px-6 py-1 text-gray-700 rounded hover:bg-gray-100'>Logout</button>;
 };
 
 export default Logout;

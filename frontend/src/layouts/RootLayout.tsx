@@ -79,11 +79,11 @@ const RootLayout: React.FC = () => {
         <main className="md:pt-24">
           <div className="container mx-auto p-4">
             <nav className="bg-pink-500 p-4 rounded-lg mb-4">
-              <NavLink to={'/algoritm'}>Algorithm</NavLink> |{' '}
+              {/* <NavLink to={'/algoritm'}>Algorithm</NavLink> |{' '}
               <NavLink to={'/alldecks'}>All Decks</NavLink> |{' '}
               <NavLink to={'/topcommander'}>Top Commanders</NavLink> |{' '}
               <NavLink to={'/allthemes'}>Themes</NavLink> |{' '}
-              <NavLink to={'/usernav'}>User Nav</NavLink> |{' '}
+              <NavLink to={'/usernav'}>User Nav</NavLink> |{' '} */}
               <NavLink to={'/my-decks'}>My Decks</NavLink>
             </nav>
             <SearchProvider>
@@ -92,7 +92,6 @@ const RootLayout: React.FC = () => {
           </div>
         </main>
       </div>
-
       <footer className="absolut bottom-0 pb-16 md:p-0">
         <Footer />
       </footer>
