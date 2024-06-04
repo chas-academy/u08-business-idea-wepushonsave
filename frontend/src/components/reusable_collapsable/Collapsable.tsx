@@ -3,8 +3,8 @@ import React from 'react';
 
 interface CollapsableProps {
   titles: string;
-  content?: JSX.Element;
-  isOpen?: boolean;
+  content: JSX.Element;
+  isOpen: boolean;
   image?: JSX.Element;
   onClick: () => void;
 }

@@ -68,41 +68,32 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen, toggleSidebar}) => {
           <div className="mt-4">
             <ul>
               <li className="ABOUT py-2">
-                <button
-                  type="button"
-                  onClick={() => handleExpand('about')}
-                  className={`hover:text-white ${expandedItem === 'about' ? 'text-white' : ''}`}>
-                  {' '}
-                  About
-                </button>
+                <li className="ABOUT py-2">
+                  <button type="button">
+                    <a
+                      href="/gamerules/#pAPAabout"
+                      className="hover:text-white">
+                      About MTG
+                    </a>
+                  </button>
 
-
+                  <div
+                    className={`smooth ${expandedItem === 'about' ? 'max-h-[1000px]' : 'max-h-0'}`}
+                    style={{
+                      transition: `max-height ${expandedItem === 'about' ? '800ms' : '300ms'} ease-in-out`,
+                      overflow: 'hidden',
+                    }}>
+                    <ul
+                      className="About bg-white/10 rounded-md p-2 max-h-[calc(100vh-300px)] overflow-y-auto"
+                      style={scrollbarStyle}></ul>
+                  </div>
+                </li>
                 <div
                   className={`smooth ${expandedItem === 'about' ? 'max-h-[1000px]' : 'max-h-0'}`}
                   style={{
                     transition: `max-height ${expandedItem === 'about' ? '800ms' : '300ms'} ease-in-out`,
                     overflow: 'hidden',
-                  }}>
-                  <ul
-                    className="About bg-white/10 rounded-md p-2 max-h-[calc(100vh-300px)] overflow-y-auto"
-                    style={scrollbarStyle}>
-                    <li className="py-1 text-sm">
-                      <a href="#A1" className="hover:text-white">
-                        About 1
-                      </a>
-                    </li>
-                    <li className="py-1 text-sm">
-                      <a href="#A2" className="hover:text-white">
-                        About 2
-                      </a>
-                    </li>
-                    <li className="py-1 text-sm">
-                      <a href="#A3" className="hover:text-white">
-                        About 3
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+                  }}></div>
               </li>
 
               <li className="GAME RULES py-2">
@@ -123,7 +114,7 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen, toggleSidebar}) => {
                   <ul
                     className="GameRules bg-white/10 rounded-md p-2 max-h-[calc(100vh-300px)] overflow-y-auto"
                     style={scrollbarStyle}>
-                       <li className="py-1 text-sm">
+                    <li className="py-1 text-sm">
                       <a
                         href="/gamerules/#pAPAabout"
                         className="hover:text-white">
@@ -767,9 +758,7 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen, toggleSidebar}) => {
           </div>
         </nav>
       </div>
-      <div className="flex-1 p-4" onClick={toggleSidebar}>
-        <h1 className="text-2xl text-white">MOUSE OUT</h1>
-      </div>
+      <div className="flex-1 p-4" onClick={toggleSidebar}></div>
     </div>
   );
 };
