@@ -14,7 +14,7 @@ const CardFooter: React.FC<CardFooterProps> = ({card, addCardToDeck}) => {
   return (
     <>
       <div className="card-footer-value col-span-2 ">
-        <CardValue />
+        <CardValue card={card} />
       </div>
       <div className="card-footer-plus-button-container w-9">
         <CardPlusButton />
