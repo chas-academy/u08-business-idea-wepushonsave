@@ -1,36 +1,33 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 
 const ProfileDashboard = () => {
   const [userData, setUserData] = useState<any>({});
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [emailAddress, setEmailAddress] = useState<any>();
+  const [username1, setUsername] = useState<any>();
 
   useEffect(() => {
-    fetchUserData();
+    fetchUserInfo();
   }, []);
 
   // Fetch user's information from the server using the token and update the state
-  const fetchUserData = async () => {
-    try {
-      const response = await fetch('https://mtg-tomb.onrender.com/api/profile-info', {
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          credentials: 'include',
-          mode: 'cors',
-        },
-      });
+  const fetchUserInfo = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+    const response = await fetch(`https://mtg-tomb.onrender.com/user/me`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok) throw new Error('Network response was not ok');
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch user data');
-      }
-
-      const data = await response.json();
-      setUserData(data);
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
+    const data = await response.json();
+    setEmailAddress(data.email);
+    setUsername(data.username);
   };
+  fetchUserInfo();
 
   // Toggle editing mode
   const toggleEdit = () => {
@@ -39,8 +36,8 @@ const ProfileDashboard = () => {
 
   // Handle input change
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setUserData({ ...userData, [name]: value });
+    const {name, value} = e.target;
+    setUserData({...userData, [name]: value});
   };
 
   // Handle form submission to update user data
@@ -54,15 +51,18 @@ const ProfileDashboard = () => {
     };
 
     try {
-      const response = await fetch('https://mtg-tomb.onrender.com/api/profile-info', {
-        method: 'PUT',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(updatedData),
-      });
+      const response = await fetch(
+        'https://mtg-tomb.onrender.com/api/profile-info',
+        {
+          method: 'PUT',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify(updatedData),
+        }
+      );
 
       if (!response.ok) {
         throw new Error('Failed to update user data');
@@ -109,12 +109,12 @@ const ProfileDashboard = () => {
                 <input
                   type="text"
                   name="username"
-                  value={userData.username || ''}
+                  value={username1 || ''}
                   onChange={handleInputChange}
                   className="text-black w-full mt-1 p-2 border border-gray-300 rounded-md"
                 />
               ) : (
-                <span className="ml-4">{userData.username || ''}</span>
+                <span className="ml-4">{username1 || ''}</span>
               )}
             </li>
             <li className="font-bold">
@@ -123,12 +123,12 @@ const ProfileDashboard = () => {
                 <input
                   type="email"
                   name="email"
-                  value={userData.email || ''}
+                  value={emailAddress || ''}
                   onChange={handleInputChange}
                   className="text-black w-full mt-1 p-2 border border-gray-300 rounded-md"
                 />
               ) : (
-                <span className="ml-4">{userData.email || ''}</span>
+                <span className="ml-4">{emailAddress || ''}</span>
               )}
             </li>
             <li className="font-bold">

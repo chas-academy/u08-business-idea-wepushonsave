@@ -1,5 +1,5 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useState, ChangeEvent, FormEvent} from 'react';
+import {useNavigate} from 'react-router-dom';
 
 interface FormData {
   email: string;
@@ -7,16 +7,18 @@ interface FormData {
 }
 
 const Login: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({ email: '', password: '' });
+
+  const [formData, setFormData] = useState<FormData>({email: '', password: ''});
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const { email, password } = formData;
+  const {email, password} = formData;
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => setFormData({
-    ...formData,
-    [e.target.name]: e.target.value
-  });
+  const onChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,9 +28,11 @@ const Login: React.FC = () => {
       const response = await fetch('https://mtg-tomb.onrender.com/user/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+
+          'Content-Type': 'application/json',
+          mode: 'cors',
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({email, password}),
       });
 
       const data = await response.json();
@@ -85,6 +89,7 @@ const Login: React.FC = () => {
           <p>Not registred yet? Register<a href="/register"> here!</a></p>
 
         </div>
+
       </div>
     </>
   );

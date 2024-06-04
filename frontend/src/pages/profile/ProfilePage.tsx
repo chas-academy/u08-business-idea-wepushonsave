@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-
-import { useNavigate } from 'react-router-dom';
 import profileIcon from '../../assets/profile-icon.webp';
 
 interface IList {
@@ -14,21 +13,65 @@ const ProfilePage = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('info');
-  const [userData, setUserData] = useState<any>({});
+  const [userId, setUserId] = useState<any>();
+  const [username1, setUsername] = useState<any>();
   const [lists, setLists] = useState<IList[]>([]);
   const [showCreateListModal, setShowCreateListModal] = useState(false);
-  const [newListName, setNewListName] = useState('');
+  const [title, setTitle] = useState('');
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) return;
+      const response = await fetch(`https://mtg-tomb.onrender.com/user/me`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) throw new Error('Network response was not ok');
+
+      const data = await response.json();
+      setUserId(data._id);
+      setUsername(data.username);
+    };
+    fetchUserInfo();
+    fetchLists();
+  }, [username1]);
+
+  const fetchLists = async () => {
+    try {
+      const response = await fetch(
+        'https://mtg-tomb.onrender.com/api/allLists',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({userId}),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch lists');
+      }
+
+      const data = await response.json();
+      setLists(data);
+      console.log('Fetched lists:', data);
+    } catch (error) {
+      console.error('Error fetching lists:', error);
+    }
+  };
+
+  const handleListClick = (listId: string) => {
+    navigate(`/cards-display/${listId}`);
+  };
+
   const settingsClick = () => {
     navigate('/profile-dashboard');
-  };
-  const mycollectionClick = () => {
-    navigate('/mycollection');
-  };
-  const mycollectionRareClick = () => {
-    navigate('/mycollection-rare');
-  };
-  const mycollectionCommonsClick = () => {
-    navigate('/mycollection-commmons');
   };
 
   const createListClick = async () => {
@@ -37,22 +80,19 @@ const ProfilePage = () => {
 
   const handleCreateList = async () => {
     try {
-      // Call the createList function here with newListName
       const response = await fetch('https://mtg-tomb.onrender.com/api/lists', {
         method: 'POST',
-        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify({ title: newListName }),
+        body: JSON.stringify({userId, title}),
       });
 
       if (!response.ok) {
         throw new Error('Failed to create list');
       }
 
-      // Refresh the list of lists after creating a new one
       fetchLists();
       setShowCreateListModal(false);
     } catch (error) {
@@ -60,63 +100,9 @@ const ProfilePage = () => {
     }
   };
 
-  const fetchLists = async () => {
-    try {
-      const response = await fetch('https://mtg-tomb.onrender.com/api/lists', {
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch lists');
-      }
-
-      const data = await response.json();
-      setLists(data);
-    } catch (error) {
-      console.error('Error fetching lists:', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchUserData();
-    fetchLists();
-  }, []);
-
-  // Fetch user's information from the server using the token and update the state
-  const fetchUserData = async () => {
-    try {
-      const response = await fetch('https://mtg-tomb.onrender.com/api/profile-info', {
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          credentials: 'include',
-          mode: 'cors',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch user data');
-      }
-
-      const data = await response.json();
-      setUserData(data);
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  };
-
-  const handleListClick = (listId: string) => {
-    navigate(`/cards-display/${listId}`);
-  };
-
   const logout = () => {
-    navigate("/login")
-  }
+    navigate('/login');
+  };
 
   return (
     <div className="shadow-md md:pt-32 ">
@@ -128,9 +114,7 @@ const ProfilePage = () => {
             className="w-28 h-28 mt-28 mb-1 rounded-full bg-custom-purple-600 border-4 border-custom-purple-800"
           />
           <div className="mb-5">
-            <h1 className="text-xl font-bold text-white">
-              {userData.username || ''}
-            </h1>
+            <h1 className="text-xl font-bold text-white">{username1 || ''}</h1>
           </div>
         </div>
         <div className="relative">
@@ -169,18 +153,20 @@ const ProfilePage = () => {
       <div className="bg-profile-content">
         <nav className="grid grid-cols-2 bg-inactive-card-btn-gradient">
           <button
-            className={`${activeSection === 'info'
-              ? 'card-details-active card-info'
-              : 'card-details-not-active'
-              }`}
+            className={`${
+              activeSection === 'info'
+                ? 'card-details-active card-info'
+                : 'card-details-not-active'
+            }`}
             onClick={() => setActiveSection('info')}>
             Collection
           </button>
           <button
-            className={`${activeSection === 'lists'
-              ? 'card-details-active card-market'
-              : 'card-details-not-active'
-              }`}
+            className={`${
+              activeSection === 'lists'
+                ? 'card-details-active card-market'
+                : 'card-details-not-active'
+            }`}
             onClick={() => setActiveSection('lists')}>
             Lists
           </button>
@@ -189,21 +175,23 @@ const ProfilePage = () => {
         <div className="mt-6">
           {activeSection === 'info' && (
             <div className="flex flex-col items-center">
-              <button
-                className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-center text-white font-bold mb-5 bg-collection-btn shadow-md"
-                onClick={mycollectionClick}>
-                MY CARD COLLECTION
-              </button>
-              <button
-                className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
-                onClick={mycollectionRareClick}>
-                RARE
-              </button>
-              <button
-                className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
-                onClick={mycollectionCommonsClick}>
-                COMMONS
-              </button>
+              {lists.map(list => {
+                if (
+                  list.title === 'My card collection' ||
+                  list.title === 'Binder - Rares' ||
+                  list.title === 'Binder - Commons'
+                ) {
+                  return (
+                    <button
+                      key={list._id}
+                      className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
+                      onClick={() => handleListClick(list._id)}>
+                      {list.title}
+                    </button>
+                  );
+                }
+                return null;
+              })}
             </div>
           )}
 
@@ -214,14 +202,21 @@ const ProfilePage = () => {
                 className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange">
                 CREATE A LIST
               </button>
-              {lists.map(list => (
-                <button
-                  key={list._id}
-                  className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
-                  onClick={() => handleListClick(list._id)}>
-                  {list.title}
-                </button>
-              ))}
+              {lists
+                .filter(
+                  list =>
+                    list.title !== 'My card collection' &&
+                    list.title !== 'Binder - Rares' &&
+                    list.title !== 'Binder - Commons'
+                )
+                .map(list => (
+                  <button
+                    key={list._id}
+                    className="p-9 w-11/12 md:w-1/3 rounded-lg font-inter text-xl text-black mb-5 bg-collection-btn-grey shadow-md border-l-8 border-orange"
+                    onClick={() => handleListClick(list._id)}>
+                    {list.title}
+                  </button>
+                ))}
             </div>
           )}
 
@@ -234,8 +229,8 @@ const ProfilePage = () => {
                 </h2>
                 <input
                   type="text"
-                  value={newListName}
-                  onChange={e => setNewListName(e.target.value)}
+                  value={title}
+                  onChange={e => setTitle(e.target.value)}
                   placeholder="Enter list name"
                   className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
                 />

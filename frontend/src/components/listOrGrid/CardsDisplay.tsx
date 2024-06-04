@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { singleCardLoader } from '../../utils/singleCardLoader';
-import { ICard } from '../../utils/ScryfallInterfaces';
-import ArtCard from '../../pages/home/RandomArtCard';
+import React, {useEffect, useRef, useState} from 'react';
+import {useParams} from 'react-router-dom';
+import {singleCardLoader} from '../../utils/singleCardLoader';
+import {ICard} from '../../utils/ScryfallInterfaces';
+import {manaCostRe} from '../../utils/apiExport';
+import CardLayout from '../../layouts/CardLayout';
 
 interface IListData {
   title: string;
@@ -10,11 +11,12 @@ interface IListData {
 }
 
 const CardDisplay: React.FC = () => {
-  const { listId } = useParams<{ listId: string }>();
+  const {listId} = useParams<{listId: string}>();
   const [listData, setListData] = useState<IListData | null>(null);
   const [cards, setCards] = useState<ICard[]>([]);
   const [isGridView, setIsGridView] = useState(true);
-  const [activeCard, setActiveCard] = useState<ICard | null>(null); // Moved useState here
+  const [activeCard, setActiveCard] = useState<ICard | null>(null);
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   useEffect(() => {
     const fetchListData = async () => {
@@ -38,10 +40,11 @@ const CardDisplay: React.FC = () => {
         setListData(data);
 
         const cardDetailsPromises = data.cardIds.map(id =>
-          singleCardLoader({ params: { id } })
+          singleCardLoader({params: {id}})
         );
         const cardDetails = await Promise.all(cardDetailsPromises);
         setCards(cardDetails);
+        console.log('Fetched card details:', cardDetails);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -55,7 +58,10 @@ const CardDisplay: React.FC = () => {
   };
 
   const extractPrimaryType = (typeLine: string) => {
-    return typeLine.split(' ')[0];
+    if (typeLine) {
+      return typeLine.split(' ')[0];
+    }
+    return 'Unknown';
   };
 
   const sortedCards = [...cards].sort((a, b) => {
@@ -65,7 +71,7 @@ const CardDisplay: React.FC = () => {
   });
 
   const getTypeCounts = () => {
-    const counts: { [type: string]: number } = {};
+    const counts: {[type: string]: number} = {};
     sortedCards.forEach(card => {
       const primaryType = extractPrimaryType(card.type_line);
       counts[primaryType] = (counts[primaryType] || 0) + 1;
@@ -75,12 +81,16 @@ const CardDisplay: React.FC = () => {
 
   const typeCounts = getTypeCounts();
 
-  const dialogRef = useRef<HTMLDialogElement | null>(null);
-
   const handleClickCard = (card: ICard) => {
     setActiveCard(card);
     dialogRef.current?.showModal();
     document.body.style.overflow = 'hidden';
+  };
+
+  const handleCloseDialog = () => {
+    dialogRef.current?.close();
+    setActiveCard(null);
+    document.body.style.overflow = '';
   };
 
   return (
@@ -94,19 +104,16 @@ const CardDisplay: React.FC = () => {
           ref={dialogRef}
           className="size-9/12 md:h-9/10 md:w-1/3 bg-transparent backdrop:bg-black/75 shadow-xl no-scrollbar flex h-min overflow-auto">
           {activeCard && (
-            <dialog
-              open
-              className="m-2 bg-[#17140D] text-white rounded-t-xl relative">
-              <ArtCard
+            <div className="m-2 bg-[#17140D] text-white rounded-t-xl relative">
+              <CardLayout
                 card={activeCard}
-                showRandomizeButton={true}
-                showInfoText={true}
-                standalone={false}
-                containerStyles={{}}
-                imgStyles={{}}
-                infoStyles={{}}
+                onClose={handleCloseDialog}
+                setActiveCard={setActiveCard}
+                addCardToDeck={function (_card: ICard): void {
+                  throw new Error('Function not implemented.');
+                }}
               />
-            </dialog>
+            </div>
           )}
         </dialog>
 
@@ -121,11 +128,18 @@ const CardDisplay: React.FC = () => {
           <div className="grid grid-cols-3 gap-1">
             {sortedCards.map(card => (
               <div key={card.id} onClick={() => handleClickCard(card)}>
-                <img
-                  src={card.image_uris.border_crop}
-                  alt={`${card.name} card image`}
-                  className="cursor-pointer"
-                />
+                {card.image_uris && card.image_uris.border_crop ? (
+                  <img
+                    src={card.image_uris.border_crop}
+                    alt={`${card.name} card image`}
+                    className="cursor-pointer"
+                  />
+                ) : (
+                  <div className="placeholder-image">
+                    {/* Optionally, add a placeholder image or text here */}
+                    <span className="text-white">No Image</span>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -151,7 +165,9 @@ const CardDisplay: React.FC = () => {
                         {card.name}
                       </span>
                       {card.mana_cost && (
-                        <span className="ml-2">{card.mana_cost}</span>
+                        <div className="ml-2 flex flex-row">
+                          {manaCostRe(card.mana_cost)}
+                        </div>
                       )}
                     </div>
                   ))}

@@ -20,7 +20,7 @@ interface Theme {
 interface User {
   _id: string;
   username: string;
-  email:string;
+  email: string;
 }
 
 const AllThemes: React.FC = () => {
@@ -54,22 +54,19 @@ const AllThemes: React.FC = () => {
   };
 
   const fetchUser = async () => {
-
     const token = localStorage.getItem('token');
     if (!token) return;
 
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(
-        `http://localhost:5000/user/me`, {
-          method: 'GET',
-          headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json'
-          }
-      }
-      );
+      const response = await fetch(`https://mtg-tomb.onrender.com/user/me`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -163,8 +160,8 @@ const AllThemes: React.FC = () => {
                 <p className="text-lg font-semibold">Keywords:</p>
                 <ul className="flex flex-row">
                   {theme.criteria.oracle_text.map((text, index) => (
-                    <li key={index} className='mx-2'>
-                        <Capitalizer text={text} />
+                    <li key={index} className="mx-2">
+                      <Capitalizer text={text} />
                     </li>
                   ))}
                 </ul>

@@ -55,6 +55,10 @@ app.use("/api", listRoutes);
 app.use("/auth", authMiddleware);
 app.use("/decks", deckBuilderRouter);
 
+// Check if user logged in
+app.get("/auth/check", (req, res) => {
+  res.status(200).json({ message: "Authenticated" });
+});
 
 // Export App for Server
 export default app;
