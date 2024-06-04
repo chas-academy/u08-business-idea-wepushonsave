@@ -89,7 +89,17 @@ const SearchResults: React.FC = () => {
           return (
             <div
               key={card.id}
-              className=" search-result-img-container flex justify-center">
+              className=" search-result-img-container flex justify-center rounded-md"
+              style={{
+                border: '2px solid transparent',
+                transition: 'border-color 0.3s',
+              }}
+              onMouseEnter={e =>
+                (e.currentTarget.style.borderColor = '#757BC0')
+              }
+              onMouseLeave={e =>
+                (e.currentTarget.style.borderColor = 'transparent')
+              }>
               {imageUrl ? (
                 <button onClick={() => setActiveCard(card)}>
                   <img
