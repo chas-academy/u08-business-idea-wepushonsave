@@ -11,44 +11,11 @@ interface Thread {
 interface Comment {
    _id: number;
    text: string;
-   userId: number; // _id for user who commented
 }
 
 const Threads: React.FC = () => {
    const [threads, setThreads] = useState<Thread[]>([]);
    const [newThreadContent, setNewThreadContent] = useState('');
-   const [userData, setUserData] = useState<any>({});
-
-   useEffect(() => {
-      fetchUserData();
-   }, []);
-
-   // Fetch user's information from the server using the token and update the state
-   const fetchUserData = async () => {
-      try {
-         const response = await fetch(
-            'https://mtg-tomb.onrender.com/api/profile-info',
-            {
-               credentials: 'include',
-               headers: {
-                  'Content-Type': 'application/json',
-                  Accept: 'application/json',
-                  credentials: 'include',
-                  mode: 'cors',
-               },
-            }
-         );
-
-         if (!response.ok) {
-            throw new Error('Failed to fetch user data');
-         }
-
-         const data = await response.json();
-         setUserData(data);
-      } catch (error) {
-         console.error('Error fetching user data:', error);
-      }
-   };
 
    useEffect(() => {
       fetchThreads();
@@ -58,11 +25,14 @@ const Threads: React.FC = () => {
       try {
          const response = await fetch('https://mtg-tomb.onrender.com/threads/all'); // Adjust the endpoint as needed
          const data = await response.json();
-         setThreads(data);
+         // Initialize collapsed to true for all threads
+         const initializedThreads = data.map((thread: Thread) => ({ ...thread, collapsed: true }));
+         setThreads(initializedThreads);
       } catch (error) {
          console.error('Error fetching threads:', error);
       }
    };
+
    const handleNewThreadSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const newThread: Omit<Thread, '_id'> = {
@@ -72,22 +42,17 @@ const Threads: React.FC = () => {
       };
 
       try {
-         const response = await fetch(
-            'https://mtg-tomb.onrender.com/threads/create',
-            {
-               method: 'POST',
-               headers: {
-                  'Content-Type': 'application/json',
-               },
-               body: JSON.stringify(newThread),
-            }
-         );
+         const response = await fetch('https://mtg-tomb.onrender.com/threads/create', {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newThread),
+         });
 
          if (response.ok) {
             const createdThread = await response.json();
-            console.log(createdThread);
             setNewThreadContent('');
-            console.log(threads);
             fetchThreads();
          } else {
             console.error('Error creating thread');
@@ -105,20 +70,16 @@ const Threads: React.FC = () => {
       e.preventDefault();
       const newComment: Omit<Comment, '_id'> = {
          text: commentText,
-         userId: 1, // Replace with actual user _id
       };
 
       try {
-         const response = await fetch(
-            'https://mtg-tomb.onrender.com/threads/${threadId}/comments',
-            {
-               method: 'POST',
-               headers: {
-                  'Content-Type': 'application/json',
-               },
-               body: JSON.stringify(newComment),
-            }
-         );
+         const response = await fetch(`https://mtg-tomb.onrender.com/threads/${threadId}/comments`, {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newComment),
+         });
 
          if (response.ok) {
             const createdComment = await response.json();
@@ -152,10 +113,8 @@ const Threads: React.FC = () => {
    };
 
    return (
-      <div className="flex flex-col items-center p-2 ">
-         <h1 className="text-3xl text-white/80 font-bold mb-4">
-            Community Threads
-         </h1>
+      <div className="flex flex-col items-center p-2">
+         <h1 className="text-3xl text-white/80 font-bold mb-4">Community Threads</h1>
          <form onSubmit={handleNewThreadSubmit} className="w-full max-w-lg mb-4">
             <textarea
                placeholder="Thread Content"
@@ -169,18 +128,15 @@ const Threads: React.FC = () => {
                Create Thread
             </button>
          </form>
-         <div className="threadSection  flex flex-col-reverse">
+         <div className="threadSection bg-white/30 flex flex-col-reverse">
             {threads.map(thread => (
-               <div key={thread._id} className=" bg-white/30 w-full max-w-lg mb-4 rounded-md ">
-                  <h3 className="text-xl font-bold text-white">
-                     {userData.username || ''}
-                  </h3>
+               <div key={thread._id} className="w-full max-w-lg mb-4">
                   <p className="min-h-20 text-white p-2">{thread.content}</p>
 
                   <button
                      className="text-white text-sm bg-nav-gradient w-3/7 px-4 py-2 cursor-pointer rounded"
                      onClick={() => toggleComments(thread._id)}>
-                     {thread.collapsed ? 'Read comments' : 'Hide comments'}
+                     {thread.collapsed ? 'Show comments' : 'Hide comments'}
                   </button>
 
                   {!thread.collapsed && (
@@ -211,11 +167,9 @@ const Threads: React.FC = () => {
                         required
                         className="w-full bg-white/30 border border-white/30 rounded py-2 px-4 mb-2 focus:outline-none focus:bg-white focus:border-blue-500"
                      />
-                     {/*                      <input type="text" placeholder={`${thread._id}`} name="threadId" value={thread._id}></input>
-               */}{' '}
                      <button
                         type="submit"
-                        className="bg-btn-gradient text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        className="bg-btn-gradient hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                         Post Comment
                      </button>
                   </form>
