@@ -76,7 +76,7 @@ const SearchResults: React.FC = () => {
         )}
       </dialog>
 
-      <div className=" grid grid-cols-3 sm:grid-cols-6 gap-4 m-4 relative sm:top-16">
+      <div className=" grid grid-cols-3 sm:grid-cols-6 gap-4 ml-4 mt-4 mr-4 relative">
         {results.map((card: ICard) => {
           const imageUrl =
             card.card_faces && card.card_faces.length > 0

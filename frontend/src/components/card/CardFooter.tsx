@@ -13,14 +13,18 @@ interface CardFooterProps {
 const CardFooter: React.FC<CardFooterProps> = ({card, addCardToDeck}) => {
   return (
     <>
-      <div className="card-footer-value col-span-2 ">
-        <CardValue card={card} />
+      <div className="flex justify-center items-center m-2">
+        <div className="card-footer-value col-span-2 ">
+          <CardValue card={card} />
+        </div>
       </div>
-      <div className="card-footer-plus-button-container w-9">
-        <CardPlusButton />
-      </div>
-      <div className="card-footer-plus-button-container w-9">
-        <AddToDeckBtn card={card} addCardToDeck={addCardToDeck} />
+      <div className="flex justify-end gap-2 m-2">
+        <div className="card-footer-plus-button-container w-9">
+          <CardPlusButton />
+        </div>
+        <div className="card-footer-plus-button-container w-9">
+          <AddToDeckBtn card={card} addCardToDeck={addCardToDeck} />
+        </div>
       </div>
     </>
   );
