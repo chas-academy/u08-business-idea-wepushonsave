@@ -51,18 +51,15 @@ const ProfileDashboard = () => {
     };
 
     try {
-      const response = await fetch(
-        'https://mtg-tomb.onrender.com/api/profile-info',
-        {
-          method: 'PUT',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify(updatedData),
-        }
-      );
+      const response = await fetch('http://localhost:3000/api/profile-info', {
+        method: 'PUT',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(updatedData),
+      });
 
       if (!response.ok) {
         throw new Error('Failed to update user data');

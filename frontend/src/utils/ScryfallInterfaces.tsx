@@ -101,6 +101,7 @@ export interface ICard {
   prints_search_uri: IPrintsAPIResponse;
   legalities: string[];
   print: IPrintsData;
+  prices: IPrices;
 }
 
 export interface IAPIResponse {

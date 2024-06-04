@@ -44,6 +44,7 @@ import CommanderDetails from './mtgtombapi/top-commanders/commanderDetails.tsx';
 import AllThemes from './mtgtombapi/theme/allThemes.tsx';
 import AuthenticatedRoute from './routes/authentificatedRoute.tsx';
 import Navigation2 from './pages/login/UserNav.tsx';
+import MyDecks from './pages/deckbuilder/MyDecks.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -81,6 +82,7 @@ const router = createBrowserRouter(
         element={<DeckBuilder />}
         loader={singleCardLoader}
       />
+      <Route path="my-decks" element={<MyDecks />} />
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
     </Route>
